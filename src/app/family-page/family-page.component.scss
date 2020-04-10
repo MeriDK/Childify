@@ -1,0 +1,43 @@
+$square-side: 150px;
+$backgroung-violet: rgb(242, 226, 255);
+
+html, body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+::ng-deep body {
+  //background-color: $backgroung-violet;
+}
+/*
+  d
+*/
+.childify-body {
+  //background-color: $backgroung-violet;
+}
+
+.content {
+  width: 100%;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.content__item {
+  background-color: rgba(180, 106, 253, 0.7);
+  border-radius: 20px;
+  width: $square-side;
+  height: $square-side;
+  margin-bottom: 45px;
+}
+
+.content__item a{
+  padding-left: 15px;
+  padding-top: $square-side;
+  display: block;
+  text-decoration: none;
+  color: black;
+}

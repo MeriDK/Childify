@@ -1,0 +1,109 @@
+.navigation-bar {
+    height: 8%;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    margin-bottom: 5px;
+}
+
+.navigation-bar__logo a{
+  color: white;
+  font-weight: 100;
+  font-size: 40px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+// Checkbox
+.navigation-bar__toggle-input {
+    display: none;
+}
+
+.nav__item {
+    visibility: collapse;
+}
+  $transition-duration: 0.5s;
+  .navigation-bar__toggle-input:checked {
+    & ~ .navigation-bar__toggle-container {
+        span, 
+        span::before,
+        span::after {
+            position: absolute;
+            top: 50%;
+            margin-top: -1px;
+            left: 50%; margin-left: -10px;
+            width: 20px;
+            height: 2px;
+            background-color: white;
+        }
+        span::before,
+        span::after {
+            content: '';
+            transition: 0.5s;
+        }
+        span::before {
+            transform: translateY(-16px);
+            height: 3px;
+        }
+        span::after {
+            transform: translateY(15px);
+            height: 1px;
+        }
+        
+    }
+    // Открываем
+    & ~ .nav {
+      // Восстанавливаем пункты навигации из «линий» в иконке меню
+      .nav__item {
+        display: inline;
+        visibility: inherit;
+        color: #EC7263;
+        letter-spacing: 0;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 0;
+        opacity: 1;
+        transform: scaleY(1);
+        transition: $transition-duration, opacity 0.1s;
+    
+        // Скрываем линии
+        &:before {
+          opacity: 0;
+        }
+      }
+    }
+  }
+/*******************/
+.navigation-bar__toggle-container {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(189, 10, 255, 1);
+    border-radius: 50%;
+    position: relative;
+    margin: 1px;
+    
+}
+.navigation-bar__toggle-container span, 
+.navigation-bar__toggle-container span::before,
+.navigation-bar__toggle-container span::after {
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    left: 50%; margin-left: -10px;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+}
+.navigation-bar__toggle-container span::before,
+.navigation-bar__toggle-container span::after {
+    content: '';
+    transition: 0.5s;
+}
+.navigation-bar__toggle-container span::before {
+    transform: translateY(-6px);
+    height: 3px;
+}
+.navigation-bar__toggle-container span::after {
+    transform: translateY(5px);
+    height: 1px;
+}

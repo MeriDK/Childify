@@ -10,6 +10,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task/task.component';
 import { RegistrationAndCreateFamilyComponent } from './registration-and-create-family/registration-and-create-family.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { FamilyPageComponent } from './family-page/family-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { RegistrationComponent } from './registration/registration.component';
     TaskComponent,
     DynamicComponentServComponent,
     RegistrationAndCreateFamilyComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NavMenuComponent,
+    FamilyPageComponent
   ],
   imports: [
     BrowserModule
