@@ -1,0 +1,10 @@
+<header class="header-childify">
+    <h1 class="header-childify__title">Task</h1>
+</header>
+ <div>
+  <tabset type="pills" [justified]="true" class = "nav-pills" >
+    <tab heading="ListTask" class="tab1"><app-task-list></app-task-list></tab>
+      <tab heading="ChildTask"><app-check-task></app-check-task></tab>
+    <tab heading="CheckTask"><app-child-task></app-child-task></tab>
+  </tabset>
+</div>
