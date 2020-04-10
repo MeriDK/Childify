@@ -8,6 +8,8 @@ import { CheckTaskComponent } from './check-task/check-task.component';
 import { ChildTaskComponent } from './child-task/child-task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task/task.component';
+import { RegistrationAndCreateFamilyComponent } from './registration-and-create-family/registration-and-create-family.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,10 @@ import { TaskComponent } from './task/task.component';
     CheckTaskComponent,
     ChildTaskComponent,
     TaskListComponent,
-    TaskComponent
+    TaskComponent,
+    DynamicComponentServComponent,
+    RegistrationAndCreateFamilyComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule
