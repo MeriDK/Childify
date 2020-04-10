@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-task',
-  templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css']
+  selector: 'app-check-task',
+  templateUrl: './check-task.component.html',
+  styleUrls: ['./check-task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class CheckTaskComponent implements OnInit {
 
   constructor() { }
 
