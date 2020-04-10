@@ -1,0 +1,39 @@
+ <!-- TASK LIST -->
+        
+        <div class="task" >
+            <p>task<i class="fas fa-chevron-right"></i>
+            </p>  
+        </div>
+    
+        <div class="task" href="#windows-infotask">
+            <p>task<i class="fas fa-chevron-right"></i>
+            </p>  
+        </div>
+        <div class="task" href="#windows-infotask">
+            <p>task<i class="fas fa-chevron-right"></i>
+            </p>  
+        </div>
+        <div class="task" href="#windows-infotask">
+            <p>task<i class="fas fa-chevron-right"></i>
+            </p>  
+        </div>
+    
+        <!-- WINDOW -->
+        <ng-template #template>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Create task</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      <div class="modal-body text-center" >
+           
+      </div>
+    </ng-template>
+        
+       
+        
+        <!-- button add task -->
+        <div class="add-task">
+            <a type="button" (click)="openModal(template)">Add</a>
+        </div>

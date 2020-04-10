@@ -1,0 +1,85 @@
+
+/* For task list */
+.task{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: rgba(95,60,107,0.3);
+    padding: 8px;
+    margin: 10px 0px;
+    
+}
+.task i {
+    float: right;
+    cursor: pointer;
+}
+.task p{
+    font-size: 18px
+}
+
+/*Button add task */
+.add-task{
+   background-color: #333;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;        
+}
+
+.add-task a{
+  vertical-align: baseline;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 6px;
+  text-decoration: none;
+  font-size: 27px;
+
+}
+
+
+
+
+.windows-addtask:target {display: block;}
+
+/* Buttom create new task */
+.windows-addtask__create{
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    background: #780096;
+    color: white;
+    font-size: 14pt;
+    padding: 16px;
+    position: absolute;
+    bottom: 0px;
+    right: 100px;
+    margin:16px;
+}
+
+
+
+.windows-addtask input{
+   
+}
+
+.windows-addtask__create:hover {background: #e6e6ff;}
+/* Date time */
+.windows-addtask__datatime{
+
+}
+
+/* Point title */
+.windows-addtask__point__title{
+       
+}
+
+/* Point block */
+.windows-addtask__point{
+     
+}
+
+/* Point input */
+.windows-addtask__point input{
+    
+}
