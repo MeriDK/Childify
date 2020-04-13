@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-title',
+  selector: 'app-login-title',
   templateUrl: './login-title.component.html',
   styleUrls: ['./login-title.component.sass']
 })
