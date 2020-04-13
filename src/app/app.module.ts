@@ -7,7 +7,6 @@ import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
-import {RouterModule} from "@angular/router";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +21,6 @@ import { RegistrationComponent } from "./registration/registration.component";
 import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
 import { TaskComponent } from "./task/task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
-
 
 @NgModule({
   declarations: [
