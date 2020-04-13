@@ -3,7 +3,6 @@ import anime from 'node_modules/animejs'
 import $ from 'node_modules/jquery'
 import  RegistrationService  from './registrationService'
 import { ApiService } from '../api.service';
-import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
