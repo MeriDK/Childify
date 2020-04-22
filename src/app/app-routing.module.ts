@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from "./login/login.component";
+import { LoginPageComponent} from "./login-page/login-page.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { FamilyPageComponent } from "./family-page/family-page.component";
 import { RegistrationComponent } from "./registration/registration.component";
@@ -11,7 +12,7 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginPageComponent
   },
   {
     path: 'registration',

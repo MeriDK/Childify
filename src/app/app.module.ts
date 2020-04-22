@@ -21,6 +21,7 @@ import { RegistrationComponent } from "./registration/registration.component";
 import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
 import { TaskComponent } from "./task/task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TaskListComponent } from "./task-list/task-list.component";
     RegistrationComponent,
     RegistrationAddCreateFamilyComponent,
     TaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
