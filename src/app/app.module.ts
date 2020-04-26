@@ -12,9 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from "./login/login.component";
 import { LoginTitleComponent } from "./login-title/login-title.component";
-import { CheckTaskComponent } from "./check-task/check-task.component";
-import { ChildTaskComponent } from "./child-task/child-task.component";
-import { CreateTaskComponent } from "./create-task/create-task.component";
 import { FamilyPageComponent } from "./family-page/family-page.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { RegistrationComponent } from "./registration/registration.component";
@@ -22,22 +19,29 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 import { TaskComponent } from "./task/task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { LoginPageComponent } from './login-page/login-page.component';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { TaskInfoChangeComponent } from './task-info-change/task-info-change.component';
+import { TaskInfoComponent } from './task-info/task-info.component';
+import { TaskChildComponent } from './task-child/task-child.component';
+import { TaskCheckComponent } from './task-check/task-check.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LoginTitleComponent,
-    CheckTaskComponent,
-    ChildTaskComponent,
-    CreateTaskComponent,
     FamilyPageComponent,
     NavMenuComponent,
     RegistrationComponent,
     RegistrationAddCreateFamilyComponent,
     TaskComponent,
     TaskListComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    TaskAddComponent,
+    TaskInfoChangeComponent,
+    TaskInfoComponent,
+    TaskChildComponent,
+    TaskCheckComponent
   ],
   imports: [
     BrowserModule,
