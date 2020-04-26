@@ -22,6 +22,7 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 import { TaskComponent } from "./task/task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ShopListComponent } from './shop-list/shop-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     RegistrationAddCreateFamilyComponent,
     TaskComponent,
     TaskListComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ShopListComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
     ButtonsModule.forRoot()
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent, TaskComponent, TaskListComponent, RegistrationComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

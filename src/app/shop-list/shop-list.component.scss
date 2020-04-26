@@ -1,0 +1,164 @@
+.shop-list__body {
+    
+    background: #F2E2FF;
+    height: 100%;
+
+    .shop-list__head {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        .navbar--shop-list {
+            position: fixed;
+            flex: 1;
+            height: 100px;
+            width: 100%;
+            background: linear-gradient(180deg, #B46AFD 28.72%, #4ECCE8 100%), #B46AFD;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+            align-items: inherit;
+            .title--shop-list {
+                margin-left: 10px;
+                margin-top: 5px;
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 23px;
+                /* identical to box height */
+
+                display: flex;
+                align-items: flex-start;
+
+                color: #FFFFFF;
+            }
+
+            .more-item--shop-list {
+                margin-right: 10px;
+                margin-top: 5px;
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                .more-item__span {
+                    border: 4px;
+                    border-radius: 50%;
+                    height: 5px;
+                    width: 5px;
+                    margin: 1px;
+                    background: #DADADA;
+                }
+            }
+        }
+
+        .tabset--shop-list {
+            width: 100%;
+            flex:1;
+            margin-block-end: 0px;
+            background: #F2E2FF;
+            
+            ::ng-deep .nav-pills .nav-link.active {
+                background-color: inherit;
+                border-bottom: 4px solid rgba(255, 255, 255, 0.87);;
+                border-radius: 0;
+                color: #FFFFFF;
+            }
+            
+            ::ng-deep .nav-pills .nav-link {
+                background-color: inherit;
+                color: #c7c7c7;
+            }
+
+            ::ng-deep .tab-content {
+                width: inherit;
+                height: calc(100% - 100px);
+                margin-block-start: 100px;
+            }
+
+            ::ng-deep .nav-pills {
+                position: fixed;
+                margin-block-start: 57px;
+                width: 100%;
+                
+            }
+
+            .list--shop-list {
+                display: block;
+                width: 100%;
+                padding: 0px;
+                .good-li--shop-list {
+                    background: rgba(255, 255, 255, 0.87);
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    margin: 15px;
+                    border-radius: 7px;
+                    border: 5px solid rgba(255, 255, 255, 1);
+                    height: 140px;
+                    width: 140px;
+                    display: inline-flex;
+
+                    .good-div--shop-list {
+                        height: 100%;
+                        width: 100%;
+                        display: block;
+                        .good__img {
+                            height: 80px;
+                            width: 80px;
+                        }
+                        
+                        .span {
+                            display: block;
+                            margin-top: 6px;
+                        }
+                        .good__title {
+                            
+                            font-family: Roboto;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 16px;
+                            text-align: center;
+                            letter-spacing: 0.0357143em;
+                            margin-top: 9px;
+                            color: #000000;
+                        }
+                        .good__price {
+                            font-family: Quattrocento Sans;
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 18px;
+                            line-height: 20px;
+                            text-align: center;
+                            letter-spacing: 0.0357143em;
+                            
+                            color: #A9A313;
+                        }
+                    }
+                    
+                }
+                .good-li--shop-list.selected {
+                    border-color: rgb(200, 200, 200);
+                    background: rgba(244, 244, 244, 0.87);
+                }
+            }
+        }
+    }
+    .btn-div-footer--shop-list {
+        position: fixed;
+        width: 100%;
+        height: calc(100% - 130px);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        .btn-footer--shop-list {
+            width: 267px;
+            height: 40px;
+
+            background: rgba(166, 79, 253, 0.89);
+            border-radius: 20px;
+
+            font-family: Roboto;
+            color: rgba(255, 255, 255, 1);
+            font-size: 18px;
+            line-height: 21px;
+        }
+    }
+}
