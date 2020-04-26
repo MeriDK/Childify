@@ -19,6 +19,7 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 import { TaskComponent } from "./task/task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ShopListComponent } from './shop-list/shop-list.component';
 import { TaskAddComponent } from './task-add/task-add.component';
 import { TaskInfoChangeComponent } from './task-info-change/task-info-change.component';
 import { TaskInfoComponent } from './task-info/task-info.component';
@@ -37,6 +38,7 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     TaskComponent,
     TaskListComponent,
     LoginPageComponent,
+    ShopListComponent,
     TaskAddComponent,
     TaskInfoChangeComponent,
     TaskInfoComponent,
@@ -53,6 +55,6 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     ButtonsModule.forRoot()
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent, TaskComponent, TaskListComponent, RegistrationComponent]
+  bootstrap: [AppComponent, TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent]
 })
 export class AppModule { }

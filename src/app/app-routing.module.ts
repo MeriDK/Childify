@@ -10,6 +10,7 @@ import { TaskInfoChangeComponent } from "./task-info-change/task-info-change.com
 import { FamilyPageComponent } from "./family-page/family-page.component";
 import { RegistrationComponent } from "./registration/registration.component";
 import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
+import { ShopListComponent } from './shop-list/shop-list.component';
 
 
 const routes: Routes = [
@@ -20,10 +21,6 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent
-  },
-  {
-    path: 'family-connection',
-    component: RegistrationAddCreateFamilyComponent
   },
   {
     path: 'family',
@@ -44,6 +41,10 @@ const routes: Routes = [
   {
     path: 'task/info',
     component: TaskInfoComponent
+  },
+  {
+    path: 'shop',
+    component: ShopListComponent
   }
 ];
 
