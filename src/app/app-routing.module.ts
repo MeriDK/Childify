@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from "./login/login.component";
 import { LoginPageComponent} from "./login-page/login-page.component";
-import { TaskListComponent } from "./task-list/task-list.component";
+import { TaskComponent } from "./task/task.component";
+import { TaskAddComponent } from "./task-add/task-add.component";
+import { TaskInfoComponent } from "./task-info/task-info.component";
+import { TaskInfoChangeComponent } from "./task-info-change/task-info-change.component";
 import { FamilyPageComponent } from "./family-page/family-page.component";
 import { RegistrationComponent } from "./registration/registration.component";
 import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
@@ -27,8 +30,20 @@ const routes: Routes = [
     component: FamilyPageComponent
   },
   {
-    path: 'tasks',
-    component: TaskListComponent
+    path: 'task',
+    component: TaskComponent
+  },
+  {
+    path: 'task/add',
+    component: TaskAddComponent
+  },
+  {
+    path: 'task/change',
+    component: TaskInfoChangeComponent
+  },
+  {
+    path: 'task/info',
+    component: TaskInfoComponent
   }
 ];
 
