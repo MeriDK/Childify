@@ -55,6 +55,6 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     ButtonsModule.forRoot()
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent, TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent]
+  bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]//now using only in routing
 })
 export class AppModule { }
