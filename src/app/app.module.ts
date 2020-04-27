@@ -5,7 +5,7 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +50,7 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     ButtonsModule.forRoot()

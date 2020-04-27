@@ -24,7 +24,8 @@ export default {
       },
 
       registerNewUser(api, data, registrationBody, componentFactoryResolver) : void {
-        api.registerNewUser(data).subscribe(
+        this.forwardToSecondStep(registrationBody, componentFactoryResolver)
+        /*api.registerNewUser(data).subscribe(
           data => {
               this.forwardToSecondStep(registrationBody, componentFactoryResolver)
               api.setCookie(data)
@@ -32,6 +33,6 @@ export default {
           error => {
             console.log(error)
           }
-        )
+        )*/
       }
 }

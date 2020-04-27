@@ -1,12 +1,13 @@
-import { CookieService } from 'ngx-cookie-service'
-
 export default {
 
       /*     registration-add-create-family      */
 
 
+      ///check errors
+      ///button pause
+
       createNewFamily(api, data) : void {
-        api.createNewFamily(data).subscribe(
+        /*api.createNewFamily(data).subscribe(
           data => {},
           error => {
             console.log(error)
@@ -14,11 +15,11 @@ export default {
               api.refreshToken()
             }
           }
-        )
+        )*/
       },
 
       connectToFamily(api, data) : void {
-        api.connectToFamily(data).subscribe(
+        /*api.connectToFamily(data).subscribe(
           data => {},
           error => {
             console.log(error)
@@ -27,6 +28,6 @@ export default {
               api.refreshTokenSubs()
             }
           }
-        )
+        )*/
       }
 }

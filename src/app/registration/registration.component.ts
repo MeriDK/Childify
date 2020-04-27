@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver, Input} from '@angular/core';
 import anime from 'node_modules/animejs'
 import $ from 'node_modules/jquery'
 import  RegistrationService  from './registrationService'
 import { ApiService } from '../api.service';
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import  ValidateServ from '../ValidateServ' ;
 
 
 @Component({
@@ -14,15 +16,39 @@ import { ApiService } from '../api.service';
 export class RegistrationComponent implements OnInit {
 
   @ViewChild("registrationBody",{read: ViewContainerRef}) registrationBody
-  data : any;
+  @Input() myvalidator:ValidatorFn;
+  registrationForm : any;
+  username: FormControl;
+  email: FormControl;
+  password: FormControl;
+  confirmPassword: FormControl;
+  isParent: FormControl;
 
   constructor(private componentFactoryResolver : ComponentFactoryResolver, private api: ApiService) {
-    this.data = {username: '', email: '', password: '', confirmPassword: '', isParent: false}
   }
 
   ngOnInit(): void {
     this.initAnime()
     this.initEventListener()
+    this.initFormControl()
+  }
+
+  initFormControl(): void {
+    this.username = new FormControl('', ValidateServ.validateUsername)
+    this.email =  new FormControl('', ValidateServ.validateEmail)
+    this.password  = new FormControl('', ValidateServ.validatePassword)
+    this.confirmPassword = new FormControl('', ValidateServ.validatePassword)
+    this.isParent = new FormControl(ValidateServ.validateIsParent)
+
+    this.registrationForm = new FormGroup({
+      inputGroup: new FormGroup({
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword
+      }),
+      isParent: this.isParent
+    })
   }
 
   initEventListener(): void {
@@ -43,6 +69,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerNewUser(): void {
-    RegistrationService.registerNewUser(this.api, this.data, this.registrationBody, this.componentFactoryResolver)
+    var data = {
+      "username" : this.username.value,
+      "email" : this.email.value,
+      "password": this.password.value,
+      "isParent": this.isParent.value=="isParent"
+    }
+    RegistrationService.registerNewUser(this.api, data, this.registrationBody, this.componentFactoryResolver)
   }
 }

@@ -11,27 +11,69 @@
             </svg>
         </div>
     </div>
-    <div class="registration__form text-center">
-        <div class="input-group input-group--registration">
-                <input class="input-text input-text--registration" [(ngModel)]="data.username" placeholder="Username">
-                <input class="input-text input-text--registration" [(ngModel)]="data.email" placeholder="Email">
-                <input class="input-text input-text--registration" type="password" [(ngModel)]="data.password" placeholder="Password">
-                <input class="input-text input-text--registration" type="password" [(ngModel)]="data.confirmPassword" placeholder="Repeat password">    
+    <form [formGroup]="registrationForm" novalidate class="registration__form text-center">
+        <div formGroupName="inputGroup"  class="input-group input-group--registration">
+                <input class="input-text input-text--registration" formControlName="username" placeholder="Username"
+                    [ngClass]="{
+                        'input-success--registration': (username.touched || username.dirty) && username.valid,
+                        'input-danger--registration': (username.touched || username.dirty) && username.invalid
+                    }">
+                <div class="form-control-feedback form-control-feedback--registration" 
+                    *ngIf="username.invalid && (username.touched || username.dirty)">
+                    <p *ngIf="username.errors.required">username is required</p>
+                    <p *ngIf="username.errors.minlength">username is too short</p>
+                </div> 
+                <input class="input-text input-text--registration" formControlName="email" placeholder="Email" 
+                    [ngClass]="{
+                        'input-success--registration': (email.touched) && email.valid,
+                        'input-danger--registration': (email.touched) && email.invalid
+                    }">
+                <div class="form-control-feedback form-control-feedback--registration" 
+                    *ngIf="email.invalid && (email.touched)">
+                    <p *ngIf="email.errors.required">email is required</p>
+                    <p *ngIf="email.errors.pattern">email is not email </p>
+                </div> 
+                <input class="input-text input-text--registration" type="password" formControlName="password" placeholder="Password"
+                    [ngClass]="{
+                        'input-success--registration': (password.touched || password.dirty) && password.valid,
+                        'input-danger--registration': (password.touched || password.dirty) && password.invalid 
+                    }">
+                <div class="form-control-feedback form-control-feedback--registration" 
+                    *ngIf="password.invalid && (password.touched || password.dirty)">
+                    <p *ngIf="password.errors.required">password is required</p>
+                    <p *ngIf="password.errors.minlength">password is too short</p>
+                </div>
+                <input class="input-text input-text--registration" type="password" formControlName="confirmPassword" placeholder="Repeat password"
+                    [ngClass]="{
+                        'input-success--registration': (confirmPassword.touched || confirmPassword.dirty) && confirmPassword.valid && confirmPassword.value==password.value,
+                        'input-danger--registration':  (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) || ((confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid)
+                    }">
+                <div class="form-control-feedback form-control-feedback--registration" 
+                    *ngIf="(confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) || ((confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid)">
+                    <p *ngIf="confirmPassword.errors && confirmPassword.errors.required">password is required</p>
+                    <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) ">passwords don't match</p>
+                    <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && confirmPassword.errors.minlength && confirmPassword.value==password.value">password is too short</p>
+                </div>    
         </div>
         <div class="radio-group radio-group--registration"> 
             <div class="custom-control custom-radio custom-radio--registration">
-                <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__parent" (click)="data.isParent = true" id="defaultUnchecked" name="defaultExampleRadios">
+                <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__parent" value="isParent" formControlName="isParent" id="defaultUnchecked">
                 <label class="custom-control-label label--registration" for="defaultUnchecked">Parent</label>
             </div>
             <div class="custom-control custom-radio custom-radio--registration">
-                <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__child"  id="defaultChecked" name="defaultExampleRadios" checked>
+                <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__child" formControlName="isParent" id="defaultChecked" checked>
                 <label class="custom-control-label label--registration" for="defaultChecked">Child</label>
             </div>
         </div>
         <div class="btn-group btn-group--registration">
-            <button class="btn btn-primary btn--registration" type="button" (click)="registerNewUser()">Register</button>
+            <button class="btn btn-primary btn--registration" type="button" (click)="registerNewUser()"
+                [ngClass]="{
+                    'btn-disable--registration': username.errors || password.errors || email.errors || confirmPassword.errors || isParent.errors || (password.value!=confirmPassword.value),
+                    'disabled': username.errors || password.errors || email.errors || confirmPassword.errors || isParent.errors || (password.value!=confirmPassword.value)
+                }"
+            >Register</button>
         </div>
-    </div>
+    </form>
     <div class="registration__footer text-center">
         <span class="msg msg--registration">Have account, yet?</span>
     </div>
