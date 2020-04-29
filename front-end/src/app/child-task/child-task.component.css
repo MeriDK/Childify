@@ -1,0 +1,17 @@
+/* For task list */
+.task{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: rgba(95,60,107,0.3);
+    padding: 8px;
+    margin: 10px 0px;
+    
+}
+.task i {
+    float: right;
+    cursor: pointer;
+}
+.task p{
+    font-size: 18px
+}
