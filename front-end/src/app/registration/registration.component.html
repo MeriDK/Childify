@@ -69,8 +69,7 @@
         <div class="btn-group btn-group--registration">
             <button class="btn btn-primary btn--registration" type="button" (click)="registerNewUser()"
                 [ngClass]="{
-                    'btn-disable--registration': username.errors || password.errors || email.errors || confirmPassword.errors  || (password.value!=confirmPassword.value),
-                    'disabled': username.errors || password.errors || email.errors || confirmPassword.errors  || (password.value!=confirmPassword.value)
+                    'btn-disable--registration disabled': username.errors || password.errors || email.errors || confirmPassword.errors  || (password.value!=confirmPassword.value)
                 }"
             >Register</button>
         </div>
