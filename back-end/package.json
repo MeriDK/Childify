@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "server": "python manage.py runserver"
+    "server": "python childify_api/manage.py runserver"
   }
 }

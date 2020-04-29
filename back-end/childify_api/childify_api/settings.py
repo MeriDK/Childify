@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +42,11 @@ INSTALLED_APPS = [
     'Child.apps.ChildConfig',
     'Child_prize.apps.ChildPrizeConfig',
     'Family.apps.FamilyConfig',
-    'Prize.apps.PrizeConfig'
+    'Prize.apps.PrizeConfig',
+    'Parent.apps.ParentConfig',
+    'User.apps.UserConfig',
+    'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +57,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 ROOT_URLCONF = 'childify_api.urls'
 
@@ -70,6 +81,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'User.User'
 
 WSGI_APPLICATION = 'childify_api.wsgi.application'
 
@@ -103,6 +116,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+# JWT settings
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'USER_ID_FIELD': 'user_id',
+    'USER_ID_CLAIM': 'user_id'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
