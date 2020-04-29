@@ -1,39 +1,51 @@
- <!-- TASK LIST -->
+ <!DOCTYPE html>
+ <html>
+ <head>
+    <title>Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
 
-        <div class="task" >
-            <p>task<i class="fas fa-chevron-right"></i>
-            </p>
-        </div>
-
-        <div class="task" href="#windows-infotask">
-            <p>task<i class="fas fa-chevron-right"></i>
-            </p>
-        </div>
-        <div class="task" href="#windows-infotask">
-            <p>task<i class="fas fa-chevron-right"></i>
-            </p>
-        </div>
-        <div class="task" href="#windows-infotask">
-            <p>task<i class="fas fa-chevron-right"></i>
-            </p>
-        </div>
-
-        <!-- WINDOW -->
-        <ng-template #template>
-          <div class="modal-header">
-            <h4 class="modal-title pull-left">Create task</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-      <div class="modal-body text-center" >
-
-      </div>
-    </ng-template>
+    </head>
+    <body>
 
 
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
+<div class="task">
+    <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+    </h3><p>Point: 15</p></a>  
+</div>
 
-        <!-- button add task -->
-        <div class="add-task">
-            <a type="button" (click)="openModal(template)">Add</a>
-        </div>
+
+<button class="btn" routerLink='add'>Add task</button>
+</body>
+</html>
