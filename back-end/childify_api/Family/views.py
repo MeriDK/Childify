@@ -16,13 +16,16 @@ class FamilyAPIView(APIView):
   permission_classes = (IsAuthenticated,)
 
   def check_object_family(self, user):
-    try:
-      if user.isParent:
-       return Parent.object.filter(user=user)
-      else:
+    if user.isParent:
+      try:
+        return Parent.object.filter(user=user)
+      except Parent.DoesNotExist:
+        return None
+    else:
+      try:
         return Child.object.filter(user=user)
-    except Child.DoesNotExist:
-      return None
+      except Child.DoesNotExist:
+        return None
 
   def post(self, request):
     serializer = FamilyCreateSerializer(data=request.data)
@@ -44,39 +47,32 @@ class FamilyUserAPIView(APIView):
   permission_classes = (IsAuthenticated,)
 
   def get_object_family(self, family_id):
-    try:
-      return Family.object.get(id=family_id)
-    except Family.DoesNotExist:
-      return None
+      return Family.object.filter(id=family_id).first()
 
   def get_object_parent(self, user):
-    try:
-      return Parent.object.get(user=user)
-    except Parent.DoesNotExist:
-      return None
+      return Parent.object.filter(user=user).first()
 
   def get_object_child(self, user):
-    try:
-      return Child.object.get(user=user)
-    except Child.DoesNotExist:
-      return None
+      return Child.object.filter(user=user).first()
 
   def check_object_family(self, user):
-    try:
-      if user.isParent:
-       return Parent.object.filter(user=user)
-      else:
+    if user.isParent:
+      try:
+        return Parent.object.filter(user=user)
+      except Parent.DoesNotExist:
+        return None
+    else:
+      try:
         return Child.object.filter(user=user)
-    except Child.DoesNotExist:
-      return None
+      except Child.DoesNotExist:
+        return None
 
 
   def post(self, request, family_id):
     if request.method == "POST":
       family = self.get_object_family(family_id)
-
       if not family:
-        return JsonResponse("error", status=400)
+        return JsonResponse({"msg": "error"}, status=400)
       if self.check_object_family(request.user):
         return JsonResponse({"msg": "already connected"}, status=405)
       if request.user.isParent:
