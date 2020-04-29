@@ -21,6 +21,6 @@ class Child(models.Model):
   points = models.IntegerField(default=0)
 
   def __str__(self):
-      return f'id: {self.child_id} family_id: {self.family} user_id: {self.user} points: {self.points}'
+      return f'id: {self.child_id} family: {self.family} user: {self.user} points: {self.points}'
 
   object = ChildManager()

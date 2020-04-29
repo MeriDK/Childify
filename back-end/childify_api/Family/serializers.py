@@ -7,7 +7,3 @@ class FamilyCreateSerializer(serializers.ModelSerializer):
     model = Family
     fields = ['name']
 
-class FamilyConnectSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Family
-    fields = []

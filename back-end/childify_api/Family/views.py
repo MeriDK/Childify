@@ -18,9 +18,9 @@ class FamilyAPIView(APIView):
   def check_object_family(self, user):
     try:
       if user.isParent:
-       return Parent.object.filter(user_id=user.user_id)
+       return Parent.object.filter(user=user)
       else:
-        return Child.object.filter(user_id=user.user_id)
+        return Child.object.filter(user=user)
     except Child.DoesNotExist:
       return None
 
@@ -49,24 +49,24 @@ class FamilyUserAPIView(APIView):
     except Family.DoesNotExist:
       return None
 
-  def get_object_parent(self, user_id):
+  def get_object_parent(self, user):
     try:
-      return Parent.object.get(user_id=user_id)
+      return Parent.object.get(user=user)
     except Parent.DoesNotExist:
       return None
 
-  def get_object_child(self, user_id):
+  def get_object_child(self, user):
     try:
-      return Child.object.get(user_id=user_id)
+      return Child.object.get(user=user)
     except Child.DoesNotExist:
       return None
 
   def check_object_family(self, user):
     try:
       if user.isParent:
-       return Parent.object.filter(user_id=user.user_id)
+       return Parent.object.filter(user=user)
       else:
-        return Child.object.filter(user_id=user.user_id)
+        return Child.object.filter(user=user)
     except Child.DoesNotExist:
       return None
 
@@ -80,12 +80,11 @@ class FamilyUserAPIView(APIView):
       if self.check_object_family(request.user):
         return JsonResponse({"msg": "already connected"}, status=405)
       if request.user.isParent:
-        parent = self.get_object_parent(request.user.user_id)
+        parent = self.get_object_parent(request.user)
         if not parent:
-          print(family)
           Parent.object.create_parent(family, request.user)
       else:
-        child = self.get_object_child(request.user.user_id)
+        child = self.get_object_child(request.user)
         if not child:
           Child.object.create_child(family, request.user)
 
