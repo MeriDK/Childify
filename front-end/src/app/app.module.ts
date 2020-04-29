@@ -10,8 +10,6 @@ import { CookieService } from "ngx-cookie-service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from "./login/login.component";
-import { LoginTitleComponent } from "./login-title/login-title.component";
 import { FamilyPageComponent } from "./family-page/family-page.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { RegistrationComponent } from "./registration/registration.component";
@@ -29,8 +27,6 @@ import { TaskCheckComponent } from './task-check/task-check.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    LoginTitleComponent,
     FamilyPageComponent,
     NavMenuComponent,
     RegistrationComponent,
