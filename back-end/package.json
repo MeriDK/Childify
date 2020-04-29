@@ -1,5 +1,7 @@
 {
   "scripts": {
-    "server": "python childify_api/manage.py runserver"
+    "server": "python childify_api/manage.py runserver",
+    "makemigrations": "python childify_api/manage.py makemigrations",
+    "migrate": "python childify_api/manage.py makemigrations"
   }
 }
