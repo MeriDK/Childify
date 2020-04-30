@@ -1,4 +1,3 @@
-from django.db import models
 from Child.models import Child
 from Prize.models import Prize
 from django.db import models
