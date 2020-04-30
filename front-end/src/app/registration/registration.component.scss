@@ -2,21 +2,24 @@
 .registration__body {
     height: 100%;
     width: 100%;
-    background: linear-gradient(162.39deg, rgba(143, 0, 255, 0.61) 2.8%, rgba(81, 139, 225, 0.75) 45.97%, rgba(144, 2, 255, 0.41) 93.16%), #C4C4C4;
+    background-color: #ffffff;
 }
 
 .registration__title {
-    height: 33%;
-    .logo--registration {
-        padding-top: 44px;
-        padding-right: 35px;
-        left: 27px;
-        top: 44px;
+    height: 39%;
+    .logo--registration {       
+        justify-content: center;
+        display: flex;
+        height: 100%;
         .svg--logo{
             color: rgba(250, 0, 187, 0.719);
             fill: rgba(255, 255, 255, 0.400);
             width: 238px;
             height: 91px;
+        }
+        .register-page__logo {
+            height: 30vh;
+            align-self: center;
         }
     }
 }
@@ -32,13 +35,13 @@
             font-weight: 200;
             font-size: 18px;
             line-height: 40px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(0, 0, 0, 0.842);
             background: transparent;
             border: 0px;
-            border-bottom:  1px solid rgba(255, 255, 255, 0.5);
+            border-bottom:  1px solid  rgba(0, 0, 0, 0.829);;
 
             &::placeholder {
-                color: rgba(255, 255, 255, 0.5);
+                color: rgba(63, 63, 63, 0.856);
                 font-style: italic;
             }
             &:focus{
@@ -51,7 +54,7 @@
         .form-control-feedback--registration {
             font-style: italic;
             font-size: 13px;
-            color: rgba(231, 195, 195, 0.5);
+            color: rgba(0, 0, 0, 0.795);
             p {
                 margin-top: -3px;
                 margin-bottom: -17px;
@@ -59,12 +62,12 @@
         }
 
         .input-success--registration {
-            color: rgba(174, 245, 215, 0.5);
-            border-bottom:  2px solid rgba(0, 255, 34, 0.459);
+            color: rgba(68, 253, 176, 0.795);
+            border-bottom:  2px solid rgba(0, 255, 34, 0.692);
         }
 
         .input-danger--registration {
-            color: rgba(255, 189, 203, 0.5);
+            color: rgba(248, 107, 138, 0.808);
             border-bottom:  2px solid rgba(255, 0, 0, 0.466);
         }
     }    
@@ -77,7 +80,7 @@
         .custom-radio--registration{
             display: inline;
             padding-right: 20px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(0, 0, 0, 0.747);
 
             .input-radio--registration~.label--registration {
                 &::before {
@@ -105,18 +108,18 @@
             width: 267px;
             height: 40px;
 
-            background: rgba(166, 79, 253, 0.69);
+            background: rgba(206, 206, 206, 0.69);
             border-radius: 20px;
 
             font-family: Roboto;
-            color: rgba(255, 255, 255, 0.57);
+            color: rgba(0, 0, 0, 0.863);
             font-size: 18px;
             line-height: 21px;
         }
 
         .btn-disable--registration {
-            background: rgba(188, 142, 233, 0.69);
-            color: rgba(255, 255, 255, 0.363);
+            background: rgba(226, 226, 226, 0.5);
+            color: rgba(0, 0, 0, 0.89);
             cursor:  no-drop;
             pointer-events: none;
         }
@@ -128,6 +131,6 @@
         font-family: Roboto;
         font-size: 13px;
         cursor: pointer;
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(0, 0, 0, 0.849);
     }
 }

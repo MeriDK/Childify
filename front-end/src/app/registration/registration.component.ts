@@ -22,7 +22,6 @@ export class RegistrationComponent implements OnInit {
   email: FormControl;
   password: FormControl;
   confirmPassword: FormControl;
-  isParent: FormControl;
 
   constructor(private componentFactoryResolver : ComponentFactoryResolver, private api: ApiService) {
   }
@@ -38,7 +37,6 @@ export class RegistrationComponent implements OnInit {
     this.email =  new FormControl('', ValidateServ.validateEmail)
     this.password  = new FormControl('', ValidateServ.validatePassword)
     this.confirmPassword = new FormControl('', ValidateServ.validatePassword)
-    this.isParent = new FormControl(ValidateServ.validateIsParent)
 
     this.registrationForm = new FormGroup({
       inputGroup: new FormGroup({
@@ -46,8 +44,7 @@ export class RegistrationComponent implements OnInit {
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword
-      }),
-      isParent: this.isParent
+      })
     })
   }
 
@@ -73,7 +70,7 @@ export class RegistrationComponent implements OnInit {
       "username" : this.username.value,
       "email" : this.email.value,
       "password": this.password.value,
-      "isParent": this.isParent.value=="isParent"
+      "isParent": $(".input-radio--registration__parent").is(':checked')
     }
     RegistrationService.registerNewUser(this.api, data, this.registrationBody, this.componentFactoryResolver)
   }
