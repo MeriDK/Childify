@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginPageComponent} from "./login-page/login-page.component";
+import { LoginPageComponent} from './login-page/login-page.component';
 import { TaskComponent } from "./task/task.component";
 import { TaskAddComponent } from "./task-add/task-add.component";
 import { TaskInfoComponent } from "./task-info/task-info.component";

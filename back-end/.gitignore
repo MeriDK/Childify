@@ -1,5 +1,7 @@
 venv
+<<<<<<< Updated upstream
 .idea
+../.idea/
 childify_api/db.sqlite3
 childify_api/Child/__pycache__
 childify_api/Child/migrations/
@@ -14,3 +16,10 @@ childify_api/Prize/migrations/
 childify_api/User/__pycache__
 childify_api/User/migrations/
 childify_api/childify_api/__pycache__
+=======
+/childify_api/Child_prize/migrations/0001_initial.py
+/childify_api/Child/migrations/0001_initial.py
+/childify_api/Family/migrations/0001_initial.py
+/childify_api/Prize/migrations/0001_initial.py
+/childify_api/db.sqlite3
+>>>>>>> Stashed changes
