@@ -2,17 +2,15 @@
 .registration__body {
     height: 100%;
     width: 100%;
-    //background: linear-gradient(162.39deg, rgba(143, 0, 255, 0.61) 2.8%, rgba(81, 139, 225, 0.75) 45.97%, rgba(144, 2, 255, 0.41) 93.16%), #C4C4C4;
     background-color: #ffffff;
 }
 
 .registration__title {
     height: 39%;
-    .logo--registration {
-        padding-top: 44px;
-        padding-right: 35px;
-        left: 27px;
-        top: 44px;
+    .logo--registration {       
+        justify-content: center;
+        display: flex;
+        height: 100%;
         .svg--logo{
             color: rgba(250, 0, 187, 0.719);
             fill: rgba(255, 255, 255, 0.400);
@@ -37,14 +35,12 @@
             font-weight: 200;
             font-size: 18px;
             line-height: 40px;
-            //color: rgba(255, 255, 255, 0.5);
             color: rgba(0, 0, 0, 0.842);
             background: transparent;
             border: 0px;
             border-bottom:  1px solid  rgba(0, 0, 0, 0.829);;
 
             &::placeholder {
-                //color: rgba(255, 255, 255, 0.5);
                 color: rgba(63, 63, 63, 0.856);
                 font-style: italic;
             }
@@ -58,7 +54,6 @@
         .form-control-feedback--registration {
             font-style: italic;
             font-size: 13px;
-            //color: rgba(231, 195, 195, 0.5);
             color: rgba(0, 0, 0, 0.795);
             p {
                 margin-top: -3px;
@@ -85,7 +80,6 @@
         .custom-radio--registration{
             display: inline;
             padding-right: 20px;
-            //color: rgba(255, 255, 255, 0.5);
             color: rgba(0, 0, 0, 0.747);
 
             .input-radio--registration~.label--registration {
@@ -118,16 +112,13 @@
             border-radius: 20px;
 
             font-family: Roboto;
-            //color: rgba(255, 255, 255, 0.57);
             color: rgba(0, 0, 0, 0.863);
             font-size: 18px;
             line-height: 21px;
         }
 
         .btn-disable--registration {
-            //background: rgba(188, 142, 233, 0.69);
             background: rgba(226, 226, 226, 0.5);
-            //color: rgba(255, 255, 255, 0.363);
             color: rgba(0, 0, 0, 0.89);
             cursor:  no-drop;
             pointer-events: none;
@@ -140,7 +131,6 @@
         font-family: Roboto;
         font-size: 13px;
         cursor: pointer;
-        //color: rgba(255, 255, 255, 0.3);
         color: rgba(0, 0, 0, 0.849);
     }
 }
