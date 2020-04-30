@@ -15,19 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView, TokenVerifyView
-
-from Family.views import FamilyUserAPIView, FamilyAPIView
-from User.views import UserAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('family/<int:family_id>/user/', FamilyUserAPIView.as_view()),
-    path('family/', FamilyAPIView.as_view()),
-    path('user/', UserAPIView.as_view()),
-    path('login/token/', TokenObtainPairView.as_view()),
-    path('login/refresh/', TokenRefreshView.as_view()),
-    path('login/verify/', TokenVerifyView.as_view()),
+    path('', include('User.urls')),
+    path('', include('Family.urls')),
     path('', include('Prize.urls')),
     path('', include('Child_prize.urls'))
 ]
