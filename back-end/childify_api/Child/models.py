@@ -14,6 +14,7 @@ class ChildManager(BaseUserManager):
     child.save(using=self._db)
     return child
 
+
 class Child(models.Model):
   child_id = models.AutoField(primary_key = True)
   family = models.ForeignKey(Family, on_delete=models.CASCADE)

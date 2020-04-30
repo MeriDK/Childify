@@ -24,6 +24,12 @@ class FamilyAPIView(APIView):
       except Child.DoesNotExist:
         return None
 
+  # check if user in family
+  def get(self, request):
+    if self.check_object_family(request.user):
+      return JsonResponse({"msg": "already connected"}, status=200)
+    return JsonResponse({"msg": "not connected"}, status=405)
+
   def post(self, request):
     serializer = FamilyCreateSerializer(data=request.data)
     if serializer.is_valid():

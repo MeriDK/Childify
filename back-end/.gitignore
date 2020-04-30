@@ -1,5 +1,6 @@
 venv
 .idea
+../.idea/
 childify_api/db.sqlite3
 childify_api/Child/__pycache__
 childify_api/Child/migrations/

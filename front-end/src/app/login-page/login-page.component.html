@@ -1,12 +1,26 @@
-<div class="login-page">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-page">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   <img src="../../assets/img/logo.png" alt="logo" class="login-page__logo">
-  <label for="uname" class="login-page__label">Username</label>
-  <input type="text" name="uname" placeholder="Enter Username" class="login-page__input">
-  <label for="pwd" class="login-page__label">Password</label>
-  <input type="password" name="pwd" placeholder="Enter password" class="login-page__input">
-  <button type="submit" class="login-page__button">LOGIN</button>
+
+  <label for="username" class="login-page__label">Username</label>
+  <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Enter Username" class="login-page__input">
+  <div *ngIf="submitted && f.username.errors">
+      <div *ngIf="f.username.errors.required">Username is required</div>
+  </div>
+
+  <label for="password" class="login-page__label">Password</label>
+  <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" class="login-page__input">
+  <div *ngIf="submitted && f.password.errors">
+    <div *ngIf="f.password.errors.required">Password is required</div>
+  </div>
+
+  <button [disabled]="loading" class="login-page__button">
+    <span *ngIf="loading"></span>
+    LOGIN
+  </button>
+
   <div class="login-page__text">
     Don't have account?
-    <a href="login" class="login-page__text_link">Sign up</a>
+    <span routerLink="/registration" class="login-page__text_link">Sign up</span>
   </div>
-</div>
+</form>
