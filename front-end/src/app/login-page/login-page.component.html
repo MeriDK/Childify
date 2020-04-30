@@ -1,30 +1,23 @@
-<form [formGroup]="loginForm" class="login-page">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-page">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   <img src="../../assets/img/logo.png" alt="logo" class="login-page__logo">
 
   <label for="username" class="login-page__label">Username</label>
-  <input formControlName="username" placeholder="Enter Username" class="login-page__input" type="text"
-    [ngClass]="{
-      'input-success--login': (username.touched || username.dirty) && username.valid,
-      'input-danger--login': (username.touched || username.dirty) && username.invalid}">
-  <div class="login-page__feedback" *ngIf="username.invalid && (username.touched || username.dirty)">
-    <div *ngIf="username.errors.required">Username is required</div>
+  <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Enter Username" class="login-page__input">
+  <div *ngIf="submitted && f.username.errors">
+      <div *ngIf="f.username.errors.required">Username is required</div>
   </div>
 
   <label for="password" class="login-page__label">Password</label>
-  <input formControlName="password" type="password" placeholder="Enter password" class="login-page__input"
-    [ngClass]="{
-      'input-success--login': (password.touched || password.dirty) && password.valid,
-      'input-danger--registration': (password.touched || password.dirty) && password.invalid
-    }">
-  <div class="login-page__feedback" *ngIf="password.invalid && (password.touched || password.dirty)">
-    <div *ngIf="password.errors.required">Password is required</div>
+  <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" class="login-page__input">
+  <div *ngIf="submitted && f.password.errors">
+    <div *ngIf="f.password.errors.required">Password is required</div>
   </div>
 
-  <button class="login-page__button" type="button"
-    [ngClass]="{
-      'btn-disable--login': username.errors || password.errors
-    }"
-  >LOGIN</button>
+  <button [disabled]="loading" class="login-page__button">
+    <span *ngIf="loading"></span>
+    LOGIN
+  </button>
 
   <div class="login-page__text">
     Don't have account?

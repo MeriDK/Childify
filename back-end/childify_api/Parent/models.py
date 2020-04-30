@@ -4,6 +4,7 @@ from django.db import models
 from Family.models import Family
 from User.models import User
 
+
 class ParentManager(BaseUserManager):
   def create_parent(self, family, user):
     parent = self.model(

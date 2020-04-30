@@ -22,12 +22,12 @@ from User.views import UserAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('family/<int:family_id>/user', FamilyUserAPIView.as_view()),
+    path('family/<int:family_id>/user/', FamilyUserAPIView.as_view()),
     path('family/', FamilyAPIView.as_view()),
     path('user/', UserAPIView.as_view()),
-    path('login/token', TokenObtainPairView.as_view()),
-    path('login/refresh', TokenRefreshView.as_view()),
-    path('login/verify', TokenVerifyView.as_view()),
+    path('login/token/', TokenObtainPairView.as_view()),
+    path('login/refresh/', TokenRefreshView.as_view()),
+    path('login/verify/', TokenVerifyView.as_view()),
     path('', include('Prize.urls')),
     path('', include('Child_prize.urls'))
 ]
