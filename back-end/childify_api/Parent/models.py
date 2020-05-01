@@ -16,11 +16,10 @@ class ParentManager(BaseUserManager):
 
 
 class Parent(models.Model):
-  parent_id = models.AutoField(primary_key = True )
   family = models.ForeignKey(Family, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-      return f'id: {self.parent_id} family: {self.family} user: {self.user}'
+      return f'id: {self.id} family: {self.family} user: {self.user}'
 
   object = ParentManager()
