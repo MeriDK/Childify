@@ -15,7 +15,6 @@ import  ValidateServ from '../ValidateServ' ;
 })
 export class RegistrationComponent implements OnInit {
 
-  @ViewChild("registrationBody",{read: ViewContainerRef}) registrationBody
   @Input() myvalidator:ValidatorFn;
   registrationForm : any;
   username: FormControl;
@@ -23,12 +22,10 @@ export class RegistrationComponent implements OnInit {
   password: FormControl;
   confirmPassword: FormControl;
 
-  constructor(private componentFactoryResolver : ComponentFactoryResolver, private api: ApiService) {
-  }
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.initAnime()
-    this.initEventListener()
     this.initFormControl()
   }
 
@@ -46,10 +43,6 @@ export class RegistrationComponent implements OnInit {
         confirmPassword: this.confirmPassword
       })
     })
-  }
-
-  initEventListener(): void {
-    $(".msg--registration").on( 'click' , () => { RegistrationService.forwardToSignIn() })
   }
 
   initAnime(): void {
@@ -72,6 +65,6 @@ export class RegistrationComponent implements OnInit {
       "password": this.password.value,
       "isParent": $(".input-radio--registration__parent").is(':checked')
     }
-    RegistrationService.registerNewUser(this.api, data, this.registrationBody, this.componentFactoryResolver)
+    RegistrationService.registerNewUser(this.api, data)
   }
 }

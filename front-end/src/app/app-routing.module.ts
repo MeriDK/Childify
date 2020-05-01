@@ -22,6 +22,10 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
+    path: 'connect-family',
+    component: RegistrationAddCreateFamilyComponent
+  },
+  {
     path: 'family',
     component: FamilyPageComponent
   },

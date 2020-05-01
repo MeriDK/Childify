@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
-import { DynamicComponentService } from '../dynamic-component-serv/dynamic-component.service';
 import $ from 'node_modules/jquery'
 import  RegistrationService  from './registrationService'
 import { ApiService } from '../api.service';
@@ -12,16 +11,15 @@ import { ApiService } from '../api.service';
 })
 export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
 
-  @Input() isChild: any;
+  isChild: any;
   data : any;
   isCreate : boolean;
 
-  constructor(private dynamicComponentService: DynamicComponentService, private api: ApiService) {
+  constructor(private api: ApiService) {
     this.data = {family_id: '', name: ''}
   }
 
   ngAfterViewInit(): void {
-    this.dynamicComponentService.afterViewInitSubject.next(null);
     this.setAccessToCreate()
   }
 

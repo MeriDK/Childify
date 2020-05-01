@@ -53,7 +53,6 @@
                     *ngIf="(confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) || ((confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid)">
                     <p *ngIf="confirmPassword.errors && confirmPassword.errors.required">password is required</p>
                     <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) ">passwords don't match</p>
-                    <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && confirmPassword.errors.minlength && confirmPassword.value==password.value">password is too short</p>
                 </div>    
         </div>
         <div class="radio-group radio-group--registration"> 
@@ -67,7 +66,7 @@
             </div>
         </div>
         <div class="btn-group btn-group--registration">
-            <button class="btn btn-primary btn--registration" type="button" (click)="registerNewUser()"
+            <button class="btn btn-primary btn--registration" routerLink="/connect-family" type="button" (click)="registerNewUser()"
                 [ngClass]="{
                     'btn-disable--registration disabled': username.errors || password.errors || email.errors || confirmPassword.errors  || (password.value!=confirmPassword.value)
                 }"
