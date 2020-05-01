@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
-    "back-server": "python ../back-end/childify_api/manage.py runserver",
+    "dev-l": "concurrently --kill-others \"npm run back-server-l\" \"npm run front-server\"",
+    "back-server": "..\\back-end\\venv\\Scripts\\activate.bat && python ../back-end/childify_api/manage.py runserver",
+    "back-server-l": "source env/bin/activate && python back-end/childify_api/manage.py runserver",
     "front-server": "ng serve",
     "makemigrations": "python ../back-end/childify_api/manage.py makemigrations",
     "migrate": "python ../back-end/childify_api/manage.py migrate",
