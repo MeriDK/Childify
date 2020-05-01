@@ -6,7 +6,7 @@
     "back-server": "python ../back-end/childify_api/manage.py runserver",
     "front-server": "ng serve",
     "makemigrations": "python ../back-end/childify_api/manage.py makemigrations",
-    "migrate": "python ../back-end/childify_api/manage.py makemigrations",
+    "migrate": "python ../back-end/childify_api/manage.py migrate",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
