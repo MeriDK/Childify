@@ -1,0 +1,23 @@
+{
+   "wish": {
+        "en" : "Wish",
+        "uk" : "Побажання"
+    },
+    "order": {
+        "en" : "Order",
+        "uk" : "Вибрані"
+    },
+    "receive": {
+        "en" : "Receive",
+        "uk" : "Здобуті"
+    },
+    "shop": {
+        "en": "Shop",
+        "uk": "Магазин"
+    },
+    "points": {
+        "en": "Points",
+        "uk": "Очки"
+    }
+
+}
