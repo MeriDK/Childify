@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
+    "back-server": "python back-end/childify_api/manage.py runserver",
+    "front-server": "cd front-end && ng serve",
+    "makemigrations": "python back-end/childify_api/manage.py makemigrations",
+    "migrate": "python back-end/childify_api/manage.py makemigrations",
+    "ng": "cd front-end && ng",
+    "start": "cd front-end && ng serve",
+    "build": "cd front-end && ng build",
+    "test": "cd front-end && ng test",
+    "lint": "cd front-end && ng lint",
+    "e2e": "cd front-end && ng e2e"
+  }
+}
