@@ -16,12 +16,11 @@ class ChildManager(BaseUserManager):
 
 
 class Child(models.Model):
-  child_id = models.AutoField(primary_key = True)
   family = models.ForeignKey(Family, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   points = models.IntegerField(default=0)
 
   def __str__(self):
-      return f'id: {self.child_id} family: {self.family} user: {self.user} points: {self.points}'
+      return f'id: {self.id} family: {self.family} user: {self.user} points: {self.points}'
 
   object = ChildManager()
