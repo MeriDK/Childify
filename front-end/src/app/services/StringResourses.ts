@@ -1,6 +1,6 @@
 // @ts-ignore
 import json from  '../../string_resourses.json'
-const currentLanguage = "uk"
+const currentLanguage = "ua"
 
 
  export  function translate(value) {
