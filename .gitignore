@@ -67,3 +67,4 @@ back-end/childify_api/childify_api/__pycache__
 
 # project
 .idea
+node_modules
