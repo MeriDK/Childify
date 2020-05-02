@@ -1,1 +1,69 @@
-node_modules
+# front-end
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+front-end/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+front-end/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# back-end
+
+back-end/.idea
+back-end/venv
+back-end/childify_api/__pycache__
+back-end/childify_api/db.sqlite3
+back-end/childify_api/Child/__pycache__
+back-end/childify_api/Child/migrations/
+back-end/childify_api/Parent/__pycache__
+back-end/childify_api/Parent/migrations/
+back-end/childify_api/Child_prize/__pycache__
+back-end/childify_api/Child_prize/migrations/
+back-end/childify_api/Family/__pycache__
+back-end/childify_api/Family/migrations/
+back-end/childify_api/Prize/__pycache__
+back-end/childify_api/Prize/migrations/
+back-end/childify_api/User/__pycache__
+back-end/childify_api/User/migrations/
+back-end/childify_api/childify_api/__pycache__
+
+# project
+.idea
