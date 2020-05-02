@@ -1,26 +1,30 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-page">
+<div class="login-page column_center">
   <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   <img src="../../assets/img/logo.png" alt="logo" class="login-page__logo">
 
-  <label for="username" class="login-page__label">Username</label>
-  <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Enter Username" class="login-page__input">
-  <div *ngIf="submitted && f.username.errors">
-      <div *ngIf="f.username.errors.required">Username is required</div>
-  </div>
-
-  <label for="password" class="login-page__label">Password</label>
-  <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" class="login-page__input">
-  <div *ngIf="submitted && f.password.errors">
-    <div *ngIf="f.password.errors.required">Password is required</div>
-  </div>
-
-  <button [disabled]="loading" class="login-page__button">
-    <span *ngIf="loading"></span>
-    LOGIN
-  </button>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="column_center">
+    <div class="login-page__container column_center">
+      <label for="username" class="login-page__label">Username</label>
+      <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Enter Username" class="login-page__input">
+      <div *ngIf="submitted && f.username.errors">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+      </div>
+    </div>
+    <div class="login-page__container column_center">
+      <label for="password" class="login-page__label">Password</label>
+      <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" class="login-page__input">
+      <div *ngIf="submitted && f.password.errors">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <button [disabled]="loading" class="login-page__button">
+      <span *ngIf="loading"></span>
+      LOGIN
+    </button>
+  </form>
 
   <div class="login-page__text">
     Don't have account?
     <span routerLink="/registration" class="login-page__text_link">Sign up</span>
   </div>
-</form>
+</div>
