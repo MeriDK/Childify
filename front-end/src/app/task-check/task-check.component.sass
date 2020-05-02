@@ -1,11 +1,26 @@
 .task
     overflow: hidden
     width: 90%
-    background: rgba(95,60,107,0.3)
+    background: rgba(149, 87, 211, 0.582)
     padding: 10px
     margin: 16px
     border-radius: 15px
 
+.cdk-drag-preview 
+  box-sizing: border-box
+  border-radius: 15px
+
+.cdk-drag-placeholder 
+  opacity: 0
+
+.cdk-drag-animating 
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.example-box:last-child 
+  border: none
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder)
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
 
 
 .task i 

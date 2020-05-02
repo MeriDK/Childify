@@ -1,44 +1,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
 
- 
-<div class = "check-tasks">
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
+<div cdkDropList id="list-1" cdkDropListConnectedTo="list-2" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4']" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let task of tasks"class="task" cdkDrag>
+        <a routerLink="change"><h3>{{task}}<i class="fas fa-chevron-right"></i>
         </h3><p>Point: 15</p></a>  
     </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-    <div class="task">
-        <a routerLink="change"><h3>task<i class="fas fa-chevron-right"></i>
-        </h3><p>Point: 15</p></a>  
-    </div>
-
-    <button class="btn add-btn" routerLink='add'>Add task</button>
-
 </div>
+
+<button class="btn" routerLink='add'>Add task</button>

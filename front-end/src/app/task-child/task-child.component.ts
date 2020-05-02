@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-child',
@@ -20,5 +21,21 @@ export class TaskChildComponent implements AfterViewInit {
       $(".child-tasks .fas").addClass('fa-times')
     }
   }
+
+  tasks = [
+    'Task 1',
+    'Task 2',
+    'Task 3',
+    'Task 4',
+    'Task 5',
+    'Task 6',
+    'Task 7'
+  ];
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
 }
 
