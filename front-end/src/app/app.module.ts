@@ -23,6 +23,7 @@ import { TaskInfoChangeComponent } from './task-info-change/task-info-change.com
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskChildComponent } from './task-child/task-child.component';
 import { TaskCheckComponent } from './task-check/task-check.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     ReactiveFormsModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    AngularSvgIconModule.forRoot()
   ],
   providers: [CookieService],
   bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]//now using only in routing
