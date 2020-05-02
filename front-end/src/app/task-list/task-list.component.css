@@ -38,3 +38,6 @@
   width: 100%; 
 }
 
+.list-tasks .task .disable {
+  display: none;
+}
