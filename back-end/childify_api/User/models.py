@@ -21,12 +21,12 @@ class MyUserManager(BaseUserManager):
     user.save(using=self._db)
     return user
 
-  def create_superuser(self, email, username, password, isParent):
+  def create_superuser(self, username, password):
     user = self.create_user(
-      email=self.normalize_email(email),
+      email=self.normalize_email(username+"@admin.childify"),
       username=username,
       password = password,
-      isParent=isParent
+      isParent= True
     )
     user.is_admin = True
     user.is_staff = True
@@ -64,3 +64,4 @@ class User(AbstractBaseUser):
 
   def has_module_perms(self, app_label):
     return True
+
