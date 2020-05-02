@@ -1,12 +1,13 @@
 <div class="task-body">
-<header class="header-childify">
-    <h1 class="header-childify__title">Task</h1>
-</header>
- <div class="tabset--task">
-  <tabset type="pills" [justified]="true" class = "nav-pills" >
-    <tab heading="ListTask" class="tab1"><app-task-list></app-task-list></tab>
-      <tab heading="ChildTask"><app-task-child></app-task-child></tab>
-    <tab heading="CheckTask"><app-task-check></app-task-check></tab>
-  </tabset>
-</div>
-</div>
+  <header class="header-childify">
+      <h1 class="header-childify__title">Task</h1>
+  </header>
+   <div class="tabset-task">
+    <tabset type="pills" [justified]="true" class = "nav-pills" >
+      <tab heading="ListTask" class="list-task-tab" id="tab1"><app-task-list></app-task-list></tab>
+      <tab heading="ChildTask" class="child-task-tab" id="tab2"><app-task-child></app-task-child></tab>
+      <tab heading="CheckTask" class="done-task-tab" id="tab3"><app-task-check></app-task-check></tab>
+    </tabset>
+    </div>
+  </div>
+ 
