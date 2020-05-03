@@ -13,8 +13,8 @@ class UserAPIView(APIView):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
       user = User.object.create_user(serializer.data['email'],serializer.data['username'],serializer.data['password'],serializer.data['isParent'])
-      refreshToken = CustomRefreshToken.for_user(user=user)
-      return JsonResponse({'refreshToken': str(refreshToken), 'accessToken': str(refreshToken.access_token)}, status=201)
+      refresh = CustomRefreshToken.for_user(user=user)
+      return JsonResponse({'refresh': str(refresh), 'access': str(refresh.access_token)}, status=201)
     return JsonResponse(serializer.errors, status=400)
 
 
