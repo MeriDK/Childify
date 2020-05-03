@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 

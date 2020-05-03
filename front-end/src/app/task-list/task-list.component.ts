@@ -1,7 +1,5 @@
-import { Component, OnInit, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
 

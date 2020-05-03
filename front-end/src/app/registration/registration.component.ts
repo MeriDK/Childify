@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver, Input} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import anime from 'node_modules/animejs'
 import $ from 'node_modules/jquery'
 import  RegistrationService  from './registrationService'
