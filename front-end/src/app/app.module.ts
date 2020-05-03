@@ -24,6 +24,7 @@ import { TaskInfoChangeComponent } from './task-info-change/task-info-change.com
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskChildComponent } from './task-child/task-child.component';
 import { TaskCheckComponent } from './task-check/task-check.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     TaskInfoChangeComponent,
     TaskInfoComponent,
     TaskChildComponent,
-    TaskCheckComponent
+    TaskCheckComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
