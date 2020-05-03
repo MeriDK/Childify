@@ -10,6 +10,27 @@ export class NavMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+      
+  }
+
+  navMenuAni():void {
+    var menuBtn = document.getElementById('menu-btn-link');
+    if (menuBtn.className === "menu-btn") {
+      menuBtn.className += " active";
+    } else {
+      menuBtn.className = "menu-btn";
+    }
+
+    var menuNav = document.getElementById('menu-nav');
+    if (menuNav.className === "menu-nav") {
+      menuNav.className += " active";
+      setTimeout(() => {
+        menuNav.className += " show";
+      }, 1)
+
+    } else {
+      menuNav.className = "menu-nav";
+    }
   }
 
 }

@@ -1,21 +1,15 @@
-<div class="navigation-bar">
-    <input class="navigation-bar__toggle-input" id="navigation-bar__toggle-input" type="checkbox">
-    <label class="navigation-bar__toggle-container" for="navigation-bar__toggle-input">
-        <span class="button button-toggle"></span>
-    </label>
-    
-    <nav class="nav" id="topnav">
-        <div class= "navigation-bar__logo"><a>Childify</a></div>
+<div class="section">
+    <div class="menu-block">
+        <nav class="menu-nav" id="menu-nav">
+            <a class="menu-nav__item" href="">Home</a>
+            <a class="menu-nav__item" href="">Shop</a>
+            <a class="menu-nav__item" href="">ToDo</a>
+            <a class="menu-nav__item" href="">About</a>
+        </nav>
         
-        <a class="nav__item" href="">Home</a>
-        <a class="nav__item" href="">Shop</a>
-        <a class="nav__item" href="">ToDo</a>
-        <a class="nav__item" href="">About</a>
-        <!-- Use this in the case of nav animation -->
-        <a href="javascript:void(0);" class="icon" onclick="showNavigation()"></a>
-       
-    
-    </nav>
-
-    
-  </div>
+        
+    </div>
+<a href="javascript:void(0);" id="menu-btn-link" class="menu-btn" (click)='navMenuAni()'>
+            <span></span>
+        </a>
+</div>
