@@ -17,7 +17,11 @@
     },
     "points": {
         "en": "Points",
-        "ua": "Очки"
+        "uk": "Очки"
+    },
+    "confirm": {
+        "en": "Confirm",
+        "ua": "Підтвердити"
     }
 
 }
