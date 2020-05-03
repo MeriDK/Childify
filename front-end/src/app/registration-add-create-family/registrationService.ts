@@ -1,4 +1,3 @@
-export default {
 
       /*     registration-add-create-family      */
 
@@ -6,7 +5,7 @@ export default {
       ///check errors
       ///button pause
 
-      createNewFamily(api, data) : void {
+      export function createNewFamily(api, data) : void {
         api.createNewFamily(data).subscribe(
           data => {},
           error => {
@@ -16,9 +15,9 @@ export default {
             }
           }
         )
-      },
+      }
 
-      connectToFamily(api, data) : void {
+      export function connectToFamily(api, data) : void {
         api.connectToFamily(data).subscribe(
           data => {},
           error => {
@@ -30,4 +29,3 @@ export default {
           }
         )
       }
-}

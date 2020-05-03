@@ -126,7 +126,7 @@ REST_FRAMEWORK = {
 # JWT settings
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'USER_ID_FIELD': 'user_id',
     'USER_ID_CLAIM': 'user_id'
