@@ -6,6 +6,7 @@ import { RegistrationService } from './registration.service';
 import { TokenService } from '../token.service'
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import  ValidateServ from '../ValidateServ' ;
+import {translate} from '../services/StringResourses'
 
 
 @Component({
@@ -15,6 +16,8 @@ import  ValidateServ from '../ValidateServ' ;
   providers: [RegistrationService]
 })
 export class RegistrationComponent implements OnInit {
+  
+  translate = translate
 
   @Input() myvalidator:ValidatorFn;
   registrationForm : any;

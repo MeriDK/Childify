@@ -86,14 +86,96 @@
     "child_name":{
         "en": "Child",
         "ua": "Дитина"
+    },
+    "title":{
+        "en": "title",
+        "ua": "заголовок"
+    },
+    "about":{
+        "en": "about",
+        "ua": "про товар"
+    },
+    "points.down":{
+        "en": "points",
+        "ua": "очки"
+    },
+    "order.btn":{
+        "en": "order",
+        "ua": "вибрати"
+    }    ,
+    "create.family":{
+        "en": "Create family",
+        "ua": "Створити сім'ю"
+    },
+    "family.name":{
+        "en": "family name",
+        "ua": "назва сім'ї"
+    },
+    "connect.family":{
+        "en": "Connect to family",
+        "ua": "Приєднатись до сім'ї"
+    },
+    "family.id":{
+        "en": "family id",
+        "ua": "id сім'ї"
+    },
+    "submit":{
+        "en": "Submit",
+        "ua": "Підтвердити"
+    },
+    "username":{
+        "en": "Username",
+        "ua": "Ім'я користувача"
+    },
+    "email":{
+        "en": "Email",
+        "ua": "Поштова скирнька"
+    },
+    "password":{
+        "en": "Password",
+        "ua": "Пароль"
+    },
+    "password.conf":{
+        "en": "Password confirm",
+        "ua": "Повторіть пароль"
+    },
+    "parent":{
+        "en": "Parent",
+        "ua": "Батько/Мати"
+    },
+    "register":{
+        "en": "Register",
+        "ua": "Зареєструвати"
+    },
+    "already.have.account":{
+        "en": "Already have account?",
+        "ua": "Уже маєте акаунт?"
+    },
+    "log.in":{
+        "en": "Log in",
+        "ua": "Увійти"
+    },
+    "username.required":{
+        "en": "username is required"
+    },
+    "username.short":{
+        "en": "username is too short"
+    },
+    "password.required":{
+        "en": "password is required"
+    },
+    "password.short":{
+        "en": "password is too short"
+    },
+    "email.required":{
+        "en": "email is required"
+    },
+    "email.not":{
+        "en": "email is not email"
+    },
+    "password.dont.match":{
+        "en": "passwords don't match"
     }
-
-
-
-
-
-
-
 
 
 

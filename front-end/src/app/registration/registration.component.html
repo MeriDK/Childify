@@ -14,55 +14,55 @@
     </div>
     <form [formGroup]="registrationForm" novalidate class="registration__form text-center">
         <div formGroupName="inputGroup"  class="input-group input-group--registration">
-                <input class="input-text input-text--registration" formControlName="username" placeholder="Username"
+                <input class="input-text input-text--registration" formControlName="username" placeholder="{{translate('username')}}"
                     [ngClass]="{
                         'input-success--registration': (username.touched || username.dirty) && username.valid,
                         'input-danger--registration': (username.touched || username.dirty) && username.invalid
                     }">
                 <div class="form-control-feedback form-control-feedback--registration" 
                     *ngIf="username.invalid && (username.touched || username.dirty)">
-                    <p *ngIf="username.errors.required">username is required</p>
-                    <p *ngIf="username.errors.minlength">username is too short</p>
+                    <p *ngIf="username.errors.required">{{translate('username.required')}}</p>
+                    <p *ngIf="username.errors.minlength">{{translate('username.short')}}</p>
                 </div> 
-                <input class="input-text input-text--registration" formControlName="email" placeholder="Email" 
+                <input class="input-text input-text--registration" formControlName="email" placeholder="{{translate('email')}}" 
                     [ngClass]="{
                         'input-success--registration': (email.touched) && email.valid,
                         'input-danger--registration': (email.touched) && email.invalid
                     }">
                 <div class="form-control-feedback form-control-feedback--registration" 
                     *ngIf="email.invalid && (email.touched)">
-                    <p *ngIf="email.errors.required">email is required</p>
-                    <p *ngIf="email.errors.pattern">email is not email </p>
+                    <p *ngIf="email.errors.required">{{translate('email.required')}}</p>
+                    <p *ngIf="email.errors.pattern">{{translate('email.not')}} </p>
                 </div> 
-                <input class="input-text input-text--registration" type="password" formControlName="password" placeholder="Password"
+                <input class="input-text input-text--registration" type="password" formControlName="password" placeholder="{{translate('password')}}"
                     [ngClass]="{
                         'input-success--registration': (password.touched || password.dirty) && password.valid,
                         'input-danger--registration': (password.touched || password.dirty) && password.invalid 
                     }">
                 <div class="form-control-feedback form-control-feedback--registration" 
                     *ngIf="password.invalid && (password.touched || password.dirty)">
-                    <p *ngIf="password.errors.required">password is required</p>
-                    <p *ngIf="password.errors.minlength">password is too short</p>
+                    <p *ngIf="password.errors.required">{{translate('password.required')}}</p>
+                    <p *ngIf="password.errors.minlength">{{translate('password.short')}}</p>
                 </div>
-                <input class="input-text input-text--registration" type="password" formControlName="confirmPassword" placeholder="Repeat password"
+                <input class="input-text input-text--registration" type="password" formControlName="confirmPassword" placeholder="{{translate('password.conf')}}"
                     [ngClass]="{
                         'input-success--registration': (confirmPassword.touched || confirmPassword.dirty) && confirmPassword.valid && confirmPassword.value==password.value,
                         'input-danger--registration':  (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) || ((confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid)
                     }">
                 <div class="form-control-feedback form-control-feedback--registration" 
                     *ngIf="(confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) || ((confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid)">
-                    <p *ngIf="confirmPassword.errors && confirmPassword.errors.required">password is required</p>
-                    <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) ">passwords don't match</p>
+                    <p *ngIf="confirmPassword.errors && confirmPassword.errors.required">{{translate('password.required')}}</p>
+                    <p *ngIf="confirmPassword.errors && !confirmPassword.errors.required && (confirmPassword.value!=password.value && (confirmPassword.touched || confirmPassword.dirty)) ">{{translate('password.dont.match')}}</p>
                 </div>    
         </div>
         <div class="radio-group radio-group--registration"> 
             <div class="custom-control custom-radio custom-radio--registration">
                 <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__parent" value="isParent" name="isParent"  id="defaultUnchecked">
-                <label class="custom-control-label label--registration" for="defaultUnchecked">Parent</label>
+                <label class="custom-control-label label--registration" for="defaultUnchecked">{{translate('parent')}}</label>
             </div>
             <div class="custom-control custom-radio custom-radio--registration">
                 <input type="radio" class="custom-control-input input-radio input-radio--registration input-radio--registration__child" name="isParent" id="defaultChecked" checked>
-                <label class="custom-control-label label--registration" for="defaultChecked">Child</label>
+                <label class="custom-control-label label--registration" for="defaultChecked">{{translate('child')}}</label>
             </div>
         </div>
         <div class="btn-group btn-group--registration">
@@ -70,10 +70,10 @@
                 [ngClass]="{
                     'btn-disable--registration disabled': username.errors || password.errors || email.errors || confirmPassword.errors  || (password.value!=confirmPassword.value)
                 }"
-            >Register</button>
+            >{{translate('register')}}</button>
         </div>
     </form>
     <div class="registration__footer text-center">
-        <a routerLink="/login" class="msg msg--registration">Already have an account?</a>
+        <a routerLink="/login" class="msg msg--registration">{{translate('already.have.account')}}<a routerLink="/login"> {{translate('log.in')}}</a></a>
     </div>
 </div>
