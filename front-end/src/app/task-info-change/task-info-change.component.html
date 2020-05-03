@@ -2,16 +2,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
 
 <header class="header-childify">
-    <h1 class="header-childify__title"><a routerLink='../'><i class="fas fa-chevron-left"></i></a>Info Task</h1>
+    <h1 class="header-childify__title"><a routerLink='../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
 </header>
 <input type="text" placeholder="Name task" class="input-name_task">
-<h3>Point</h3>
+<h3>{{translate('points')}}</h3>
 <input type="number" placeholder="15" class="input-point">
-<h3>More info</h3>
+<h3>{{translate('more_info')}}</h3>
 <textarea name="Text1" cols="40" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Phasellus rutrum ligula a velit tincidunt, a congue ipsum vehicula.
 Phasellus placerat nulla ut ipsum imperdiet vehicula.
 Aliquam scelerisque sed eros sed pretium.
 Vestibulum porttitor, est in tempor accumsan, arcu quam pellentesque augue, ut imperdiet sapien dolor vel arcu.</textarea>
-<button class="btn" routerLink='../'>Save change</button>
+<button class="btn" routerLink='../'>{{translate('save_change')}}</button>
 
