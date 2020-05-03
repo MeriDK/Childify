@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {translate} from '../services/StringResourses'
 
 @Component({
   selector: 'app-task-child',
@@ -9,12 +10,15 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class TaskChildComponent implements AfterViewInit {
 
-  isChild = true
+  isChild = false
+  translate = translate
+
   constructor() { }
+
  
   ngAfterViewInit(): void {
     if (this.isChild){
-      $(".task__child-name").css("display", "none")
+      $(".task__child-nam").css("display", "none")
       $(".child-tasks .fas").addClass('fa-check')
     }
     else{

@@ -17,11 +17,84 @@
     },
     "points": {
         "en": "Points",
-        "uk": "Очки"
+        "ua": "Очки"
     },
     "confirm": {
         "en": "Confirm",
         "ua": "Підтвердити"
+    },
+    "task_title":{
+        "en": "Task",
+        "ua": "Завдання"
+    },
+    "list_task":{
+        "en": "List",
+        "ua": "Cписок"
+    },
+    "child_task":{
+        "en": "ChildTask",
+        "ua": "У процесі"
+    },
+    "check_task":{
+        "en": "CheckTask",
+        "ua": "Перевірити"
+    },
+    "in_progress":{
+        "en": "InProgress",
+        "ua": "У процесі"
+    },
+    "done":{
+        "en":"Done",
+        "ua":"Виконанні"
+    },
+    "add_task":{
+        "en": "Add task",
+        "ua": "Додати завдання"
+    },
+    "info_task":{
+        "en": "Info task",
+        "ua": "Інфо завдання"
+    },
+    "more_info":{
+        "en": "More info",
+        "ua": "Детальніша інформація"
+    },
+    "save_change":{
+        "en": "Save change",
+        "ua": "Зберегти зміни"
+    },
+    "child":{
+        "en": "Child",
+        "ua": "Маленький засранець"
+    },
+    "cancel":{
+        "en":"Cancel",
+        "ua": "Відмінити"
+    },
+    "add":{
+        "en":"Add",
+        "ua": "Додати"
+    },
+    "write_info_about_task":{
+        "en":"Write more info about this task",
+        "ua": "Напишіть більш детальну інформацію про завдання"
+    },
+    "name_your_task":{
+        "en": "Name your task",
+        "ua": "Назва завдання"
+    },
+    "child_name":{
+        "en": "Child",
+        "ua": "Дитина"
     }
+
+
+
+
+
+
+
+
+
 
 }

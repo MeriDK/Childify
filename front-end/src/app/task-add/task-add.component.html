@@ -1,15 +1,15 @@
 
 <header class="header-childify">
-    <h1 class="header-childify__title">Add Task</h1>
+    <h1 class="header-childify__title">{{translate('add_task')}}</h1>
 </header>
-<input type="text" placeholder="Name your task" class="input-name_task">
-<h3>Point</h3>
+<input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task">
+<h3>{{translate('points')}}</h3>
 <input type="number" placeholder="0" class="input-point">
-<h3>More info</h3>
-<textarea name="Text1" cols="40" rows="6" placeholder="Write more info about this task"></textarea>
+<h3>{{translate('more_info')}}</h3>
+<textarea name="Text1" cols="40" rows="6" placeholder="{{translate('write_info_about_task')}}"></textarea>
 <div class="button">
-<button class="btn_add" routerLink='../'>Cancel</button>
-<button class="btn_add" routerLink='../'>Add task</button>
+<button class="btn_add" routerLink='../'>{{translate('cancel')}}</button>
+<button class="btn_add" routerLink='../'>{{translate('add')}}</button>
 </div>
 
 

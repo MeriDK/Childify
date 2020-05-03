@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
+import {translate} from '../services/StringResourses'
 
 @Component({
   selector: 'app-task-info',
@@ -7,9 +8,8 @@ import $ from 'node_modules/jquery'
   styleUrls: ['./task-info.component.sass']
 })
 export class TaskInfoComponent implements AfterViewInit {
-  isChild = true
-
-  
+  isChild = false
+  translate = translate
 
   ngAfterViewInit(): void {
     if(this.isChild) {

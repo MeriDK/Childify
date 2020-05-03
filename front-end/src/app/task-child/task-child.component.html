@@ -4,7 +4,7 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let task of tasks"class="task" cdkDrag>
             <a routerLink="info"><h3>{{task}}<i class="fas"></i>
-            </h3><p>Point: 15</p><p class="task__child-name">Child: Name</p></a>   
+            </h3><p>{{translate('points')}}: 15</p><p class="task__child-nam">{{translate('child_name')}}: Name</p></a>   
         </div>
     </div>
 </div>
