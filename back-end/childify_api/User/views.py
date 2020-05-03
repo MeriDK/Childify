@@ -1,9 +1,10 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from User.models import User
-from User.serializers import UserSerializer
+from User.serializers import UserSerializer, CustomTokenObtainPairSerializer
 
 
 class UserAPIView(APIView):
@@ -15,3 +16,7 @@ class UserAPIView(APIView):
       refreshToken = RefreshToken.for_user(user=user)
       return JsonResponse({'refreshToken': str(refreshToken), 'accessToken': str(refreshToken.access_token)}, status=201)
     return JsonResponse(serializer.errors, status=400)
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
