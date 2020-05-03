@@ -24,9 +24,9 @@ export class NavMenuComponent implements OnInit {
     var menuNav = document.getElementById('menu-nav');
     if (menuNav.className === "menu-nav") {
       menuNav.className += " active";
-      setTimeout(() => {
-        menuNav.className += " show";
-      }, 1)
+      // setTimeout(() => {
+      //   menuNav.className += " show";
+      // }, 1)
 
     } else {
       menuNav.className = "menu-nav";
