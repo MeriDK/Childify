@@ -63,7 +63,7 @@ $bright_violet: rgba(189, 10, 255, 1);
         text-align: center;
         height: 0px;
         padding-bottom: 4%;
-
+        transform: translateY(-15%);
         opacity: 0;
         transition: .35s;
 
@@ -98,6 +98,7 @@ $bright_violet: rgba(189, 10, 255, 1);
             opacity: 1; 
             transition: all .4s ease-out;
             height: 100%;
+            transform: translateY(5%);
 
             & li {
             height: 100%;
