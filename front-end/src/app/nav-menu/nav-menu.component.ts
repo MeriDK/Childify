@@ -15,21 +15,17 @@ export class NavMenuComponent implements OnInit {
 
   navMenuAni():void {
     var menuBtn = document.getElementById('menu-btn-link');
-    if (menuBtn.className === "menu-btn") {
+    if (menuBtn.className === "nav-bar__menu-btn") {
       menuBtn.className += " active";
     } else {
-      menuBtn.className = "menu-btn";
+      menuBtn.className = "nav-bar__menu-btn";
     }
 
     var menuNav = document.getElementById('menu-nav');
-    if (menuNav.className === "menu-nav") {
+    if (menuNav.className === "menu-block__menu-nav") {
       menuNav.className += " active";
-      // setTimeout(() => {
-      //   menuNav.className += " show";
-      // }, 1)
-
     } else {
-      menuNav.className = "menu-nav";
+      menuNav.className = "menu-block__menu-nav";
     }
   }
 

@@ -1,14 +1,14 @@
 $violet: blueviolet;
 $bright_violet: rgba(189, 10, 255, 1);
 
-.section {
+.nav-bar {
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
 }
 
-.menu-btn {
+.nav-bar__menu-btn {
     display: block;
     width: 50px;
     height: 50px;
@@ -26,7 +26,7 @@ $bright_violet: rgba(189, 10, 255, 1);
     width: 100%;
 }
 
-.menu-nav {
+.menu-block__menu-nav {
     
     position: relative;
     width: 100%;
@@ -119,9 +119,9 @@ $bright_violet: rgba(189, 10, 255, 1);
     }
 }
 
-.menu-btn span,
-.menu-btn span::before,
-.menu-btn span::after {
+.nav-bar__menu-btn span,
+.nav-bar__menu-btn span::before,
+.nav-bar__menu-btn span::after {
     position: absolute;
     top: 50%;
     margin-top: -1px;
@@ -131,25 +131,25 @@ $bright_violet: rgba(189, 10, 255, 1);
     background-color: white;
 }
 
-.menu-btn span {
+.nav-bar__menu-btn span {
     transition: 1s;
 }
 
-.menu-btn span::before,
-.menu-btn span::after {
+.nav-bar__menu-btn span::before,
+.nav-bar__menu-btn span::after {
     transition: 0.5s;
     content: '';
 }
 
-.menu-btn span::before {
+.nav-bar__menu-btn span::before {
     transform: translateY(-5px);
 }
 
-.menu-btn span::after {
+.nav-bar__menu-btn span::after {
     transform: translateY(5px);
 }
 
-.menu-btn.active {
+.nav-bar__menu-btn.active {
     
     & span{
         transform: rotate(135deg);
