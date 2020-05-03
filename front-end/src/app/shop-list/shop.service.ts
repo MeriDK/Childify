@@ -11,7 +11,7 @@ export class ShopService {
   baseUrl = 'http://127.0.0.1:8000'
 
   httpHeaders = { headers : new HttpHeaders({'Content-Type': 'application/json',
-  'Authorization':'Bearer '+ this.cookieService.get("accessToken")})}
+  'Authorization':'Bearer '+ this.cookieService.get("access")})}
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 

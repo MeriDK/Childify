@@ -13,7 +13,7 @@ export class TokenService {
 
 
   refreshToken(): Observable<any> {
-    const body = { "refresh": this.cookieService.get("refreshToken")}
+    const body = { "refresh": this.cookieService.get("refresh")}
     const url = this.baseUrl + '/login/refresh'
 
     const httpHeadersWithToken = { headers : new HttpHeaders({'Content-Type': 'application/json'})}
@@ -23,7 +23,7 @@ export class TokenService {
   refreshTokenSubs() : void {
     this.refreshToken().subscribe(
       data => {
-        this.setCookie({"accessToken":data.access, "refreshToken":data.refresh})
+        this.setCookie({"access":data.access, "refresh":data.refresh})
       },
       error => {
         console.log(error)
@@ -32,9 +32,9 @@ export class TokenService {
   }
 
   setCookie(data) : void {
-    this.cookieService.set("accessToken",data.accessToken)
-    if(data.refreshToken){
-      this.cookieService.set("refreshToken",data.refreshToken)
+    this.cookieService.set("access",data.access)
+    if(data.refresh){
+      this.cookieService.set("refresh",data.refresh)
     }
   }
 }
