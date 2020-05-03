@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionManager
+import regex
 
 class MyUserManager(BaseUserManager):
   def create_user(self, email, username, password, isParent):
@@ -11,6 +12,15 @@ class MyUserManager(BaseUserManager):
       raise ValueError("User must have an password")
     if isParent==None:
       raise ValueError("User must have an isParent")
+
+    if len(username) < 6 :
+      raise ValueError("username must be at least 6 characters")
+    if len(password) < 8:
+      raise ValueError("password must be at least 6 characters")
+
+    if not regex.match("[^ @]*",username):
+      raise ValueError("username must be valid")
+
     user = self.model(
       email = self.normalize_email(email),
       username = username,
