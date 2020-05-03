@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-check',
@@ -21,5 +22,18 @@ export class TaskCheckComponent implements AfterViewInit {
       $(".check-tasks .task .cross .fas").addClass('fa-times')
     }
   }
+
+  tasks = [
+    'Task 1',
+    'Task 2',
+    'Task 3',
+    'Task 4'
+  ];
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
 
 }
