@@ -4,8 +4,8 @@ import $ from 'node_modules/jquery'
 import  {registerNewUser}  from './registrationService'
 import { RegistrationService } from './registration.service';
 import { TokenService } from '../token.service'
-import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
-import  ValidateServ from '../ValidateServ' ;
+import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
+import  ValidateServ from '../services/ValidateServ' ;
 import {translate} from '../services/StringResourses'
 
 
