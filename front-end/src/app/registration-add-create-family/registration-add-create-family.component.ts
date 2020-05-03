@@ -1,13 +1,13 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
-import  RegistrationService  from './registrationService'
-import { ApiService } from '../api.service';
+import  {createNewFamily, connectToFamily}  from './registrationService'
+import { RegistrationAddService } from './registration-add.service';
 
 @Component({
   selector: 'app-registration-add-create-family',
   templateUrl: './registration-add-create-family.component.html',
   styleUrls: ['./registration-add-create-family.component.scss','../registration/registration.component.scss'],
-  providers: [ApiService]
+  providers: [RegistrationAddService]
 })
 export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
 
@@ -15,7 +15,7 @@ export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
   data : any;
   isCreate : boolean;
 
-  constructor(private api: ApiService) {
+  constructor(private api: RegistrationAddService) {
     this.data = {family_id: '', name: ''}
   }
 
@@ -32,10 +32,10 @@ export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
 
   connectCreateFamily(): void {
     if (this.isCreate) {
-      RegistrationService.createNewFamily(this.api, {name: this.data.name})
+      createNewFamily(this.api, {name: this.data.name})
     }
     else {
-      RegistrationService.connectToFamily(this.api, {family_id: this.data.family_id})
+      connectToFamily(this.api, {family_id: this.data.family_id})
     }
   }
 }

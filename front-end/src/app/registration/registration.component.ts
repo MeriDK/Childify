@@ -1,8 +1,9 @@
 import { Component, OnInit, Input} from '@angular/core';
 import anime from 'node_modules/animejs'
 import $ from 'node_modules/jquery'
-import  RegistrationService  from './registrationService'
-import { ApiService } from '../api.service';
+import  {registerNewUser}  from './registrationService'
+import { RegistrationService } from './registration.service';
+import { TokenService } from '../token.service'
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import  ValidateServ from '../ValidateServ' ;
 
@@ -11,7 +12,7 @@ import  ValidateServ from '../ValidateServ' ;
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  providers: [ApiService]
+  providers: [RegistrationService]
 })
 export class RegistrationComponent implements OnInit {
 
@@ -22,7 +23,7 @@ export class RegistrationComponent implements OnInit {
   password: FormControl;
   confirmPassword: FormControl;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: RegistrationService, private token :TokenService) {}
 
   ngOnInit(): void {
     this.initAnime()
@@ -65,6 +66,6 @@ export class RegistrationComponent implements OnInit {
       "password": this.password.value,
       "isParent": $(".input-radio--registration__parent").is(':checked')
     }
-    RegistrationService.registerNewUser(this.api, data)
+    registerNewUser(this.api, this.token, data)
   }
 }
