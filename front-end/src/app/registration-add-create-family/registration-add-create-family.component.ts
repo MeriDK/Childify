@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import  {createNewFamily, connectToFamily}  from './registrationService'
 import { RegistrationAddService } from './registration-add.service';
+import {translate} from '../services/StringResourses'
 
 @Component({
   selector: 'app-registration-add-create-family',
@@ -14,6 +15,8 @@ export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
   isChild: any;
   data : any;
   isCreate : boolean;
+
+  translate = translate
 
   constructor(private api: RegistrationAddService) {
     this.data = {family_id: '', name: ''}

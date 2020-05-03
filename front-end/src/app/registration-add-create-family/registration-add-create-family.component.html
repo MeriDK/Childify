@@ -14,19 +14,19 @@
     </div>
     <div class="registration__form registration__form--step2 text-center">
         <tabset type="pills" [justified]="true" class="tabset--registration">
-            <tab customClass="tab tab--registration tab--create" (selectTab)= "isCreate = true" heading="Create family">
+            <tab customClass="tab tab--registration tab--create" (selectTab)= "isCreate = true" heading="{{translate('create.family')}}">
                 <div class="input-group input-group--registration">
-                    <input class="input-text input-text--registration" [(ngModel)]="data.name"placeholder="family name">
+                    <input class="input-text input-text--registration" [(ngModel)]="data.name"placeholder="{{translate('family.name')}}">
                 </div>
             </tab>
-            <tab customClass="tab tab--registration tab--connect" [active]="true" (selectTab)= "isCreate = false" heading="Connect family">
+            <tab customClass="tab tab--registration tab--connect" [active]="true" (selectTab)= "isCreate = false" heading="{{translate('connect.family')}}">
                 <div class="input-group input-group--registration">
-                    <input class="input-text input-text--registration" [(ngModel)]="data.family_id" placeholder="family id">
+                    <input class="input-text input-text--registration" [(ngModel)]="data.family_id" placeholder="{{translate('family.id')}}">
                 </div>
             </tab>
         </tabset>
         <div class= "btn-group btn-group--registration">
-            <button class="btn btn-primary btn--registration" (click)="connectCreateFamily()" type="button">Submit</button>
+            <button class="btn btn-primary btn--registration" (click)="connectCreateFamily()" type="button">{{translate('submit')}}</button>
         </div>
     </div>
 </div>
