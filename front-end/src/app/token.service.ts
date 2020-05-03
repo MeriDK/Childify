@@ -32,7 +32,6 @@ export class TokenService {
   }
 
   setCookie(data) : void {
-    console.log("set")
     this.cookieService.set("accessToken",data.accessToken)
     if(data.refreshToken){
       this.cookieService.set("refreshToken",data.refreshToken)
