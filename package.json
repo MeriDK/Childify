@@ -13,5 +13,8 @@
     "test": "cd front-end && ng test",
     "lint": "cd front-end && ng lint",
     "e2e": "cd front-end && ng e2e"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0"
   }
 }

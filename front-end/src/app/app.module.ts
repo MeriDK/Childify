@@ -7,6 +7,7 @@ import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { TaskInfoChangeComponent } from './task-info-change/task-info-change.com
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskChildComponent } from './task-child/task-child.component';
 import { TaskCheckComponent } from './task-check/task-check.component';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     TaskInfoChangeComponent,
     TaskInfoComponent,
     TaskChildComponent,
-    TaskCheckComponent
+    TaskCheckComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,8 @@ import { TaskCheckComponent } from './task-check/task-check.component';
     ReactiveFormsModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    DragDropModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]//now using only in routing

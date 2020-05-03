@@ -10,7 +10,7 @@ import { FamilyPageComponent } from "./family-page/family-page.component";
 import { RegistrationComponent } from "./registration/registration.component";
 import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
 import { ShopListComponent } from './shop-list/shop-list.component';
-
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -48,6 +48,14 @@ const routes: Routes = [
   {
     path: 'shop',
     component: ShopListComponent
+  },
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

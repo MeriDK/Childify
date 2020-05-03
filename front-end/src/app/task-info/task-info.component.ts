@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import $ from 'node_modules/jquery'
 
 @Component({
   selector: 'app-task-info',
   templateUrl: './task-info.component.html',
   styleUrls: ['./task-info.component.sass']
 })
-export class TaskInfoComponent implements OnInit {
+export class TaskInfoComponent implements AfterViewInit {
+  isChild = true
 
-  constructor() { }
+  
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    if(this.isChild) {
+      $(".child-title").css("display", "none")
+      $(".child-name").css("display", "none")
+    }
+    
   }
-
 }
