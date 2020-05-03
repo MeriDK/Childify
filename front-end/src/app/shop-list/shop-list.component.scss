@@ -49,6 +49,18 @@
                     background: #DADADA;
                 }
             }
+            .points--shop-list {
+                margin-right: 10px;
+                margin-top: 5px;
+                align-items: flex-start;
+                flex-direction: column;
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 17px;
+                line-height: 23px;
+                color: #FFFFFF;
+            }
         }
 
         .tabset--shop-list {
@@ -94,6 +106,7 @@
                     height: 140px;
                     width: 140px;
                     display: inline-flex;
+                    transition: width 0.7s, height 0.7s;
 
                     .good-div--shop-list {
                         height: 100%;
@@ -102,6 +115,7 @@
                         .good__img {
                             height: 80px;
                             width: 80px;
+                            transition: width 0.7s, height 0.7s;
                         }
                         
                         .span {
@@ -119,6 +133,7 @@
                             letter-spacing: 0.0357143em;
                             margin-top: 9px;
                             color: #000000;
+                            transition: font-size 0.7s color 0.7s
                         }
                         .good__price {
                             font-family: Quattrocento Sans;
@@ -130,13 +145,188 @@
                             letter-spacing: 0.0357143em;
                             
                             color: #A9A313;
+                            transition: font-size 0.7s
                         }
-                    }
-                    
+                        .good__about {
+                            transition: width 0.7s, height 0.7s, font-size 0.7s;
+                            font-size: 0px;
+                            width: 0px;
+                            height: 0px;
+                            overflow: scroll;
+                            overflow-wrap: break-word;
+                            visibility: collapse;
+                        }
+                        .btn-div--shop-list {
+                            
+                            transition: width 0.7s, height 0.7s;
+                            width: 0px;
+                            height: 0px;
+                            .btn-order--shop-list{
+                                transition: width 0.7s, height 0.7s, background-color 0.7s;
+                                background-color: transparent;
+                                width: 0px;
+                                height: 0px;
+                                visibility: collapse;
+                            }
+                        }
+                        .good__child {
+                            display: none;
+                        }
+                    }                    
                 }
                 .good-li--shop-list.selected {
+                    width: 305px;
+                    height: 320px;
                     border-color: rgb(200, 200, 200);
                     background: rgba(244, 244, 244, 0.87);
+                    display: flex;
+                    
+                    .good-div--shop-list {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .good__title {
+                            font-size: 20px;
+                            color: cadetblue;
+                        }
+                        .good__about {
+                            width: 255px;
+                            height: 65px;
+                            overflow: scroll;
+                            overflow-wrap: break-word;
+                            display: initial;
+                            font-family: Roboto;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 16px;
+                            text-align: center;
+                            letter-spacing: 0.0357143em;
+                            margin-top: 9px;
+                            color: #000000;
+                            visibility: initial;
+                        }
+                        .good__price {
+                            font-size: 22px;
+                            flex: 1;
+                            margin-top: auto;
+                        }
+                        .good__child {
+                            height: 20px;
+                            width: 30px;
+                            display: none;
+                            font-family: Roboto;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 16px;
+                            text-align: center;
+                            letter-spacing: 0.0357143em;
+                            margin-top: 9px;
+                            color: #000000;
+                        }
+                        .btn-div--shop-list {  
+                            width: 267px;
+                            height: 40px;
+                            display: flex;  
+                            flex: 1;                
+                            .btn-order--shop-list {
+                                
+                                width: 267px;
+                                height: 40px;
+                                align-self: flex-end;
+                                margin-bottom: 5px;
+                                
+                                visibility: initial;
+                    
+                                background-color: rgba(166, 79, 253, 0.89);
+                                border-radius: 20px;
+                    
+                                font-family: Roboto;
+                                color: rgba(255, 255, 255, 1);
+                                font-size: 18px;
+                                line-height: 21px;
+                            }
+                        }
+                        .good__img {
+                            height: 140px;
+                            width: 140px;
+                        }
+                    }
+                }
+                .add-good-li--shop-list {
+                    display: none;
+                    width: 305px;
+                    height: 320px;
+                    background: rgba(244, 244, 244, 0.87);
+                    box-shadow: 0px 4px 4px rgb(200, 200, 200);
+                    margin: 15px;
+                    border-radius: 7px;
+                    border: 5px solid rgba(255, 255, 255, 1);
+                    transition: width 0.7s, height 0.7s;
+                    
+                    .add-good-div--shop-list {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        height: 100%;
+                        width: 100%;
+                        .good__price__input {
+                            width: 80px;
+                        }
+                        .input {
+                            text-align: center;
+                            padding: 5px;
+                            font-weight: 200;
+                            font-size: 18px;
+                            color: rgba(0, 0, 0, 0.842);
+                            background: transparent;
+                            border: 0px;
+                            border-bottom:  1px solid  rgba(0, 0, 0, 0.829);;
+
+                            &::placeholder {
+                                color: rgba(63, 63, 63, 0.856);
+                                font-style: italic;
+                            }
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                        .good__about__input {
+                        }
+                        .good__child__input {
+                        }
+                        .btn-div--shop-list {
+                            width: 267px;
+                            height: 40px;
+                            display: flex;  
+                            flex: 1;    
+                            .btn-order--shop-list {
+                                width: 267px;
+                                height: 40px;
+                                align-self: flex-end;
+                                margin-bottom: 5px;
+                                
+                                visibility: initial;
+                    
+                                background-color: rgba(166, 79, 253, 0.89);
+                                border-radius: 20px;
+                    
+                                font-family: Roboto;
+                                color: rgba(255, 255, 255, 1);
+                                font-size: 18px;
+                                line-height: 21px;
+                            }
+                        }
+                        .good__img {
+                            height: 140px;
+                            width: 140px;
+                        }
+                    }
+                }
+                .shown {
+                    display: inline-flex;
                 }
             }
         }
@@ -144,20 +334,58 @@
     .btn-div-footer--shop-list {
         position: fixed;
         margin-top: -30px;
-        display: flex;
+        margin-left: 36%;;
+        display: none;
         align-self: flex-end;
 
-        .btn-footer--shop-list {
-            width: 267px;
-            height: 40px;
+        .btn-add--shop-list {
+            width: 55px;
+            height: 55px;
 
             background: rgba(166, 79, 253, 0.89);
-            border-radius: 20px;
+            border-radius: 50%;
 
             font-family: Roboto;
             color: rgba(255, 255, 255, 1);
             font-size: 18px;
-            line-height: 21px;
+
+            i {
+                zoom: 1.5;
+                margin-top: 2.5px;
+            }
         }
+    }
+}
+
+
+.isParent{
+
+    .shop-list__head {
+        .navbar--shop-list {
+            .points--shop-list {
+                display: none;
+            }
+        }
+
+        .tabset--shop-list {
+            
+
+            .list--shop-list {
+                .good-li--shop-list.selected {
+                    
+                    .good-div--shop-list {
+                        .btn-div--shop-list {
+                            display: none;
+                        }
+                        .good__child {
+                            display: initial;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .btn-div-footer--shop-list {
+        display: flex;
     }
 }

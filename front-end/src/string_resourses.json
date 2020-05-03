@@ -18,6 +18,10 @@
     "points": {
         "en": "Points",
         "uk": "Очки"
+    },
+    "confirm": {
+        "en": "Confirm",
+        "ua": "Підтвердити"
     }
 
 }
