@@ -62,9 +62,10 @@ $bright_violet: rgba(189, 10, 255, 1);
         text-align: right;
         text-align: center;
         height: 0px;
+        padding-bottom: 4%;
 
         opacity: 0;
-        transition: .15s;
+        transition: .35s;
 
         & li {
             height: 0px;
@@ -79,7 +80,7 @@ $bright_violet: rgba(189, 10, 255, 1);
             height: 0px;
             transform: translateY(20%);
             opacity: 0;
-            transition: .15s;
+            transition: .35s;
             & a {
                 display: block;
                 color: white;
