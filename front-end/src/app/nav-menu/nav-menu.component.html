@@ -1,21 +1,17 @@
-<div class="navigation-bar">
-    <input class="navigation-bar__toggle-input" id="navigation-bar__toggle-input" type="checkbox">
-    <label class="navigation-bar__toggle-container" for="navigation-bar__toggle-input">
-        <span class="button button-toggle"></span>
-    </label>
-    
-    <nav class="nav" id="topnav">
-        <div class= "navigation-bar__logo"><a>Childify</a></div>
+<div class="nav-bar">
+    <div class="menu-block">
+        <nav class="menu-block__menu-nav" id="menu-nav">
+            <h2>Childify</h2>
+            <ul>
+                <li><a class="menu-block__menu-nav__item" href="/family">Family</a></li>
+                <li><a class="menu-block__menu-nav__item" href="/shop">Shop</a></li>
+                <li><a class="menu-block__menu-nav__item" href="/task">Tasks</a></li>
+                <li><a class="menu-block__menu-nav__item" href="/login">Log Out</a></li>
+            </ul>
+        </nav>
         
-        <a class="nav__item" href="">Home</a>
-        <a class="nav__item" href="">Shop</a>
-        <a class="nav__item" href="">ToDo</a>
-        <a class="nav__item" href="">About</a>
-        <!-- Use this in the case of nav animation -->
-        <a href="javascript:void(0);" class="icon" onclick="showNavigation()"></a>
-       
-    
-    </nav>
-
-    
-  </div>
+    </div>
+<a href="javascript:void(0);" id="menu-btn-link" class="nav-bar__menu-btn" (click)='navMenuAni()'>
+            <span></span>
+        </a>
+</div>

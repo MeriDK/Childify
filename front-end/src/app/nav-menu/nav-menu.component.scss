@@ -1,131 +1,127 @@
 $violet: blueviolet;
 $bright_violet: rgba(189, 10, 255, 1);
-.navigation-bar {
-    height: 8%;
-    background-color: $violet;
+
+.nav-bar {
     display: flex;
-    justify-content: left;
-    align-items: flex-end;
-    margin-bottom: 5px;
-    margin-left: 0;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
 }
 
-.navigation-bar__logo a{
-  color: white;
-  font-weight: 100;
-  font-size: 40px;
-  display: block;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-// Checkbox
-.navigation-bar__toggle-input {
-    display: none;
-}
-
-.nav a{
-    text-decoration: none;
-    width: 100%;
-    height: 5%;
-}
-
-.nav__item {
-    //visibility: collapse;
-    display: none;
-}
-
-$transition-duration: 0.5s;
-
-.navigation-bar__toggle-input:checked {
-    & ~ .navigation-bar__logo {
-        @at-root .navigation-bar {
-            flex-direction: row;    
-        }
-    }
-
-    & ~ .navigation-bar__toggle-container {
-        span, 
-        span::before,
-        span::after {
-            position: absolute;
-            top: 50%;
-            margin-top: -1px;
-            left: 50%; margin-left: -10px;
-            width: 20px;
-            height: 2px;
-            background-color: white;
-        }
-        span::before,
-        span::after {
-            content: '';
-            transition: 0.5s;
-        }
-        span::before {
-            transform: translateY(-11px) rotate(45deg) translateX(5px);
-            height: 3px;
-        }
-        span::after {
-            transform: translateY(10px) rotate(-45deg) translate(5px);
-            height: 3px;
-        }
-        span {
-            transform: rotate(-90deg);
-            width: 22px;
-        }
-        
-    }
-    // Открываем
-    & ~ .nav {
-        
-        flex-direction: column;
-        
-      // Восстанавливаем пункты навигации из «линий» в иконке меню
-      .nav__item {
-        // display: block;
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-
-        // visibility: inherit;
-        // color: #EC7263;
-        // letter-spacing: 0;
-        // height: 40px;
-        // line-height: 40px;
-        // margin-top: 0;
-        // opacity: 1;
-        transform: scaleY(1);
-        transition: $transition-duration, opacity 0.1s;
-        
-        &:hover {
-            background-color: black;
-        }
-
-        // Скрываем линии
-        &:before {
-          opacity: 0;
-        }
-      }
-      
-    }
-
-
-  }
-/*******************/
-.navigation-bar__toggle-container {
+.nav-bar__menu-btn {
     display: block;
     width: 50px;
     height: 50px;
     background-color: $bright_violet;
     border-radius: 50%;
-    position: relative;
-    margin: 1px;
-    
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
-.navigation-bar__toggle-container span, 
-.navigation-bar__toggle-container span::before,
-.navigation-bar__toggle-container span::after {
+
+.menu-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-block__menu-nav {
+    
+    position: relative;
+    width: 100%;
+    min-width: 100px;
+
+    & h2 {
+        border-radius: 2px;
+        position: relative;
+        background-color: $violet;
+        color: white;
+        padding-bottom: 10px;
+        font-weight: 200;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 4px 4px 20px -2px black;
+        transition: all .4s;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 2px 2px 5px -1px rgba(0,0,0,.35);
+        }
+        
+    }
+
+    & ul {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        overflow: hidden;
+        text-align: right;
+        text-align: center;
+        height: 0px;
+        padding-bottom: 4%;
+        transform: translateY(-15%);
+        opacity: 0;
+        transition: .35s;
+
+        & li {
+            height: 0px;
+            border-radius: 4px;
+            position: relative;
+            display: inline-block;
+            line-height: 1.5;
+            width: 100%;
+            background-color: black;
+            box-shadow: 2px 2px 10px -2px rgba(0,0,0,.35);
+
+            height: 0px;
+            transform: translateY(20%);
+            opacity: 0;
+            transition: .35s;
+            & a {
+                display: block;
+                color: white;
+                font-size: 20px;
+                font-weight: 200;
+                text-decoration: none;
+                transition: color .3s;
+            }
+        }
+
+    }
+
+    &.active {
+        & ul {
+            opacity: 1; 
+            transition: all .4s ease-out;
+            height: 100%;
+            transform: translateY(5%);
+
+            & li {
+            height: 100%;
+            opacity: 1;
+            padding-bottom: 8px;
+            margin-bottom: 3px;
+            
+            
+            background-color: blueviolet;
+            transition: background .5s;
+
+            &:hover {
+                background: mediumorchid;
+                transition: background .45s;
+            }
+        }
+        }
+    }
+}
+
+.nav-bar__menu-btn span,
+.nav-bar__menu-btn span::before,
+.nav-bar__menu-btn span::after {
     position: absolute;
     top: 50%;
     margin-top: -1px;
@@ -134,16 +130,34 @@ $transition-duration: 0.5s;
     height: 2px;
     background-color: white;
 }
-.navigation-bar__toggle-container span::before,
-.navigation-bar__toggle-container span::after {
-    content: '';
+
+.nav-bar__menu-btn span {
+    transition: 1s;
+}
+
+.nav-bar__menu-btn span::before,
+.nav-bar__menu-btn span::after {
     transition: 0.5s;
+    content: '';
 }
-.navigation-bar__toggle-container span::before {
-    transform: translateY(-6px);
-    height: 3px;
+
+.nav-bar__menu-btn span::before {
+    transform: translateY(-5px);
 }
-.navigation-bar__toggle-container span::after {
+
+.nav-bar__menu-btn span::after {
     transform: translateY(5px);
-    height: 1px;
+}
+
+.nav-bar__menu-btn.active {
+    
+    & span{
+        transform: rotate(135deg);
+        transition: 1s;
+
+        &::before, &::after{
+            transform: rotate(90deg);
+        }
+
+    }
 }

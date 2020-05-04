@@ -8,7 +8,9 @@ html, body {
 }
 
 ::ng-deep body {
-  //background-color: $backgroung-violet;
+  margin: 0px;
+  padding: 0px;
+  background-color: $backgroung-violet;
 }
 /*
   d
@@ -36,8 +38,15 @@ html, body {
 
 .content__item a{
   padding-left: 15px;
-  padding-top: $square-side;
+  padding-top: 0px;
   display: block;
   text-decoration: none;
   color: black;
 }
+
+.content__item img {
+  padding: 5px;
+  width: $square-side;
+  height: $square-side;
+}
+

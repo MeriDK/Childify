@@ -25,7 +25,8 @@ import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskChildComponent } from './task-child/task-child.component';
 import { TaskCheckComponent } from './task-check/task-check.component';
 import { HomeComponent } from './home/home.component';
-
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HomeComponent } from './home/home.component';
     TaskInfoComponent,
     TaskChildComponent,
     TaskCheckComponent,
-    HomeComponent
+    HomeComponent,
+    UserStatisticComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { HomeComponent } from './home/home.component';
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
-    DragDropModule
+    DragDropModule,
+    AngularSvgIconModule.forRoot()
   ],
   providers: [CookieService],
   bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]//now using only in routing

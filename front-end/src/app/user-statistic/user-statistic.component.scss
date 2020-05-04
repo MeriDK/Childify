@@ -1,0 +1,27 @@
+.statistic-section {
+    border-radius: 5px;
+    border-style: double;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    & .img-wraper {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        & img {
+            width: 100%;
+            max-width: 500px;
+            min-width: 100px;
+        }
+    }
+
+}
+
+
+
+.statistic-block {
+    display: block;
+}
