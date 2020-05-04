@@ -26,9 +26,10 @@ class FamilyAPIView(APIView):
 
   # check if user in family
   def get(self, request):
-    if self.check_object_family(request.user):
-      return JsonResponse({"msg": "already connected"}, status=200)
-    return JsonResponse({"msg": "not connected"}, status=405)
+    check = self.check_object_family(request.user)
+    if check:
+      return JsonResponse({'family_id': check.first().family.id}, status=200)
+    return JsonResponse({}, status=412)
 
   def post(self, request):
     serializer = FamilyCreateSerializer(data=request.data)
