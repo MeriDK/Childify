@@ -1,1 +1,19 @@
-<p>user-statistic works!</p>
+<app-nav-menu></app-nav-menu>
+
+<div class="statistic-section">
+    <div class="img-wraper">
+        <img src="../../assets/svg/dog.svg" alt="Your profile image" class="statistic-section__img">
+    </div>
+    
+    <div class="statistic-block">
+        <div class="family">
+            <strong>Family: {{familyName}}</strong>
+            <p>Members: {{numOfMembers}}</p>
+        </div>
+        <div class="user-stats">
+            <strong>Point's: {{points}}</strong>
+            <pre>{{obj | json}}</pre>
+        </div>
+    </div>
+
+</div>
