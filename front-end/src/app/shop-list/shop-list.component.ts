@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import { FormControl, FormGroup } from '@angular/forms';
 import {addNewGood, getWishList, addNewGoodChild, getWishListChild} from './ShopService';
 import { ShopService } from './shop.service';
+import jwt_decode from 'jwt-decode'
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-shop-list',
@@ -12,10 +14,10 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop-list.component.scss'],
   providers: [ShopService]
 })
-export class ShopListComponent implements OnInit {
+export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent= true
+  isParent= jwt_decode(this.tokenService.getAccess()).isParent
   points = 100
   translate = translate
 
@@ -25,11 +27,13 @@ export class ShopListComponent implements OnInit {
   price: FormControl;
   goodForm : any;
 
-  wishGoods :  any;
-  orderGoods : any;
-  receiveGoods : any;
+  @Input() wishGoods :  any;
+  @Input() orderGoods : any;
+  @Input() receiveGoods : any;
 
-  constructor(private api: ShopService) { }
+  
+
+  constructor(private api: ShopService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -105,28 +109,29 @@ export class ShopListComponent implements OnInit {
       "price": this.price.value
     }
     if(this.isParent) {
-      addNewGood(this.api, data)
+      addNewGood(this.api, data , this.tokenService).then(location.reload())
     } else {
-      addNewGoodChild(this.api, data)
+      addNewGoodChild(this.api, data, this.tokenService).then(location.reload())
     }
 
-    location.reload()
+    
   }
 
   getData(): void {
     if(this.isParent){
-      getWishList(this.api).then(
-        data=> {this.wishGoods=data;
+      getWishList(this.api, this.tokenService).then(
+        data=> {
+          this.wishGoods=data;
           this.orderGoods=data;
           this.receiveGoods=data;
-        this.addEventListener();}
+        setTimeout(()=>{this.addEventListener();},0) }
       );
     } else {
-      getWishListChild(this.api).then(
+      getWishListChild(this.api, this.tokenService).then(
         data=> {this.wishGoods=data;
           this.orderGoods=data;
           this.receiveGoods=data;
-        this.addEventListener();}
+        setTimeout(()=>{this.addEventListener();},0) }
       );
     }
   }

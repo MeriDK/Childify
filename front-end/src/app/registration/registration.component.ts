@@ -7,6 +7,7 @@ import { TokenService } from '../token.service'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import  ValidateServ from '../services/ValidateServ' ;
 import {translate} from '../services/StringResourses'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class RegistrationComponent implements OnInit {
   password: FormControl;
   confirmPassword: FormControl;
 
-  constructor(private api: RegistrationService, private token :TokenService) {}
+  constructor(private api: RegistrationService, private token :TokenService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.initAnime()
@@ -69,6 +71,6 @@ export class RegistrationComponent implements OnInit {
       "password": this.password.value,
       "isParent": $(".input-radio--registration__parent").is(':checked')
     }
-    registerNewUser(this.api, this.token, data)
+    registerNewUser(this.api, this.token, data, this.router)
   }
 }
