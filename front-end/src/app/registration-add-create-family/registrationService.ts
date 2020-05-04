@@ -5,27 +5,35 @@
       ///check errors
       ///button pause
 
-      export function createNewFamily(api, data) : void {
-        api.createNewFamily(data).subscribe(
-          data => {},
+      export function createNewFamily(api, token, data, router) : any {
+        return   new Promise((resolve, reject) => { 
+          api.createNewFamily(data).subscribe(
+          data => {
+            router.navigate(['/login']);
+          },
           error => {
             console.log(error)
             if(error.code=="token_not_valid" && error['messages'][0]['message']=="Token 'exp' claim has expired"){
-              api.refreshToken()
+              token.refreshTokenSubs().then( newToken => { api.createNewFamily(data).subscribe(data => {router.navigate(['/login']);resolve()})})
             }
           }
         )
+        })
       }
 
-      export function connectToFamily(api, data) : void {
-        api.connectToFamily(data).subscribe(
-          data => {},
+      export function connectToFamily(api, token, data, router) : any {
+        return   new Promise((resolve, reject) => {
+          api.connectToFamily(data).subscribe(
+          data => {
+            router.navigate(['/login']);
+          },
           error => {
             console.log(error)
             console.log(error.error.code=="token_not_valid")
             if(error.error.code=="token_not_valid"){
-              api.refreshTokenSubs()
+              token.refreshTokenSubs().then( newToken => {api.connectToFamily(data).subscribe(data => {router.navigate(['/login']);resolve();})})
             }
           }
         )
+        })
       }

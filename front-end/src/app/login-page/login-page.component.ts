@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { LoginService } from './login.service';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import { CookieService } from 'ngx-cookie-service';
 import {HttpHeaders} from '@angular/common/http';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-login-page',
@@ -22,9 +22,9 @@ export class LoginPageComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private cookieService: CookieService
+    private tokenService: TokenService
   ) {
-    this.loginService.validate({token: this.cookieService.get('refresh')})
+    this.loginService.validate({token: this.tokenService.getRefresh()})
       .pipe(first())
       .subscribe(
         response => {
@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
 
   // after login
   forwardToFamily() {
-    this.loginService.getFamily({ headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.cookieService.get('access'))})
+    this.loginService.getFamily({ headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenService.getAccess())})
       .pipe(first())
       .subscribe(
         response => {
@@ -69,9 +69,7 @@ export class LoginPageComponent implements OnInit {
       .subscribe(
         response => {
           // @ts-ignore
-          this.cookieService.set('access', response.access);
-          // @ts-ignore
-          this.cookieService.set('refresh', response.refresh);
+          this.tokenService.setCookie({'access':response.access, 'refresh':response.refresh})
           this.forwardToFamily();
         },
         error => {

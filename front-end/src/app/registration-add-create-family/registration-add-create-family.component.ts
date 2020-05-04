@@ -3,6 +3,9 @@ import $ from 'node_modules/jquery'
 import  {createNewFamily, connectToFamily}  from './registrationService'
 import { RegistrationAddService } from './registration-add.service';
 import {translate} from '../services/StringResourses'
+import { TokenService } from '../token.service';
+import jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-add-create-family',
@@ -12,13 +15,14 @@ import {translate} from '../services/StringResourses'
 })
 export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
 
-  isChild: any;
+  isChild= !jwt_decode(this.token.getAccess()).isParent;
   data : any;
   isCreate : boolean;
 
   translate = translate
 
-  constructor(private api: RegistrationAddService) {
+  constructor(private api: RegistrationAddService, private token :TokenService,
+    private router: Router) {
     this.data = {family_id: '', name: ''}
   }
 
@@ -35,10 +39,10 @@ export class RegistrationAddCreateFamilyComponent implements AfterViewInit {
 
   connectCreateFamily(): void {
     if (this.isCreate) {
-      createNewFamily(this.api, {name: this.data.name})
+      createNewFamily(this.api, this.token, {name: this.data.name}, this.router)
     }
     else {
-      connectToFamily(this.api, {family_id: this.data.family_id})
+      connectToFamily(this.api, this.token, {family_id: this.data.family_id}, this.router)
     }
   }
 }
