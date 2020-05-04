@@ -51,8 +51,12 @@ export class LoginPageComponent implements OnInit {
         response => {
           this.router.navigate(['/family']);
         },
-        // error 405 when user isn't connected to family
-        error => this.router.navigate(['/connect-family'])
+        // error 412 - user isn't connected to family
+        error => {
+          if (error.status === 412) {
+            this.router.navigate(['/connect-family']);
+          }
+        }
       );
   }
 
