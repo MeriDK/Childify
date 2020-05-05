@@ -4,14 +4,47 @@
 <header class="header-childify">
     <h1 class="header-childify__title"><a routerLink='../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
 </header>
+
 <input type="text" placeholder="Name task" class="input-name_task">
+
 <h3>{{translate('points')}}</h3>
 <input type="number" placeholder="15" class="input-point">
+
+<h3>{{translate('category')}}</h3>
+<div class="chose-category">
+    <div class="div-category">
+        <input type="radio" name="emotion" id="category1" class="input-hidden" />
+        <label for="category1">
+        <img src="../../assets/img/task-icon/task-icon-home.png" alt="category home" />
+        </label>
+
+        <input type="radio" name="emotion" id="category2" class="input-hidden" checked/>
+        <label for="category2">
+        <img src="../../assets/img/task-icon/task-icon-kitchen.png" alt="category kitchen" />
+        </label>
+    </div>
+
+    <br>
+
+    <div class="div-category2">
+        <input type="radio" name="emotion" id="category3" class="input-hidden" />
+        <label for="category3">
+        <img src="../../assets/img/task-icon/task-icon-book.png" alt="category book" />
+        </label>
+
+        <input type="radio" name="emotion" id="category4" class="input-hidden" />
+        <label for="category4">
+        <img src="../../assets/img/task-icon/task-icon-shop.png" alt="category shop" />
+        </label>
+    </div>
+</div>
+
 <h3>{{translate('more_info')}}</h3>
-<textarea name="Text1" cols="40" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<textarea name="Text1" cols="40" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Phasellus rutrum ligula a velit tincidunt, a congue ipsum vehicula.
 Phasellus placerat nulla ut ipsum imperdiet vehicula.
 Aliquam scelerisque sed eros sed pretium.
 Vestibulum porttitor, est in tempor accumsan, arcu quam pellentesque augue, ut imperdiet sapien dolor vel arcu.</textarea>
+
 <button class="btn" routerLink='../'>{{translate('save_change')}}</button>
 

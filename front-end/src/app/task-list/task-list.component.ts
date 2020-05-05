@@ -11,15 +11,26 @@ import {translate} from '../services/StringResourses'
 export class TaskListComponent implements AfterViewInit,OnInit {
   isChild = false
   url
+  tasks = [
+    'Task 1',
+    'Task 2',
+    'Task 3',
+    'Task 4',
+    'Task 5',
+    'Task 6',
+    'Task 7'
+  ];
 
+  icon_task = "../../assets/img/task-icon/task-icon-kitchen.png"
   translate = translate
-
+  
   ngOnInit(): void {
     if (this.isChild) {
       this.url="task/info"
     } else {
       this.url="task/change"
     }
+
   }
 
   ngAfterViewInit(): void {
@@ -31,17 +42,8 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     }
   }
 
-  tasks = [
-    'Task 1',
-    'Task 2',
-    'Task 3',
-    'Task 4',
-    'Task 5',
-    'Task 6',
-    'Task 7',
-    'Task 8',
-    'Task 9'
-  ];
+
+ 
 
 
   drop(event: CdkDragDrop<string[]>) {

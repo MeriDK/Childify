@@ -29,14 +29,15 @@
 }
 
 .task i {
-    float: right;
-    cursor: pointer;
-    margin:  10px;
+  float: right;
+  cursor: pointer;
+  margin:  10px;
 }
 .task h3{
-    font-size: 24px;
-    margin:  0px;
-    color: black;
+  font-size: 24px;
+  margin:  0px;
+  color: black;
+  margin-top: 10px;
 }
 .task p{
     float: left;
@@ -62,4 +63,11 @@
 
 .list-tasks .task .disable {
   display: none;
+}
+
+.task-icon{
+  margin:  5px;
+  width: 50px;
+  display:inline-block;
+  float: left;
 }
