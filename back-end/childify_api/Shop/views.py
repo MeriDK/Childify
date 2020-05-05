@@ -41,6 +41,13 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
             return Response({'message': 'you cant delete item if child chose it'}, status=400)
         return self.destroy(request, *args, **kwargs)
 
+    def patch(self, request, *args, **kwargs):
+        if request.data.get('child', None):
+            return Response({'message': 'cant change child, use /confirm or /set-child instead'}, status=400)
+        if request.data.get('family', None):
+            return Response({'message': 'changing family is forbidden'}, status=400)
+        return self.partial_update(request, *args, **kwargs)
+
 
 class ItemSetChildView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
