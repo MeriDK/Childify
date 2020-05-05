@@ -175,6 +175,10 @@
     },
     "password.dont.match":{
         "en": "passwords don't match"
+    },
+    "category":{
+        "en": "Category",
+        "ua": "Категорія"
     }
 
 

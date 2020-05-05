@@ -14,11 +14,11 @@ header
   border-left: none
   border-right: none
   margin: 30px
-  font-size: 36px
+  font-size: 32px
 
 
 h3
-  margin: 20px 20px
+  margin: 8px 20px
   font-size: 30px
   color: #888
 
@@ -29,6 +29,37 @@ input
   width: 80%
   margin: 10px 30px
   
+
+.input-hidden 
+  position: absolute
+  left: -9999px
+
+
+input[type=radio]:checked + label>img 
+  border: 1px solid #fff
+  margin: 10px 20px
+  filter: grayscale(0%)
+
+.chose-category
+  width: 95%
+  margin-left: auto
+  margin-right: auto
+  text-align: center
+ 
+.div-category2
+  margin-top: -30px
+  
+
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img 
+  width: 80px
+  height: 80px
+  transition: 500ms all
+  margin: 10px 20px
+  filter: grayscale(90%)
+
+
 
 .input-point
   width: 55px
@@ -61,4 +92,5 @@ textarea
     margin-right: auto
     width: 95%
     text-align: center
+    margin-top: -30px
 
