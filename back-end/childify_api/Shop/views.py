@@ -23,6 +23,11 @@ class ItemListView(generics.ListCreateAPIView):
             queryset = queryset.filter(status=status)
         return queryset
 
+    def post(self, request, *args, **kwargs):
+        if request.data.get('child', None):
+            return Response({'message': 'no child in post'}, status=400)
+        return self.create(request, *args, **kwargs)
+
 
 class ItemView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemSerializer
