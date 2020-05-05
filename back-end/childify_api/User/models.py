@@ -16,7 +16,7 @@ class MyUserManager(BaseUserManager):
     if len(username) < 6 :
       raise ValueError("username must be at least 6 characters")
     if len(password) < 8:
-      raise ValueError("password must be at least 6 characters")
+      raise ValueError("password must be at least 8 characters")
 
     if not regex.match("[^ @]*",username):
       raise ValueError("username must be valid")
