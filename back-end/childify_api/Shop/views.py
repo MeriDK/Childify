@@ -48,6 +48,9 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
             return Response({'message': 'changing family is forbidden'}, status=400)
         return self.partial_update(request, *args, **kwargs)
 
+    def put(self, request, *args, **kwargs):
+        return Response(status=405)
+
 
 class ItemSetChildView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
@@ -76,6 +79,9 @@ class ItemSetChildView(generics.UpdateAPIView):
         request._full_data = data
         return self.partial_update(request, *args, **kwargs)
 
+    def put(self, request, *args, **kwargs):
+        return Response(status=405)
+
 
 class ItemConfirmView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
@@ -94,3 +100,6 @@ class ItemConfirmView(generics.UpdateAPIView):
         # delete all unnecessary fields and set needed data
         request._full_data = data
         return self.partial_update(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return Response(status=405)
