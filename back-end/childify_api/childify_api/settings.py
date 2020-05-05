@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Prize.apps.PrizeConfig',
     'Parent.apps.ParentConfig',
     'User.apps.UserConfig',
+    'Shop.apps.ShopConfig',
     'corsheaders',
     'rest_framework.authtoken'
 ]
