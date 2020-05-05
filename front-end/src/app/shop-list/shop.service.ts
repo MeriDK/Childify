@@ -28,14 +28,14 @@ export class ShopService {
   }
 
   addNewGood(data): Observable<any> {
-    const body = {name: data.title, family_id: "1", points: data.price}
+    const body = {name: data.title, family_id: "1", points: data.price, about: data.about}
     const url = this.baseUrl + '/prize/'
 
     return this.http.post(url, body, this.httpHeaders())
   }
 
   addNewGoodChild(data): Observable<any> {
-    const body = {name: data.title, family_id: "1", points: data.price}
+    const body = {name: data.title, family_id: "1", points: data.price, about: data.about}
     const url = this.baseUrl + '/child_prize/'
 
     return this.http.post(url, body, this.httpHeaders())
