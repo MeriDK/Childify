@@ -1,9 +1,10 @@
+from django.http import JsonResponse
 from rest_framework.response import Response
 
 from .models import Item
 from .serializers import ItemSerializer
-from rest_framework import viewsets
-from rest_framework import generics, mixins
+from rest_framework import generics
+from Child.models import Child
 
 
 class ItemListView(generics.ListCreateAPIView):
@@ -39,3 +40,46 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
         if item.child:
             return Response({'message': 'you cant delete item if child chose it'}, status=400)
         return self.destroy(request, *args, **kwargs)
+
+
+class ItemSetChildView(generics.UpdateAPIView):
+    serializer_class = ItemSerializer
+    queryset = Item.objects.all()
+
+    def patch(self, request, *args, **kwargs):
+        queryset = Item.objects.all()
+        item = queryset.filter(id=self.kwargs['pk']).first()
+
+        if item.child:
+            return Response({'message': 'child already set'}, status=400)
+
+        child = request.data.get('child', None)
+        if not child:
+            return Response({'message': 'child info should be in body'}, status=400)
+
+        data = {
+            'child': child,
+            'status': 1
+        }
+        # delete all unnecessary fields and set needed data
+        request._full_data = data
+        return self.partial_update(request, *args, **kwargs)
+
+
+class ItemConfirmView(generics.UpdateAPIView):
+    serializer_class = ItemSerializer
+    queryset = Item.objects.all()
+
+    def patch(self, request, *args, **kwargs):
+        queryset = Item.objects.all()
+        item = queryset.filter(id=self.kwargs['pk']).first()
+
+        if item.child is None:
+            return Response({'message': 'child should be set'}, status=400)
+
+        data = {
+            'status': 2
+        }
+        # delete all unnecessary fields and set needed data
+        request._full_data = data
+        return self.partial_update(request, *args, **kwargs)
