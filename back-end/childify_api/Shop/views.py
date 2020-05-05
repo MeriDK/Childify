@@ -64,6 +64,10 @@ class ItemSetChildView(generics.UpdateAPIView):
         if not child:
             return Response({'message': 'child info should be in body'}, status=400)
 
+        item_child = Child.object.filter(id=child).first()
+        if item_child.family != item.family:
+            return Response({'message': 'child not in this family'}, status=400)
+
         data = {
             'child': child,
             'status': 1
