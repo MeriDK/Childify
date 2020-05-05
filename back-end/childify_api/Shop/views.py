@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
+from rest_framework.utils import json
+from rest_framework.exceptions import ValidationError
 
 from .models import Item
 from .serializers import ItemSerializer
@@ -16,6 +18,16 @@ class ItemListView(generics.ListCreateAPIView):
         family = self.request.query_params.get('family', None)
         child = self.request.query_params.get('child', None)
         status = self.request.query_params.get('status', None)
+
+        if self.request.user.isParent:
+            if child or not family or not status:
+                raise ValidationError(detail='wrong filter usage')
+        else:
+            if bool(family) and (status != '0' or bool(child)):
+                raise ValidationError(detail='wrong filter usage')
+            if bool(child) and (status not in ('1', '2') or bool(family)):
+                raise ValidationError(detail='wrong filter usage')
+
         if family:
             queryset = queryset.filter(family=family)
         if child:
