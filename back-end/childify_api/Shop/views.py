@@ -27,3 +27,10 @@ class ItemListView(generics.ListCreateAPIView):
 class ItemView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        queryset = Item.objects.all()
+        item = queryset.filter(id=self.kwargs['pk']).first()
+        if item.child:
+            return Response({'message': 'you cant delete item if child chose it'}, status=400)
+        return self.destroy(request, *args, **kwargs)
