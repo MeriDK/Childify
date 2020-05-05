@@ -21,8 +21,8 @@ class Item(models.Model):
     points = models.IntegerField()
     name = models.TextField(max_length=30)
     about = models.TextField(max_length=500, default='')
-    status = models.SmallIntegerField(StatusEnum, default=StatusEnum.WISH)
-    category = models.SmallIntegerField(CategoryEnum)
+    status = models.SmallIntegerField(choices=StatusEnum.choices, default=StatusEnum.WISH)
+    category = models.SmallIntegerField(choices=CategoryEnum.choices)
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
     child = models.ForeignKey(Child, on_delete=models.CASCADE, blank=True, null=True)
 
