@@ -7,6 +7,14 @@ from .models import Item
 from .serializers import ItemSerializer
 from rest_framework import generics
 from Child.models import Child
+from Parent.models import Parent
+
+
+def check_family(user, family):
+    user_info = Child.object.filter(user=user).first() or Parent.object.filter(user=user).first()
+    if user_info.family.id != int(family):
+        return False
+    return True
 
 
 class ItemListView(generics.ListCreateAPIView):
@@ -28,6 +36,9 @@ class ItemListView(generics.ListCreateAPIView):
             if bool(child) and (status not in ('1', '2') or bool(family)):
                 raise ValidationError(detail='wrong filter usage')
 
+        if not check_family(self.request.user.user_id, family):
+            raise ValidationError(detail='user isnt in this family')
+
         if family:
             queryset = queryset.filter(family=family)
         if child:
@@ -39,6 +50,10 @@ class ItemListView(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         if request.data.get('child', None):
             return Response({'message': 'no child in post'}, status=400)
+        if not request.user.isParent:
+            return Response({'message': 'item can create only parent'}, status=400)
+        if not check_family(request.user.user_id, request.data.get('family')):
+            return Response({'message': 'user isnt in this family'}, status=400)
         return self.create(request, *args, **kwargs)
 
 
@@ -49,6 +64,10 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
     def delete(self, request, *args, **kwargs):
         queryset = Item.objects.all()
         item = queryset.filter(id=self.kwargs['pk']).first()
+        if not check_family(request.user.user_id, item.family.id):
+            return Response({'message': 'user isnt in this family'}, status=400)
+        if not request.user.isParent:
+            return Response({'message': 'item can delete only parent'}, status=400)
         if item.child:
             return Response({'message': 'you cant delete item if child chose it'}, status=400)
         return self.destroy(request, *args, **kwargs)
@@ -58,6 +77,12 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
             return Response({'message': 'cant change child, use /confirm or /set-child instead'}, status=400)
         if request.data.get('family', None):
             return Response({'message': 'changing family is forbidden'}, status=400)
+
+        item = Item.objects.all().filter(id=self.kwargs['pk']).first()
+        if not check_family(request.user.user_id, item.family.id):
+            return Response({'message': 'user isnt in this family'}, status=400)
+        if not request.user.isParent:
+            return Response({'message': 'item can update only parent'}, status=400)
         return self.partial_update(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
@@ -83,6 +108,11 @@ class ItemSetChildView(generics.UpdateAPIView):
         if item_child.family != item.family:
             return Response({'message': 'child not in this family'}, status=400)
 
+        if not check_family(request.user.user_id, item.family.id):
+            return Response({'message': 'user isnt in this family'}, status=400)
+        if request.user.isParent:
+            return Response({'message': 'item can set child only child'}, status=400)
+
         data = {
             'child': child,
             'status': 1
@@ -105,6 +135,11 @@ class ItemConfirmView(generics.UpdateAPIView):
 
         if item.child is None:
             return Response({'message': 'child should be set'}, status=400)
+
+        if not check_family(request.user.user_id, item.family.id):
+            return Response({'message': 'user isnt in this family'}, status=400)
+        if request.user.isParent:
+            return Response({'message': 'item can validate only child'}, status=400)
 
         data = {
             'status': 2
