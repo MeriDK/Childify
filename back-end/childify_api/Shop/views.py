@@ -1,6 +1,5 @@
-from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.utils import json
 from rest_framework.exceptions import ValidationError
 
 from .models import Item
@@ -20,6 +19,7 @@ def check_family(user, family):
 class ItemListView(generics.ListCreateAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         queryset = Item.objects.all()
@@ -60,6 +60,7 @@ class ItemListView(generics.ListCreateAPIView):
 class ItemView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def delete(self, request, *args, **kwargs):
         queryset = Item.objects.all()
@@ -92,6 +93,7 @@ class ItemView(generics.RetrieveUpdateDestroyAPIView):
 class ItemSetChildView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def patch(self, request, *args, **kwargs):
         queryset = Item.objects.all()
@@ -128,6 +130,7 @@ class ItemSetChildView(generics.UpdateAPIView):
 class ItemConfirmView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def patch(self, request, *args, **kwargs):
         queryset = Item.objects.all()
