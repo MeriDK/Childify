@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('User.urls')),
     path('', include('Family.urls')),
     path('', include('Prize.urls')),
-    path('', include('Child_prize.urls'))
+    path('', include('Child_prize.urls')),
+    path('', include('Shop.urls'))
 ]
