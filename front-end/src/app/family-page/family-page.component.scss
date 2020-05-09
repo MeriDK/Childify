@@ -27,26 +27,3 @@ html, body {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-
-.content__item {
-  background-color: rgba(180, 106, 253, 0.7);
-  border-radius: 20px;
-  width: $square-side;
-  height: $square-side;
-  margin-bottom: 45px;
-}
-
-.content__item a{
-  padding-left: 15px;
-  padding-top: 0px;
-  display: block;
-  text-decoration: none;
-  color: black;
-}
-
-.content__item img {
-  padding: 5px;
-  width: $square-side;
-  height: $square-side;
-}
-
