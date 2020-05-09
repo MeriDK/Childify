@@ -1,11 +1,10 @@
-import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Injectable, AfterViewInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
 
 import { FamilyMember, FamilyMemberComponent } from '../family-member/family-member.component';
 import { async } from '@angular/core/testing';
-import { rejects } from 'assert';
 
 @Component({
   selector: 'app-family-page',
@@ -28,20 +27,12 @@ export class FamilyPageComponent implements OnInit, AfterViewInit{
   imgYoung = "../../assets/svg/daughter.svg";
   imgOld = "../../assets/svg/grandfather.svg";
 
-  members: FamilyMember[];
+  @Input() members: FamilyMember[];
 
   ngOnInit(): void {
-
-    /*const shit = this.getMembers().then(
-      response => this.members = response,
-      error => console.log("Damn this shit")
-    );*/
-
-      this.members = [
-        {name: "useruser", memberUrl: "http://127.0.0.1:8000/family/${element[user_id]/statistic", imgUrl: "../../assets/svg/daughter.svg"},
-        {imgUrl: "../../assets/svg/daughter.svg",memberUrl: "http://127.0.0.1:8000/family/${element[user_id]/statistic",name: "childchild"}
-      ]
-
+    while(!this.members)
+      this.members = this.getMembers();
+      
     console.log("HERE\n" + this.members)
   }
 
@@ -50,15 +41,10 @@ export class FamilyPageComponent implements OnInit, AfterViewInit{
     // this.members = this.getMembers();
   }
 
+  getMembers():FamilyMember[] {
+    let family: FamilyMember[];
 
-  
-  
-  getMembers(): Promise<FamilyMember[]> {
-    var family: FamilyMember[];  
-    return new Promise(function(resolve, rej){
-      
-
-    this.http.get(this.baseUrl + '/family/1').subscribe(value => { 
+     this.http.get(this.baseUrl + '/family/1').subscribe(value => { 
     console.log(value['family']);
     
     value['family'].forEach(element => {
@@ -75,15 +61,13 @@ export class FamilyPageComponent implements OnInit, AfterViewInit{
         console.log(family); 
       family.push(memb);
     });
-    resolve(this.family)
+    return family;
     }, 
     error => {
       console.log("Request error")
-      rej(new Error("Network Error"))
     });
-    })
-    
 
+    return family;
   }
 
 
