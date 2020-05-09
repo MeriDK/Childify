@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Parent.apps.ParentConfig',
     'User.apps.UserConfig',
     'Shop.apps.ShopConfig',
+    'Task.apps.TaskConfig',
     'corsheaders',
     'rest_framework.authtoken'
 ]
