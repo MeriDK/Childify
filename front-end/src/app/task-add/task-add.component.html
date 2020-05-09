@@ -2,9 +2,9 @@
 <header class="header-childify">
     <h1 class="header-childify__title">{{translate('add_task')}}</h1>
 </header>
-<input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task">
+<input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task"  [(ngModel)]="task.name_task">
 <h3>{{translate('points')}}</h3>
-<input type="number" placeholder="0" class="input-point">
+<input type="number" placeholder="0" class="input-point" [(ngModel)]="task.point_task">
 <h3>{{translate('category')}}</h3>
 <div class="chose-category">
 
@@ -37,10 +37,10 @@
 </div>
 
 <h3>{{translate('more_info')}}</h3>
-<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}"></textarea>
+<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}" [(ngModel)]="task.about_task"></textarea>
 <div class="button">
 <button class="btn_add" routerLink='../'>{{translate('cancel')}}</button>
-<button class="btn_add" routerLink='../'>{{translate('add')}}</button>
+<button class="btn_add" routerLink='../' (click)='createTask()'>{{translate('add')}}</button>
 </div>
 
 

@@ -2,36 +2,31 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
+import {TaskListService} from './task-list.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
+  providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
   isChild = false
   url
-  tasks = [
-    'Task 1',
-    'Task 2',
-    'Task 3',
-    'Task 4',
-    'Task 5',
-    'Task 6',
-    'Task 7'
-  ];
 
-  icon_task = "../../assets/img/task-icon/task-icon-kitchen.png"
   translate = translate
-  
+
   ngOnInit(): void {
     if (this.isChild) {
       this.url="task/info"
     } else {
       this.url="task/change"
     }
-
+    console.log(this.router.snapshot.queryParamMap.get('id'));
   }
+
+  
 
   ngAfterViewInit(): void {
     if(this.isChild) {
@@ -42,8 +37,23 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     }
   }
 
+  tasks = [{name_task: 'test',point_task: 15}
+  ];
 
- 
+  constructor(private api: TaskListService, private router: ActivatedRoute){
+    this.getTask();
+  }
+  getTask = () => {
+    this.api.getTaskList().subscribe(
+      data => {
+        this.tasks = data;
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
 
 
   drop(event: CdkDragDrop<string[]>) {
@@ -52,3 +62,4 @@ export class TaskListComponent implements AfterViewInit,OnInit {
 
    
 }
+
