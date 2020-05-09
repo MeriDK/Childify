@@ -16,4 +16,16 @@ export class TaskCheckService {
   getTaskList(): Observable<any> {
     return this.http.get(this.baseUrl + "/family/1/task/list?status=check" , {headers: this.httpHeaders})
   }
+
+  updateTasktoDone(task): Observable<any> {
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:4}
+    return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    {headers: this.httpHeaders})
+  }
+
+  updateTasktoInProgress(task): Observable<any> {
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:2}
+    return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    {headers: this.httpHeaders})
+  }
 }
