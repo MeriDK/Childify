@@ -14,8 +14,8 @@ export class TaskCheckComponent implements AfterViewInit {
 
   isChild = false
   translate = translate
-
-  tasks = [{name_task: 'test',point_task: 15,id_child:1}];
+  url = "task/info/"
+  tasks = [{id: -1 ,name_task: 'test',point_task: 15,id_child:1}];
   constructor(private api: TaskCheckService) {
     this.getTask();
   }

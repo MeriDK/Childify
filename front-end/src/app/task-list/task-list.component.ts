@@ -19,11 +19,10 @@ export class TaskListComponent implements AfterViewInit,OnInit {
 
   ngOnInit(): void {
     if (this.isChild) {
-      this.url="task/info"
+      this.url="task/info/"
     } else {
-      this.url="task/change"
+      this.url="task/change/"
     }
-    console.log(this.router.snapshot.queryParamMap.get('id'));
   }
 
   
@@ -37,8 +36,8 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     }
   }
 
-  tasks = [{name_task: 'test',point_task: 15}
-  ];
+  tasks = [{id:-1,name_task: 'test',point_task: 15}];
+
 
   constructor(private api: TaskListService, private router: ActivatedRoute){
     this.getTask();

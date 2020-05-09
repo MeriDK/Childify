@@ -2,7 +2,7 @@
 
 <div cdkDropList id="list-1" cdkDropListConnectedTo="list-2" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4']" (cdkDropListDropped)="drop($event)">
     <div *ngFor="let task of tasks"class="task" cdkDrag>
-        <a href={{url}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><div class = "task-info"><h3>{{task.name_task}}<i class="fas fa-chevron-right"></i>
+        <a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><div class = "task-info"><h3>{{task.name_task}}<i class="fas fa-chevron-right"></i>
         </h3><p>{{translate('points')}}: {{task.point_task}}</p></div></a>  
     </div>
 </div>
