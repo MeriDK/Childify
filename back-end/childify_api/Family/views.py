@@ -4,9 +4,48 @@ from rest_framework.views import APIView
 
 from Child.models import Child
 from Family.models import Family
-from Family.serializers import FamilyCreateSerializer
+from Family.serializers import FamilyCreateSerializer, FamilyGetSerializer
 from Parent.models import Parent
+from User.models import User
+from Prize.models import Prize
 
+class UserStatisticAPIView(APIView):
+  def member_validation(self, family_id, user_id):
+    user = Parent.object.filter(family_id=family_id).filter(user_id=user_id)
+    if user:
+      return user.first()
+    user = Child.object.filter(family_id=family_id).filter(user_id=user_id)
+    if user:
+      return user.first()
+    return None
+  
+  def get(self, request, family_id, user_id):
+    #return JsonResponse({'msg': 'Yes'})
+    user = self.member_validation(family_id, user_id)
+    if user:
+      response = None
+      if type(user)==Parent:
+        response = {"user_id": user.user_id,"family": {"name":Family.object.filter(id=family_id).first().name,"size": len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},"statistic": {"prizes": {"accomplised": 0,"amout": 3},"activity": [{"day": [],"accomplished_prizes": []},{"day":[],"reviewd_tasks":[]}]}}
+
+        return JsonResponse(response, status=200)
+      else:
+        response = {"user_id": user.user_id,"family": {"name":Family.object.filter(id=family_id).first().name,"size": len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},"statistic": {"prizes": {"accomplised": 0,"amout": 3},"activity": [{"day": [],"accomplished_prizes": []},{"day":[],"reviewd_tasks":[]}]}}
+        return JsonResponse(response, status=200)
+    else:
+      return JsonResponse({'msg': 'No family'}, status=404)
+      
+    
+
+
+class FamilyStatisticAPIView(APIView):
+  def get(self, request, id):
+    family = Family.object.filter(id=id)
+    if family:
+      parents = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Parent.object.filter(family=id)]
+      childres = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Child.object.filter(family=id)]
+      
+      return JsonResponse({'family_id': family.first().id, 'family': parents + childres}, status=200)
+    return JsonResponse({'nsg':'Family does not exist'}, status=404)
 
 class FamilyAPIView(APIView):
 

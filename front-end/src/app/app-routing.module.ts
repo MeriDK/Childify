@@ -51,17 +51,18 @@ const routes: Routes = [
     component: ShopListComponent
   },
   {
+    path: 'statistic',
+    component: UserStatisticComponent
+  },
+  {
     path: '',
     component: HomeComponent
   },
   {
     path: '**',
     redirectTo: ''
-  },
-  {
-    path: 'statistic',
-    component: UserStatisticComponent
   }
+
 ];
 
 @NgModule({
