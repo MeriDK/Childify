@@ -14,8 +14,8 @@ export class TaskChildComponent implements AfterViewInit {
 
   isChild = false
   translate = translate
-
-  tasks = [{name_task: 'test',point_task: 15,id_child:1}];
+  url = 'task/info/'
+  tasks = [{id: -1, name_task: 'test',point_task: 15,id_child:1}];
   constructor(private api: TaskChildService) {
     this.getTask();
   }
@@ -34,7 +34,7 @@ export class TaskChildComponent implements AfterViewInit {
  
   ngAfterViewInit(): void {
     if (this.isChild){
-      $(".task__child-nam").css("display", "none")
+      $(".task__child-name").css("display", "none")
       $(".child-tasks .fas").addClass('fa-check')
     }
     else{

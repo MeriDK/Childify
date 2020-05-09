@@ -2,13 +2,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
 
 <header class="header-childify">
-    <h1 class="header-childify__title"><a routerLink='../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
+    <h1 class="header-childify__title"><a routerLink='../../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
 </header>
 
-<input type="text" placeholder="Name task" class="input-name_task">
+<input type="text" placeholder="Name task" class="input-name_task"  [(ngModel)]="task.name_task">
 
 <h3>{{translate('points')}}</h3>
-<input type="number" placeholder="15" class="input-point">
+<input type="number" placeholder="15" class="input-point"  [(ngModel)]="task.point_task">
 
 <h3>{{translate('category')}}</h3>
 <div class="chose-category">
@@ -40,11 +40,11 @@
 </div>
 
 <h3>{{translate('more_info')}}</h3>
-<textarea name="Text1" cols="40" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<textarea name="Text1" cols="40" rows="3"  [(ngModel)]="task.info_task">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Phasellus rutrum ligula a velit tincidunt, a congue ipsum vehicula.
 Phasellus placerat nulla ut ipsum imperdiet vehicula.
 Aliquam scelerisque sed eros sed pretium.
 Vestibulum porttitor, est in tempor accumsan, arcu quam pellentesque augue, ut imperdiet sapien dolor vel arcu.</textarea>
 
-<button class="btn" routerLink='../'>{{translate('save_change')}}</button>
+<button class="btn" routerLink='../../' (click)='updateTask()'>{{translate('save_change')}}</button>
 
