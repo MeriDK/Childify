@@ -31,6 +31,32 @@ export class TaskCheckComponent implements AfterViewInit {
     )
   }
 
+  updateTasktoDone = (task) =>{
+    this.api.updateTasktoDone(task).subscribe(
+      data => {
+        // @ts-ignore
+        this.task=data
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.getTask()
+  }
+
+  updateTasktoInProgress = (task) =>{
+    this.api.updateTasktoInProgress(task).subscribe(
+      data => {
+        // @ts-ignore
+        this.task=data
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.getTask()
+  }
+
  
   ngAfterViewInit(): void {
     if (this.isChild){
