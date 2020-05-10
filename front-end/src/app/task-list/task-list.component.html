@@ -3,7 +3,7 @@
 <div cdkDropList id="list-1" cdkDropListConnectedTo="list-2" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4']" (cdkDropListDropped)="drop($event)">
     <div *ngFor="let task of tasks"class="task" cdkDrag>
         <div class = "task-info">
-        <a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><h3>{{task.name_task}}</h3></a><i class="fas fa-chevron-right" *ngIf="isChild" (click)="updateTasktoInProgress(task)"></i>
+        <a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><h3>{{task.name_task}}</h3></a><img class="icon-status-change" *ngIf="isChild" (click)="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Move Button.png"/>
         <p>{{translate('points')}}: {{task.point_task}}</p></div>  
     </div>
 </div>
