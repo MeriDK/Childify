@@ -5,7 +5,7 @@ import { error } from '@angular/compiler/src/util';
 
 import { FamilyMember, FamilyMemberComponent } from '../family-member/family-member.component';
 import { async } from '@angular/core/testing';
-import { rejects } from 'assert';
+
 
 @Component({
   selector: 'app-family-page',
@@ -31,16 +31,24 @@ export class FamilyPageComponent implements OnInit, AfterViewInit{
   members: FamilyMember[];
 
   ngOnInit(): void {
-
+/*
     this.members = [
       {name: "useruser", memberUrl: "http://127.0.0.1:8000/family/${element[user_id]/statistic", imgUrl: "../../assets/svg/daughter.svg"},
       {imgUrl: "../../assets/svg/daughter.svg",memberUrl: "http://127.0.0.1:8000/family/${element[user_id]/statistic",name: "childchild"}
-    ]
+    ]*/
+
+    this.getMembers().then((val) => {
+      console.log('it works');
+      console.log(val);
+      this.members = this.parseMembers(val);
+    });
 
     /*const shit = this.getMembers().then(
       response => this.members = response,
       error => console.log("Damn this shit")
     );*/
+
+
 
     console.log("HERE\n" + this.members)
   }
@@ -50,41 +58,42 @@ export class FamilyPageComponent implements OnInit, AfterViewInit{
     // this.members = this.getMembers();
   }
 
-
   
-  
-  getMembers(): Promise<FamilyMember[]> {
-    var family: FamilyMember[];  
-    return new Promise(function(resolve, rej){
-
-
-    this.http.get(this.baseUrl + '/family/1').subscribe(value => { 
-    console.log(value['family']);
-
-    value['family'].forEach(element => {
-      let memb: FamilyMember = {
-      name: element['username'],
-      memberUrl: this.baseUrl + '/family/${element[user_id]/statistic',
-      imgUrl: value['is_parent']? this.imgOld : this.imgYoung
-      }
-
-      console.log(memb);
-      if (!family)
-        family = [memb];
-
-        console.log(family); 
-      family.push(memb);
+  getMembers(): Promise<any> {
+    let promise = new Promise((resolve, reject) =>{
+      this.http.get(this.baseUrl + '/family/1').subscribe(value => {
+        resolve(value['family']);
+      }, error => {
+        console.log("There is a prob with network");
+        reject();
+      });
     });
-    resolve(this.family)
-    }, 
-    error => {
-      console.log("Request error")
-      rej(new Error("Network Error"))
-    });
-    })
-
-
+    return promise;
   }
+  
 
+    parseMembers(value): FamilyMember[] {
+      var family: FamilyMember[];
+
+      value.forEach(element => {
+        var memb: FamilyMember = {
+        
+          name: element['username'],
+          memberUrl: this.baseUrl + '/family/${element[user_id]/statistic',
+          imgUrl: value['is_parent']? this.imgOld : this.imgYoung
+        }
+  
+        console.log('Memb: ' + memb);
+        if (!family)
+          family = [memb];
+        else {
+          console.log('Family inter:' + family); 
+          family.push(memb);
+        }
+          
+      });
+
+      return family;
+    }
 
 }
