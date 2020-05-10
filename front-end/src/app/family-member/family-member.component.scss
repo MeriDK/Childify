@@ -1,0 +1,29 @@
+$square-side: 150px;
+$backgroung-violet: rgb(242, 226, 255);
+
+:host-context(.content) {
+  width: 100%;
+}
+
+.content__item {
+  background-color: rgba(180, 106, 253, 0.7);
+  border-radius: 20px;
+  width: 100%;
+  height: $square-side;
+  margin-bottom: 45px;
+}
+
+.content__item a{
+  padding-left: 15px;
+  padding-top: 0px;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.content__item img {
+  padding: 5px;
+  width: $square-side;
+  height: $square-side;
+}
+

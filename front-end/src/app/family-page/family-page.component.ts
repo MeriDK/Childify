@@ -1,30 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { error } from '@angular/compiler/src/util';
+
+import { FamilyMember, FamilyMemberComponent } from '../family-member/family-member.component';
+import { async } from '@angular/core/testing';
+import { JsonPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-family-page',
   templateUrl: './family-page.component.html',
   styleUrls: ['./family-page.component.scss']
 })
-export class FamilyPageComponent implements OnInit {
+
+@Injectable()
+export class FamilyPageComponent implements OnInit{
 
   constructor(private http: HttpClient) { }
 
   private readonly baseUrl = 'http://127.0.0.1:8000';
+  httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json'})}};
 
   data : Observable<any>;
-
+  
   rec : any;
 
+  imgYoung = "../../assets/svg/daughter.svg";
+  imgOld = "../../assets/svg/grandfather.svg";
+
+  members: FamilyMember[];
+
   ngOnInit(): void {
+
+    this.getMembers().then((val) => {
+      console.log('it works');
+      console.log(val);
+      this.members = this.parseMembers(val);
+    });
+
+    console.log("HERE\n" + this.members)
+  }
+  
+  getMembers(): Promise<any> {
+    let promise = new Promise((resolve, reject) =>{
+      this.http.get(this.baseUrl + '/family/1').subscribe(value => {
+        resolve(value['family']);
+      }, error => {
+        console.log("There is a prob with network");
+        reject();
+      });
+    });
+    return promise;
+  }
+  
+  parseMembers(value): FamilyMember[] {
+    var family: FamilyMember[];
+
+    value.forEach(element => {
+      var memb: FamilyMember = {
+      
+        name: element['username'],
+        memberUrl: this.baseUrl + '/family/${element[user_id]/statistic',
+        imgUrl: element['is_parent']? this.imgOld : this.imgYoung
+      }
+      
+      console.log('Memb: ' + memb);
+      if (!family)
+        family = [memb];
+      else {
+        console.log('Family inter:' + family); 
+        family.push(memb);
+      }
+        
+    });
+
+    return family;
   }
 
-  getData(): Observable<any> {
-    console.log('SHIT');
-    let resp = this.http.get('http://127.0.0.1:8000/childify/');
-    //console.log(resp[0].name);
-    this.data = resp;
-    return this.http.jsonp('${this.baseUrl}/childify', 'callback');
-  }
 }

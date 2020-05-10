@@ -27,6 +27,7 @@ import { TaskCheckComponent } from './task-check/task-check.component';
 import { HomeComponent } from './home/home.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
+import { FamilyMemberComponent } from './family-member/family-member.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserStatisticComponent } from './user-statistic/user-statistic.componen
     TaskChildComponent,
     TaskCheckComponent,
     HomeComponent,
-    UserStatisticComponent
+    UserStatisticComponent,
+    FamilyMemberComponent
   ],
   imports: [
     BrowserModule,
