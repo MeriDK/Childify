@@ -25,11 +25,11 @@ class UserStatisticAPIView(APIView):
     if user:
       response = None
       if type(user)==Parent:
-        response = {"user_id": user.user_id,"family": {"name":Family.object.filter(id=family_id).first().name,"size": len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},"statistic": {"prizes": {"accomplised": 0,"amout": 3},"activity": [{"day": [],"accomplished_prizes": []},{"day":[],"reviewd_tasks":[]}]}}
+        response = {'user_id': user.user_id,'family': {'name':Family.object.filter(id=family_id).first().name,'size': len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},'statistic': {'prizes': {'accomplised': 0,'amout': 3},'activity': [{'day': [],'accomplished_prizes': []},{'day':[],'reviewd_tasks':[]}]}}
 
         return JsonResponse(response, status=200)
       else:
-        response = {"user_id": user.user_id,"family": {"name":Family.object.filter(id=family_id).first().name,"size": len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},"statistic": {"prizes": {"accomplised": 0,"amout": 3},"activity": [{"day": [],"accomplished_prizes": []},{"day":[],"reviewd_tasks":[]}]}}
+        response = {"user_id": user.user_id,"family": {'name':Family.object.filter(id=family_id).first().name,'size': len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},'statistic': {'prizes': {'accomplised': 0,'amout': 3},'activity': [{'day': [],'accomplished_prizes': []},{'day':[],'reviewd_tasks':[]}]}}
         return JsonResponse(response, status=200)
     else:
       return JsonResponse({'msg': 'No family'}, status=404)
