@@ -1,12 +1,8 @@
 import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { error } from '@angular/compiler/src/util';
 
-import { FamilyMember, FamilyMemberComponent } from '../family-member/family-member.component';
-import { async } from '@angular/core/testing';
-import { JsonPipe } from '@angular/common';
-
+import { FamilyMember } from '../family-member/family-member.component';
 
 @Component({
   selector: 'app-family-page',
@@ -64,7 +60,7 @@ export class FamilyPageComponent implements OnInit{
         memberUrl: this.baseUrl + '/family/${element[user_id]/statistic',
         imgUrl: element['is_parent']? this.imgOld : this.imgYoung
       }
-      
+
       console.log('Memb: ' + memb);
       if (!family)
         family = [memb];
