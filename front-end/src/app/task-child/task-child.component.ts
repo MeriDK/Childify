@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit} from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
@@ -40,7 +40,6 @@ export class TaskChildComponent implements AfterViewInit {
     else{
       $(".child-tasks .fas").addClass('fa-times')
     }
-    this.getTask()
   }
 
 
