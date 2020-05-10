@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = false
+  isChild = true
   url
 
   translate = translate
@@ -28,12 +28,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   
 
   ngAfterViewInit(): void {
-    if(this.isChild) {
-      $(".add-btn").css("display", "none")
-      $(".tabset-task").addClass("tabset-task--without-btn")
-      $("#tab2-link span")[0].innerHTML=translate('in_progress');
-      $("#tab3-link span")[0].innerHTML=translate('done');
-    }
+
   }
 
   tasks = [{id:-1,name_task: 'test',point_task: 15}];
@@ -54,10 +49,25 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     )
   }
 
+  updateTasktoInProgress = (task) =>{
+    this.api.updateTasktoInProgress(task).subscribe(
+      data => {
+        // @ts-ignore
+        this.task=data
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.getTask()
+  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
+
+  
 
    
 }

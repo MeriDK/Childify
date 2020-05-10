@@ -3,8 +3,9 @@
 <div class="child-tasks">
     <div cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let task of tasks"class="task" cdkDrag>
-            <a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><div class = "task-info"><h3>{{task.name_task}}<i class="fas"></i>
-            </h3><p>{{translate('points')}}: {{task.point_task}}</p><p class="task__child-name">{{translate('child_name')}}: {{task.id_child}}</p></div></a>   
+            <div class = "task-info">
+            <a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><h3>{{task.name_task}}</h3></a><i class="fas fa-check" *ngIf="isChild" (click)="updateTasktoCheck(task)"></i>
+            <p>{{translate('points')}}: {{task.point_task}}</p><p class="task__child-name" *ngIf="!isChild">{{translate('child_name')}}: {{task.id_child}}</p></div>   
         </div>
     </div>
 </div>

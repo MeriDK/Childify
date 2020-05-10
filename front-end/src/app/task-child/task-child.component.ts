@@ -12,10 +12,10 @@ import {TaskChildService} from './task-child.service'
 })
 export class TaskChildComponent implements AfterViewInit {
 
-  isChild = false
+  isChild = true
   translate = translate
   url = 'task/info/'
-  tasks = [{id: -1, name_task: 'test',point_task: 15,id_child:1}];
+  tasks = [{id: -1, name_task: 'test',point_task: 15,id_child:1,id_status:2}];
   constructor(private api: TaskChildService) {
     this.getTask();
   }
@@ -31,6 +31,18 @@ export class TaskChildComponent implements AfterViewInit {
     )
   }
 
+  updateTasktoCheck = (task) =>{
+    this.api.updateTasktoCheck(task).subscribe(
+      data => {
+        // @ts-ignore
+        this.task=data
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.getTask()
+  }
  
   ngAfterViewInit(): void {
     if (this.isChild){

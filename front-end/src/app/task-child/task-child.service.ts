@@ -16,4 +16,10 @@ export class TaskChildService {
   getTaskList(): Observable<any> {
     return this.http.get(this.baseUrl + "/family/1/task/list?status=inProgress" , {headers: this.httpHeaders})
   }
+
+  updateTasktoCheck(task): Observable<any> {
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:3}
+    return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    {headers: this.httpHeaders})
+  }
 }
