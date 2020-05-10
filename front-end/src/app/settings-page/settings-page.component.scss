@@ -27,8 +27,13 @@
         width: 150px;
         height: 150px;
         border-radius: 50%;
-        box-shadow: 4px 8px 5px -4px grey;
-        border: solid 1px black;
+        
+        background: #FFFFFF;
+        /* Light_Grey_25 */
+        border: 1px solid rgba(119, 142, 148, 0.25);
+        box-sizing: border-box;
+        /* Light Shadow */
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
         
         & img {
             position: relative;
@@ -40,6 +45,16 @@
     & .change-avatar {
         max-width: 60%;
         & img {
+            border-radius: 50%;
+        
+            /* White */
+            background: #FFFFFF;
+            /* Light_Grey_25 */
+            border: 1px solid rgba(119, 142, 148, 0.25);
+            box-sizing: border-box;
+            /* Light Shadow */
+            box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+
             margin: 15px;
             max-width: 12%;
         }
@@ -57,9 +72,13 @@
         width: 80%;
         margin: 5px 0px 0px 15px;
         min-height: 35px;
-        border-radius: 5px;
-        border: solid 1px lightgray;
-        box-shadow: 4px 5px 3px -4px lightgrey;
+
+        /* White */
+        background: #FFFFFF;
+        /* Light_Grey_25 */
+        border: 1px solid rgba(119, 142, 148, 0.25);
+        box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
     }
 }
 
@@ -70,13 +89,17 @@
     margin: 5%;
     & button {
         background-color: white;
-        border-radius: 5px;
-        border: solid 1px lightgray;
-        box-shadow: 4px 5px 3px -4px lightgrey;
         margin-bottom: 10px;
         height: auto;
         min-height: 35px;
         overflow: visible;
+
+        /* White */
+        background: #FFFFFF;
+        /* Light_Grey_25 */
+        border: 1px solid rgba(119, 142, 148, 0.25);
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
 
         font-size: 30px;
         color: rgb(33, 33, 33);

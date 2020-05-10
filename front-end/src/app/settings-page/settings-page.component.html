@@ -15,14 +15,14 @@
         </div>
 
         <div class="data-block">
-            <input type="text">
-            <input type="text">
+            <input type="text" (input)="userNameInputHandler($event)" [value]="this.username">
+            <input type="email" (input)="emailInputHandler($event)" [value]="this.email">
         </div>
     </div>
     
     <div class="buttons-block">
-        <button class="btn-confirm">Зберегти</button>
-        <button class="btn-get-family-id">Дізнатися ID сім'ї</button>
+        <button class="btn-confirm" (click)="onSaveClick()">Зберегти</button>
+        <button class="btn-get-family-id" (click)="showId()">Дізнатися ID сім'ї</button>
         <button class="btn-out-from-family">Вийти з сім'ї</button>
     </div>
 </div>

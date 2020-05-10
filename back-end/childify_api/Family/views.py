@@ -20,7 +20,6 @@ class UserStatisticAPIView(APIView):
     return None
   
   def get(self, request, family_id, user_id):
-    #return JsonResponse({'msg': 'Yes'})
     user = self.member_validation(family_id, user_id)
     if user:
       response = None
