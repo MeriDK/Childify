@@ -81,6 +81,9 @@ export class SettingsPageComponent implements OnInit {
       this.http.delete(this.baseUrl + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
         resolve(value);
       }, error => {
+        if (error.status == 401) {
+          this.refreshToken();
+        }
         console.log("There is a problems with network");
         reject();
       });
@@ -101,6 +104,9 @@ export class SettingsPageComponent implements OnInit {
     this.http.patch(this.baseUrl + '/user/'+ this.user.user_id + '/settings', json, this.httpHeaders()).subscribe(value => {
       resolve(value);
     }, error => {
+      if (error.status == 401) {
+        this.refreshToken();
+      }
       console.log("There is a problems with network");
       reject();
     });
@@ -118,6 +124,17 @@ export class SettingsPageComponent implements OnInit {
     this.email = value;
   }
 
+  refreshToken(): boolean {
+    this.refresh().then((val)=>{
+      //console.log("GOOOOOOOOOOOOOD\n" + val['access']);
+      this.tokenService.setCookie({'access':val['access']})  
+    }, (err) => {
+        console.log(err);
+        return false;
+      });
+    return true;
+  }
+
   getUserInfo(): Promise<any> {
     let promise = new Promise((resolve, reject) =>{
       console.log(this.user.user_id);
@@ -126,16 +143,9 @@ export class SettingsPageComponent implements OnInit {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");
-        
         if (error.status == 401) {
-          this.refresh().then((val)=>{
-            console.log("GOOOOOOOOOOOOOD\n" + val['access']);
-            this.tokenService.setCookie({'access':val['access']})  
-          }, (err) => {
-              console.log(err);
-            });
+          this.refreshToken();
         }
-
         reject(error);
       });
     });
