@@ -23,6 +23,6 @@
     <div class="buttons-block">
         <button class="btn-confirm" (click)="onSaveClick()">{{saveBtnText}}</button>
         <button class="btn-get-family-id" (click)="showId()">{{familyIdBtnText}}</button>
-        <button class="btn-out-from-family"><a href="/login">Вийти з сім'ї</a></button>
+        <button class="btn-out-from-family" (click)="onRejectClick()">{{rejectBtnText}}</button>
     </div>
 </div>

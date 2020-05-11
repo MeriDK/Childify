@@ -23,6 +23,8 @@ class SettingsAPIView(APIView):
             if family:
                 return JsonResponse({'username': user.username, 'email': user.email, 'family_id': family.id})
             
+            return JsonResponse({'username': user.username, 'email': user.email, 'family_id': None})
+            
         return JsonResponse({'msg': 'No user exist'})
 
     def patch(self, request, user_id):
@@ -33,4 +35,22 @@ class SettingsAPIView(APIView):
             user.save()
             return JsonResponse({'code': 200, 'msg': 'well done'})
         return JsonResponse({'code': 404, 'msg': request.data}) 
+    
+    def delete(self, request, user_id):
+        user = User.object.filter(user_id=user_id).first()
+        if user:
+            if user.isParent:
+                member = Parent.object.filter(user=user).first()
+            else:
+                member = Child.object.filter(user=user).first()
+            
+            if member:
+                family = member.family
+            
+            if family:
+                member.family = None
+                member.save()
+                return JsonResponse({'code': 200, 'msg': request.data})
+            
+        return JsonResponse({'msg': 'No user exist'})
 

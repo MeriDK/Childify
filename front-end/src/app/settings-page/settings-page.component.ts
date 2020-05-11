@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-page',
@@ -14,7 +15,10 @@ export class SettingsPageComponent implements OnInit {
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 
-  constructor(private http: HttpClient, private tokenService: TokenService) { }
+  constructor(
+    private http: HttpClient, 
+    private tokenService: TokenService,
+    private router: Router) { }
 
   @Input() username: String = 'Your username';
   @Input() email: String = 'Your email';
@@ -22,13 +26,23 @@ export class SettingsPageComponent implements OnInit {
   user = jwt_decode(this.tokenService.getAccess())
   familyId: String = 'Please try again';
   familyIdBtnText: String = "Дізнатися ID сім'ї";
-  saveBtnText: String = "Зберегти";
+  saveBtnText: String = 'Зберегти';
+  rejectBtnText: String = "Вийти з сім'ї";
   
   ngOnInit(): void {
     this.getUserInfo().then((val) => {
       this.username = val['username'];
       this.email = val['email'];
       this.familyId = val['family_id'];
+      console.log("HERE IS YORE PROBLEM =>" + val['family_id']);
+      if (this.familyId == null) {
+        this.router.navigate(['/connect-family']);
+      }
+    }, (err) => {
+      console.log(err);
+      if (err.status == 401){
+        this.router.navigate(['/login']);
+      }
     })
   }
 
@@ -43,7 +57,35 @@ export class SettingsPageComponent implements OnInit {
       this.saveBtnText = tempMessage;
       }, 3000);
     
-    })
+    });
+  }
+
+  onRejectClick(): void {
+    this.deleteFamily().then((val) => {
+      console.log(val);
+    
+      var tempMessage = this.rejectBtnText;
+      this.rejectBtnText =  val['code'] == 200 ? '0.0 Збережено!': 'Виникли проблеми Т.Т';
+      setTimeout(() => {
+      this.rejectBtnText = tempMessage;
+      this.router.navigate(['/connect-family']);
+      }, 3000);
+      
+    });
+  }
+
+  deleteFamily(): Promise<any> {
+    let promise = new Promise((resolve, reject) =>{
+      console.log(this.user.user_id);
+  
+      this.http.delete(this.baseUrl + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
+        resolve(value);
+      }, error => {
+        console.log("There is a problems with network");
+        reject();
+      });
+    });
+    return promise;
   }
 
   patchUserInfo(): Promise<any> {
@@ -84,7 +126,7 @@ export class SettingsPageComponent implements OnInit {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");
-        reject();
+        reject(error);
       });
     });
     return promise;
