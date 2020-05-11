@@ -30,7 +30,6 @@ export class FamilyPageComponent implements OnInit{
   ngOnInit(): void {
 
     this.getMembers().then((val) => {
-      console.log('it works');
       console.log(val);
       this.members = this.parseMembers(val);
     });

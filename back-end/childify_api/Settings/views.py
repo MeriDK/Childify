@@ -8,6 +8,7 @@ from Family.models import Family
 from Parent.models import Parent
 
 class SettingsAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request, user_id):
         user = User.object.filter(user_id=user_id).first()
         if user:
@@ -23,3 +24,13 @@ class SettingsAPIView(APIView):
                 return JsonResponse({'username': user.username, 'email': user.email, 'family_id': family.id})
             
         return JsonResponse({'msg': 'No user exist'})
+
+    def patch(self, request, user_id):
+        user = User.object.filter(user_id=user_id).first()
+        if user:
+            user.username = request.data['username']
+            user.email = request.data['email']
+            user.save()
+            return JsonResponse({'code': 200, 'msg': 'well done'})
+        return JsonResponse({'code': 404, 'msg': request.data}) 
+

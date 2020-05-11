@@ -103,5 +103,10 @@
 
         font-size: 30px;
         color: rgb(33, 33, 33);
+
+        & a {
+            text-decoration: none;
+            color: rgb(33, 33, 33);
+        }
     }
 }
