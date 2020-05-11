@@ -13,8 +13,8 @@ export class TaskAddService {
 
   constructor(private http: HttpClient) { }
 
-  createTask(task): Observable<any> {
-    const body = {name_task: task.name_task, about_task: task.about_task, point_task: task.point_task, id_family_task: 1};
+  createTask(task,category): Observable<any> {
+    const body = {id_category: category,name_task: task.name_task, about_task: task.about_task, point_task: task.point_task, id_family_task: 1};
     return this.http.post(this.baseUrl + "/family/1/task/create/" ,body, {headers: this.httpHeaders})
   }
 }

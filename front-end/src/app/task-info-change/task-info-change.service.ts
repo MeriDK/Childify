@@ -17,8 +17,8 @@ export class TaskInfoChangeServer {
     return this.http.get(this.baseUrl + "/family/1/task/"+id+"/" , {headers: this.httpHeaders})
   }
 
-  updateTask(task): Observable<any> {
-    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task}
+  updateTask(task,category): Observable<any> {
+    const body = {id_category: category,name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task}
     return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
