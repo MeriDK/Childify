@@ -41,7 +41,7 @@ export class SettingsPageComponent implements OnInit {
     }, (err) => {
       console.log(err);
       if (err.status == 401){
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
       }
     })
   }
@@ -126,6 +126,16 @@ export class SettingsPageComponent implements OnInit {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");
+        
+        if (error.status == 401) {
+          this.refresh().then((val)=>{
+            console.log("GOOOOOOOOOOOOOD\n" + val['access']);
+            this.tokenService.setCookie({'access':val['access']})  
+          }, (err) => {
+              console.log(err);
+            });
+        }
+
         reject(error);
       });
     });
@@ -139,6 +149,26 @@ export class SettingsPageComponent implements OnInit {
       this.familyIdBtnText = tempMessage;
     }, 3000);
     
+  }
+
+  refresh(): Promise<any> {
+    let promise = new Promise((resolve, reject) =>{
+      console.log(this.user.user_id);
+      
+      var data = {
+        refresh: this.tokenService.getRefresh()
+      };
+  
+      var json = JSON.stringify(data);
+
+      this.http.post(this.baseUrl + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
+        resolve(value);
+      }, error => {
+        console.log("There is a prob with network");
+        reject(error);
+      });
+    });
+    return promise;
   }
 
 }
