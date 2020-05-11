@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = false
+  isChild = true
   url
 
   translate = translate
@@ -23,6 +23,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     } else {
       this.url="task/change/"
     }
+    $("h3").addClass("parent");
   }
 
   
