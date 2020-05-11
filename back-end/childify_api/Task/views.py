@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from .models import Task
-from .models import Status
+from .models import Status,Category
 from Family.models import Family
 
 
@@ -47,7 +47,8 @@ class TaskCreate(APIView):
             if serializers.is_valid():
                     family = Family.object.get(id=1)
                     status = Status.objects.get(id=1)
-                    task= Task.object.create_task(family,status,serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
+                    category = Category.objects.get(id=serializers.data['id_category'])
+                    task= Task.object.create_task(family,status,category,serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
                     return JsonResponse({"info":"task create"},status = 201)
             return JsonResponse(serializers.data,status = 400)
 
