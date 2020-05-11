@@ -7,33 +7,13 @@
 <input type="number" placeholder="0" class="input-point" [(ngModel)]="task.point_task">
 <h3>{{translate('category')}}</h3>
 <div class="chose-category">
-
-  <div class="div-category">
-    <input type="radio" name="emotion" id="category1" class="input-hidden" />
-    <label for="category1">
-    <img src="../../assets/img/task-icon/task-icon-home.png" alt="category home" />
-    </label>
-
-    <input type="radio" name="emotion" id="category2" class="input-hidden" />
-    <label for="category2">
-    <img src="../../assets/img/task-icon/task-icon-kitchen.png" alt="category kitchen" />
-    </label>
-  </div>
-
-  <br>
-
-  <div class="div-category2">
-    <input type="radio" name="emotion" id="category3" class="input-hidden" />
-    <label for="category3">
-    <img src="../../assets/img/task-icon/task-icon-book.png" alt="category book" />
-    </label>
-
-    <input type="radio" name="emotion" id="category4" class="input-hidden" />
-    <label for="category4">
-    <img src="../../assets/img/task-icon/task-icon-shop.png" alt="category shop" />
-    </label>
-  </div>
-
+    <select id="category" class="category-select" (change)="filterChanged($event.target.value)">
+      <option value="1">House</option>
+      <option value="2">Kitchen</option>
+      <option value="3">Studding</option>
+      <option value="4">Shop</option>
+      <option value="5">Pet</option>
+    </select>
 </div>
 
 <h3>{{translate('more_info')}}</h3>

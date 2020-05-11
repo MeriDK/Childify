@@ -10,20 +10,43 @@ import {TaskCheckService} from './task-check.service'
   styleUrls: ['./task-check.component.sass'],
   providers: [TaskCheckService]
 })
-export class TaskCheckComponent implements AfterViewInit {
+export class TaskCheckComponent{
 
-  isChild = true
+  isChild = false
   translate = translate
   url = "task/info/"
-  tasks = [{id: -1 ,name_task: 'test',point_task: 15,id_child:1}];
+  icon;
+  tasks = [{id: -1,id_category:"",name_task: 'test',point_task: 15,id_child:1}];
   constructor(private api: TaskCheckService) {
     this.getTask();
   }
-   getTask = () => {
+
+  category(id_category): void {
+    if(id_category==1){
+      this.icon = "../../assets/img/task-icon/House.png"
+    }
+    else if(id_category==2){
+      this.icon = "../../assets/img/task-icon/Kitchen.png"
+    }
+    else if(id_category==3){
+      this.icon = "../../assets/img/task-icon/Studding.png"
+    }
+    else if(id_category==4){
+      this.icon = "../../assets/img/task-icon/Shop.png"
+    }
+    else if(id_category==5){
+      this.icon = "../../assets/img/task-icon/Pets.png"
+    }
+  }
+
+  getTask = () => {
     this.api.getTaskList().subscribe(
       data => {
         this.tasks = data;
-        console.log(data)
+        for (var i = 0; i<this.tasks.length; i++){
+          this.category(this.tasks[i].id_category)
+          this.tasks[i].id_category=this.icon
+        }
       },
       error => {
         console.log(error)
@@ -56,17 +79,6 @@ export class TaskCheckComponent implements AfterViewInit {
     )
     this.getTask()
   }
-
- 
-  ngAfterViewInit(): void {
-    if (this.isChild){
-      $(".task__child-nam").css("display", "none")
-      $(".check-tasks .check").css("display", "none")
-      $(".check-tasks .task .cross ").css("display","none")
-      $(".check-tasks .fas").addClass('fa-chevron-left')
-    }
-  }
-
 
 
   drop(event: CdkDragDrop<string[]>) {

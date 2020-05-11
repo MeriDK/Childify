@@ -10,20 +10,43 @@ import {TaskChildService} from './task-child.service'
   styleUrls: ['./task-child.component.sass'],
   providers: [TaskChildService]
 })
-export class TaskChildComponent implements AfterViewInit {
+export class TaskChildComponent {
 
-  isChild = true
+  isChild = false
   translate = translate
   url = 'task/info/'
-  tasks = [{id: -1, name_task: 'test',point_task: 15,id_child:1,id_status:2}];
+  icon;
+  tasks = [{id: -1,id_category:"", name_task: 'test',point_task: 15,id_child:1,id_status:2}];
   constructor(private api: TaskChildService) {
     this.getTask();
   }
-   getTask = () => {
+
+  category(id_category): void {
+    if(id_category==1){
+      this.icon = "../../assets/img/task-icon/House.png"
+    }
+    else if(id_category==2){
+      this.icon = "../../assets/img/task-icon/Kitchen.png"
+    }
+    else if(id_category==3){
+      this.icon = "../../assets/img/task-icon/Studding.png"
+    }
+    else if(id_category==4){
+      this.icon = "../../assets/img/task-icon/Shop.png"
+    }
+    else if(id_category==5){
+      this.icon = "../../assets/img/task-icon/Pets.png"
+    }
+  }
+
+  getTask = () => {
     this.api.getTaskList().subscribe(
       data => {
         this.tasks = data;
-        console.log(data)
+        for (var i = 0; i<this.tasks.length; i++){
+          this.category(this.tasks[i].id_category)
+          this.tasks[i].id_category=this.icon
+        }
       },
       error => {
         console.log(error)
@@ -42,16 +65,6 @@ export class TaskChildComponent implements AfterViewInit {
       }
     )
     this.getTask()
-  }
- 
-  ngAfterViewInit(): void {
-    if (this.isChild){
-      $(".task__child-name").css("display", "none")
-      $(".child-tasks .fas").addClass('fa-check')
-    }
-    else{
-      $(".child-tasks .fas").addClass('fa-times')
-    }
   }
 
 

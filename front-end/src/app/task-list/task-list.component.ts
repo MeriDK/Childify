@@ -12,8 +12,10 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = true
+  isChild = false
+  task;
   url
+  icon;
 
   translate = translate
 
@@ -23,7 +25,6 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     } else {
       this.url="task/change/"
     }
-    $("h3").addClass("parent");
   }
 
   
@@ -32,17 +33,41 @@ export class TaskListComponent implements AfterViewInit,OnInit {
 
   }
 
-  tasks = [{id:-1,name_task: 'test',point_task: 15}];
+  tasks = [{id:-1,id_category:"",name_task: 'test',point_task: 15}];
 
 
   constructor(private api: TaskListService, private router: ActivatedRoute){
     this.getTask();
   }
+
+  category(id_category): void {
+    if(id_category==1){
+      this.icon = "../../assets/img/task-icon/House.png"
+    }
+    else if(id_category==2){
+      this.icon = "../../assets/img/task-icon/Kitchen.png"
+    }
+    else if(id_category==3){
+      this.icon = "../../assets/img/task-icon/Studding.png"
+    }
+    else if(id_category==4){
+      this.icon = "../../assets/img/task-icon/Shop.png"
+    }
+    else if(id_category==5){
+      this.icon = "../../assets/img/task-icon/Pets.png"
+    }
+  }
+
   getTask = () => {
     this.api.getTaskList().subscribe(
       data => {
         this.tasks = data;
-        console.log(data)
+        for (var i = 0; i<this.tasks.length; i++){
+          this.category(this.tasks[i].id_category)
+          this.tasks[i].id_category=this.icon
+          console.log(this.tasks[i].id_category)
+        }
+        
       },
       error => {
         console.log(error)
