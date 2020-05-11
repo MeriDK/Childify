@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, Input} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
-import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
-import { FormControl, FormGroup } from '@angular/forms';
-import {addNewGood, getWishList, addNewGoodChild, getWishListChild} from './ShopService';
 import { ShopService } from './shop.service';
-import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
+import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 
 @Component({
   selector: 'app-shop-list',
@@ -17,122 +14,200 @@ import { TokenService } from '../token.service';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent= jwt_decode(this.tokenService.getAccess()).isParent
-  points = 100
+  isParent = false;
   translate = translate
-
-  
-  title: FormControl;
-  about: FormControl;
-  price: FormControl;
-  goodForm : any;
-
-  @Input() wishGoods :  any;
-  @Input() orderGoods : any;
-  @Input() receiveGoods : any;
-
-  
-
+  wishGoods = [
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    }
+  ]
   constructor(private api: ShopService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-    this.getData();
-    this.initFormControl()
+    this.initEventListener();
   }
 
-  initFormControl(): void {
-    this.title = new FormControl('')
-    this.about =  new FormControl('')
-    this.price  = new FormControl('')
-
-    this.goodForm = new FormGroup({
-      inputGroup: new FormGroup({
-        title: this.title,
-        about: this.about,
-        price: this.price
+  initEventListener(): void {
+    setTimeout(()=>{
+      var pressTimer;
+      var deselect = false;
+      $('.li-selectable').on('touchend',(event)=>{
+        event.stopPropagation();
+        var element = event.target;
+        while (element.localName!='li') {
+          element = element.parentNode;
+        }
+        if (!$(element).hasClass('selected') && !deselect) {
+          $(element).addClass('active')
+          this.showModal();
+        }
+        clearTimeout(pressTimer);
+        return false;
       })
-    })
-  }
+      $('.li-selectable').on('touchstart',(event)=>{
+        event.stopPropagation();
+        deselect = false;
+        pressTimer = window.setTimeout(()=> { 
+          deselect = this.selectNode(event.target);
+        },150);
+        return false; 
+      });
+      $('.btn-move').on('click', (event)=>{
+        event.stopPropagation();
+        this.moveNode();
+      });
+      $('.btn-back').on('click', (event)=>{
+        event.stopPropagation();
+        this.backNode();
+      });
+      $('.btn-confirm').on('click', (event)=>{
+        event.stopPropagation();
+        this.confirmNode();
+      });
+      $('.btn-close').on('click', (event)=>{
+        event.stopPropagation();
+        this.closeEditing();
+        this.closeModal();
+      });    
+    }, 100)
+  } 
 
-  addEventListener(): void {
-    $(".good-li--shop-list").on('click',  (event) => { this.selectElement(event.target)})
-    $(".btn-add--shop-list").on('click',  (event) => { this.showAddPanel()})
-    $(".btn-add-good").on('click', (event) => { this.addPanelBtnOnClick() })
-    $(".btn-wish-good").on('click', (event) => { this.selectElement(event.target.parentNode.parentNode) })
-    $(".btn-confirm-good").on('click', (event) => { this.selectElement(event.target.parentNode.parentNode) })
+  selectNode(element): boolean {
     
+    while (element.localName!='li') {
+      element = element.parentNode;
+    }
+    $(element).toggleClass('selected');
+    if ($('.selected').length>0){
+      $(".footer--shop-list.tab1").addClass('active');
+    } else {
+      $(".footer--shop-list.tab1").removeClass('active');
+    }
+    return !$(element).hasClass('selected');
   }
 
-  showAddPanel(): void {
-    $(".add-good-li--shop-list").toggleClass("shown")
-    window.scrollTo(0,0);
+  closeEditing(): void {
+    $(".footer--shop-list.tab1").removeClass('active');
+    $('.selected').removeClass('selected');
   }
 
-  addPanelBtnOnClick(): void {   
-    this.addNewGood();
-    $(".add-good-li--shop-list").toggleClass("shown")
+  deleteNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    setTimeout(()=> {
+      $(element).toggleClass('moving-start');
+      setTimeout(()=> {
+        $(element).toggleClass('moving');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
   }
 
-  selectElement(element): void {
-    if(element.localName!='div' && element.localName!='li') {
-      element = element.parentNode
-    }
-    if(element.localName!='li') {
-      element = element.parentNode
-    }
-    if(element.localName=='li'){
-      $(element).toggleClass('selected');
-      var scrollY=window.scrollY;
-      var scrollBy;
-      if($(element)[0].getBoundingClientRect().x>100){
-        scrollBy=$(element)[0].getBoundingClientRect().y-115+140
-        window.scrollBy(0,scrollBy);
-      } else {
-        scrollBy=$(element)[0].getBoundingClientRect().y-115
-        window.scrollBy(0,scrollBy);
-      }
-      if(window.scrollY-scrollY!=scrollBy)
-      setTimeout(()=>{
-        window.scrollBy(0,scrollBy-(window.scrollY-scrollY));
-      },700)
-    }
+  moveNode() : void {
+    this.deleteNode();
+    this.closeModal();
+  }
+
+  backNode() : void {
+    this.deleteNode();
+    this.closeModal();
+  }
+
+  confirmNode() : void {
+    this.deleteNode();
+    this.closeModal();
+  }
+
+  closeModal(): void {
+    var classs = "."+this.activeTab()+".active";
+    $(classs).removeClass('active');
+    $("li.active").removeClass('active')
+  }
+  showModal(): void {
+    var classs = "."+this.activeTab();
+    $(classs).addClass('active');
   }
 
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
   }
 
-  addNewGood(): void {
-    var data = {
-      "title" : this.title.value,
-      "about" : this.about.value,
-      "price": this.price.value
+  activeTab() {
+    // @ts-ignore
+    var tabId ; 
+    this.staticTabs.tabs.find(tabs => {
+      tabId = tabs.id       
+      return tabs.active
+    })
+    if(tabId == "tab1") {
+      return "inStock-modal"
     }
-    if(this.isParent) {
-      addNewGood(this.api, data , this.tokenService).then(location.reload())
-    } else {
-      addNewGoodChild(this.api, data, this.tokenService).then(location.reload())
+    if(tabId == "tab2") {
+      return "bought-modal"
     }
-
-    
-  }
-
-  getData(): void {
-    if(this.isParent){
-      getWishList(this.api, this.tokenService).then(
-        data=> {
-          this.wishGoods=data;
-          this.orderGoods=data;
-          this.receiveGoods=data;
-        setTimeout(()=>{this.addEventListener();},0) }
-      );
-    } else {
-      getWishListChild(this.api, this.tokenService).then(
-        data=> {this.wishGoods=data;
-          this.orderGoods=data;
-          this.receiveGoods=data;
-        setTimeout(()=>{this.addEventListener();},0) }
-      );
+    if(tabId == "tab3") {
+      return "received-modal"
     }
   }
+ 
 }
