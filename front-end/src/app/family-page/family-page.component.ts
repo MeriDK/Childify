@@ -1,8 +1,12 @@
 import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import jwt_decode from 'jwt-decode'
 
 import { FamilyMember } from '../family-member/family-member.component';
+import { TokenService } from '../token.service';
+import { Router } from '@angular/router';
+import { SettingsPageComponent } from '../settings-page/settings-page.component';
 
 @Component({
   selector: 'app-family-page',
@@ -13,10 +17,15 @@ import { FamilyMember } from '../family-member/family-member.component';
 @Injectable()
 export class FamilyPageComponent implements OnInit{
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService,
+    private router: Router) { }
 
+  private user = jwt_decode(this.tokenService.getAccess())
   private readonly baseUrl = 'http://127.0.0.1:8000';
-  httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json'})}};
+  httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
+  'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 
   data : Observable<any>;
   
@@ -32,6 +41,13 @@ export class FamilyPageComponent implements OnInit{
     this.getMembers().then((val) => {
       console.log(val);
       this.members = this.parseMembers(val);
+    },
+    (err) => {
+      console.log(err);
+      
+      
+        this.refreshToken();
+      
     });
 
     console.log("HERE\n" + this.members)
@@ -39,9 +55,12 @@ export class FamilyPageComponent implements OnInit{
   
   getMembers(): Promise<any> {
     let promise = new Promise((resolve, reject) =>{
-      this.http.get(this.baseUrl + '/family/1').subscribe(value => {
+      this.http.get(this.baseUrl + '/family/1', this.httpHeaders()).subscribe(value => {
         resolve(value['family']);
       }, error => {
+        
+          this.refreshToken();
+        
         console.log("There is a prob with network");
         reject();
       });
@@ -71,6 +90,38 @@ export class FamilyPageComponent implements OnInit{
     });
 
     return family;
+  }
+
+  //bad idia
+
+  refreshToken(): boolean {
+    this.refresh().then((val)=>{
+      this.tokenService.setCookie({'access':val['access']})  
+    }, (err) => {
+        console.log(err);
+        return false;
+      });
+    return true;
+  }
+
+  refresh(): Promise<any> {
+    let promise = new Promise((resolve, reject) =>{
+      console.log(this.user.user_id);
+      
+      var data = {
+        refresh: this.tokenService.getRefresh()
+      };
+  
+      var json = JSON.stringify(data);
+
+      this.http.post(this.baseUrl + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
+        resolve(value);
+      }, error => {
+        console.log("There is a prob with network");
+        reject(error);
+      });
+    });
+    return promise;
   }
 
 }
