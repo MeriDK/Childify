@@ -12,7 +12,7 @@ import {TaskChildService} from './task-child.service'
 })
 export class TaskChildComponent implements AfterViewInit {
 
-  isChild = false
+  isChild = true
   translate = translate
   url = 'task/info/'
   tasks = [{id: -1, name_task: 'test',point_task: 15,id_child:1,id_status:2}];
