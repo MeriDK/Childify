@@ -2,85 +2,310 @@
 [ngClass]= "{'isParent': isParent}">
     <div class="shop-list__head">
         <nav class="navbar navbar--shop-list">
-            <span class="title--shop-list">{{translate('shop')}}</span>
-            <div class="points--shop-list">
-                <span>{{translate('points')}}  </span><span class="points-span">{{points}}</span>
+            <div class="title--shop-list">
+                <div class="btn btn-title">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5819 15.5819C16.0834 15.5819 16.5643 15.7811 16.9189 16.1357C17.2736 16.4903 17.4728 16.9713 17.4728 17.4728C17.4728 17.9743 17.2736 18.4552 16.9189 18.8098C16.5643 19.1645 16.0834 19.3637 15.5819 19.3637C14.5324 19.3637 13.691 18.5128 13.691 17.4728C13.691 16.4233 14.5324 15.5819 15.5819 15.5819ZM0.45459 0.45459H3.54623L4.43495 2.3455H18.4182C18.669 2.3455 18.9095 2.44511 19.0868 2.62242C19.2641 2.79972 19.3637 3.0402 19.3637 3.29095C19.3637 3.45168 19.3164 3.61241 19.2502 3.76368L15.8655 9.88077C15.544 10.4575 14.92 10.8546 14.211 10.8546H7.16732L6.31641 12.3957L6.28804 12.5091C6.28804 12.5718 6.31295 12.6319 6.35727 12.6763C6.4016 12.7206 6.46172 12.7455 6.52441 12.7455H17.4728V14.6364H6.12732C5.07786 14.6364 4.23641 13.7855 4.23641 12.7455C4.23641 12.4146 4.3215 12.1026 4.46332 11.8379L5.74914 9.5215L2.3455 2.3455H0.45459V0.45459ZM6.12732 15.5819C6.62882 15.5819 7.10978 15.7811 7.46439 16.1357C7.81901 16.4903 8.01823 16.9713 8.01823 17.4728C8.01823 17.9743 7.81901 18.4552 7.46439 18.8098C7.10978 19.1645 6.62882 19.3637 6.12732 19.3637C5.07786 19.3637 4.23641 18.5128 4.23641 17.4728C4.23641 16.4233 5.07786 15.5819 6.12732 15.5819ZM14.6364 8.96368L17.2648 4.23641H5.31423L7.5455 8.96368H14.6364Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="19.3637" y1="19.3637" x2="0.45459" y2="0.45459" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.140625" stop-color="#FF066F"/>
+                        <stop offset="0.911458" stop-color="#FF73E0"/>
+                        </linearGradient>
+                        </defs>
+                    </svg>  
+                </div>
+                <span class="span">{{translate('shop')}}</span>
             </div>
-            <!--<div class="more-item--shop-list">
-                <span class="more-item__span"></span><span class="more-item__span"></span><span class="more-item__span"></span>
-            </div>-->
+            <div class="points--shop-list">
+                <span class="span">300</span>
+                <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                    <defs>
+                    <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.15625" stop-color="#FF6464"/>
+                    <stop offset="0.807292" stop-color="#FFBB55"/>
+                    </linearGradient>
+                    </defs>
+                    </svg>
+            </div>
         </nav>
         <tabset class="tabset tabset--shop-list" [justified]="true" type="pills" #staticTabs>
-            <tab heading="{{translate('wish')}}" id="tab1">
-                <div> 
-                    <ul class="list--shop-list">
-                        <li class="add-good-li--shop-list">
-                            <div class="add-good-div--shop-list text-center">
-                                <img class="good__img" src="data:image/png;base64,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">
-                                <form [formGroup]="goodForm" novalidate class="good__form text-center">
-                                    <div formGroupName="inputGroup">
-                                        <input class="input good__title__input" formControlName="title" placeholder="{{translate('title')}}">
-                                        <input class="input good__about__input" formControlName="about" placeholder="{{translate('about')}}">
-                                        <div><input class="input good__price__input" formControlName="price" placeholder="{{translate('points.down')}}"><span>{{translate('points')}}</span></div>
-                                    </div>
-                                </form>
-                                <div class="btn-div--shop-list">
-                                    <button type="button" class="btn btn-primary btn-add-good btn-order--shop-list">{{translate('order.btn')}}</button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="good-li--shop-list" *ngFor="let good of wishGoods">
-                            <div class="good-div--shop-list text-center">
-                                <img class="good__img" src="data:image/png;base64,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">
-                                <span class="span good__title">{{good.name}}</span>
-                                <span class="span good__about">{{good.about}}</span>
-                                <span class="span good__child">{{good.child}}</span>
-                                <span class="span good__price">{{good.points}} {{translate('points.down')}}</span>
-                                <div class="btn-div--shop-list">
-                                    <button type="button" class="btn btn-primary btn-wish-good btn-order--shop-list">{{translate('order')}}</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </tab>
-            <tab heading="{{translate('order')}}" id="tab2">
+            <tab id="tab1">
+                <ng-template tabHeading>
+                    <div class="btn btn-tabset">
+                        <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.0918 13.8222L10.0002 13.9111L9.89933 13.8222C5.54516 9.99111 2.66683 7.45778 2.66683 4.88889C2.66683 3.11111 4.04183 1.77778 5.87516 1.77778C7.28683 1.77778 8.66183 2.66667 9.14766 3.87556H10.8527C11.3385 2.66667 12.7135 1.77778 14.1252 1.77778C15.9585 1.77778 17.3335 3.11111 17.3335 4.88889C17.3335 7.45778 14.4552 9.99111 10.0918 13.8222ZM14.1252 0C12.5302 0 10.9993 0.72 10.0002 1.84889C9.001 0.72 7.47016 0 5.87516 0C3.05183 0 0.833496 2.14222 0.833496 4.88889C0.833496 8.24 3.95016 10.9867 8.671 15.1378L10.0002 16.3111L11.3293 15.1378C16.0502 10.9867 19.1668 8.24 19.1668 4.88889C19.1668 2.14222 16.9485 0 14.1252 0Z" fill="#FF5025"/>
+                            </svg>
+                    </div>
+                    <span>{{translate('wish')}}</span>
+                </ng-template>
                 <div>
                     <ul class="list--shop-list">
-                        <li class="good-li--shop-list" *ngFor="let good of orderGoods">
-                            <div class="good-div--shop-list text-center">
-                                <img class="good__img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAgVBMVEX///8DAQQAAAAXFheJiYl6ent0dHX09PShoaHS0tL8/Py8vLy2tradnZ339/fq6urKysqsrKzExMTX19fo6OiXlpdqaWrf39+4uLhQT1Dp6elKSUoODQ+UlJQlJCUdHB0yMTJdXV5BQUKEg4Q7OjtVVVY3Njd1dHUrKitsbG1+fn8EKqUZAAAIs0lEQVR4nO2dCXPiPAyGiSHlLPdZbigt7f//gV8IxHYk2aHBEGU/vzO7M02THT1rI1tHTKXCW+PaLqieOq2i7XiWWqEQIoj+rEZFm/IcdS58sYRoFm3MEzReXvniv4Uo2hz3qiV8YRAjDoo2yLHaydBtRvUr6WfRJjnVxykZwFqlMrx+FsW/5GzWCd/nLPqpcSP8LtosZ+pvE8BG/HN4IxT/yKLY2yd8i971yjJZMRrFWuZI7yIZsU5ySa6JuwLtcqXmJhnAaTe5Vr8BRldLv+rXp8kABkN1daQIp8XZ5kQNOUFD3ad0FKGoF2acA412yQTdpCfjWhIG4r0g4xyo9SYHsAZ+tdcIN4UY50IDyRev8SntFGEg+kVY97hmBwmIl7yu0An3BZj3sFq/ku/Uw78ea4DRLcQd3DVXQW6H+v1QJwzE+tX2ParZUgKqNT6lRpoweLGBj6qmPmRiTN8SpggD0X6thY9puNIATVmKAyA8vNTEh9Q7pbzkznCbAITl8TWTtOkipG/rpQHLE+r3q3BsDMHfCBGWIsCo7wUy3LBbGaAbyzBL3xFfZLghbKiBW8X5tbbmUXNHAVYNdx8gIfu0af2H4IsMX5B3DwMISN/HSAOSL7IcxkwXdadoqTgwz7eNvmSaAhISe9IO/N+gQg9W6oYyiNhkr3K9BRrAPfMkRkcFEe0GIoSzr4H4xJD8Z9lIi3K/W5UpnH8rcPcnAjwWY/fdOkq+7WVPgj5h6TzhGvHtUHKDl9pCAk4uP9fRJJ1odze3CJC5h/lYSL5bKaKJCNVnrBUivilzD1PTPMztEnY0MvwdIr4t8632sCoHUGWyf9BCd/sV2pLj9CkzJaWyyNKztuLtIOGtgg13PEIsmXuYiZqgej6+i1zp7+XyeIkAyewbH/U3hkQodjQXXwljKvYeRpbKok0oyI/hqLYpCzPq2pZ5Br+hJmgId2S/iLBbK5uHaZ7lBN3hzBF0NEGwSQNGURJvD9N9UwNI7UZwjAgHkHkgP1B8ZLwzo4NgxRfS+X0uUmGBWNHxTsdGyH4Po+8qTQEdTJ+lASf0Q1yUSjyYai0LIyFdQWSkWWpTYuzSMiSj9K05Ux2By1/St40NgHHwz1ntFVy0DXmHIUkYbc15e5gxzIzRCcKL1hQh+zAeJlZiow3bkhNxq+xDZKohLJVdzTbcjQebu4fpwbj8ZveOvn2CAY+8PQxVKosNJ4u6ozNKYHzx3mQ3N6bVjdo9ozwaew9Th8Uh3Xbs/NuYj3kYr0W5GBAVdYlSy4Z3GK9KZWKJN9OoGj3BA8i7g0uPcgfRhg0RpisR6PPKfgkEUe4SE+rpw9Y3rpXNC7P9HmlR7nWxJvIS2kdsjifoL+slUDaERpa+xZZ+2LpHxic0gLgRmJXmqlSWJBxwuKAa8QgPwzvPpDWEqpQm2onJdmXCwzBfArVSmbbbgrWkpJdXOVzJxzyTPdTey9V3W1tMeHFARLsI7zyTaggFi1mdcKVjag+zMOSmmEhFubDqhVO8YkV0G6x4R4H9rRpA2HOOU7xiQ7SLsF4CVfVZiCryFUSKFzek8V4C37UJSmTQiMwL5OW9BMpSmalzxxwk3p56Y11q0RpCBf12HOr/AXzME6Fae4T4op19315L4v3OoIxyY2MNtr6bCaPYinUUCBJHpmrZt7nSYqggchHcdJmqZTBBqAB579FkQ6gymL4R9f8kty8+Xmvx39Q6IrtN1TKyLM9+jwY7BGOjDW8mzamaBfd2GDJTb9qX4GoZ+yDCsMCZXqlCZXnU5cVPpHM0HGgw+0RRLu8g4iLUOni1fEvdi/vRmAcRseg9ijjhO5tbyMc8iLgJp+hj61GVoYsz2bwTvVI4NxibD90HrJWVY4LGMrSDpM0nes6ZtyxrapGrYXrPhnvOmTcUptWmCPUD4eCetUQT9CbUiB1B/Khf40RheSZoIqIQIXPcozMcwJJ40LTQipHUA1VprawTNBF6ceeajQCvHosyTtBEe4ByuQaXCPZBkl2p2nwc/nYg34l1FJ+tL73htwZfS2JfCrxDraqWSZw34ADyTjPdp/pKZYOrYAB/eNeq79VYS3inBvBckkNisjWit6il9qBATaKAveJdafmrYCglxLSMezSb1sCFlncPYxI4Ea56rrLU9quWd3/cgJESX+V0gOh0AL7KeQpviQhznoddKsJcX6BQJsJ8Z9SWizDPNM0mtDu4vz+R4xF5Vx53mkkopqFZNXTmVWztr+WRI9ViJTaWR44yWH8Kof2tCSIvGWR8Z8zHCj8jVrZgTYVAzyC0A1IPZwBS4Yyo2gBnT52lvACfQOgckIjW7p6izyB0DtinALc2wF46u+KY8DWA1hGsg/SKW0J7to2qlWcAkl081hGsV9NPuCV0PoLoBczMEezC1yCcEuYZQWuGDr2dkTmCXXyEpkNC5yNInd1qXyZa+Kwih4TOAeFpntkj2PoinnBGaJ+iuQCJR6yAFdiM5ZTQ+QhSDS72KVo5kP/zjgidLxPUYSAZI4jfy3VI6HwEqWOV7MuE6SUWN4TOlwmqy0xsrIB70xKWhxBGeM5HEJ3AF2R+BuExxE4JnY/g299HEL+y6pDQuZOhrM1wMsb3O1wQOh9B6gOVARiaAR8ntCfraEBrvYQE/LSW7+juV0eEonp8M4v8+Ivlr/mJb3JRE9PQ8ojJi7ohzJEZfdEjzgjZyxN6Qv7yhJ6QvzyhJ+QvT+gJ+csTekL+8oSekL88oSfkL0/oCfnLE3pC/spFaP3+KW7yhJ6QvzyhJ+QvT+gJ+csTekL+8oSekL88oSfkL09IijqQnK08oSfkL0/oCfnLE/5PCanDvdnKE3pC/vKEnpC/PKEn5C9P6An5yxN6Qv7yhJ6Qv3IR0t8zx1T/A8I8X34zLhVhru94JY4n5Cohcn27SImmad5vaAozDvZhI9P3amdrnXV4EQdFNn7nBaxUZuvPVdEEWdodDcem/QcQFqWF8MHFsAAAAABJRU5ErkJggg==">
-                                <span class="span good__title">{{good.name}}</span>
-                                <span class="span good__about">{{good.about}}</span>
-                                <span class="span good__child">{{good.child}}</span>
-                                <span class="span good__price">{{good.points}} {{translate('points')}}</span>
-                                <div class="btn-div--shop-list">
-                                    <button type="button" class="btn btn-primary btn-confirm-good btn-order--shop-list">{{translate('confirm')}}</button>
+                        <li class="good-li--shop-list li-selectable"  *ngFor="let good of wishGoods">
+                            <div class="good-div--shop-list text-center li-selectable">
+                                <div class="li-selectable">
+                                    <svg class="li-selectable" width="25" height="41" viewBox="0 0 25 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.52956 16.7813C8.52956 17.8338 8.11123 18.8433 7.3666 19.5876C6.62197 20.3319 5.61203 20.75 4.55897 20.75C3.5059 20.75 2.49597 20.3319 1.75134 19.5876C1.00671 18.8433 0.588379 17.8338 0.588379 16.7813V12.8125C0.588379 11.5623 0.786908 10.3717 1.12441 9.24063L8.52956 16.6423V16.7813ZM12.5001 0.90625C13.9693 0.90625 15.359 1.16422 16.6494 1.66031L12.4406 8.84375C10.7928 8.84375 9.40308 9.83594 8.82735 11.3242L3.05014 5.54969C5.23397 2.73188 8.64867 0.90625 12.5001 0.90625ZM23.9354 9.45891L16.4707 16.9202V12.8125C16.4707 12.0584 16.2722 11.3639 15.9149 10.7686L20.1038 3.64469C21.9104 5.13297 23.2604 7.15703 23.9354 9.45891ZM24.4119 22.913L16.4707 30.8505V22.5359L24.4119 14.5984V22.913ZM24.4119 36.625C24.4119 37.6776 23.9936 38.687 23.249 39.4313C22.5043 40.1756 21.4944 40.5938 20.4413 40.5938C19.3883 40.5938 18.3783 40.1756 17.6337 39.4313C16.8891 38.687 16.4707 37.6776 16.4707 36.625V36.4464L24.4119 28.5089V36.625Z" fill="#232526"/>
+                                        </svg>                                        
                                 </div>
+                                <div class="li-buyed">
+                                    <svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M34.5429 11.6864H26.8584L19.8316 1.33333C19.5268 0.891431 19.0135 0.638916 18.5001 0.638916C17.9867 0.638916 17.4734 0.891431 17.1685 1.34911L10.1418 11.6864H2.45731C1.57495 11.6864 0.853027 12.3966 0.853027 13.2646C0.853027 13.4067 0.853027 13.5487 0.917198 13.6908L4.99206 28.3208C5.36105 29.6465 6.59634 30.625 8.07228 30.625H28.9279C30.4038 30.625 31.6391 29.6465 32.0242 28.3208L36.099 13.6908L36.1471 13.2646C36.1471 12.3966 35.4252 11.6864 34.5429 11.6864ZM18.5001 5.05792L22.9921 11.6864H14.0081L18.5001 5.05792ZM28.9279 27.4686H8.07228L4.55891 14.8429H32.4573L28.9279 27.4686ZM18.5001 17.9993C16.7354 17.9993 15.2915 19.4197 15.2915 21.1557C15.2915 22.8918 16.7354 24.3122 18.5001 24.3122C20.2648 24.3122 21.7086 22.8918 21.7086 21.1557C21.7086 19.4197 20.2648 17.9993 18.5001 17.9993Z" fill="#232526"/>
+                                        </svg>
+                                        
+                                </div>
+                                <span class="span good__title li-selectable">{{good.title}}</span>
+                                <span class="span span-buyed good__title li-selectable">Куплено</span>
+                                <span class="span good__price li-selectable">{{good.points}}
+                                    <svg class="li-selectable" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="li-selectable" d="M11.6469 0.5C13.3318 0.5 14.9477 1.16902 16.1392 2.35987C17.3306 3.55073 17.9999 5.16588 17.9999 6.85001C17.9999 8.53413 17.3306 10.1493 16.1392 11.3401C14.9477 12.531 13.3318 13.2 11.6469 13.2C9.96204 13.2 8.34614 12.531 7.15474 11.3401C5.96333 10.1493 5.294 8.53413 5.294 6.85001C5.294 5.16588 5.96333 3.55073 7.15474 2.35987C8.34614 1.16902 9.96204 0.5 11.6469 0.5ZM11.6469 11.6125C12.9106 11.6125 14.1225 11.1107 15.0161 10.2176C15.9097 9.32446 16.4117 8.1131 16.4117 6.85001C16.4117 5.58691 15.9097 4.37555 15.0161 3.48241C14.1225 2.58926 12.9106 2.0875 11.6469 2.0875C10.3833 2.0875 9.17134 2.58926 8.27779 3.48241C7.38423 4.37555 6.88224 5.58691 6.88224 6.85001C6.88224 8.1131 7.38423 9.32446 8.27779 10.2176C9.17134 11.1107 10.3833 11.6125 11.6469 11.6125ZM2.11753 6.85001C2.11753 8.9217 3.44371 10.6838 5.294 11.3347V12.9936C2.5543 12.2872 0.529297 9.8107 0.529297 6.85001C0.529297 3.88932 2.5543 1.41281 5.294 0.706375V2.36531C3.44371 3.01619 2.11753 4.77832 2.11753 6.85001Z" fill="url(#paint0_linear)"/>
+                                        <defs>
+                                        <linearGradient id="paint0_linear" x1="17.9999" y1="13.2" x2="5.91943" y2="-3.41829" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0.15625" stop-color="#FF6464"/>
+                                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                                        </linearGradient>
+                                        </defs>
+                                        </svg>
+                                        
+                                </span>
                             </div>
                         </li>
+                        
                     </ul>
-                </div>
+                </div>    
             </tab>
-            <tab heading="{{translate('receive')}}" id="tab2">
+            <tab  id="tab2">
+                <ng-template tabHeading>
+                    <div class="btn btn-tabset">
+                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3335 6.45617H14.3418L10.6918 1.23886C10.5335 1.01617 10.2668 0.888916 10.0002 0.888916C9.7335 0.888916 9.46683 1.01617 9.3085 1.24681L5.6585 6.45617H1.66683C1.2085 6.45617 0.833496 6.81406 0.833496 7.25149C0.833496 7.32307 0.833496 7.39465 0.866829 7.46623L2.9835 14.8389C3.17516 15.5069 3.81683 16 4.5835 16H15.4168C16.1835 16 16.8252 15.5069 17.0252 14.8389L19.1418 7.46623L19.1668 7.25149C19.1668 6.81406 18.7918 6.45617 18.3335 6.45617ZM10.0002 3.11582L12.3335 6.45617H7.66683L10.0002 3.11582ZM15.4168 14.4094H4.5835L2.7585 8.04681H17.2502L15.4168 14.4094ZM10.0002 9.63745C9.0835 9.63745 8.3335 10.3532 8.3335 11.2281C8.3335 12.103 9.0835 12.8187 10.0002 12.8187C10.9168 12.8187 11.6668 12.103 11.6668 11.2281C11.6668 10.3532 10.9168 9.63745 10.0002 9.63745Z" fill="#232526"/>
+                            </svg>                            
+                    </div>
+                    <span>{{translate('wish')}}</span>
+                </ng-template>
                 <div>
                     <ul class="list--shop-list">
-                        <li class="good-li--shop-list" *ngFor="let good of receiveGoods">
-                            <div class="good-div--shop-list text-center">
-                                <img class="good__img" src="data:image/png;base64,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">
-                                <span class="span good__title">{{good.name}}</span>
-                                <span class="span good__about">{{good.about}}</span>
-                                <span class="span good__child">{{good.child}}</span>
-                                <span class="span good__price">{{good.points}} {{translate('points')}}</span>
+                        <li class="good-li--shop-list li-selectable"  *ngFor="let good of wishGoods">
+                            <div class="good-div--shop-list text-center li-selectable">
+                                <div class="li-selectable">
+                                    <svg class="li-selectable" width="25" height="41" viewBox="0 0 25 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.52956 16.7813C8.52956 17.8338 8.11123 18.8433 7.3666 19.5876C6.62197 20.3319 5.61203 20.75 4.55897 20.75C3.5059 20.75 2.49597 20.3319 1.75134 19.5876C1.00671 18.8433 0.588379 17.8338 0.588379 16.7813V12.8125C0.588379 11.5623 0.786908 10.3717 1.12441 9.24063L8.52956 16.6423V16.7813ZM12.5001 0.90625C13.9693 0.90625 15.359 1.16422 16.6494 1.66031L12.4406 8.84375C10.7928 8.84375 9.40308 9.83594 8.82735 11.3242L3.05014 5.54969C5.23397 2.73188 8.64867 0.90625 12.5001 0.90625ZM23.9354 9.45891L16.4707 16.9202V12.8125C16.4707 12.0584 16.2722 11.3639 15.9149 10.7686L20.1038 3.64469C21.9104 5.13297 23.2604 7.15703 23.9354 9.45891ZM24.4119 22.913L16.4707 30.8505V22.5359L24.4119 14.5984V22.913ZM24.4119 36.625C24.4119 37.6776 23.9936 38.687 23.249 39.4313C22.5043 40.1756 21.4944 40.5938 20.4413 40.5938C19.3883 40.5938 18.3783 40.1756 17.6337 39.4313C16.8891 38.687 16.4707 37.6776 16.4707 36.625V36.4464L24.4119 28.5089V36.625Z" fill="#232526"/>
+                                        </svg>                                        
+                                </div>
+                                <div class="li-buyed">
+                                    <svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M34.5429 11.6864H26.8584L19.8316 1.33333C19.5268 0.891431 19.0135 0.638916 18.5001 0.638916C17.9867 0.638916 17.4734 0.891431 17.1685 1.34911L10.1418 11.6864H2.45731C1.57495 11.6864 0.853027 12.3966 0.853027 13.2646C0.853027 13.4067 0.853027 13.5487 0.917198 13.6908L4.99206 28.3208C5.36105 29.6465 6.59634 30.625 8.07228 30.625H28.9279C30.4038 30.625 31.6391 29.6465 32.0242 28.3208L36.099 13.6908L36.1471 13.2646C36.1471 12.3966 35.4252 11.6864 34.5429 11.6864ZM18.5001 5.05792L22.9921 11.6864H14.0081L18.5001 5.05792ZM28.9279 27.4686H8.07228L4.55891 14.8429H32.4573L28.9279 27.4686ZM18.5001 17.9993C16.7354 17.9993 15.2915 19.4197 15.2915 21.1557C15.2915 22.8918 16.7354 24.3122 18.5001 24.3122C20.2648 24.3122 21.7086 22.8918 21.7086 21.1557C21.7086 19.4197 20.2648 17.9993 18.5001 17.9993Z" fill="#232526"/>
+                                        </svg>
+                                        
+                                </div>
+                                <span class="span good__title li-selectable">{{good.title}}</span>
+                                <span class="span span-buyed good__title li-selectable">Куплено</span>
+                                <span class="span good__price li-selectable">{{good.points}}
+                                    <svg class="li-selectable" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="li-selectable" d="M11.6469 0.5C13.3318 0.5 14.9477 1.16902 16.1392 2.35987C17.3306 3.55073 17.9999 5.16588 17.9999 6.85001C17.9999 8.53413 17.3306 10.1493 16.1392 11.3401C14.9477 12.531 13.3318 13.2 11.6469 13.2C9.96204 13.2 8.34614 12.531 7.15474 11.3401C5.96333 10.1493 5.294 8.53413 5.294 6.85001C5.294 5.16588 5.96333 3.55073 7.15474 2.35987C8.34614 1.16902 9.96204 0.5 11.6469 0.5ZM11.6469 11.6125C12.9106 11.6125 14.1225 11.1107 15.0161 10.2176C15.9097 9.32446 16.4117 8.1131 16.4117 6.85001C16.4117 5.58691 15.9097 4.37555 15.0161 3.48241C14.1225 2.58926 12.9106 2.0875 11.6469 2.0875C10.3833 2.0875 9.17134 2.58926 8.27779 3.48241C7.38423 4.37555 6.88224 5.58691 6.88224 6.85001C6.88224 8.1131 7.38423 9.32446 8.27779 10.2176C9.17134 11.1107 10.3833 11.6125 11.6469 11.6125ZM2.11753 6.85001C2.11753 8.9217 3.44371 10.6838 5.294 11.3347V12.9936C2.5543 12.2872 0.529297 9.8107 0.529297 6.85001C0.529297 3.88932 2.5543 1.41281 5.294 0.706375V2.36531C3.44371 3.01619 2.11753 4.77832 2.11753 6.85001Z" fill="url(#paint0_linear)"/>
+                                        <defs>
+                                        <linearGradient id="paint0_linear" x1="17.9999" y1="13.2" x2="5.91943" y2="-3.41829" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0.15625" stop-color="#FF6464"/>
+                                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                                        </linearGradient>
+                                        </defs>
+                                        </svg>
+                                        
+                                </span>
                             </div>
                         </li>
+                        
                     </ul>
-                </div>
+                </div>     
+            </tab>
+            <tab  id="tab3">
+                <ng-template tabHeading>
+                    <div class="btn btn-tabset">
+                        <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.3335 8.99997C17.3335 10.886 16.5609 12.6947 15.1856 14.0283C13.8103 15.3619 11.9451 16.1111 10.0002 16.1111C8.05524 16.1111 6.18998 15.3619 4.81471 14.0283C3.43945 12.6947 2.66683 10.886 2.66683 8.99997C2.66683 7.11399 3.43945 5.30525 4.81471 3.97166C6.18998 2.63807 8.05524 1.88886 10.0002 1.88886C10.6968 1.88886 11.3752 1.98664 12.0168 2.16442L13.456 0.768862C12.3927 0.342195 11.2285 0.111084 10.0002 0.111084C8.79638 0.111084 7.60438 0.341002 6.49223 0.78771C5.38008 1.23442 4.36955 1.88917 3.51835 2.71458C1.79927 4.38157 0.833496 6.64249 0.833496 8.99997C0.833496 11.3575 1.79927 13.6184 3.51835 15.2854C4.36955 16.1108 5.38008 16.7655 6.49223 17.2122C7.60438 17.6589 8.79638 17.8889 10.0002 17.8889C12.4313 17.8889 14.7629 16.9524 16.482 15.2854C18.2011 13.6184 19.1668 11.3575 19.1668 8.99997H17.3335ZM6.251 7.29331L4.9585 8.55553L9.0835 12.5555L18.2502 3.66664L16.9577 2.40442L9.0835 10.04L6.251 7.29331Z" fill="#232526"/>
+                            </svg>                            
+                    </div>
+                    <span>{{translate('wish')}}</span>
+                </ng-template>
+                <div>
+                    <ul class="list--shop-list">
+                        <li class="good-li--shop-list li-selectable"  *ngFor="let good of wishGoods">
+                            <div class="good-div--shop-list text-center li-selectable">
+                                <div class="li-selectable">
+                                    <svg class="li-selectable" width="25" height="41" viewBox="0 0 25 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.52956 16.7813C8.52956 17.8338 8.11123 18.8433 7.3666 19.5876C6.62197 20.3319 5.61203 20.75 4.55897 20.75C3.5059 20.75 2.49597 20.3319 1.75134 19.5876C1.00671 18.8433 0.588379 17.8338 0.588379 16.7813V12.8125C0.588379 11.5623 0.786908 10.3717 1.12441 9.24063L8.52956 16.6423V16.7813ZM12.5001 0.90625C13.9693 0.90625 15.359 1.16422 16.6494 1.66031L12.4406 8.84375C10.7928 8.84375 9.40308 9.83594 8.82735 11.3242L3.05014 5.54969C5.23397 2.73188 8.64867 0.90625 12.5001 0.90625ZM23.9354 9.45891L16.4707 16.9202V12.8125C16.4707 12.0584 16.2722 11.3639 15.9149 10.7686L20.1038 3.64469C21.9104 5.13297 23.2604 7.15703 23.9354 9.45891ZM24.4119 22.913L16.4707 30.8505V22.5359L24.4119 14.5984V22.913ZM24.4119 36.625C24.4119 37.6776 23.9936 38.687 23.249 39.4313C22.5043 40.1756 21.4944 40.5938 20.4413 40.5938C19.3883 40.5938 18.3783 40.1756 17.6337 39.4313C16.8891 38.687 16.4707 37.6776 16.4707 36.625V36.4464L24.4119 28.5089V36.625Z" fill="#232526"/>
+                                        </svg>                                        
+                                </div>
+                                <div class="li-buyed">
+                                    <svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M34.5429 11.6864H26.8584L19.8316 1.33333C19.5268 0.891431 19.0135 0.638916 18.5001 0.638916C17.9867 0.638916 17.4734 0.891431 17.1685 1.34911L10.1418 11.6864H2.45731C1.57495 11.6864 0.853027 12.3966 0.853027 13.2646C0.853027 13.4067 0.853027 13.5487 0.917198 13.6908L4.99206 28.3208C5.36105 29.6465 6.59634 30.625 8.07228 30.625H28.9279C30.4038 30.625 31.6391 29.6465 32.0242 28.3208L36.099 13.6908L36.1471 13.2646C36.1471 12.3966 35.4252 11.6864 34.5429 11.6864ZM18.5001 5.05792L22.9921 11.6864H14.0081L18.5001 5.05792ZM28.9279 27.4686H8.07228L4.55891 14.8429H32.4573L28.9279 27.4686ZM18.5001 17.9993C16.7354 17.9993 15.2915 19.4197 15.2915 21.1557C15.2915 22.8918 16.7354 24.3122 18.5001 24.3122C20.2648 24.3122 21.7086 22.8918 21.7086 21.1557C21.7086 19.4197 20.2648 17.9993 18.5001 17.9993Z" fill="#232526"/>
+                                        </svg>
+                                </div>
+                                <span class="span good__title li-selectable">{{good.title}}</span>
+                                <span class="span span-buyed good__title li-selectable">Куплено</span>
+                                <span class="span good__price li-selectable">{{good.points}}
+                                    <svg class="li-selectable" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="li-selectable" d="M11.6469 0.5C13.3318 0.5 14.9477 1.16902 16.1392 2.35987C17.3306 3.55073 17.9999 5.16588 17.9999 6.85001C17.9999 8.53413 17.3306 10.1493 16.1392 11.3401C14.9477 12.531 13.3318 13.2 11.6469 13.2C9.96204 13.2 8.34614 12.531 7.15474 11.3401C5.96333 10.1493 5.294 8.53413 5.294 6.85001C5.294 5.16588 5.96333 3.55073 7.15474 2.35987C8.34614 1.16902 9.96204 0.5 11.6469 0.5ZM11.6469 11.6125C12.9106 11.6125 14.1225 11.1107 15.0161 10.2176C15.9097 9.32446 16.4117 8.1131 16.4117 6.85001C16.4117 5.58691 15.9097 4.37555 15.0161 3.48241C14.1225 2.58926 12.9106 2.0875 11.6469 2.0875C10.3833 2.0875 9.17134 2.58926 8.27779 3.48241C7.38423 4.37555 6.88224 5.58691 6.88224 6.85001C6.88224 8.1131 7.38423 9.32446 8.27779 10.2176C9.17134 11.1107 10.3833 11.6125 11.6469 11.6125ZM2.11753 6.85001C2.11753 8.9217 3.44371 10.6838 5.294 11.3347V12.9936C2.5543 12.2872 0.529297 9.8107 0.529297 6.85001C0.529297 3.88932 2.5543 1.41281 5.294 0.706375V2.36531C3.44371 3.01619 2.11753 4.77832 2.11753 6.85001Z" fill="url(#paint0_linear)"/>
+                                        <defs>
+                                        <linearGradient id="paint0_linear" x1="17.9999" y1="13.2" x2="5.91943" y2="-3.41829" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0.15625" stop-color="#FF6464"/>
+                                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                                        </linearGradient>
+                                        </defs>
+                                        </svg>
+                                        
+                                </span>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>    
             </tab>
         </tabset>
-    </div>
-    <div class="btn-div-footer--shop-list">
-        <button type="button" class="btn btn-primary btn-add--shop-list" (click)="selectTab(0)"><i class="fas fa-plus"></i></button>
-    </div>
-</div>
+        <nav class="navbar footer--shop-list tab1">
+                <div class="btn btn-close">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 9.0101L16 6.9899L3.87879 6.9899L9.43435 1.43434L8 2.54292e-07L1.65306e-06 8L8 16L9.43434 14.5657L3.87879 9.0101L16 9.0101Z" fill="#232526"/>
+                    </svg>                         
+                </div>
+                <div class="btn btn-move" >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5832 15.4999C16.0694 15.4999 16.5357 15.6931 16.8795 16.0369C17.2234 16.3807 17.4165 16.847 17.4165 17.3333C17.4165 17.8195 17.2234 18.2858 16.8795 18.6296C16.5357 18.9734 16.0694 19.1666 15.5832 19.1666C14.5657 19.1666 13.7498 18.3416 13.7498 17.3333C13.7498 16.3158 14.5657 15.4999 15.5832 15.4999ZM0.916504 0.833252H3.914L4.77567 2.66659H18.3332C18.5763 2.66659 18.8094 2.76316 18.9814 2.93507C19.1533 3.10698 19.2498 3.34014 19.2498 3.58325C19.2498 3.73909 19.204 3.89492 19.1398 4.04159L15.8582 9.97242C15.5465 10.5316 14.9415 10.9166 14.254 10.9166H7.42484L6.59984 12.4108L6.57234 12.5208C6.57234 12.5815 6.59648 12.6398 6.63946 12.6828C6.68244 12.7258 6.74073 12.7499 6.8015 12.7499H17.4165V14.5833H6.4165C5.399 14.5833 4.58317 13.7583 4.58317 12.7499C4.58317 12.4291 4.66567 12.1266 4.80317 11.8699L6.04984 9.62409L2.74984 2.66659H0.916504V0.833252ZM6.4165 15.4999C6.90273 15.4999 7.36905 15.6931 7.71287 16.0369C8.05668 16.3807 8.24984 16.847 8.24984 17.3333C8.24984 17.8195 8.05668 18.2858 7.71287 18.6296C7.36905 18.9734 6.90273 19.1666 6.4165 19.1666C5.399 19.1666 4.58317 18.3416 4.58317 17.3333C4.58317 16.3158 5.399 15.4999 6.4165 15.4999ZM14.6665 9.08325L17.2148 4.49992H5.62817L7.7915 9.08325H14.6665Z" fill="#232526"/>
+                    </svg> 
+                </div>
+        </nav>
+        <nav class="navbar footer--shop-list tab2">
+            <div class="btn btn-close">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 9.0101L16 6.9899L3.87879 6.9899L9.43435 1.43434L8 2.54292e-07L1.65306e-06 8L8 16L9.43434 14.5657L3.87879 9.0101L16 9.0101Z" fill="#232526"/>
+                </svg>                         
+            </div>
+        </nav>
+        
+        <div class="modal inStock-modal">
+            <div>
+                <span class="title span">Назва</span>
+                <span class="title--value">Комп'ютер</span>
+            </div>
+            <div>
+                <span class="category span">Категорія</span>
+                <select class="category--value" value="Розваги"></select>
+            </div>
+            <div>
+                <span class="price span">Ціна</span>
+                <div  class="price--value">
+                    <input value="123">
+                    <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.15625" stop-color="#FF6464"/>
+                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>       
+                </div>             
+            </div>
+            <div>
+                <span class="about span">Опис</span>
+                <span class="about--value">Одна годинка за компютером</span>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-move">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5837 15.5C16.0699 15.5 16.5362 15.6932 16.88 16.037C17.2238 16.3808 17.417 16.8471 17.417 17.3333C17.417 17.8196 17.2238 18.2859 16.88 18.6297C16.5362 18.9735 16.0699 19.1667 15.5837 19.1667C14.5662 19.1667 13.7503 18.3417 13.7503 17.3333C13.7503 16.3158 14.5662 15.5 15.5837 15.5ZM0.916992 0.833332H3.91449L4.77616 2.66667H18.3337C18.5768 2.66667 18.8099 2.76324 18.9818 2.93515C19.1537 3.10706 19.2503 3.34022 19.2503 3.58333C19.2503 3.73917 19.2045 3.895 19.1403 4.04167L15.8587 9.9725C15.547 10.5317 14.942 10.9167 14.2545 10.9167H7.42533L6.60033 12.4108L6.57283 12.5208C6.57283 12.5816 6.59697 12.6399 6.63995 12.6829C6.68292 12.7259 6.74121 12.75 6.80199 12.75H17.417V14.5833H6.41699C5.39949 14.5833 4.58366 13.7583 4.58366 12.75C4.58366 12.4292 4.66616 12.1267 4.80366 11.87L6.05033 9.62417L2.75033 2.66667H0.916992V0.833332ZM6.41699 15.5C6.90322 15.5 7.36954 15.6932 7.71335 16.037C8.05717 16.3808 8.25033 16.8471 8.25033 17.3333C8.25033 17.8196 8.05717 18.2859 7.71335 18.6297C7.36954 18.9735 6.90322 19.1667 6.41699 19.1667C5.39949 19.1667 4.58366 18.3417 4.58366 17.3333C4.58366 16.3158 5.39949 15.5 6.41699 15.5ZM14.667 9.08333L17.2153 4.5H5.62866L7.79199 9.08333H14.667Z" fill="#232526"/>
+                        </svg>                                                
+                </div>
+                <div class="btn btn-close" >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
+                        </svg>                        
+                </div>
+            </div>
+        </div>
 
+        <div class="modal bought-modal">
+            <div>
+                <span class="title span">Назва</span>
+                <span class="title--value">Комп'ютер</span>
+            </div>
+            <div>
+                <span class="category span">Категорія</span>
+                <select class="category--value" value="Розваги"></select>
+            </div>
+            <div>
+                <span class="price span">Ціна</span>
+                <div  class="price--value">
+                    <input value="123">
+                    <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.15625" stop-color="#FF6464"/>
+                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>       
+                </div>             
+            </div>
+            <div>
+                <span class="about span">Опис</span>
+                <span class="about--value">Одна годинка за компютером</span>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-back">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.5 4.5C11.2239 4.5 12.8772 5.18482 14.0962 6.40381C15.3152 7.62279 16 9.27609 16 11C16 12.7239 15.3152 14.3772 14.0962 15.5962C12.8772 16.8152 11.2239 17.5 9.5 17.5H6V15.5H9.5C12 15.5 14 13.5 14 11C14 8.5 12 6.5 9.5 6.5H3.83L6.91 9.59L5.5 11L0 5.5L5.5 0L6.92 1.41L3.83 4.5H9.5ZM2 15.5H4V17.5H2V15.5Z" fill="black"/>
+                        </svg>                                                                     
+                </div>
+                <div class="btn btn-confirm" >
+                    <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.7442 1.39379L5.26246 13.2558L0 7.81905L1.3491 6.42526L5.26246 10.4584L15.3951 0L16.7442 1.39379Z" fill="#232526"/>
+                        </svg>
+                                               
+                </div>
+                <div class="btn btn-close" >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
+                        </svg>                        
+                </div>
+            </div>
+        </div>
+
+        <div class="modal received-modal">
+            <div>
+                <span class="title span">Назва</span>
+                <span class="title--value">Комп'ютер</span>
+            </div>
+            <div>
+                <span class="category span">Категорія</span>
+                <select class="category--value" value="Розваги"></select>
+            </div>
+            <div>
+                <span class="price span">Ціна</span>
+                <div  class="price--value">
+                    <input value="123">
+                    <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.15625" stop-color="#FF6464"/>
+                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>       
+                </div>             
+            </div>
+            <div>
+                <span class="about span">Опис</span>
+                <span class="about--value">Одна годинка за компютером</span>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-close" >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
+                        </svg>                        
+                </div>
+            </div>
+        </div>
+</div>
