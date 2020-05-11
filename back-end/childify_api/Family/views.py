@@ -10,6 +10,9 @@ from User.models import User
 from Prize.models import Prize
 
 class UserStatisticAPIView(APIView):
+  
+  permission_classes = (IsAuthenticated,)
+  
   def member_validation(self, family_id, user_id):
     user = Parent.object.filter(family_id=family_id).filter(user_id=user_id)
     if user:
@@ -32,18 +35,22 @@ class UserStatisticAPIView(APIView):
         return JsonResponse(response, status=200)
     else:
       return JsonResponse({'msg': 'No family'}, status=404)
-      
-    
-
 
 class FamilyStatisticAPIView(APIView):
+  
+  permission_classes = (IsAuthenticated,)
+
   def get(self, request, id):
-    family = Family.object.filter(id=id)
+    if User.object.filter(user_id=id):
+      family = Parent.object.filter(user_id=id).first().family
+      if not family:
+        family = Child.object.filter(user_id=id).first().family
+    
     if family:
-      parents = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Parent.object.filter(family=id)]
-      childres = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Child.object.filter(family=id)]
+      parents = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Parent.object.filter(family=family)]
+      childres = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Child.object.filter(family=family)]
       
-      return JsonResponse({'family_id': family.first().id, 'family': parents + childres}, status=200)
+      return JsonResponse({'family_id': family.id, 'family': parents + childres}, status=200)
     return JsonResponse({'nsg':'Family does not exist'}, status=404)
 
 class FamilyAPIView(APIView):

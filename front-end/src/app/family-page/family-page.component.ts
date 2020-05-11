@@ -46,7 +46,8 @@ export class FamilyPageComponent implements OnInit{
       console.log(err);
       
       
-        this.refreshToken();
+      this.refreshToken();
+      
       
     });
 
@@ -55,7 +56,7 @@ export class FamilyPageComponent implements OnInit{
   
   getMembers(): Promise<any> {
     let promise = new Promise((resolve, reject) =>{
-      this.http.get(this.baseUrl + '/family/1', this.httpHeaders()).subscribe(value => {
+      this.http.get(this.baseUrl + '/family/' + this.user.user_id, this.httpHeaders()).subscribe(value => {
         resolve(value['family']);
       }, error => {
         
