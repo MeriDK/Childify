@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = true
+  isChild = false
   url
 
   translate = translate

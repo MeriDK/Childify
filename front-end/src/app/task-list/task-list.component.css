@@ -34,19 +34,22 @@
   margin:  10px;
 }
 .task h3{
-  font-size: 24px;
+  padding-left: 10px;
   margin:  0px;
+  margin-top: 12px;
+  margin-bottom: -7px;
+  padding-top: 9px;
   color: black;
-  margin-top: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.0357143em;
 }
-.task p{
-    float: left;
-    color: #333;
-    cursor: pointer;
-    margin: 0px 10px;
-    margin-top: 3px;
-    font-size: 16px;
-}
+
 
 .btn {
   background-color: rgba(166, 79, 253, 0.9);
@@ -70,4 +73,26 @@
   width: 50px;
   display:inline-block;
   float: left;
+  margin-top: -8px;
 }
+
+.icon-status-change{
+  float: right;
+  height: 60px;
+  margin-top: -33px;
+}
+
+.icon-coin{
+  float: right;
+  margin-top: 4%;
+}
+.text-coin{
+  float: right;
+  margin-bottom: 0;
+  margin-top: 3%;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.0357143em;
+  margin-right: 3px;
+}
+

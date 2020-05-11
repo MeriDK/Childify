@@ -4,8 +4,9 @@
 <div class="check-tasks">
     <div cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let task of tasks"class="task" cdkDrag>
-            <div class = "task-info"><a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/task-icon-kitchen.png"><h3>{{task.name_task}}</h3></a><a (click) ="updateTasktoInProgress(task)"><i class="cross fas fa-times"></i></a><a (click) ="updateTasktoDone(task)"><i class="check fas fa-check"></i></a>
-            <p>{{translate('points')}}: {{task.point_task}}</p><p class="task__child-nam">{{translate('child_name')}}: {{task.id_child}}</p></div>   
+            <div class = "task-info"><a href={{url}}{{task.id}}><img class="task-icon" src="../../assets/img/task-icon/Shop.png"><img class="child-icon" src="../../assets/img/task-icon/icon-child.png"><h3>{{task.name_task}}</h3></a>
+            <img *ngIf = "isChild" class="icon-not-done" (click) ="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Back Button.png"/>
+            <img class="icon-coin" src="../../assets/img/task-icon/Coin.png"/><p class="text-coin">{{task.point_task}}</p></div>   
         </div>
     </div>
 </div>
