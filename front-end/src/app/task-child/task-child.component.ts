@@ -12,7 +12,7 @@ import {TaskChildService} from './task-child.service'
 })
 export class TaskChildComponent {
 
-  isChild = false
+  isChild = true
   translate = translate
   url = 'task/info/'
   icon;
