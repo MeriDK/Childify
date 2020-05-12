@@ -93,6 +93,7 @@
             box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.12);
             div {
                 margin-left: 17px;
+                margin-right: 17px;
                 display: inline-block;
                 margin-top: 3px;
                 margin-bottom: 8px;
@@ -107,14 +108,12 @@
                 border: 1px solid rgba(119, 142, 148, 0.25);
                 box-sizing: border-box;
                 box-shadow: 1px 1px 3px rgba(134, 134, 134, 0.9), -1px -1px 2px rgba(255, 255, 255, 0.9), 1px -1px 2px rgba(217, 217, 217, 0.2), -1px 1px 2px rgba(217, 217, 217, 0.2), inset -1px -1px 2px rgba(217, 217, 217, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+                
+            }
+            .btn-move {
                 svg {
                     margin-left: -4px;
                 }
-            }
-            .btn-close {
-
-            }
-            .btn-move {
                 margin-right: calc(50% - 17.5px);
             }
         }
@@ -123,11 +122,6 @@
         }
     }
     .tabset--shop-list {
-        
-
-        ::ng-deep .nav-pills .nav-link.active {
-        }
-
         ::ng-deep .tab-content {
             position: absolute;
             display: flex;
@@ -136,9 +130,11 @@
             margin-bottom: 56px;
             .list--shop-list {
                 padding: 0;
-                padding-left: 7px;
                 .good-li--shop-list {
                     margin: 5px;
+                    margin-right: 0px;
+                    margin-left: calc((100vw - 106px*3)/6);
+                    margin-right: calc((100vw - 106px*3)/6);
                     display: inline-flex;
                     flex-direction: column;
                     padding: 5px 8px;
@@ -239,13 +235,25 @@
                         .span-buyed {
                             display: none;
                         }
+                        .li-confirm {
+                            display: none;
+                        }
+                        .span-confirm {
+                            display: none;
+                        }
+                        .li-back {
+                            display: none;
+                        }
+                        .span-back {
+                            display: none;
+                        }
                     }
                 }
 
                 .selected {
                     border: 1.5px solid #FF5025;
-                    margin-top: -1.5px;
-                    margin-bottom: -1.5px;
+                    //margin-top: -1.5px;
+                    //margin-bottom: -1.5px;
                 }
                 .moving-start{
                     .good-div--shop-list { 
@@ -270,6 +278,54 @@
                     /* Orange */
 
                     border: 1px solid #FF5025;
+                    .good__price path {
+                        fill: #FFFFFF;
+                    }
+                }
+                .confirm-start{
+                    .good-div--shop-list { 
+                        .li-confirm {
+                            display: initial;
+                            margin-top: 2px;
+                        }
+                        div {
+                            display: none;
+                        }
+                        .good__title {
+                            display: none;
+                        }
+                        .span-confirm {
+                            display: flex;
+                        }
+                    }        
+                    background-color: #FF6464;
+                }
+                .confirm {
+                    background: linear-gradient(306.44deg, #FF6464 15.62%, #FFBB55 80.73%);
+                    .good__price path {
+                        fill: #FFFFFF;
+                    }
+                }
+                .back-start{
+                    .good-div--shop-list { 
+                        .li-back {
+                            display: initial;
+                            margin-top: 4px;
+                        }
+                        div {
+                            display: none;
+                        }
+                        .good__title {
+                            display: none;
+                        }
+                        .span-back {
+                            display: flex;
+                        }
+                    }        
+                    background-color: #99CEFF;
+                }
+                .back {
+                    background: linear-gradient(306.44deg, #99CEFF 17.19%, #8875FF 87.5%);
                     .good__price path {
                         fill: #FFFFFF;
                     }
@@ -393,6 +449,12 @@
                     margin-left: 2px;
                     margin-top: 8px;
                 }
+            }
+        }
+
+        &.isParent {
+            ::ng-deep .nav-pills {
+                padding-right: calc(42px + 7px + 5px);
             }
         }
     }
@@ -592,4 +654,23 @@
     .modal.inStock-modal {
 
     }
+    .btn-add {
+        position: fixed;
+        z-index: 1;
+        margin-block-start: calc(100vh - 7px - 42px);
+        margin-inline-start: calc(100vw - 6px - 42px);
+        background: #FFFFFF;
+        box-shadow: 1px 1px 3px rgba(134, 134, 134, 0.9), -1px -1px 2px rgba(255, 255, 255, 0.9), 1px -1px 2px rgba(217, 217, 217, 0.2), -1px 1px 2px rgba(217, 217, 217, 0.2), inset -1px -1px 2px rgba(217, 217, 217, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+        align-self: flex-end;
+        flex: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        padding: 0;
+        svg {
+            margin-top: 10px;
+        }
+    }
+
+
 }

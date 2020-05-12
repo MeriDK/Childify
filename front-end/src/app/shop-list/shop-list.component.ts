@@ -14,7 +14,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = false;
+  isParent = true;
   translate = translate
   wishGoods = [
     {
@@ -104,49 +104,55 @@ export class ShopListComponent implements OnInit{
       $('.btn-move').on('click', (event)=>{
         event.stopPropagation();
         this.moveNode();
+        this.closeEditing();
       });
       $('.btn-back').on('click', (event)=>{
         event.stopPropagation();
         this.backNode();
+        this.closeEditing();
       });
       $('.btn-confirm').on('click', (event)=>{
         event.stopPropagation();
         this.confirmNode();
+        this.closeEditing();
       });
       $('.btn-close').on('click', (event)=>{
         event.stopPropagation();
-        this.closeEditing();
         this.closeModal();
+        this.closeEditing();
       });    
     }, 100)
   } 
 
   selectNode(element): boolean {
-    
-    while (element.localName!='li') {
-      element = element.parentNode;
+    var activeTab = this.activeTab();
+    if (activeTab!="received-modal") {
+      while (element.localName!='li') {
+        element = element.parentNode;
+      }
+      $(element).toggleClass('selected');
+      if ($('.selected').length>0){
+        $(".footer--shop-list."+activeTab).addClass('active');
+      } else {
+        $(".footer--shop-list."+activeTab).removeClass('active');
+      }
+      return !$(element).hasClass('selected');
     }
-    $(element).toggleClass('selected');
-    if ($('.selected').length>0){
-      $(".footer--shop-list.tab1").addClass('active');
-    } else {
-      $(".footer--shop-list.tab1").removeClass('active');
-    }
-    return !$(element).hasClass('selected');
   }
 
   closeEditing(): void {
-    $(".footer--shop-list.tab1").removeClass('active');
+    $(".footer--shop-list").removeClass('active');
     $('.selected').removeClass('selected');
   }
 
-  deleteNode(): void {
+  moveNode(): void {
     var element = $('.li-selectable.active')
     var time = 300;
     if (element.length==0) {
       element = $('.li-selectable.selected');
       time = 0;
     }
+    this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('moving-start');
       setTimeout(()=> {
@@ -163,28 +169,62 @@ export class ShopListComponent implements OnInit{
     },time)    
   }
 
-  moveNode() : void {
-    this.deleteNode();
+  confirmNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
     this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('confirm-start');
+      setTimeout(()=> {
+        $(element).toggleClass('confirm');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
   }
 
-  backNode() : void {
-    this.deleteNode();
+  backNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
     this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('back-start');
+      setTimeout(()=> {
+        $(element).toggleClass('back');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
   }
-
-  confirmNode() : void {
-    this.deleteNode();
-    this.closeModal();
-  }
+  
 
   closeModal(): void {
-    var classs = "."+this.activeTab()+".active";
+    var classs = ".modal."+this.activeTab()+".active";
     $(classs).removeClass('active');
     $("li.active").removeClass('active')
   }
   showModal(): void {
-    var classs = "."+this.activeTab();
+    var classs = ".modal."+this.activeTab();
     $(classs).addClass('active');
   }
 
