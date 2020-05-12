@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = false
+  isChild = true
   task;
   url
   icon;

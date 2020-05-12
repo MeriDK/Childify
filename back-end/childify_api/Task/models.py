@@ -1,13 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
 from Family.models import Family
+from Child.models import Child
 # Create your models here.
-
-
-
-
-class Child(models.Model):
-    name_child = models.CharField(verbose_name="Name child", max_length=50, default="name")
 
 
 class Status(models.Model):

@@ -1,15 +1,18 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
-
 <header class="header-childify">
-    <h1 class="header-childify__title"><a routerLink='../../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
+    <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
+      <h1 class="header-childify__title">{{translate('task_title')}}</h1>
 </header>
 
-<h2 class="name-task">{{task.name_task}}</h2>
+<div class="body">
+<h3 class="name_task">{{translate('name_task')}}</h3>
+    <h2 class="name-task">{{task.name_task}}</h2>
 <h3 class = "category-title">Category</h3>
-<h2 class="category">{{name_category}}</h2>
-<h3>{{translate('points')}}</h3>
-<h2>{{task.point_task}}</h2>
-<h3 class = "child-title">{{translate('child')}}</h3>
-<h2 class="child-name">{{task.id_child}}</h2>
-<h3>{{translate('more_info')}}</h3>
+    <h2 class="category">{{name_category}}</h2>
+
+<h3 class="title_point">{{translate('points')}}</h3>
+<h2 class="point">{{task.point_task}}</h2>
+<img class="coin" src="../../assets/img/task-icon/Coin_input.png">
+<h3 class="title_info">{{translate('more_info')}}</h3>
 <p>{{task.info_task}}</p>
+<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../../'>
+</div>

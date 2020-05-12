@@ -1,18 +1,13 @@
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
-
 <header class="header-childify">
-    <h1 class="header-childify__title"><a routerLink='../../'><i class="fas fa-chevron-left"></i></a>{{translate('info_task')}}</h1>
+  <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
+    <h1 class="header-childify__title">{{translate('task_title')}}</h1>
 </header>
-
+<h3 class="name_task">{{translate('name_task')}}</h3>
 <input type="text" placeholder="Name task" class="input-name_task"  [(ngModel)]="task.name_task">
 
-<h3>{{translate('points')}}</h3>
-<input type="number" placeholder="15" class="input-point"  [(ngModel)]="task.point_task">
-
-<h3>{{translate('category')}}</h3>
+<h3 class = "title_category" >{{translate('category')}}</h3>
 <div class="chose-category">
-    <select id="category" [(ngModel)]='id_category' (change)="filterChanged($event.target.value)">
+    <select id="category" class="category-select" (change)="filterChanged($event.target.value)">
       <option value="1">Home</option>
       <option value="2">Kitchen</option>
       <option value="3">Education</option>
@@ -21,12 +16,19 @@
     </select>
 </div>
 
-<h3>{{translate('more_info')}}</h3>
+
+<h3 class="title_point">{{translate('points')}}</h3>
+<input type="number" placeholder="15" class="input-point"  [(ngModel)]="task.point_task">
+
+<h3 class='title_info'>{{translate('more_info')}}</h3>
 <textarea name="Text1" cols="40" rows="3"  [(ngModel)]="task.info_task">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Phasellus rutrum ligula a velit tincidunt, a congue ipsum vehicula.
 Phasellus placerat nulla ut ipsum imperdiet vehicula.
 Aliquam scelerisque sed eros sed pretium.
 Vestibulum porttitor, est in tempor accumsan, arcu quam pellentesque augue, ut imperdiet sapien dolor vel arcu.</textarea>
 
-<button class="btn" routerLink='../../' (click)='updateTask()'>{{translate('save_change')}}</button>
 
+<div class="button">
+  <button class="btn_add" routerLink='../../' (click)='updateTask()'>{{translate('save_change')}}</button>
+  <img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../../'>
+</div>

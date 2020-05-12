@@ -57,16 +57,16 @@
 
 
 .btn {
-  background-color: rgba(166, 79, 253, 0.9);
-  padding: 16px 32px;
+  background-color: rgba(255,80,37, 0.79);
+  padding: 9px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 26px;
-  color: black; 
-    position: fixed;
+  font-size: 23px;
+  color: white;
+  position: fixed;
   bottom: 0;
-  width: 100%; 
+  width: 100%;
 }
 
 .list-tasks .task .disable {
@@ -94,7 +94,7 @@
 .text-coin{
   float: right;
   margin-bottom: 0;
-  margin-top: 3%;
+  margin-top: 4%;
   font-family: Roboto;
   font-size: 14px;
   letter-spacing: 0.0357143em;

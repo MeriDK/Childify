@@ -12,7 +12,7 @@ import {TaskCheckService} from './task-check.service'
 })
 export class TaskCheckComponent{
 
-  isChild = false
+  isChild = true
   translate = translate
   url = "task/info/"
   icon;
