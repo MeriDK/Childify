@@ -106,6 +106,11 @@ export class ShopListComponent implements OnInit{
         this.moveNode();
         this.closeEditing();
       });
+      $('.btn-delete').on('click', (event)=>{
+        event.stopPropagation();
+        this.deleteNode();
+        this.closeEditing();
+      });
       $('.btn-back').on('click', (event)=>{
         event.stopPropagation();
         this.backNode();
@@ -120,13 +125,28 @@ export class ShopListComponent implements OnInit{
         event.stopPropagation();
         this.closeModal();
         this.closeEditing();
-      });    
+      });
+      $('.btn-add').on('click', (event)=>{
+        event.stopPropagation();
+        this.addNode();
+        this.closeEditing();
+      });
+      $('.btn-edit').on('click', (event)=>{
+        event.stopPropagation();
+        this.editNode();
+        this.closeEditing();
+      });
+      $('.btn-create').on('click', (event)=>{
+        event.stopPropagation();
+        this.createNode();
+        this.closeEditing();
+      });       
     }, 100)
   } 
 
   selectNode(element): boolean {
     var activeTab = this.activeTab();
-    if (activeTab!="received-modal") {
+    if (activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
       while (element.localName!='li') {
         element = element.parentNode;
       }
@@ -143,6 +163,34 @@ export class ShopListComponent implements OnInit{
   closeEditing(): void {
     $(".footer--shop-list").removeClass('active');
     $('.selected').removeClass('selected');
+  }
+
+  createNode(): void {
+    this.closeModal();
+  }
+
+  deleteNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('delete-start');
+      setTimeout(()=> {
+        $(element).toggleClass('delete');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)   
   }
 
   moveNode(): void {
@@ -216,16 +264,34 @@ export class ShopListComponent implements OnInit{
       },500)
     },time)    
   }
-  
 
+  addNode(): void {
+    $(".modal.add-modal").addClass('active');
+  }
+
+  editNode(): void {
+    this.closeModal();
+  }
+
+  showEditModal(): void {
+    $(".modal.edit-modal").addClass('active');
+  }
+  
   closeModal(): void {
-    var classs = ".modal."+this.activeTab()+".active";
+    var classs = ".modal"+".active";
     $(classs).removeClass('active');
-    $("li.active").removeClass('active')
+    $(".good-li--shop-list.active").removeClass('active')
   }
   showModal(): void {
-    var classs = ".modal."+this.activeTab();
-    $(classs).addClass('active');
+    if(this.activeTab()=="inStock-modal" && this.isParent) {
+      this.showEditModal();
+    } else if(this.activeTab()=="bought-modal" && this.isParent) {
+      var classs = ".modal.received-modal";
+      $(classs).addClass('active');
+    } else {
+      var classs = ".modal."+this.activeTab();
+      $(classs).addClass('active');
+    }
   }
 
   selectTab(tabId: number) {
