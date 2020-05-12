@@ -116,6 +116,12 @@
                 }
                 margin-right: calc(50% - 17.5px);
             }
+            .btn-delete {
+                svg {
+                    margin-left: 0px;
+                }
+                margin-right: calc(50% - 17.5px);
+            }
         }
         .active {
             display: flex;
@@ -151,8 +157,24 @@
                     border: 1px solid rgba(119, 142, 148, 0.25);
                     box-sizing: border-box;
                     border-radius: 12px;
+                    transition: color 0.7s , background-color 0.7s , border-color 0.7 , box-shadow 0.7s;
                     
                     .good-div--shop-list {
+
+                        div {
+                            transition: color 0.7s;
+                        }
+                        .good__title {
+                            transition: color 0.7s;
+                        }
+                        .good__price {
+                            transition: color 0.7s;
+                        }
+                        path {
+                            transition: fill 0.7s;
+                        } 
+                    
+                    
                         
                         width: 100%;
                         height: 100%;
@@ -281,6 +303,26 @@
                     .good__price path {
                         fill: #FFFFFF;
                     }
+                }
+                .delete-start{
+                    .good-div--shop-list {
+                        div {
+                            color: white;
+                            box-shadow: 2px 4px 4px white;  
+                        }
+                        .good__title {
+                            color: white;   
+                        }
+                        .good__price {
+                            color: white;  
+                        }
+                        path {
+                            fill: white;
+                        } 
+                    }
+                    color: white;        
+                    background-color: rgb(255, 255, 255);
+                    border-color: white;
                 }
                 .confirm-start{
                     .good-div--shop-list { 
@@ -483,7 +525,7 @@
 
         div {
             flex: 1;
-            margin-bottom: 24px;
+            margin-bottom: 17px;
             .span {
                 
                 font-family: Roboto;
@@ -500,6 +542,30 @@
             }
             .title {
                 margin-bottom: 10px;
+            }
+            input.title--value {
+                margin-bottom: -11px;
+                margin-top: -7px;
+                width: calc(100% - 20px);
+                height: 48px;
+                background: #FFFFFF;
+                /* Light_Grey_25 */
+
+                border: 1px solid rgba(119, 142, 148, 0.25);
+                box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.05);
+                border-radius: 6px;
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 21px;
+                letter-spacing: 0.0357143em;
+
+                color: #000000;
+                flex: none;
+                order: 0;
+                align-self: center;
+                padding-left: 10px;
             }
             .title--value {
                 font-family: Roboto;
@@ -583,6 +649,23 @@
                 height: 106px;
 
             }
+            textarea.about--value {
+                background: #FFFFFF;
+                /* Light_Grey_25 */
+
+                border: 1px solid rgba(119, 142, 148, 0.25);
+                box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.05);
+                border-radius: 6px;
+                
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 13px;
+                line-height: 15px;
+                letter-spacing: 0.0357143em;
+
+                color: #000000;
+            }
         }
 
         .modal-footer {
@@ -638,6 +721,55 @@
                     margin-top: 13px;
                 }
             }
+            .btn-create {
+                width: 60vw;
+                height: 43px;
+                background: #FFFFFF;
+                margin-left: 0px;
+/* Orange */
+
+                border: 1px solid #FF5025;
+                box-sizing: border-box;
+                border-radius: 6px;
+                
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 23px;
+                display: grid;
+                align-items: center;
+                text-align: center;
+
+                /* Orange */
+
+                color: #FF5025;
+            }
+
+            .btn-edit {
+                width: 60vw;
+                height: 43px;
+                background: #FFFFFF;
+                margin-left: 0px;
+/* Orange */
+
+                border: 1px solid #FF5025;
+                box-sizing: border-box;
+                border-radius: 6px;
+                
+                font-family: Roboto;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 23px;
+                display: grid;
+                align-items: center;
+                text-align: center;
+
+                /* Orange */
+
+                color: #FF5025;
+            }
         }
     }
     .modal.active {
@@ -653,6 +785,31 @@
     }
     .modal.inStock-modal {
 
+    }
+    .modal.add-modal {
+        .modal-footer {
+            align-self: flex-end;
+        } 
+    }
+    .modal.edit-modal {
+        .modal-footer {
+            .btn-delete {
+                margin-left: 0px;
+                margin-right: 18px;
+                svg {
+                    margin-top: 11px;
+                }
+            }
+            .btn-close {
+                margin-left: 0px;
+                margin-right: 10px;
+            }
+            .btn-edit {
+                margin-left: 17px;
+                margin-right: 16px;
+                width: 181px;
+            }
+        } 
     }
     .btn-add {
         position: fixed;

@@ -168,11 +168,12 @@
             </tab>
         </tabset>
         <div *ngIf="isParent" class="btn btn-add">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.5837 15.5C16.0699 15.5 16.5362 15.6932 16.88 16.037C17.2238 16.3808 17.417 16.8471 17.417 17.3333C17.417 17.8196 17.2238 18.2859 16.88 18.6297C16.5362 18.9735 16.0699 19.1667 15.5837 19.1667C14.5662 19.1667 13.7503 18.3417 13.7503 17.3333C13.7503 16.3158 14.5662 15.5 15.5837 15.5ZM0.916992 0.833332H3.91449L4.77616 2.66667H18.3337C18.5768 2.66667 18.8099 2.76324 18.9818 2.93515C19.1537 3.10706 19.2503 3.34022 19.2503 3.58333C19.2503 3.73917 19.2045 3.895 19.1403 4.04167L15.8587 9.9725C15.547 10.5317 14.942 10.9167 14.2545 10.9167H7.42533L6.60033 12.4108L6.57283 12.5208C6.57283 12.5816 6.59697 12.6399 6.63995 12.6829C6.68292 12.7259 6.74121 12.75 6.80199 12.75H17.417V14.5833H6.41699C5.39949 14.5833 4.58366 13.7583 4.58366 12.75C4.58366 12.4292 4.66616 12.1267 4.80366 11.87L6.05033 9.62417L2.75033 2.66667H0.916992V0.833332ZM6.41699 15.5C6.90322 15.5 7.36954 15.6932 7.71335 16.037C8.05717 16.3808 8.25033 16.8471 8.25033 17.3333C8.25033 17.8196 8.05717 18.2859 7.71335 18.6297C7.36954 18.9735 6.90322 19.1667 6.41699 19.1667C5.39949 19.1667 4.58366 18.3417 4.58366 17.3333C4.58366 16.3158 5.39949 15.5 6.41699 15.5ZM14.667 9.08333L17.2153 4.5H5.62866L7.79199 9.08333H14.667Z" fill="#232526"/>
-            </svg>                                                
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.10209 6.60209V0.5H8.93124V6.60209H15.0333V9.43124H8.93124V15.5333H6.10209V9.43124H0V6.60209H6.10209Z" fill="#232526"/>
+                </svg>
+                                                               
         </div>
-        <nav class="navbar footer--shop-list inStock-modal">
+        <nav *ngIf="!isParent" class="navbar footer--shop-list inStock-modal">
             <div class="btn btn-close" >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 9.0101L16 6.9899L3.87879 6.9899L9.43435 1.43434L8 2.54292e-07L1.65306e-06 8L8 16L9.43434 14.5657L3.87879 9.0101L16 9.0101Z" fill="#232526"/>
@@ -184,7 +185,19 @@
                     </svg>                                                
             </div>
         </nav>
-        <nav class="navbar footer--shop-list bought-modal">
+        <nav *ngIf="isParent" class="navbar footer--shop-list inStock-modal">
+            <div class="btn btn-close" >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 9.0101L16 6.9899L3.87879 6.9899L9.43435 1.43434L8 2.54292e-07L1.65306e-06 8L8 16L9.43434 14.5657L3.87879 9.0101L16 9.0101Z" fill="#232526"/>
+                    </svg>                                            
+            </div>
+            <div class="btn btn-delete">
+                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.375 0V0.888889H0V2.66667H0.875V14.2222C0.875 14.6937 1.05937 15.1459 1.38756 15.4793C1.71575 15.8127 2.16087 16 2.625 16H11.375C11.8391 16 12.2842 15.8127 12.6124 15.4793C12.9406 15.1459 13.125 14.6937 13.125 14.2222V2.66667H14V0.888889H9.625V0H4.375ZM2.625 2.66667H11.375V14.2222H2.625V2.66667ZM4.375 4.44444V12.4444H6.125V4.44444H4.375ZM7.875 4.44444V12.4444H9.625V4.44444H7.875Z" fill="#232526"/>
+                    </svg>                                                                  
+            </div>
+        </nav>
+        <nav  *ngIf="!isParent"class="navbar footer--shop-list bought-modal">
             <div class="btn btn-back">
                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.5 4.5C11.2239 4.5 12.8772 5.18482 14.0962 6.40381C15.3152 7.62279 16 9.27609 16 11C16 12.7239 15.3152 14.3772 14.0962 15.5962C12.8772 16.8152 11.2239 17.5 9.5 17.5H6V15.5H9.5C12 15.5 14 13.5 14 11C14 8.5 12 6.5 9.5 6.5H3.83L6.91 9.59L5.5 11L0 5.5L5.5 0L6.92 1.41L3.83 4.5H9.5ZM2 15.5H4V17.5H2V15.5Z" fill="black"/>
@@ -322,6 +335,87 @@
                 <span class="about--value">Одна годинка за компютером</span>
             </div>
             <div class="modal-footer">
+                <div class="btn btn-close" >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
+                        </svg>                        
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal add-modal">
+            <div>
+                <span class="title span">Назва</span>
+                <input class="title--value" value="Комп'ютер">
+            </div>
+            <div>
+                <span class="category span">Категорія</span>
+                <select class="category--value" value="Розваги"></select>
+            </div>
+            <div>
+                <span class="price span">Ціна</span>
+                <div  class="price--value">
+                    <input value="123">
+                    <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.15625" stop-color="#FF6464"/>
+                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>       
+                </div>             
+            </div>
+            <div>
+                <span class="about span">Опис</span>
+                <textarea class="about--value">Одна годинка за компютером</textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-create">Створити</div>
+                <div class="btn btn-close" >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
+                        </svg>                        
+                </div>
+            </div>
+        </div>
+        <div class="modal edit-modal">
+            <div>
+                <span class="title span">Назва</span>
+                <input class="title--value" value="Комп'ютер">
+            </div>
+            <div>
+                <span class="category span">Категорія</span>
+                <select class="category--value" value="Розваги"></select>
+            </div>
+            <div>
+                <span class="price span">Ціна</span>
+                <div  class="price--value">
+                    <input value="123">
+                    <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear" x1="32" y1="23" x2="10.1996" y2="-7.33097" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.15625" stop-color="#FF6464"/>
+                        <stop offset="0.807292" stop-color="#FFBB55"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>       
+                </div>             
+            </div>
+            <div>
+                <span class="about span">Опис</span>
+                <textarea class="about--value">Одна годинка за компютером</textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-edit">Зберегти</div>
+                <div class="btn btn-delete">
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.375 0V0.888889H0V2.66667H0.875V14.2222C0.875 14.6937 1.05937 15.1459 1.38756 15.4793C1.71575 15.8127 2.16087 16 2.625 16H11.375C11.8391 16 12.2842 15.8127 12.6124 15.4793C12.9406 15.1459 13.125 14.6937 13.125 14.2222V2.66667H14V0.888889H9.625V0H4.375ZM2.625 2.66667H11.375V14.2222H2.625V2.66667ZM4.375 4.44444V12.4444H6.125V4.44444H4.375ZM7.875 4.44444V12.4444H9.625V4.44444H7.875Z" fill="#232526"/>
+                        </svg>                                                                  
+                </div>
                 <div class="btn btn-close" >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.46 7L14 12.54V14H12.54L7 8.46L1.46 14H0V12.54L5.54 7L0 1.46V0H1.46L7 5.54L12.54 0H14V1.46L8.46 7Z" fill="black"/>
