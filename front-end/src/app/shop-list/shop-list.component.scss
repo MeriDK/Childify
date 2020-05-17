@@ -386,11 +386,17 @@
                     }
                 }
                 .hide {
-                    visibility: hidden;
                     margin: 0;
                     padding: 0px;
                     width: 0px;
+                    height: 0px;
                     border: 0px;
+                    div {
+                        display: none  !important;
+                    }
+                }
+                .hidden {
+                    display: none;
                 }
                 
             }
@@ -521,7 +527,7 @@
         width: calc(100% - 30px);
         height: 526px;
         margin-top: calc(-5px + (100vh - 526px)/2);
-        margin-left: 100vh;
+        margin-left: 200vh;
         margin-right: 15px;
 
         background: #FFFFFF;
