@@ -12,6 +12,7 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'statistic',
     component: UserStatisticComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent
   },
   {
     path: '',
