@@ -16,5 +16,8 @@
   },
   "dependencies": {
     "concurrently": "^5.2.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.901.6"
   }
 }

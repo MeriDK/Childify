@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { FamilyMemberComponent } from './family-member/family-member.component';
+import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
     HomeComponent,
     UserStatisticComponent,
     FamilyMemberComponent,
+    LoginComponent,
     SettingsPageComponent
   ],
   imports: [
