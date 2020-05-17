@@ -40,11 +40,11 @@ const routes: Routes = [
     component: TaskAddComponent
   },
   {
-    path: 'task/change',
+    path: 'task/change/:id',
     component: TaskInfoChangeComponent
   },
   {
-    path: 'task/info',
+    path: 'task/info/:id',
     component: TaskInfoComponent
   },
   {

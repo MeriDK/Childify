@@ -1,10 +1,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
 
 <div cdkDropList id="list-1" cdkDropListConnectedTo="list-2" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4']" (cdkDropListDropped)="drop($event)">
+    
     <div *ngFor="let task of tasks"class="task" cdkDrag>
-        <a href={{url}}><img class="task-icon" src={{icon_task}}><div class = "task-info"><h3>{{task}}<i class="fas fa-chevron-right"></i>
-        </h3><p>{{translate('points')}}: 15</p></div></a>  
+        <div class = "task-info">
+
+        <a href={{url}}{{task.id}}><img class="task-icon" src="{{task.id_category}}"><h3 *ngIf="!isChild" class="task-name parent">{{task.name_task}}</h3><h3 *ngIf="isChild" class="task-name child">{{task.name_task}}</h3></a><img class="icon-status-change" *ngIf="isChild" (click)="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Move Button.png"/>
+        <p *ngIf="isChild" class="text-coin-child">{{task.point_task}}</p><img *ngIf="isChild" class="icon-coin-child" src="../../assets/img/task-icon/coin-child.png"/><img *ngIf="!isChild" class="icon-coin" src="../../assets/img/task-icon/Coin.png"/><p *ngIf="!isChild" class="text-coin">{{task.point_task}}</p></div>  
+
     </div>
+    
 </div>
 
-<button class="btn add-btn" routerLink='add'>{{translate('add_task')}}</button>
+<button class="btn add-btn" routerLink='add' *ngIf="!isChild">{{translate('add_task')}}</button>

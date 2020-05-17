@@ -1,10 +1,13 @@
 .task{
     overflow: hidden;
     width: 90%;
-    background: rgba(149, 87, 211, 0.582);
     padding: 10px;
     margin: 16px;
-    border-radius: 15px;
+    background: #FFFFFF;
+    border: 1px solid rgba(119, 142, 148, 0.25);
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .cdk-drag-preview {
@@ -34,31 +37,36 @@
   margin:  10px;
 }
 .task h3{
-  font-size: 24px;
+  padding-left: 10px;
   margin:  0px;
+  margin-top: 12px;
   color: black;
-  margin-top: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.0357143em;
 }
-.task p{
-    float: left;
-    color: #333;
-    cursor: pointer;
-    margin: 0px 10px;
-    margin-top: 3px;
-    font-size: 16px;
+.task .parent{
+  margin-bottom: -7px;
+  padding-top: 9px;
 }
 
+
 .btn {
-  background-color: rgba(166, 79, 253, 0.9);
-  padding: 16px 32px;
+  background-color: rgba(255,80,37, 0.79);
+  padding: 9px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 26px;
-  color: black; 
-    position: fixed;
+  font-size: 23px;
+  color: white;
+  position: fixed;
   bottom: 0;
-  width: 100%; 
+  width: 100%;
 }
 
 .list-tasks .task .disable {
@@ -70,4 +78,36 @@
   width: 50px;
   display:inline-block;
   float: left;
+  margin-top: -8px;
 }
+
+.icon-status-change{
+  float: right;
+  height: 60px;
+  margin-top: -29px;
+}
+
+.icon-coin{
+  float: right;
+  margin-top: 4%;
+}
+.text-coin{
+  float: right;
+  margin-bottom: 0;
+  margin-top: 4%;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.0357143em;
+  margin-right: 3px;
+}
+
+.text-coin-child{
+  padding-left: 10px;
+  display: inline;
+  padding-right: 3px;
+  font-family: Roboto;
+  font-size: 14px;
+  letter-spacing: 0.0357143em;
+  margin-right: 3px;
+}
+

@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('Family.urls')),
     path('', include('Prize.urls')),
     path('', include('Child_prize.urls')),
-    path('', include('Shop.urls')),
-    path('', include('Settings.urls'))
+    path('', include('Settings.urls')),
+    path('', include('Task.urls')),
+    path('', include('Shop.urls'))
 ]

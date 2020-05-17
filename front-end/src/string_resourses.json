@@ -79,9 +79,13 @@
         "en":"Write more info about this task",
         "ua": "Напишіть більш детальну інформацію про завдання"
     },
+    "name_task":{
+        "en": "Name",
+        "ua": "Назва"
+    },
     "name_your_task":{
         "en": "Name your task",
-        "ua": "Назва завдання"
+        "ua": "Введіть назва"
     },
     "child_name":{
         "en": "Child",

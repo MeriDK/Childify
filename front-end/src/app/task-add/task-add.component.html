@@ -1,46 +1,32 @@
 
 <header class="header-childify">
-    <h1 class="header-childify__title">{{translate('add_task')}}</h1>
+  <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
+    <h1 class="header-childify__title">{{translate('task_title')}}</h1>
 </header>
-<input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task">
-<h3>{{translate('points')}}</h3>
-<input type="number" placeholder="0" class="input-point">
-<h3>{{translate('category')}}</h3>
+<div class="all">
+<h3 class="name_task">{{translate('name_task')}}</h3>
+<input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task"  [(ngModel)]="task.name_task">
+
+<h3 class = "title_category" >{{translate('category')}}</h3>
 <div class="chose-category">
-
-  <div class="div-category">
-    <input type="radio" name="emotion" id="category1" class="input-hidden" />
-    <label for="category1">
-    <img src="../../assets/img/task-icon/task-icon-home.png" alt="category home" />
-    </label>
-
-    <input type="radio" name="emotion" id="category2" class="input-hidden" />
-    <label for="category2">
-    <img src="../../assets/img/task-icon/task-icon-kitchen.png" alt="category kitchen" />
-    </label>
-  </div>
-
-  <br>
-
-  <div class="div-category2">
-    <input type="radio" name="emotion" id="category3" class="input-hidden" />
-    <label for="category3">
-    <img src="../../assets/img/task-icon/task-icon-book.png" alt="category book" />
-    </label>
-
-    <input type="radio" name="emotion" id="category4" class="input-hidden" />
-    <label for="category4">
-    <img src="../../assets/img/task-icon/task-icon-shop.png" alt="category shop" />
-    </label>
-  </div>
-
+    <select id="category" class="category-select" (change)="filterChanged($event.target.value)">
+      <option >Bиберіть категорію</option>
+      <option value="1">Home</option>
+      <option value="2">Kitchen</option>
+      <option value="3">Education</option>
+      <option value="4">Shop</option>
+      <option value="5">Pet</option>
+    </select>
 </div>
 
-<h3>{{translate('more_info')}}</h3>
-<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}"></textarea>
+<h3 class="title_point">{{translate('points')}}</h3>
+<input type="number" placeholder="0" class="input-point" src="../../assets/img/task-icon/Coin.png" [(ngModel)]="task.point_task">
+
+<h3 class='title_info'>{{translate('more_info')}}</h3>
+<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}" [(ngModel)]="task.about_task"></textarea>
 <div class="button">
-<button class="btn_add" routerLink='../'>{{translate('cancel')}}</button>
-<button class="btn_add" routerLink='../'>{{translate('add')}}</button>
+<button class="btn_add" routerLink='../' (click)='createTask()'>{{translate('add')}}</button>
+<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../'>
 </div>
-
+</div>
 

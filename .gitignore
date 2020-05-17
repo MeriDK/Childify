@@ -66,6 +66,8 @@ back-end/childify_api/User/migrations/
 back-end/childify_api/childify_api/__pycache__
 back-end/childify_api/Shop/__pycache__
 back-end/childify_api/Shop/migrations/
+back-end/childify_api/Task/__pycache__
+back-end/childify_api/Task/migrations/
 
 # project
 .idea

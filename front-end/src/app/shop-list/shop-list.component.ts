@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, Input} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
-import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
-import { FormControl, FormGroup } from '@angular/forms';
-import {addNewGood, getWishList, addNewGoodChild, getWishListChild} from './ShopService';
 import { ShopService } from './shop.service';
-import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
+import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 
 @Component({
   selector: 'app-shop-list',
@@ -17,84 +14,298 @@ import { TokenService } from '../token.service';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent= jwt_decode(this.tokenService.getAccess()).isParent
-  points = 100
+  isParent = false;
   translate = translate
-
-  
-  title: FormControl;
-  about: FormControl;
-  price: FormControl;
-  goodForm : any;
-
-  @Input() wishGoods :  any;
-  @Input() orderGoods : any;
-  @Input() receiveGoods : any;
-
-  
-
+  wishGoods = [
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    },
+    {
+      title : "Солодощі",
+      points: "123"
+    }
+  ]
   constructor(private api: ShopService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-    this.getData();
-    this.initFormControl()
+    this.initEventListener();
   }
 
-  initFormControl(): void {
-    this.title = new FormControl('')
-    this.about =  new FormControl('')
-    this.price  = new FormControl('')
-
-    this.goodForm = new FormGroup({
-      inputGroup: new FormGroup({
-        title: this.title,
-        about: this.about,
-        price: this.price
+  initEventListener(): void {
+    setTimeout(()=>{
+      var pressTimer;
+      var deselect = false;
+      $('.li-selectable').on('touchend',(event)=>{
+        event.stopPropagation();
+        var element = event.target;
+        while (element.localName!='li') {
+          element = element.parentNode;
+        }
+        if (!$(element).hasClass('selected') && !deselect) {
+          $(element).addClass('active')
+          this.showModal();
+        }
+        clearTimeout(pressTimer);
+        return false;
       })
-    })
+      $('.li-selectable').on('touchstart',(event)=>{
+        event.stopPropagation();
+        deselect = false;
+        pressTimer = window.setTimeout(()=> { 
+          deselect = this.selectNode(event.target);
+        },150);
+        return false; 
+      });
+      $('.btn-move').on('click', (event)=>{
+        event.stopPropagation();
+        this.moveNode();
+        this.closeEditing();
+      });
+      $('.btn-delete').on('click', (event)=>{
+        event.stopPropagation();
+        this.deleteNode();
+        this.closeEditing();
+      });
+      $('.btn-back').on('click', (event)=>{
+        event.stopPropagation();
+        this.backNode();
+        this.closeEditing();
+      });
+      $('.btn-confirm').on('click', (event)=>{
+        event.stopPropagation();
+        this.confirmNode();
+        this.closeEditing();
+      });
+      $('.btn-close').on('click', (event)=>{
+        event.stopPropagation();
+        this.closeModal();
+        this.closeEditing();
+      });
+      $('.btn-add').on('click', (event)=>{
+        event.stopPropagation();
+        this.addNode();
+        this.closeEditing();
+      });
+      $('.btn-edit').on('click', (event)=>{
+        event.stopPropagation();
+        this.editNode();
+        this.closeEditing();
+      });
+      $('.btn-create').on('click', (event)=>{
+        event.stopPropagation();
+        this.createNode();
+        this.closeEditing();
+      });
+      $('.category--value').on('click', (event)=>{
+        event.stopPropagation();
+        this.openDropdown(event.target);
+      });       
+    }, 100)
   }
-
-  addEventListener(): void {
-    $(".good-li--shop-list").on('click',  (event) => { this.selectElement(event.target)})
-    $(".btn-add--shop-list").on('click',  (event) => { this.showAddPanel()})
-    $(".btn-add-good").on('click', (event) => { this.addPanelBtnOnClick() })
-    $(".btn-wish-good").on('click', (event) => { this.selectElement(event.target.parentNode.parentNode) })
-    $(".btn-confirm-good").on('click', (event) => { this.selectElement(event.target.parentNode.parentNode) })
-    
-  }
-
-  showAddPanel(): void {
-    $(".add-good-li--shop-list").toggleClass("shown")
-    window.scrollTo(0,0);
-  }
-
-  addPanelBtnOnClick(): void {   
-    this.addNewGood();
-    $(".add-good-li--shop-list").toggleClass("shown")
-  }
-
-  selectElement(element): void {
-    if(element.localName!='div' && element.localName!='li') {
-      element = element.parentNode
+  
+  openDropdown(element): any {
+    var dropdown =$(element.parentNode.querySelector('.category--value__dropdown'))
+    dropdown.toggleClass('active')
+    if(dropdown.hasClass('active')) {
+      $('.category--value__dropdown.active .category').on('click',()=>{
+      dropdown.removeClass('active')
+    })} else {
+      $('.category--value__dropdown.active .category').prop("onclick", null).off("click");
     }
-    if(element.localName!='li') {
-      element = element.parentNode
-    }
-    if(element.localName=='li'){
-      $(element).toggleClass('selected');
-      var scrollY=window.scrollY;
-      var scrollBy;
-      if($(element)[0].getBoundingClientRect().x>100){
-        scrollBy=$(element)[0].getBoundingClientRect().y-115+140
-        window.scrollBy(0,scrollBy);
-      } else {
-        scrollBy=$(element)[0].getBoundingClientRect().y-115
-        window.scrollBy(0,scrollBy);
+  }
+
+  selectNode(element): boolean {
+    var activeTab = this.activeTab();
+    if (activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
+      while (element.localName!='li') {
+        element = element.parentNode;
       }
-      if(window.scrollY-scrollY!=scrollBy)
-      setTimeout(()=>{
-        window.scrollBy(0,scrollBy-(window.scrollY-scrollY));
-      },700)
+      $(element).toggleClass('selected');
+      if ($('.selected').length>0){
+        $(".footer--shop-list."+activeTab).addClass('active');
+      } else {
+        $(".footer--shop-list."+activeTab).removeClass('active');
+      }
+      return !$(element).hasClass('selected');
+    }
+  }
+
+  closeEditing(): void {
+    $(".footer--shop-list").removeClass('active');
+    $('.selected').removeClass('selected');
+  }
+
+  createNode(): void {
+    this.closeModal();
+  }
+
+  deleteNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('delete-start');
+      setTimeout(()=> {
+        $(element).toggleClass('delete');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)   
+  }
+
+  moveNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('moving-start');
+      setTimeout(()=> {
+        $(element).toggleClass('moving');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
+  }
+
+  confirmNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('confirm-start');
+      setTimeout(()=> {
+        $(element).toggleClass('confirm');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
+  }
+
+  backNode(): void {
+    var element = $('.li-selectable.active')
+    var time = 300;
+    if (element.length==0) {
+      element = $('.li-selectable.selected');
+      time = 0;
+    }
+    this.closeModal();
+    setTimeout(()=> {
+      $(element).toggleClass('back-start');
+      setTimeout(()=> {
+        $(element).toggleClass('back');
+        setTimeout(()=> {
+          $(element).toggleClass('hide');
+          setTimeout(()=> {
+            $(element).toggleClass('hidden');
+            $(".footer--shop-list.tab1").removeClass('active');
+            $('.selected').removeClass('selected');
+          },300)
+        },200)
+      },500)
+    },time)    
+  }
+
+  addNode(): void {
+    $(".modal.add-modal").addClass('active');
+  }
+
+  editNode(): void {
+    this.closeModal();
+  }
+
+  showEditModal(): void {
+    $(".modal.edit-modal").addClass('active');
+  }
+  
+  closeModal(): void {
+    var classs = ".modal"+".active";
+    $(classs).removeClass('active');
+    $(".good-li--shop-list.active").removeClass('active')
+  }
+  showModal(): void {
+    if(this.activeTab()=="inStock-modal" && this.isParent) {
+      this.showEditModal();
+    } else if(this.activeTab()=="bought-modal" && this.isParent) {
+      var classs = ".modal.received-modal";
+      $(classs).addClass('active');
+    } else {
+      var classs = ".modal."+this.activeTab();
+      $(classs).addClass('active');
     }
   }
 
@@ -102,37 +313,23 @@ export class ShopListComponent implements OnInit{
     this.staticTabs.tabs[tabId].active = true;
   }
 
-  addNewGood(): void {
-    var data = {
-      "title" : this.title.value,
-      "about" : this.about.value,
-      "price": this.price.value
+  activeTab() {
+    // @ts-ignore
+    var tabId ; 
+    this.staticTabs && this.staticTabs.tabs.find(tabs => {
+      tabId = tabs.id       
+      return tabs.active
+    })
+    if(tabId == "tab1") {
+      return "inStock-modal"
     }
-    if(this.isParent) {
-      addNewGood(this.api, data , this.tokenService).then(location.reload())
-    } else {
-      addNewGoodChild(this.api, data, this.tokenService).then(location.reload())
+    if(tabId == "tab2") {
+      return "bought-modal"
     }
-
-    
+    if(tabId == "tab3") {
+      return "received-modal"
+    }
+    return ""
   }
-
-  getData(): void {
-    if(this.isParent){
-      getWishList(this.api, this.tokenService).then(
-        data=> {
-          this.wishGoods=data;
-          this.orderGoods=data;
-          this.receiveGoods=data;
-        setTimeout(()=>{this.addEventListener();},0) }
-      );
-    } else {
-      getWishListChild(this.api, this.tokenService).then(
-        data=> {this.wishGoods=data;
-          this.orderGoods=data;
-          this.receiveGoods=data;
-        setTimeout(()=>{this.addEventListener();},0) }
-      );
-    }
-  }
+ 
 }
