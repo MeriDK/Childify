@@ -14,6 +14,7 @@ export class TaskCheckComponent{
 
   isChild = true
   translate = translate
+  now = true
   url = "task/info/"
   icon;
   tasks = [{id: -1,id_category:"",name_task: 'test',point_task: 15,id_child:1}];
