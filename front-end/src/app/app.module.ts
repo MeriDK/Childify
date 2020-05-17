@@ -30,6 +30,7 @@ import { UserStatisticComponent } from './user-statistic/user-statistic.componen
 import { FamilyMemberComponent } from './family-member/family-member.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
     UserStatisticComponent,
     FamilyMemberComponent,
     LoginComponent,
-    SettingsPageComponent
+    SettingsPageComponent,
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,
