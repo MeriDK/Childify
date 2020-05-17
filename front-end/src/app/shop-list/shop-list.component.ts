@@ -14,7 +14,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = false;
+  isParent = true;
   translate = translate
   wishGoods = [
     {
