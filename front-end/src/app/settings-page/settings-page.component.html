@@ -1,0 +1,29 @@
+<app-nav-menu></app-nav-menu>
+<div class="settings-page">
+    <div class="settings-block">
+        <div class="avatar-block">
+            <div class="current-avatar">
+                <img src="../../assets/img/Childify_Logo.png"/>
+            </div>
+            
+            <div class="change-avatar">
+                <img src="../../assets/img/Childify_Logo.png"/>
+                <img src="../../assets/img/Childify_Logo.png"/>
+                <img src="../../assets/img/Childify_Logo.png"/>
+                <img src="../../assets/img/Childify_Logo.png"/>
+                <img src="../../assets/img/Childify_Logo.png"/>
+            </div>
+        </div>
+
+        <div class="data-block">
+            <input type="text" (input)="userNameInputHandler($event)" [value]="this.username">
+            <input type="email" (input)="emailInputHandler($event)" [value]="this.email">
+        </div>
+    </div>
+    
+    <div class="buttons-block">
+        <button class="btn-confirm" (click)="onSaveClick()">{{saveBtnText}}</button>
+        <button class="btn-get-family-id" (click)="showId()">{{familyIdBtnText}}</button>
+        <button class="btn-out-from-family" (click)="onRejectClick()">{{rejectBtnText}}</button>
+    </div>
+</div>

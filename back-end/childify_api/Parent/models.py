@@ -16,7 +16,7 @@ class ParentManager(BaseUserManager):
 
 
 class Parent(models.Model):
-  family = models.ForeignKey(Family, on_delete=models.CASCADE)
+  family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
