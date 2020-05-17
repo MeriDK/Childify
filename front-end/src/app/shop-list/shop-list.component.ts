@@ -14,7 +14,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = true;
+  isParent = false;
   translate = translate
   wishGoods = [
     {
@@ -140,9 +140,24 @@ export class ShopListComponent implements OnInit{
         event.stopPropagation();
         this.createNode();
         this.closeEditing();
+      });
+      $('.category--value').on('click', (event)=>{
+        event.stopPropagation();
+        this.openDropdown(event.target);
       });       
     }, 100)
-  } 
+  }
+  
+  openDropdown(element): any {
+    var dropdown =$(element.parentNode.querySelector('.category--value__dropdown'))
+    dropdown.toggleClass('active')
+    if(dropdown.hasClass('active')) {
+      $('.category--value__dropdown.active .category').on('click',()=>{
+      dropdown.removeClass('active')
+    })} else {
+      $('.category--value__dropdown.active .category').prop("onclick", null).off("click");
+    }
+  }
 
   selectNode(element): boolean {
     var activeTab = this.activeTab();
@@ -301,7 +316,7 @@ export class ShopListComponent implements OnInit{
   activeTab() {
     // @ts-ignore
     var tabId ; 
-    this.staticTabs.tabs.find(tabs => {
+    this.staticTabs && this.staticTabs.tabs.find(tabs => {
       tabId = tabs.id       
       return tabs.active
     })
@@ -314,6 +329,7 @@ export class ShopListComponent implements OnInit{
     if(tabId == "tab3") {
       return "received-modal"
     }
+    return ""
   }
  
 }
