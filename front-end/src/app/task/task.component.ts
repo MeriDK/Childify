@@ -12,6 +12,10 @@ export class TaskComponent implements OnInit {
   translate = translate
   
   ngOnInit(): void {
+    
   }
+  
+  
+  
 
 }
