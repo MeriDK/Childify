@@ -12,11 +12,16 @@ import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'new-login',
+    component: LoginComponent
   },
   {
     path: 'registration',
