@@ -32,6 +32,8 @@ import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
 import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-cat
     LoginComponent,
     SettingsPageComponent,
     ShopPrizeIconComponent,
-    ShopPrizeCategoryComponent
+    ShopPrizeCategoryComponent,
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,
