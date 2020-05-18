@@ -32,7 +32,6 @@ import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
 import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
-import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 
 @NgModule({
@@ -57,8 +56,7 @@ import { NewRegistrationComponent } from './new-registration/new-registration.co
     LoginComponent,
     SettingsPageComponent,
     ShopPrizeIconComponent,
-    ShopPrizeCategoryComponent,
-    NewRegistrationComponent
+    ShopPrizeCategoryComponent
   ],
   imports: [
     BrowserModule,

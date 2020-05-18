@@ -83,7 +83,7 @@
                     <ul class="list--shop-list">
                         <li class="good-li--shop-list li-selectable"  *ngFor="let good of wishGoods">
                             <div class="good-div--shop-list text-center li-selectable"
-                            [ngClass]="{'child': isParent}">
+                                [ngClass]="{'child': isParent}">
                                 <app-shop-prize-icon ico={{good.numIcon}}></app-shop-prize-icon>
                                 <div class="li-confirm">
                                     <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -479,11 +479,11 @@
         <div class="modal edit-modal">
             <div>
                 <span class="title span">Назва</span>
-                <input class="title--value" value="Комп'ютер">
+                <input class="title--value" value="{{$('.edit-modal').attr('title')}}">
             </div>
             <div>
                 <span class="category span">Категорія</span>
-                <app-shop-prize-category numCategory="{{$('.add-modal').attr('numCategory')}}"></app-shop-prize-category><div class="category--value">Розваги</div>
+                <app-shop-prize-category numCategory="{{$('.edit-modal').attr('numIcon')}}"></app-shop-prize-category><div class="category--value">{{$('.edit-modal').attr('numIcon')}}</div>
                 <div class="category--value__dropdown">
                     <div  class="icon ico1">
                         <svg width="36" height="60" viewBox="0 0 36 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -526,7 +526,7 @@
             <div>
                 <span class="price span">Ціна</span>
                 <div  class="price--value">
-                    <input value="123">
+                    <input value="{{$('.edit-modal').attr('price')}}">
                     <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.3636 0C23.4498 0 26.4095 1.2116 28.5918 3.36827C30.774 5.52494 32 8.45001 32 11.5C32 14.55 30.774 17.4751 28.5918 19.6317C26.4095 21.7884 23.4498 23 20.3636 23C17.2775 23 14.3177 21.7884 12.1355 19.6317C9.95324 17.4751 8.72727 14.55 8.72727 11.5C8.72727 8.45001 9.95324 5.52494 12.1355 3.36827C14.3177 1.2116 17.2775 0 20.3636 0ZM20.3636 20.125C22.6783 20.125 24.8981 19.2163 26.5348 17.5988C28.1714 15.9813 29.0909 13.7875 29.0909 11.5C29.0909 9.21251 28.1714 7.01871 26.5348 5.4012C24.8981 3.7837 22.6783 2.875 20.3636 2.875C18.049 2.875 15.8292 3.7837 14.1925 5.4012C12.5558 7.01871 11.6364 9.21251 11.6364 11.5C11.6364 13.7875 12.5558 15.9813 14.1925 17.5988C15.8292 19.2163 18.049 20.125 20.3636 20.125ZM2.90909 11.5C2.90909 15.2519 5.33818 18.4431 8.72727 19.6219V22.6262C3.70909 21.3469 0 16.8619 0 11.5C0 6.13812 3.70909 1.65313 8.72727 0.37375V3.37812C5.33818 4.55687 2.90909 7.74813 2.90909 11.5Z" fill="url(#paint0_linear)"/>
                         <defs>
@@ -535,7 +535,7 @@
                         <stop offset="0.807292" stop-color="#FFBB55"/>
                         </linearGradient>
                         </defs>
-                        </svg>       
+                    </svg>       
                 </div>             
             </div>
             <div>
