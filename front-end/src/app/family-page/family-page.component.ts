@@ -31,8 +31,8 @@ export class FamilyPageComponent implements OnInit{
   
   rec : any;
 
-  imgYoung = "../../assets/svg/daughter.svg";
-  imgOld = "../../assets/svg/grandfather.svg";
+  imgYoung = "../../assets/svg/kid.svg";
+  imgOld = "../../assets/svg/any_avatar.svg";
 
   members: FamilyMember[];
 
