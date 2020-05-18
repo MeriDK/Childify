@@ -14,8 +14,10 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = true;
+  isParent = true/*jwt_decode(this.tokenService.getAccess()).isParent*/;
+  $=$
   translate = translate
+  numCategory = 3
   wishGoods = [
     {
       title : "Солодощі",
@@ -88,7 +90,14 @@ export class ShopListComponent implements OnInit{
         }
         if (!$(element).hasClass('selected') && !deselect) {
           $(element).addClass('active')
-          this.showModal();
+          if (this.activeTab()=='inStock-modal')
+            var elementContent = {"numIcon":element.__ngContext__[37], "title":element.__ngContext__[38],"price":element.__ngContext__[39]}
+          if (this.activeTab()=='bought-modal')
+            var elementContent = {"numIcon":element.__ngContext__[68], "title":element.__ngContext__[69],"price":element.__ngContext__[70]}
+          if (this.activeTab()=='received-modal')
+            var elementContent = {"numIcon":element.__ngContext__[63], "title":element.__ngContext__[64],"price":element.__ngContext__[65]}
+         
+          this.showModal(elementContent);
         }
         clearTimeout(pressTimer);
         return false;
@@ -150,11 +159,39 @@ export class ShopListComponent implements OnInit{
   
   openDropdown(element): any {
     var dropdown =$(element.parentNode.querySelector('.category--value__dropdown'))
+    var modal =  $('.'+element.parentNode.parentNode.classList[1])
     dropdown.toggleClass('active')
     if(dropdown.hasClass('active')) {
-      $('.category--value__dropdown.active .category').on('click',()=>{
+    $('.category--value__dropdown.active .category.category1').on('click',()=>{
+      modal.attr('numicon',1)
       dropdown.removeClass('active')
-    })} else {
+    })
+    $('.category--value__dropdown.active .category.category2').on('click',()=>{
+      modal.attr('numicon',2)
+      dropdown.removeClass('active')
+    })
+    $('.category--value__dropdown.active .category.category3').on('click',()=>{
+      modal.attr('numicon',3)
+      dropdown.removeClass('active')
+    })
+    $('.category--value__dropdown.active .category.category4').on('click',()=>{
+      modal.attr('numicon',4)
+      dropdown.removeClass('active')
+    })
+    $('.category--value__dropdown.active .category.category5').on('click',()=>{
+      modal.attr('numicon',5)
+      dropdown.removeClass('active')
+    })
+    $('.category--value__dropdown.active .category.category6').on('click',()=>{
+      modal.attr('numicon',6)
+      dropdown.removeClass('active')
+    })
+    $('.category--value__dropdown.active .category.category7').on('click',()=>{
+      modal.attr('numicon',7)
+      dropdown.removeClass('active')
+    })
+  
+  } else {
       $('.category--value__dropdown.active .category').prop("onclick", null).off("click");
     }
   }
@@ -288,25 +325,26 @@ export class ShopListComponent implements OnInit{
     this.closeModal();
   }
 
-  showEditModal(): void {
-    $(".modal.edit-modal").addClass('active');
-  }
-  
   closeModal(): void {
     var classs = ".modal"+".active";
     $(classs).removeClass('active');
     $(".good-li--shop-list.active").removeClass('active')
   }
-  showModal(): void {
+  showModal(elementContent): void {
+    var classs =""; 
     if(this.activeTab()=="inStock-modal" && this.isParent) {
-      this.showEditModal();
+      classs=".modal.edit-modal"
+      $(classs).addClass('active');
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
-      var classs = ".modal.received-modal";
+      classs = ".modal.received-modal";
       $(classs).addClass('active');
     } else {
-      var classs = ".modal."+this.activeTab();
+      classs = ".modal."+this.activeTab();
       $(classs).addClass('active');
     }
+    $(classs).attr("numIcon",elementContent.numIcon);
+    $(classs).attr("title",elementContent.title);
+    $(classs).attr("price",elementContent.price);
   }
 
   selectTab(tabId: number) {
@@ -330,6 +368,16 @@ export class ShopListComponent implements OnInit{
       return "received-modal"
     }
     return ""
+  }
+
+  categoryStr(numCategory) {
+    if (numCategory==1) { return "Солодощі"}
+    if (numCategory==2) { return "Іграшка"}
+    if (numCategory==3) { return "Морозиво"}
+    if (numCategory==4) { return "Книжка"}
+    if (numCategory==5) { return "Фільм"}
+    if (numCategory==6) { return "Квиток в кіно"}
+    if (numCategory==7) { return "Комп'ютер"}
   }
  
 }
