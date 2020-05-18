@@ -14,8 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { ConnectFamilyComponent } from "./connect-family/connect-family.component";
-import { CreateFamilyComponent } from "./create-family/create-family.component";
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 const routes: Routes = [
   {
@@ -31,16 +30,12 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
+    path: 'new-registration',
+    component: NewRegistrationComponent
+  },
+  {
     path: 'connect-family',
     component: RegistrationAddCreateFamilyComponent
-  },
-  {
-    path: 'new-connect-family',
-    component: ConnectFamilyComponent
-  },
-  {
-    path: 'new-create-family',
-    component: CreateFamilyComponent
   },
   {
     path: 'family',

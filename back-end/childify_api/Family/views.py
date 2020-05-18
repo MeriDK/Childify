@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 
 from Child.models import Child
 from Family.models import Family
+from Family.serializers import FamilyCreateSerializer, FamilyGetSerializer
 from Parent.models import Parent
 from User.models import User
 from Prize.models import Prize
@@ -46,8 +47,8 @@ class FamilyStatisticAPIView(APIView):
         family = Child.object.filter(user_id=id).first().family
     
     if family:
-      parents = [{"user_id": member.user.user_id, "username": member.user.username, "numIcon": member.user.numIcon, "is_parent": member.user.isParent} for member in Parent.object.filter(family=family)]
-      childres = [{"user_id": member.user.user_id, "username": member.user.username, "numIcon": member.user.numIcon, "is_parent": member.user.isParent} for member in Child.object.filter(family=family)]
+      parents = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Parent.object.filter(family=family)]
+      childres = [{"user_id": member.user.user_id, "username": member.user.username, "is_parent": member.user.isParent} for member in Child.object.filter(family=family)]
       
       return JsonResponse({'family_id': family.id, 'family': parents + childres}, status=200)
     return JsonResponse({'nsg':'Family does not exist'}, status=404)
@@ -76,15 +77,18 @@ class FamilyAPIView(APIView):
     return JsonResponse({}, status=412)
 
   def post(self, request):
-    if self.check_object_family(request.user):
-      return JsonResponse({"msg": "already connected"}, status=405)
+    serializer = FamilyCreateSerializer(data=request.data)
+    if serializer.is_valid():
+      if self.check_object_family(request.user):
+        return JsonResponse({"msg": "already connected"}, status=405)
 
-    family = Family.object.create_family()
-    if request.user.isParent:
-      Parent.object.create_parent(family, request.user, request.data['username'])
-    else:
-      Child.object.create_child(family, request.user, request.data['username'])
-    return JsonResponse({"family":family.id}, status=201)
+      family = Family.object.create_family(serializer.data['name'])
+      if request.user.isParent:
+        Parent.object.create_parent(family, request.user)
+      else:
+        Child.object.create_child(family, request.user)
+      return JsonResponse({"family":family.id}, status=201)
+    return JsonResponse(serializer.errors, status=400)
 
 
 class FamilyUserAPIView(APIView):
@@ -113,8 +117,8 @@ class FamilyUserAPIView(APIView):
         return None
 
 
-  def patch(self, request, family_id):
-    if request.method == "PATCH":
+  def post(self, request, family_id):
+    if request.method == "POST":
       family = self.get_object_family(family_id)
       if not family:
         return JsonResponse({"msg": "error"}, status=400)
@@ -123,10 +127,10 @@ class FamilyUserAPIView(APIView):
       if request.user.isParent:
         parent = self.get_object_parent(request.user)
         if not parent:
-          Parent.object.create_parent(family, request.user, request.data['username'])
+          Parent.object.create_parent(family, request.user)
       else:
         child = self.get_object_child(request.user)
         if not child:
-          Child.object.create_child(family, request.user, request.data['username'])
+          Child.object.create_child(family, request.user)
 
-      return JsonResponse({}, status=200)
+      return JsonResponse({}, status=201)

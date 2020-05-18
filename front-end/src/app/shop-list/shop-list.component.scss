@@ -291,11 +291,10 @@
                     //margin-bottom: -1.5px;
                 }
                 .moving-start{
-                    .good-div--shop-list {
-                        margin-top: 31px; 
+                    .good-div--shop-list { 
                         .li-buyed {
                             display: initial;
-                            margin-top: -24px;
+                            margin-top: 5px;
                         }
                         div {
                             display: none;
@@ -339,11 +338,10 @@
                     border-color: white;
                 }
                 .confirm-start{
-                    .good-div--shop-list {
-                        margin-top: 31px;  
+                    .good-div--shop-list { 
                         .li-confirm {
                             display: initial;
-                            margin-top: -24px;
+                            margin-top: 2px;
                         }
                         div {
                             display: none;
@@ -364,11 +362,10 @@
                     }
                 }
                 .back-start{
-                    .good-div--shop-list {
-                        margin-top: 31px;  
+                    .good-div--shop-list { 
                         .li-back {
                             display: initial;
-                            margin-top: -24px;
+                            margin-top: 4px;
                         }
                         div {
                             display: none;
@@ -682,7 +679,6 @@
                 svg {
                     margin-top: 9px;
                     margin-left: 5px;
-                    zoom: 0.4;
                 }
             }
             .price {
