@@ -11,7 +11,7 @@ export class ShopService {
   baseUrl = 'http://127.0.0.1:8000'
 
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
-  'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
+  'Authorization':'Bearer '+ 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5NzQ4MDAyLCJqdGkiOiIzNDk1ZjI3NjFjMGU0ZTRkOWJjMDRiMjRmYmU5ZmNjNiIsInVzZXJfaWQiOjEsImlzUGFyZW50Ijp0cnVlfQ.zrzzXKfatl9zDVPQJcCIYwnWyHRW6Cr2UZl0LoOdfXo'/*+this.tokenService.getAccess()*/})}}
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 

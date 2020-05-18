@@ -1,14 +1,13 @@
 <div class="task-body">
   <header class="header-childify">
-    <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
+    <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png" routerLink = "/family">
       <h1 class="header-childify__title">{{translate('task_title')}}</h1>
   </header>
    <div class="tabset-task">
     <tabset type="pills" [justified]="true" class = "nav-pills" >
-      <tab heading="{{translate('list_task')}}" class="list-task-tab" id="tab1"><app-task-list></app-task-list></tab>
+      <tab heading="{{translate('list_task')}}" class="list-task-tab" id="tab1" ><app-task-list></app-task-list></tab>
       <tab heading="{{translate('child_task')}}" class="child-task-tab" id="tab2"><app-task-child></app-task-child></tab>
       <tab heading="{{translate('check_task')}}" class="done-task-tab" id="tab3"><app-task-check></app-task-check></tab>
     </tabset>
     </div>
   </div>
- 

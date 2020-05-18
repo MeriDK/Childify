@@ -1,0 +1,76 @@
+.icon {
+   
+    position: absolute;
+    margin: 0px;
+    margin-top: 9px;
+    margin-left: 9px;
+    align-self: flex-end;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+
+
+    /* White */
+
+    background: #FFFFFF;
+    /* Light_Grey_25 */
+
+    box-sizing: border-box;
+    /* Light Shadow */
+
+    box-shadow: 1px 1px 3px rgba(134, 134, 134, 0.9), -1px -1px 2px rgba(255, 255, 255, 0.9), 1px -1px 2px rgba(217, 217, 217, 0.2), -1px 1px 2px rgba(217, 217, 217, 0.2), inset -1px -1px 2px rgba(217, 217, 217, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.3); 
+    svg {
+        margin-top: 9px;
+        margin-left: 5px;
+        zoom: 0.4;
+    }
+}
+.ico1 {
+
+    svg {
+        
+    }
+}
+.ico2 {
+    margin-top: 5px;
+
+    svg {
+        margin-top: 24px !important;
+    }
+}
+.ico3 {
+
+    svg {
+        margin-top: 15px !important;
+    }
+}
+.ico4 {
+    margin-top: 3px;
+
+    svg {
+        margin-top: 21px !important;
+    }
+}
+.ico5 {
+    margin-top: 3px;
+
+    svg {
+        margin-top: 21px !important;
+    }
+}
+.ico6 {
+    margin-top: 3px;
+
+    svg {
+        margin-top: 21px !important;
+    }
+}
+.ico7 {
+    margin-top: 3px;
+
+    svg {
+        margin-top: 21px !important;
+    }
+}
