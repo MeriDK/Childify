@@ -1,17 +1,16 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 
-from User.models import User, MyUserManager
+from User.models import User
 from Family.models import Family
 
 
 class ChildManager(BaseUserManager):
-  def create_child(self, family, user, username):
+  def create_child(self, family, user):
     child = self.model(
       family = family,
       user = user
     )
-    MyUserManager.addUsername(user, username)
     child.save(using=self._db)
     return child
 

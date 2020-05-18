@@ -30,11 +30,7 @@ import { UserStatisticComponent } from './user-statistic/user-statistic.componen
 import { FamilyMemberComponent } from './family-member/family-member.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
-import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
-import { ConnectFamilyComponent } from './connect-family/connect-family.component';
-import { CreateFamilyComponent } from './create-family/create-family.component';
-
+import { NewRegistrationComponent } from './new-registration/new-registration.component';
 
 @NgModule({
   declarations: [
@@ -57,10 +53,7 @@ import { CreateFamilyComponent } from './create-family/create-family.component';
     FamilyMemberComponent,
     LoginComponent,
     SettingsPageComponent,
-    ShopPrizeIconComponent,
-    ShopPrizeCategoryComponent,
-    ConnectFamilyComponent,
-    CreateFamilyComponent
+    NewRegistrationComponent
   ],
   imports: [
     BrowserModule,

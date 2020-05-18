@@ -3,8 +3,6 @@ import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
 import {TaskCheckService} from './task-check.service'
-import { TokenService } from '../token.service';
-import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-task-check',
@@ -14,13 +12,13 @@ import jwt_decode from 'jwt-decode'
 })
 export class TaskCheckComponent{
 
-  isChild = !jwt_decode(this.token.getAccess()).isParent;
+  isChild = true
   translate = translate
   now = true
   url = "task/info/"
   icon;
   tasks = [{id: -1,id_category:"",name_task: 'test',point_task: 15,id_child:1}];
-  constructor(private api: TaskCheckService, private token :TokenService) {
+  constructor(private api: TaskCheckService) {
     this.getTask();
   }
 
