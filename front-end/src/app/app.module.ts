@@ -32,7 +32,8 @@ import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
 import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
-import { NewRegistrationComponent } from './new-registration/new-registration.component';
+import { ConnectFamilyComponent } from './connect-family/connect-family.component';
+import { CreateFamilyComponent } from './create-family/create-family.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { NewRegistrationComponent } from './new-registration/new-registration.co
     SettingsPageComponent,
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
-    NewRegistrationComponent
+    ConnectFamilyComponent,
+    CreateFamilyComponent
   ],
   imports: [
     BrowserModule,
