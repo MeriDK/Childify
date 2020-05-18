@@ -86,7 +86,9 @@ export class ShopListComponent implements OnInit{
         }
         if (!$(element).hasClass('selected') && !deselect) {
           $(element).addClass('active')
-          this.showModal();
+          
+          var elementContent = {"numIcon":element.__ngContext__[37], "title":element.__ngContext__[38],"price":element.__ngContext__[39]}
+          this.showModal(elementContent);
         }
         clearTimeout(pressTimer);
         return false;
@@ -151,31 +153,31 @@ export class ShopListComponent implements OnInit{
     dropdown.toggleClass('active')
     if(dropdown.hasClass('active')) {
     $('.category--value__dropdown.active .category.category1').on('click',()=>{
-      $('.add-modal').attr('numCategory',1)
+      $('.edit-modal').attr('numicon',1)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category2').on('click',()=>{
-      $('.add-modal').attr('numCategory',2)
+      $('.edit-modal').attr('numicon',2)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category3').on('click',()=>{
-      $('.add-modal').attr('numCategory',3)
+      $('.edit-modal').attr('numicon',3)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category4').on('click',()=>{
-      $('.add-modal').attr('numCategory',4)
+      $('.edit-modal').attr('numicon',4)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category5').on('click',()=>{
-      $('.add-modal').attr('numCategory',5)
+      $('.edit-modal').attr('numicon',5)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category6').on('click',()=>{
-      $('.add-modal').attr('numCategory',6)
+      $('.edit-modal').attr('numicon',6)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category7').on('click',()=>{
-      $('.add-modal').attr('numCategory',7)
+      $('.edit-modal').attr('numicon',7)
       dropdown.removeClass('active')
     })
   
@@ -313,8 +315,11 @@ export class ShopListComponent implements OnInit{
     this.closeModal();
   }
 
-  showEditModal(): void {
+  showEditModal(elementContent): void {
     $(".modal.edit-modal").addClass('active');
+    $(".modal.edit-modal").attr("numIcon",elementContent.numIcon);
+    $(".modal.edit-modal").attr("title",elementContent.title);
+    $(".modal.edit-modal").attr("price",elementContent.price);
   }
   
   closeModal(): void {
@@ -322,9 +327,9 @@ export class ShopListComponent implements OnInit{
     $(classs).removeClass('active');
     $(".good-li--shop-list.active").removeClass('active')
   }
-  showModal(): void {
+  showModal(elementContent): void {
     if(this.activeTab()=="inStock-modal" && this.isParent) {
-      this.showEditModal();
+      this.showEditModal(elementContent);
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
       var classs = ".modal.received-modal";
       $(classs).addClass('active');
