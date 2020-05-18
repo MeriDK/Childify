@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild, Input, TemplateRef} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 import { ShopService } from './shop.service';
+import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
+import { addNewGood, getWishList } from './ShopService';
 
 @Component({
   selector: 'app-shop-list',
@@ -21,60 +23,54 @@ export class ShopListComponent implements OnInit{
   wishGoods = [
     {
       title : "Солодощі",
-      points: "123"
+      points: "123",
+      about: "about",
+      numIcon: 1
     },
     {
-      title : "Солодощі",
-      points: "123"
+      title : "Іграшка",
+      points: "300",
+      about: "about",
+      numIcon: 2
     },
     {
-      title : "Солодощі",
-      points: "123"
+      title : "Морозиво",
+      points: "300",
+      about: "about",
+      numIcon: 3
     },
     {
-      title : "Солодощі",
-      points: "123"
+      title : "Книжка",
+      points: "300",
+      about: "about",
+      numIcon: 4
     },
     {
-      title : "Солодощі",
-      points: "123"
+      title : "Фільм",
+      points: "300",
+      about: "about",
+      numIcon: 5
     },
     {
-      title : "Солодощі",
-      points: "123"
+      title : "Квиток в кіно",
+      points: "300",
+      about: "about",
+      numIcon: 6
     },
     {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
-    },
-    {
-      title : "Солодощі",
-      points: "123"
+      title : "Комп'ютер",
+      points: "300",
+      about: "about",
+      numIcon: 7
     }
   ]
   constructor(private api: ShopService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    /*getWishList(this.api, this.tokenService).then(data=> {
+      //this.wishGoods=data;
+      
+    })*/
     this.initEventListener();
   }
 

@@ -3,6 +3,9 @@ import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
 import {TaskChildService} from './task-child.service'
+import { TokenService } from '../token.service';
+import jwt_decode from 'jwt-decode'
+
 
 @Component({
   selector: 'app-task-child',
@@ -12,13 +15,13 @@ import {TaskChildService} from './task-child.service'
 })
 export class TaskChildComponent {
 
-  isChild = true
+  isChild =!jwt_decode(this.token.getAccess()).isParent;
   translate = translate
   url = 'task/info/'
   icon;
   tasks = [{id: -1,id_category:"", name_task: 'test',point_task: 15,id_child:1,id_status:2}];
-  constructor(private api: TaskChildService) {
-    this.getTask();
+  constructor(private api: TaskChildService, private token :TokenService) {
+      this.getTask()
   }
 
   category(id_category): void {
@@ -56,6 +59,19 @@ export class TaskChildComponent {
 
   updateTasktoCheck = (task) =>{
     this.api.updateTasktoCheck(task).subscribe(
+      data => {
+        // @ts-ignore
+        this.task=data
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.getTask()
+  }
+
+  updateTasktoTodo = (task) =>{
+    this.api.updateTasktoTodo(task,null).subscribe(
       data => {
         // @ts-ignore
         this.task=data

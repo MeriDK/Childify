@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
 from Family.models import Family
-from Child.models import Child
+from User.models import User
 # Create your models here.
 
 
@@ -31,7 +31,7 @@ class Task (models.Model):
     id_family = models.ForeignKey(Family, on_delete=models.CASCADE, verbose_name='Family',null=True)
     id_status = models.ForeignKey(Status,on_delete=models.CASCADE,verbose_name='Status',null=True)
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Category', null=True)
-    id_child = models.ForeignKey(Child, on_delete=models.CASCADE, verbose_name='Child', null=True)
+    id_child = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Child', null=True)
     name_task = models.CharField(verbose_name="Name task", max_length=50)
     info_task = models.CharField(verbose_name="Info task", max_length=200,null=True)
     point_task = models.IntegerField(verbose_name='Point')
