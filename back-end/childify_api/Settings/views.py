@@ -21,9 +21,9 @@ class SettingsAPIView(APIView):
                 if family:
                     family = family.family
             if family:
-                return JsonResponse({'username': user.username, 'email': user.email, 'family_id': family.id})
+                return JsonResponse({'username': user.username,'numIcon': user.numIcon, 'email': user.email, 'family_id': family.id})
             
-            return JsonResponse({'username': user.username, 'email': user.email, 'family_id': None})
+            return JsonResponse({'username': user.username,'numIcon': user.numIcon, 'email': user.email, 'family_id': None})
             
         return JsonResponse({'msg': 'No user exist'})
 
@@ -31,6 +31,7 @@ class SettingsAPIView(APIView):
         user = User.object.filter(user_id=user_id).first()
         if user:
             user.username = request.data['username']
+            user.numIcon = request.data['numIcon']
             user.email = request.data['email']
             user.save()
             return JsonResponse({'code': 200, 'msg': 'well done'})

@@ -4,6 +4,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
 import {TaskListService} from './task-list.service'
 import { ActivatedRoute } from '@angular/router';
+import { TokenService } from '../token.service';
+import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-task-list',
@@ -12,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = true
+  isChild = !jwt_decode(this.token.getAccess()).isParent;
   task;
   url
   icon;
@@ -36,7 +38,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   tasks = [{id:-1,id_category:"",name_task: 'test',point_task: 15}];
 
 
-  constructor(private api: TaskListService, private router: ActivatedRoute){
+  constructor(private api: TaskListService, private router: ActivatedRoute,  private token :TokenService){
     this.getTask();
   }
 
@@ -76,7 +78,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   }
 
   updateTasktoInProgress = (task) =>{
-    this.api.updateTasktoInProgress(task).subscribe(
+    this.api.updateTasktoInProgress(task,jwt_decode(this.token.getAccess()).user_id).subscribe(
       data => {
         // @ts-ignore
         this.task=data
