@@ -1,3 +1,4 @@
+<!---
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login column_center">
   <img src="../../assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
   <div class="login__group">
@@ -11,4 +12,18 @@
   </button>
   <div class="login__link" routerLink="/registration">Зареєструватись</div>
   <div *ngIf="error" class="login__error alert alert-danger">{{error}}</div>
+</form>
+--->
+<form class="login column_center">
+  <img src="../../assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
+  <div class="login__group">
+    <input type="text" formControlName="email" placeholder="Електронна адреса" class="login__input">
+    <input type="password" formControlName="password" placeholder="Пароль" class="login__input">
+  </div>
+  <div class="login__link" routerLink="/change-password">Забув пароль?</div>
+  <button class="login__button" routerLink="/new-connect-family">
+    <span></span>
+    Увійти
+  </button>
+  <div class="login__link" routerLink="/new-registration">Зареєструватись</div>
 </form>
