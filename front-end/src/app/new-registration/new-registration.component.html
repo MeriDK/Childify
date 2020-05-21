@@ -1,4 +1,4 @@
-<div class="login column_center">
+<form [formGroup]="registrationForm" novalidate class="login column_center">
   <img src="../../assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
   <div class="ava-group">
     <img src="../../assets/img/ava-icon/1.png" alt="ava"  class="ava-group__main-ava">
@@ -15,8 +15,24 @@
     </div>
   </div>
   <div class="login__group">
-    <input type="text" formControlName="email" placeholder="Електронна адреса" class="login__input">
-    <input type="password" formControlName="password" placeholder="Пароль" class="login__input">
+    <input type="text" formControlName="email" placeholder="Електронна адреса" class="login__input"
+      [ngClass]="{
+        'input-success--registration': (email.touched) && email.valid,
+        'input-danger--registration': (email.touched) && email.invalid
+      }">
+    <div *ngIf="email.invalid && (email.touched)">
+         <div class="login__error" *ngIf="email.errors.required">Помилка. Не введена електронна адреса</div>
+         <div class="login__error" *ngIf="email.errors.pattern">Введіть дійсну електронну адресу</div>
+    </div>
+    <input type="password" formControlName="password" placeholder="Пароль" class="login__input"
+      [ngClass]="{
+        'input-success--registration': (password.touched || password.dirty) && password.valid,
+        'input-danger--registration': (password.touched || password.dirty)
+      }">
+    <div *ngIf="password.invalid && (password.touched || password.dirty)">
+        <div class="login__error" *ngIf="password.errors.required">Помилка. Не введений пароль</div>
+        <div class="login__error" *ngIf="password.errors.minlength">Помилка. Пароль повинен бути довшим</div>
+    </div>
   </div>
   <div class="radio-group">
     <div class="radio-group__container">
@@ -30,9 +46,11 @@
       <div class="radio-group__label">Дорослий</div>
     </div>
   </div>
-  <button class="login__button" routerLink="/new-connect-family">
-    <span></span>
+  <button class="login__button" (click)="registerNewUser()"
+    [ngClass]="{
+      'btn-disable--registration disabled': password.errors || email.errors
+    }">
     Зареєструватись
   </button>
   <div class="login__link" routerLink="/new-login">Уже маєш профіль? Увійти</div>
-</div>
+</form>

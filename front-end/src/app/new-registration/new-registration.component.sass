@@ -5,11 +5,12 @@
     width: 40vh
     margin-top: 2rem
   &__group
+    width: 45vh
     input::placeholder
       color: rgba(119, 142, 148, 0.25)
   &__input
     height: 8vh
-    width: 100%
+    min-width: 100%
     outline: 0
     border-radius: 8px
     box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.05)
@@ -29,7 +30,10 @@
   &__link
     text-decoration: underline
     color: #778E94
-    margin-top: 1.5rem
+    margin-top: 0.9rem
+  &__error
+    color: #FF5025
+    text-align: center
 
 .column_center
   display: flex
@@ -41,7 +45,7 @@
   height: 23vh
   width: 46vh
   justify-content: space-between
-  margin-top: 2rem
+  margin-top: 1rem
   &__main-ava
     display: flex
     flex: 1
