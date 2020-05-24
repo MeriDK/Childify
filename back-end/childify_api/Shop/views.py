@@ -197,6 +197,8 @@ class ItemView(generics.UpdateAPIView, generics.DestroyAPIView):
         item_check_res = item_check(request, self.kwargs)
         if item_check_res != 'OK':
             return Response({'message': item_check_res}, status=400)
+        if 'child' in request.data or 'family' in request.data or 'status' in request.data:
+            return Response({'message': 'cant change this field'}, status=400)
         return self.partial_update(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
