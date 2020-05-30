@@ -34,6 +34,7 @@ import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-cat
 import { ConnectFamilyComponent } from './connect-family/connect-family.component';
 import { CreateFamilyComponent } from './create-family/create-family.component';
 import { NewRegistrationComponent } from './new-registration/new-registration.component';
+import { UserIconComponent } from './user-icon/user-icon.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { NewRegistrationComponent } from './new-registration/new-registration.co
     ShopPrizeCategoryComponent,
     ConnectFamilyComponent,
     CreateFamilyComponent,
-    NewRegistrationComponent
+    NewRegistrationComponent,
+    UserIconComponent
   ],
   imports: [
     BrowserModule,
