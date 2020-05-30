@@ -5,7 +5,7 @@ import { ShopService } from './shop.service';
 import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
-import { addNewGood, getWishList } from './ShopService';
+import { getWishList, getOrderList, getReceivedList, addItem, editItem, deleteItem, confirmItem, buyItem, returnItem} from './ShopService';
 
 @Component({
   selector: 'app-shop-list',
@@ -16,62 +16,36 @@ import { addNewGood, getWishList } from './ShopService';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = true/*jwt_decode(this.tokenService.getAccess()).isParent*/;
+  isParent = jwt_decode(this.tokenService.getAccess()).isParent;
+  points = 0
   $=$
   translate = translate
-  numCategory = 3
-  wishGoods = [
-    {
-      title : "Солодощі",
-      points: "123",
-      about: "about",
-      numIcon: 1
-    },
-    {
-      title : "Іграшка",
-      points: "300",
-      about: "about",
-      numIcon: 2
-    },
-    {
-      title : "Морозиво",
-      points: "300",
-      about: "about",
-      numIcon: 3
-    },
-    {
-      title : "Книжка",
-      points: "300",
-      about: "about",
-      numIcon: 4
-    },
-    {
-      title : "Фільм",
-      points: "300",
-      about: "about",
-      numIcon: 5
-    },
-    {
-      title : "Квиток в кіно",
-      points: "300",
-      about: "about",
-      numIcon: 6
-    },
-    {
-      title : "Комп'ютер",
-      points: "300",
-      about: "about",
-      numIcon: 7
-    }
-  ]
+  wishGoods = []
+  orderGoods = []
+  receivedGoods = []
+
   constructor(private api: ShopService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-    /*getWishList(this.api, this.tokenService).then(data=> {
-      //this.wishGoods=data;
-      
-    })*/
-    this.initEventListener();
+      !this.isParent && this.tokenService.getPointsSubs().then(points => {this.points=points.points})
+      this.getListData()
+      $('input').prop( "disabled", true )  
+      $('.add-modal input').prop( "disabled", false )
+      $('.edit-modal input').prop( "disabled", false )  
+  }
+
+  getListData(): void {
+    getWishList(this.api, this.tokenService).then(data=> {
+      this.wishGoods=data;
+      getOrderList(this.api, this.tokenService).then(data=> {
+        this.orderGoods=data;
+        getReceivedList(this.api, this.tokenService).then(data=> {
+          this.receivedGoods=data;
+          $( "div" ).off();
+          this.initEventListener();
+        })
+      })
+    })
   }
 
   initEventListener(): void {
@@ -86,12 +60,13 @@ export class ShopListComponent implements OnInit{
         }
         if (!$(element).hasClass('selected') && !deselect) {
           $(element).addClass('active')
+          var elementContent
           if (this.activeTab()=='inStock-modal')
-            var elementContent = {"numIcon":element.__ngContext__[37], "title":element.__ngContext__[38],"price":element.__ngContext__[39]}
-          if (this.activeTab()=='bought-modal')
-            var elementContent = {"numIcon":element.__ngContext__[68], "title":element.__ngContext__[69],"price":element.__ngContext__[70]}
+            elementContent = {"id":element.id,"category":element.__ngContext__[39], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[38] }
           if (this.activeTab()=='received-modal')
-            var elementContent = {"numIcon":element.__ngContext__[63], "title":element.__ngContext__[64],"price":element.__ngContext__[65]}
+            elementContent = {"id":element.id,"category":element.__ngContext__[38], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[36]}
+            if (this.activeTab()=='bought-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[46], "name":element.__ngContext__[48],"points":element.__ngContext__[49],"about":element.__ngContext__[44]}
          
           this.showModal(elementContent);
         }
@@ -149,9 +124,45 @@ export class ShopListComponent implements OnInit{
       $('.category--value').on('click', (event)=>{
         event.stopPropagation();
         this.openDropdown(event.target);
-      });       
-    }, 100)
+      });
+
+    }, 1)
   }
+
+   updatePoints(): any {
+    !this.isParent && this.tokenService.getPointsSubs().then(async points => {
+      while(this.points != points.points)
+      {
+        var point = Math.floor(Math.abs( points.points - this.points)/100)+1
+        if(this.points < points.points)
+          await this.addPoint(point)
+        else
+          await this.deletePoint(point)
+      }
+      
+    })
+  
+  }
+
+  addPoint(point): any {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.points += point
+        resolve()
+      }, 0.01);
+    })
+  }
+
+  deletePoint(point): any {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.points -= point
+        resolve()
+      }, 0.01);
+    })
+  }
+
+  
   
   openDropdown(element): any {
     var dropdown =$(element.parentNode.querySelector('.category--value__dropdown'))
@@ -159,31 +170,31 @@ export class ShopListComponent implements OnInit{
     dropdown.toggleClass('active')
     if(dropdown.hasClass('active')) {
     $('.category--value__dropdown.active .category.category1').on('click',()=>{
-      modal.attr('numicon',1)
+      modal.attr('category',1)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category2').on('click',()=>{
-      modal.attr('numicon',2)
+      modal.attr('category',2)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category3').on('click',()=>{
-      modal.attr('numicon',3)
+      modal.attr('category',3)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category4').on('click',()=>{
-      modal.attr('numicon',4)
+      modal.attr('category',4)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category5').on('click',()=>{
-      modal.attr('numicon',5)
+      modal.attr('category',5)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category6').on('click',()=>{
-      modal.attr('numicon',6)
+      modal.attr('category',6)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category7').on('click',()=>{
-      modal.attr('numicon',7)
+      modal.attr('category',7)
       dropdown.removeClass('active')
     })
   
@@ -194,7 +205,7 @@ export class ShopListComponent implements OnInit{
 
   selectNode(element): boolean {
     var activeTab = this.activeTab();
-    if (activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
+    if (!$('.selected').length && activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
       while (element.localName!='li') {
         element = element.parentNode;
       }
@@ -214,7 +225,18 @@ export class ShopListComponent implements OnInit{
   }
 
   createNode(): void {
-    this.closeModal();
+    var data = {"name": $('.modal.add-modal.active .title--value').val(),
+    "points":$('.modal.add-modal.active .price--value input').val(),
+    "about":$('.modal.add-modal.active .about--value').val(),
+    "category":$('.modal.add-modal.active').attr('category')};
+    if (this.isParent) {
+      addItem(this.api,data, this.tokenService).then(()=>{
+        this.closeModal();
+        this.getListData()
+      });
+    }
+    
+    
   }
 
   deleteNode(): void {
@@ -224,6 +246,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    deleteItem(this.api,{"id":element[0].id}, this.tokenService)
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('delete-start');
@@ -248,6 +271,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    buyItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('moving-start');
@@ -259,10 +283,14 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            
+            this.getListData();
           },300)
         },200)
       },500)
     },time)    
+    this.updatePoints()
+    })
   }
 
   confirmNode(): void {
@@ -272,6 +300,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    confirmItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('confirm-start');
@@ -283,10 +312,12 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            this.getListData();
           },300)
         },200)
       },500)
     },time)    
+    })
   }
 
   backNode(): void {
@@ -296,6 +327,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    returnItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('back-start');
@@ -307,10 +339,14 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            
+            this.getListData();
           },300)
         },200)
       },500)
-    },time)    
+    },time)
+    this.updatePoints()
+     })
   }
 
   addNode(): void {
@@ -318,7 +354,17 @@ export class ShopListComponent implements OnInit{
   }
 
   editNode(): void {
-    this.closeModal();
+    var data = {"id":$('.modal.edit-modal.active')[0].id,
+    "points":$('.modal.edit-modal.active .price--value input').val(),
+    "about":$('.modal.edit-modal.active .about--value').val(),
+    "category":$('.modal.edit-modal.active').attr('category'),
+    "name": $('.modal.edit-modal.active .title--value').val()};
+    if (this.isParent) {
+      editItem(this.api,data, this.tokenService).then(()=>{
+        this.closeModal();
+        this.getListData();
+      });;
+    }
   }
 
   closeModal(): void {
@@ -338,9 +384,11 @@ export class ShopListComponent implements OnInit{
       classs = ".modal."+this.activeTab();
       $(classs).addClass('active');
     }
-    $(classs).attr("numIcon",elementContent.numIcon);
-    $(classs).attr("title",elementContent.title);
-    $(classs).attr("price",elementContent.price);
+    $(classs).attr("category",elementContent.category);
+    $(classs).attr("name",elementContent.name);
+    $(classs).attr("points",elementContent.points);
+    $(classs).attr("id",elementContent.id);
+    $(classs).attr("about",elementContent.about);
   }
 
   selectTab(tabId: number) {

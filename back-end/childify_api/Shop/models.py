@@ -15,6 +15,9 @@ class CategoryEnum(models.TextChoices):
     SWEET = 2
     GAME = 3
     BOOK = 4
+    FILM = 5
+    TICKET = 6
+    COMPUTER = 7
 
 
 class Item(models.Model):

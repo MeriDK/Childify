@@ -42,8 +42,8 @@ export class NewRegistrationComponent implements OnInit {
     var data = {
       email: this.email.value,
       password: this.password.value,
-      isParent: $('.input-radio--registration__parent').is(':checked'),
-      numIcon: '1'
+      isParent: $('.radio-group__check-box--parent')[0].checked,
+      numIcon: '4'
     };
     registerNewUser(this.api, this.token, data, this.router);
   }
