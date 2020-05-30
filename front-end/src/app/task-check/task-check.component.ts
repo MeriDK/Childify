@@ -67,8 +67,17 @@ export class TaskCheckComponent{
         console.log(error)
       }
     )
+    this.api.addPoint(task).subscribe(
+      data => {
+        // @ts-ignore
+      },
+      error => {
+        console.log(error)
+      }
+    )
     this.getTask()
   }
+
 
   updateTasktoInProgress = (task) =>{
     this.api.updateTasktoInProgress(task).subscribe(

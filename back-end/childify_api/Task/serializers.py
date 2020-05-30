@@ -8,6 +8,10 @@ class TaskCreateSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('id_category','name_task','info_task','point_task')
 
+class PointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Child
+        fields = '__all__'
 
 class TaskSerializer(serializers.ModelSerializer):
     was_published_recently = serializers.BooleanField(read_only=True)
