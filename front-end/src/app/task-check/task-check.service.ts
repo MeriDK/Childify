@@ -16,18 +16,23 @@ export class TaskCheckService {
   constructor(private http: HttpClient,private tokenService: TokenService) { }
 
   getTaskList(): Observable<any> {
-    return this.http.get(this.baseUrl + "/family/1/task/list?status=check" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/list?status=check" , {headers: this.httpHeaders})
   }
 
   updateTasktoDone(task): Observable<any> {
     const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:4}
-    return this.http.patch(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
+    {headers: this.httpHeaders})
+  }
+  addPoint(task):Observable<any> {
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:4}
+    return this.http.patch(this.baseUrl + "/task/point/"+task.id  ,body,
     {headers: this.httpHeaders})
   }
 
   updateTasktoInProgress(task): Observable<any> {
     const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:2}
-    return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    return this.http.put(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
 }

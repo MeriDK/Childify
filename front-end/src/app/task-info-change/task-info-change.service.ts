@@ -14,12 +14,12 @@ export class TaskInfoChangeServer {
   constructor(private http: HttpClient) { }
 
   getTask(id): Observable<any> {
-    return this.http.get(this.baseUrl + "/family/1/task/"+id+"/" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/"+id+"/" , {headers: this.httpHeaders})
   }
 
   updateTask(task,category): Observable<any> {
     const body = {id_category: category,name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task}
-    return this.http.put(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    return this.http.put(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
 }

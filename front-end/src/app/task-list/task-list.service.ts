@@ -16,12 +16,12 @@ export class TaskListService {
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   getTaskList(): Observable<any> {
-    return this.http.get(this.baseUrl + "/family/1/task/list?status=todo" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/list?status=todo" , {headers: this.httpHeaders})
   }
 
   updateTasktoInProgress(task,id_child): Observable<any> {
     const body = {id_status:2,id_child:id_child}
-    return this.http.patch(this.baseUrl + "/family/1/task/"+task.id +"/" ,body,
+    return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
 }
