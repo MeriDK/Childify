@@ -28,7 +28,6 @@ import { HomeComponent } from './home/home.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { FamilyMemberComponent } from './family-member/family-member.component';
-import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
 import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
@@ -56,7 +55,6 @@ import { NewRegistrationComponent } from './new-registration/new-registration.co
     HomeComponent,
     UserStatisticComponent,
     FamilyMemberComponent,
-    LoginComponent,
     SettingsPageComponent,
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
