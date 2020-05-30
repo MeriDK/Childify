@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TaskInfoServer {
 
-  baseUrl = 'http://127.0.0.1:8000'
+  baseUrl = 'http://192.168.1.24:8000'
 
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 

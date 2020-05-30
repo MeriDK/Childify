@@ -8,7 +8,7 @@ import { TokenService } from '../token.service';
 })
 export class RegistrationAddService {
 
-  baseUrl = 'http://127.0.0.1:8000'
+  baseUrl = 'http://192.168.1.24:8000'
 
   httpHeaders = ()=>{return{ headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}

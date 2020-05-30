@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SettingsPageComponent implements OnInit {
 
-  private readonly baseUrl = 'http://127.0.0.1:8000';
+  private readonly baseUrl = 'http://192.168.1.24:8000';
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 

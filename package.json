@@ -1,10 +1,13 @@
 {
   "scripts": {
     "dev": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
+    "devtest": "concurrently --kill-others \"npm run back-servertest\" \"npm run front-servertest\"",
     "dev-l": "concurrently --kill-others \"npm run back-server-l\" \"npm run front-server\"",
     "back-server": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver",
+    "back-servertest": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver 0.0.0.0:8000",
     "back-server-l": "source env/bin/activate && python back-end/childify_api/manage.py runserver",
     "front-server": "cd front-end && ng serve",
+    "front-servertest": "cd front-end && ng serve --host 192.168.1.24",
     "makemigrations": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py makemigrations",
     "migrate": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py migrate",
     "ng": "cd front-end && ng",

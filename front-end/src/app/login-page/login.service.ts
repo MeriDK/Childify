@@ -8,12 +8,12 @@ export class LoginService {
   ) {
   }
   loginUser(user) {
-    return this.http.post('http://127.0.0.1:8000/login/token/', user);
+    return this.http.post('http://192.168.1.24:8000/login/token/', user);
   }
   getFamily(headers) {
-    return this.http.get('http://127.0.0.1:8000/family/', headers);
+    return this.http.get('http://192.168.1.24:8000/family/', headers);
   }
   validate(token) {
-    return this.http.post('http://127.0.0.1:8000/login/verify/', token);
+    return this.http.post('http://192.168.1.24:8000/login/verify/', token);
   }
 }
