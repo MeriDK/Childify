@@ -9,7 +9,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
     # if child is not None return child ava id else None
     def get_child_icon(self, obj):
-        child = Child.object.all().filter(id=obj.id).first()
+        child = Child.object.all().filter(id=obj.child.id).first()
         if child:
             user = User.object.all().filter(user_id=child.user_id).first()
             return user.numIcon
