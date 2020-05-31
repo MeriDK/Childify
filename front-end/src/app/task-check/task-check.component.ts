@@ -26,25 +26,25 @@ export class TaskCheckComponent implements AfterViewInit{
   now = true
   url = "task/info/"
   icon;
-  tasks = [{id: -1,id_category:"",name_task: 'test',point_task: 15,id_child:1}];
+  tasks = [{id: -1,category:"",name_task: 'test',point_task: 15,id_child:1}];
   constructor(private api: TaskCheckService, private token :TokenService) {
     this.getTaskCheck();
   }
 
-  category(id_category): void {
-    if(id_category==1){
+  category(category): void {
+    if(category==1){
       this.icon = "../../assets/img/task-icon/House.png"
     }
-    else if(id_category==2){
+    else if(category==2){
       this.icon = "../../assets/img/task-icon/Kitchen.png"
     }
-    else if(id_category==3){
+    else if(category==3){
       this.icon = "../../assets/img/task-icon/Studding.png"
     }
-    else if(id_category==4){
+    else if(category==4){
       this.icon = "../../assets/img/task-icon/Shop.png"
     }
-    else if(id_category==5){
+    else if(category==5){
       this.icon = "../../assets/img/task-icon/Pets.png"
     }
   }
@@ -55,8 +55,8 @@ export class TaskCheckComponent implements AfterViewInit{
         this.tasks = data;
         console.log(this.tasks)
         for (var i = 0; i<this.tasks.length; i++){
-          this.category(this.tasks[i].id_category)
-          this.tasks[i].id_category=this.icon
+          this.category(this.tasks[i].category)
+          this.tasks[i].category=this.icon
         }
       },
       error => {

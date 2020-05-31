@@ -20,12 +20,12 @@ export class TaskChildService {
   }
 
   updateTasktoCheck(task): Observable<any> {
-    const body = {id_status:3}
+    const body = {status:3}
     return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
   updateTasktoTodo(task,id_child): Observable<any> {
-    const body = {id_status:1,id_child:id_child}
+    const body = {status:1,id_child: null}
     return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }

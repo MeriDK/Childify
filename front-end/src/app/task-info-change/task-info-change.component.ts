@@ -15,37 +15,40 @@ export class TaskInfoChangeComponent implements OnInit {
   translate = translate
   id_task;
   task;
-  id_category;
+  category;
   
   
   constructor(private route: ActivatedRoute, private api: TaskInfoChangeServer) {
     this.id_task = this.route.snapshot.paramMap.get("id")
-    this.getOneTask();
     this.task={id:-1, name_task: "",info_task:"" ,point_task:0}
+    this.getOneTask();
+
+    
   }
 
   ngOnInit(): void {
-    console.log(this.task.id_category)
+    console.log(this.task.category)
   }
 
   getOneTask = () => {
     this.api.getTask(this.id_task).subscribe(
       data => {
         this.task=data
-        this.id_category=data.id_category
+        this.category=data.category
       },
       error => {
         console.log(error)
       }
     )
+    console.log(this.task)
    
   }
 
   updateTask = () =>{
-    this.api.updateTask(this.task,this.id_category).subscribe(
+    this.api.updateTask(this.task,this.category).subscribe(
       data => {
         this.task=data
-        this.id_category=data.id_category
+        this.category=data.id_category
       },
       error => {
         console.log(error)
@@ -54,6 +57,6 @@ export class TaskInfoChangeComponent implements OnInit {
   }
 
   filterChanged(selectedValue:string){
-    this.id_category=selectedValue;
+    this.category=selectedValue;
   }
 }

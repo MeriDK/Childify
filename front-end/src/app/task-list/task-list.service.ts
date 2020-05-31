@@ -20,7 +20,8 @@ export class TaskListService {
   }
 
   updateTasktoInProgress(task,id_child): Observable<any> {
-    const body = {id_status:2,id_child:id_child}
+    console.log(id_child)
+    const body = {status:2,id_child:id_child}
     return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }

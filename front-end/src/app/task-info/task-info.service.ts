@@ -14,7 +14,7 @@ export class TaskInfoServer {
   constructor(private http: HttpClient) { }
 
   getTask(id): Observable<any> {
-    return this.http.get(this.baseUrl + "/family/4/task/"+id+"/" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/"+id+"/" , {headers: this.httpHeaders})
   }
 
 }

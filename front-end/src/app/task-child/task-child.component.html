@@ -6,8 +6,8 @@
             <div class = "task-info">
 
             <a href={{url}}{{task.id}}>
-                <img *ngIf="!isChild" class="task-icon" src="{{task.id_category}}"><img *ngIf="!isChild" class="child-icon" src="../../assets/img/task-icon/icon-child.png">
-                <img *ngIf="isChild" class="task-icon-child" src="{{task.id_category}}">
+                <img *ngIf="!isChild" class="task-icon" src="{{task.category}}"><img *ngIf="!isChild" class="child-icon" src="../../assets/img/task-icon/icon-child.png">
+                <img *ngIf="isChild" class="task-icon-child" src="{{task.category}}">
                 <h3 *ngIf="!isChild" class="task-name parent">{{task.name_task}}</h3>
                 <h3 *ngIf="isChild" class="task-name child">{{task.name_task}}</h3>
             </a>
