@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {translate} from '../services/StringResourses'
 import { ActivatedRoute } from '@angular/router';
 import {TaskInfoChangeServer} from './task-info-change.service'
+
 @Component({
   selector: 'app-task-info-change',
   templateUrl: './task-info-change.component.html',

@@ -13,7 +13,11 @@ import jwt_decode from 'jwt-decode'
   styleUrls: ['./task-child.component.sass'],
   providers: [TaskChildService]
 })
-export class TaskChildComponent {
+export class TaskChildComponent implements AfterViewInit {
+
+  ngAfterViewInit(): void{
+    $('#tab2-link').on("click",() => {this.getTask()})
+  }
 
   isChild =!jwt_decode(this.token.getAccess()).isParent;
   translate = translate
