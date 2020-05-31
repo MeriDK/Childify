@@ -17,31 +17,31 @@ export class TaskInfoComponent{
   translate = translate
   id_task;
   task;
-  id_category;
+  category;
   name_category;
 
   
   constructor(private route: ActivatedRoute, private api: TaskInfoServer) {
     this.id_task = this.route.snapshot.paramMap.get("id")
     this.getOneTask();
-    this.task={id:-1,id_category:0 ,name_task: "",info_task:"" ,point_task:0,id_child:"name child"}
+    this.task={id:-1,category:0 ,name_task: "",info_task:"" ,point_task:0,id_child:"name child"}
   }
 
 
-  category(id_catagory): void {
-    if(id_catagory==1){
+  category_t(catagory): void {
+    if(catagory==1){
       this.name_category="Home"
     }
-    else if(id_catagory==2){
+    else if(catagory==2){
       this.name_category="Kitchen"
     }
-    else if(id_catagory==3){
+    else if(catagory==3){
       this.name_category="Studing"
     }
-    else if(id_catagory==4){
+    else if(catagory==4){
       this.name_category="Shop"
     }
-    else if(id_catagory==5){
+    else if(catagory==5){
       this.name_category="Pet"
     }
   }
@@ -51,8 +51,8 @@ export class TaskInfoComponent{
     this.api.getTask(this.id_task).subscribe(
       data => {
         this.task=data
-        this.id_category=data.id_category
-        this.category(this.id_category)
+        this.category=data.category
+        this.category_t(this.category)
       },
       error => {
         console.log(error)

@@ -71,13 +71,11 @@ class TaskCreate(APIView):
                 family = Parent.object.get(user=user)
             else:
                 family = Child.object.get(user=user)
-            family = Family.object.get(id=4)
-            print(Family.object.get(id=4))
+            family = Family.object.get(id=family.family.id)
+            print(family)
             if serializers.is_valid():
 
-                status = Status.objects.get(id=1)
-                category = Category.objects.get(id=serializers.data['id_category'])
-                task= Task.object.create_task(family,status,category,serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
+                task= Task.object.create_task(family,1,serializers.data['category'],serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
                 return JsonResponse({"info":"task create"},status = 201)
             return JsonResponse(serializers.data,status = 400)
 
@@ -89,16 +87,27 @@ class ParentTaskStatus(viewsets.ViewSet):
             user = Parent.object.get(user = request.user)
         else:
             user = Child.object.get(user=request.user)
+
+
         try:
             name_status = request.GET.get('status','')
-            status = Status.objects.get(name_status = name_status)
+            if name_status == "inProgress":
+                status = 2
+            elif name_status == "check":
+                status = 3
+            elif name_status == "done":
+                status = 4
+
             if name_status == "todo":
-                queryset = Task.object.filter(id_family=user.family, id_status=status)
+                queryset = Task.object.filter(id_family=user.family, status=1)
             else:
+                print("OK", request.user.isParent)
+                print(request.user.user_id)
                 if request.user.isParent:
-                    queryset = Task.object.filter(id_family=user.family, id_status=status)
+                    queryset = Task.object.filter(id_family=user.family, status=status)
                 else:
-                    queryset = Task.object.filter(id_family=user.family,id_child = request.user, id_status=status)
+                    print("Child",status)
+                    queryset = Task.object.filter(id_family=user.family,id_child = request.user, status=status)
 
         except:
             queryset = Task.object.filter(id_family=id_family)

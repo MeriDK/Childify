@@ -13,31 +13,35 @@ import jwt_decode from 'jwt-decode'
   styleUrls: ['./task-child.component.sass'],
   providers: [TaskChildService]
 })
-export class TaskChildComponent {
+export class TaskChildComponent implements AfterViewInit {
+
+  ngAfterViewInit(): void{
+    $('#tab2-link').on("click",() => {this.getTask()})
+  }
 
   isChild =!jwt_decode(this.token.getAccess()).isParent;
   translate = translate
   url = 'task/info/'
   icon;
-  tasks = [{id: -1,id_category:"", name_task: 'test',point_task: 15,id_child:1,id_status:2}];
+  tasks = [{id: -1,category:"", name_task: 'test',point_task: 15,id_child:1,status:2}];
   constructor(private api: TaskChildService, private token :TokenService) {
       this.getTask()
   }
 
-  category(id_category): void {
-    if(id_category==1){
+  category(category): void {
+    if(category==1){
       this.icon = "../../assets/img/task-icon/House.png"
     }
-    else if(id_category==2){
+    else if(category==2){
       this.icon = "../../assets/img/task-icon/Kitchen.png"
     }
-    else if(id_category==3){
+    else if(category==3){
       this.icon = "../../assets/img/task-icon/Studding.png"
     }
-    else if(id_category==4){
+    else if(category==4){
       this.icon = "../../assets/img/task-icon/Shop.png"
     }
-    else if(id_category==5){
+    else if(category==5){
       this.icon = "../../assets/img/task-icon/Pets.png"
     }
   }
@@ -47,8 +51,8 @@ export class TaskChildComponent {
       data => {
         this.tasks = data;
         for (var i = 0; i<this.tasks.length; i++){
-          this.category(this.tasks[i].id_category)
-          this.tasks[i].id_category=this.icon
+          this.category(this.tasks[i].category)
+          this.tasks[i].category=this.icon
         }
       },
       error => {

@@ -20,19 +20,19 @@ export class TaskCheckService {
   }
 
   updateTasktoDone(task): Observable<any> {
-    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:4}
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,status:4}
     return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
   addPoint(task):Observable<any> {
-    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:4}
+    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,status:4}
     return this.http.patch(this.baseUrl + "/task/point/"+task.id  ,body,
     {headers: this.httpHeaders})
   }
 
   updateTasktoInProgress(task): Observable<any> {
-    const body = {name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task,id_status:2}
-    return this.http.put(this.baseUrl + "/task/"+task.id +"/" ,body,
+    const body = {status:2}
+    return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
 }

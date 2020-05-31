@@ -18,8 +18,8 @@ export class TaskInfoChangeServer {
   }
 
   updateTask(task,category): Observable<any> {
-    const body = {id_category: category,name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task}
-    return this.http.put(this.baseUrl + "/task/"+task.id +"/" ,body,
+    const body = {category: category,name_task: task.name_task ,info_task: task.info_task ,point_task: task.point_task}
+    return this.http.patch(this.baseUrl + "/task/"+task.id +"/" ,body,
     {headers: this.httpHeaders})
   }
 }
