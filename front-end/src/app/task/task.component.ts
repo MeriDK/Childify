@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import {translate} from '../services/StringResourses'
-
+import { TokenService } from '../token.service';
+import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-task',
@@ -10,9 +11,9 @@ import {translate} from '../services/StringResourses'
 })
 export class TaskComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = true/*jwt_decode(this.tokenService.getAccess()).isParent*/;
+  isParent = jwt_decode(this.token.getAccess()).isParent;
 
-  constructor() { }
+  constructor(private token :TokenService) { }
 
   translate = translate
   

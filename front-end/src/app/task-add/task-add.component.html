@@ -23,7 +23,7 @@
 <input type="number" placeholder="0" class="input-point" src="../../assets/img/task-icon/Coin.png" [(ngModel)]="task.point_task">
 
 <h3 class='title_info'>{{translate('more_info')}}</h3>
-<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}" [(ngModel)]="task.about_task"></textarea>
+<textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}" [(ngModel)]="task.info_task"></textarea>
 <div class="button">
 <button class="btn_add" routerLink='../' (click)='createTask()'>{{translate('add')}}</button>
 <img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../'>
