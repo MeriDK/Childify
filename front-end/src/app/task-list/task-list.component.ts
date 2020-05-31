@@ -32,10 +32,10 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   
 
   ngAfterViewInit(): void {
-
+    $('#tab1-link').on("click",() => {this.getTask()})
   }
 
-  tasks = [{id:-1,id_category:"",name_task: 'test',point_task: 15}];
+  tasks = [{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15},{id:-1,id_category:"",name_task: 'test',point_task: 15}];
 
 
   constructor(private api: TaskListService, private router: ActivatedRoute,  private token :TokenService){

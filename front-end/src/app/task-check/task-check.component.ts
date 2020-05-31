@@ -12,7 +12,14 @@ import jwt_decode from 'jwt-decode'
   styleUrls: ['./task-check.component.sass'],
   providers: [TaskCheckService]
 })
-export class TaskCheckComponent{
+export class TaskCheckComponent implements AfterViewInit{
+
+  ngAfterViewInit(): void{
+    $('#tab3-link').on("click",() => {this.getTaskCheck()})
+    console.log($('#tab3-link'))
+    this.getTaskCheck()
+
+  }
 
   isChild = !jwt_decode(this.token.getAccess()).isParent;
   translate = translate
@@ -21,7 +28,7 @@ export class TaskCheckComponent{
   icon;
   tasks = [{id: -1,id_category:"",name_task: 'test',point_task: 15,id_child:1}];
   constructor(private api: TaskCheckService, private token :TokenService) {
-    this.getTask();
+    this.getTaskCheck();
   }
 
   category(id_category): void {
@@ -42,10 +49,11 @@ export class TaskCheckComponent{
     }
   }
 
-  getTask = () => {
+  getTaskCheck = () => {
     this.api.getTaskList().subscribe(
       data => {
         this.tasks = data;
+        console.log(this.tasks)
         for (var i = 0; i<this.tasks.length; i++){
           this.category(this.tasks[i].id_category)
           this.tasks[i].id_category=this.icon
@@ -75,7 +83,7 @@ export class TaskCheckComponent{
         console.log(error)
       }
     )
-    this.getTask()
+    this.getTaskCheck()
   }
 
 
@@ -89,7 +97,7 @@ export class TaskCheckComponent{
         console.log(error)
       }
     )
-    this.getTask()
+    this.getTaskCheck()
   }
 
 
