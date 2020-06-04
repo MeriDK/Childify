@@ -5,7 +5,6 @@
     width: 40vh
     margin-top: 2rem
   &__group
-    margin-top: 8rem
     width: 100%
     input::placeholder
       color: rgba(119, 142, 148, 0.25)
@@ -35,19 +34,21 @@
   align-items: center
 
 .connect-menu
-  height: 3.5rem
+  height: 9vh
   width: 100%
   box-shadow: -2px -4px 4px rgba(0, 0, 0, 0.1)
   display: flex
   position: absolute
   justify-content: space-around
-  align-items: center
   bottom: 0
   padding: 0 0.5rem
+  &__item
+    height: 100%
+    width: 48%
+    display: flex
+    align-items: center
   &__img
-    flex: 1
-    height: 3rem
-    width: 9rem
-    &_padding-right
-      padding-right: 0.3rem
+    width: 100%
 
+.connect-form
+  justify-self: flex-end

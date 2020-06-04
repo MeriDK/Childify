@@ -5,6 +5,7 @@ import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
 import $ from 'node_modules/jquery';
 import { connectToFamily, createNewFamily } from './connect.service';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-connect-family',
@@ -12,26 +13,24 @@ import { connectToFamily, createNewFamily } from './connect.service';
   styleUrls: ['./connect-family.component.sass'],
   providers: [RegistrationAddService]
 })
-export class ConnectFamilyComponent implements AfterViewInit {
+export class ConnectFamilyComponent implements OnInit {
 
-  isChild = !jwt_decode(this.token.getAccess()).isParent;
+  // isChild = !jwt_decode(this.token.getAccess()).isParent;
+  isParent = true;
+  isCreate = false;
   data: any;
-  isCreate: boolean;
+  private formBuilder: any;
 
   constructor(private api: RegistrationAddService, private token: TokenService,
               private router: Router) {
     this.data = {family_id: '', username: ''};
   }
 
-  ngAfterViewInit(): void {
-    this.setAccessToCreate();
-  }
-
-  setAccessToCreate(): void {
-    if (this.isChild) {
-      $('li.tab--create').css('cursor', 'no-drop');
-      $('li.tab--create').children().addClass('disabled');
-    }
+  ngOnInit(): void {
+    this.data = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   connectCreateFamily(): void {
