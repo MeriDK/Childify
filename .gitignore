@@ -74,3 +74,4 @@ back-end/childify_api/Settings/migrations/
 # project
 .idea
 node_modules
+package.json

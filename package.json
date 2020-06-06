@@ -1,23 +1,23 @@
 {
-  "scripts": {
-    "dev": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
-    "dev-l": "concurrently --kill-others \"npm run back-server-l\" \"npm run front-server\"",
-    "back-server": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver",
-    "back-server-l": "source env/bin/activate && python back-end/childify_api/manage.py runserver",
-    "front-server": "cd front-end && ng serve",
-    "makemigrations": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py makemigrations",
-    "migrate": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py migrate",
-    "ng": "cd front-end && ng",
-    "start": "cd front-end && ng serve",
-    "build": "cd front-end && ng build",
-    "test": "cd front-end && ng test",
-    "lint": "cd front-end && ng lint",
-    "e2e": "cd front-end && ng e2e"
-  },
-  "dependencies": {
-    "concurrently": "^5.2.0"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^0.901.6"
-  }
+    "scripts": {
+        "dev": "back-end\\venv\\Scripts\\activate.bat && ip.py && npm run dev+",
+        "dev+": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
+        "dev-l": "concurrently --kill-others \"npm run back-server-l\" \"npm run front-server\"",
+        "back-server": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
+        "back-server-l": "source env/bin/activate && python back-end/childify_api/manage.py runserver",
+        "front-server": "cd front-end && ng serve --host 192.168.1.26",
+        "makemigrations": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py makemigrations",
+        "migrate": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py migrate",
+        "ng": "cd front-end && ng",
+        "start": "cd front-end && ng serve",
+        "build": "cd front-end && ng build",
+        "test": "cd front-end && ng test",
+        "lint": "cd front-end && ng lint",
+        "e2e": "cd front-end && ng e2e"
+    },
+    "dependencies": {
+        "concurrently": "^5.2.0"
+    },
+    "baseURL": "http://192.168.1.26:8000",
+    "IP": "192.168.1.26"
 }
