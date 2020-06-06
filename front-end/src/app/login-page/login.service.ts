@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import config from  '../../../../package.json'
 
 @Injectable()
 export class LoginService {
@@ -8,12 +9,12 @@ export class LoginService {
   ) {
   }
   loginUser(user) {
-    return this.http.post('http://192.168.1.24:8000/login/token/', user);
+    return this.http.post(config['baseURL']+'/login/token/', user);
   }
   getFamily(headers) {
-    return this.http.get('http://192.168.1.24:8000/family/', headers);
+    return this.http.get(config['baseURL']+'/family/', headers);
   }
   validate(token) {
-    return this.http.post('http://192.168.1.24:8000/login/verify/', token);
+    return this.http.post(config['baseURL']+'/login/verify/', token);
   }
 }

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token.service';
+import config from  '../../../../package.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationAddService {
 
-  baseUrl = 'http://192.168.1.24:8000';
 
   httpHeaders = () => {
     return { headers : new HttpHeaders(
@@ -20,13 +20,13 @@ export class RegistrationAddService {
 
   createNewFamily(data): Observable<any> {
     const body = {username: data.username};
-    const url = this.baseUrl + '/family/';
+    const url = config['baseURL'] + '/family/';
     return this.http.post(url, body, this.httpHeaders());
   }
 
   connectToFamily(data): Observable<any> {
     const body = {username: data.username};
-    const url = this.baseUrl + '/family/' + data.family_id + '/user/';
+    const url = config['baseURL'] + '/family/' + data.family_id + '/user/';
     return this.http.patch(url, body, this.httpHeaders());
   }
 }

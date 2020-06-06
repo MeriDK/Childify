@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
 import { Router } from '@angular/router';
+import config from  '../../../../package.json'
 
 @Component({
   selector: 'app-settings-page',
@@ -11,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class SettingsPageComponent implements OnInit {
 
-  private readonly baseUrl = 'http://192.168.1.24:8000';
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 
@@ -78,7 +78,7 @@ export class SettingsPageComponent implements OnInit {
     let promise = new Promise((resolve, reject) =>{
       console.log(this.user.user_id);
   
-      this.http.delete(this.baseUrl + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
+      this.http.delete(config['baseURL'] + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
         resolve(value);
       }, error => {
         if (error.status == 401) {
@@ -101,7 +101,7 @@ export class SettingsPageComponent implements OnInit {
 
     var json = JSON.stringify(data);
 
-    this.http.patch(this.baseUrl + '/user/'+ this.user.user_id + '/settings', json, this.httpHeaders()).subscribe(value => {
+    this.http.patch(config['baseURL'] + '/user/'+ this.user.user_id + '/settings', json, this.httpHeaders()).subscribe(value => {
       resolve(value);
     }, error => {
       if (error.status == 401) {
@@ -139,7 +139,7 @@ export class SettingsPageComponent implements OnInit {
     let promise = new Promise((resolve, reject) =>{
       console.log(this.user.user_id);
       
-      this.http.get(this.baseUrl + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
+      this.http.get(config['baseURL'] + '/user/'+ this.user.user_id + '/settings', this.httpHeaders()).subscribe(value => {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");
@@ -171,7 +171,7 @@ export class SettingsPageComponent implements OnInit {
   
       var json = JSON.stringify(data);
 
-      this.http.post(this.baseUrl + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
+      this.http.post(config['baseURL'] + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");
