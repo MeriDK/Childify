@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import config from  '../../../../package.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
-  baseUrl = 'http://127.0.0.1:8000';
 
   httpHeaders = { headers : new HttpHeaders({'Content-Type': 'application/json'})};
 
@@ -16,7 +16,7 @@ export class RegistrationService {
 
   registerNewUser(data): Observable<any> {
     const body = {email: data.email, password: data.password, isParent: data.isParent, numIcon: data.numIcon};
-    const url = this.baseUrl + '/user/';
+    const url = config['baseURL'] + '/user/';
 
     return this.http.post(url, body, this.httpHeaders);
   }

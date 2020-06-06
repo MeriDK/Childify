@@ -3,19 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode'
+import config from  '../../../package.json'
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-
-  baseUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getPoints(): Observable<any> {
     const httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
     'Authorization':'Bearer '+ this.getAccess()})}}
-    const url = this.baseUrl + '/user/points/'
+    const url = config['baseURL'] + '/user/points/'
     return this.http.get(url, httpHeaders())
   }
 
@@ -38,7 +37,7 @@ export class TokenService {
 
   refreshToken(): Observable<any> {
     const body = { refresh: this.cookieService.get('refresh') };
-    const url = this.baseUrl + '/login/refresh/';
+    const url = config['baseURL'] + '/login/refresh/';
 
     const httpHeadersWithToken = { headers : new HttpHeaders({'Content-Type': 'application/json'})};
     return this.http.post(url, body, httpHeadersWithToken);

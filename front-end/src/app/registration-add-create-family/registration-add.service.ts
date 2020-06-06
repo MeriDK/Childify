@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token.service';
+import config from  '../../../../package.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationAddService {
 
-  baseUrl = 'http://127.0.0.1:8000'
 
   httpHeaders = ()=>{return{ headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
@@ -19,13 +19,13 @@ export class RegistrationAddService {
 
   createNewFamily(data): Observable<any> {
     const body = {name: data.name}
-    const url = this.baseUrl + '/family/'
+    const url = config['baseURL'] + '/family/'
     return this.http.post(url, body, this.httpHeaders())
   }
 
   connectToFamily(data): Observable<any> {
     const body = {}
-    const url = this.baseUrl + '/family/' + data.family_id + '/user/'
+    const url = config['baseURL'] + '/family/' + data.family_id + '/user/'
     return this.http.post(url, body, this.httpHeaders())
   }
 }
