@@ -22,10 +22,13 @@ export class TaskChildComponent implements AfterViewInit {
   isChild =!jwt_decode(this.token.getAccess()).isParent;
   translate = translate
   url = 'task/info/'
+  picture = "../../assets/img/ava-icon/"
+  end = ".png"
   icon;
-  tasks = [{id: -1,category:"", name_task: 'test',point_task: 15,id_child:1,status:2}];
+  tasks = [{id: -1,category:"", name_task: 'test',point_task: 15,id_child:1,status:2, child_icon: ""}];
   constructor(private api: TaskChildService, private token :TokenService) {
       this.getTask()
+      
   }
 
   category(category): void {
@@ -53,12 +56,14 @@ export class TaskChildComponent implements AfterViewInit {
         for (var i = 0; i<this.tasks.length; i++){
           this.category(this.tasks[i].category)
           this.tasks[i].category=this.icon
+          this.tasks[i].child_icon=this.picture+this.tasks[i].child_icon+".png"
         }
       },
       error => {
         console.log(error)
       }
     )
+    console.log("Why",this.tasks)
   }
 
   updateTasktoCheck = (task) =>{

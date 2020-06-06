@@ -14,11 +14,12 @@ import jwt_decode from 'jwt-decode'
 })
 export class TaskCheckComponent implements AfterViewInit{
 
+  picture = "../../assets/img/ava-icon/"
+  
   ngAfterViewInit(): void{
     $('#tab3-link').on("click",() => {this.getTaskCheck()})
     console.log($('#tab3-link'))
     this.getTaskCheck()
-
   }
 
   isChild = !jwt_decode(this.token.getAccess()).isParent;
@@ -26,7 +27,7 @@ export class TaskCheckComponent implements AfterViewInit{
   now = true
   url = "task/info/"
   icon;
-  tasks = [{id: -1,category:"",name_task: 'test',point_task: 15,id_child:1}];
+  tasks = [{id: -1,category:"",name_task: 'test',point_task: 15,id_child:1,child_icon:""}];
   constructor(private api: TaskCheckService, private token :TokenService) {
     this.getTaskCheck();
   }
@@ -57,6 +58,7 @@ export class TaskCheckComponent implements AfterViewInit{
         for (var i = 0; i<this.tasks.length; i++){
           this.category(this.tasks[i].category)
           this.tasks[i].category=this.icon
+          this.tasks[i].child_icon=this.picture+this.tasks[i].child_icon+".png"
         }
       },
       error => {

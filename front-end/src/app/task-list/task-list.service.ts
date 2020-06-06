@@ -16,7 +16,7 @@ export class TaskListService {
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   getTaskList(): Observable<any> {
-    return this.http.get(this.baseUrl + "/task/list?status=todo" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/list?status=1" , {headers: this.httpHeaders})
   }
 
   updateTasktoInProgress(task,id_child): Observable<any> {

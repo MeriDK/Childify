@@ -16,7 +16,7 @@ export class TaskCheckService {
   constructor(private http: HttpClient,private tokenService: TokenService) { }
 
   getTaskList(): Observable<any> {
-    return this.http.get(this.baseUrl + "/task/list?status=check" , {headers: this.httpHeaders})
+    return this.http.get(this.baseUrl + "/task/list?status=3" , {headers: this.httpHeaders})
   }
 
   updateTasktoDone(task): Observable<any> {
