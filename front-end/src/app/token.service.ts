@@ -34,6 +34,27 @@ export class TokenService {
       )
     }) 
 }
+verifyToken(): Observable<any> {
+  const body = { token: this.cookieService.get('refresh') };
+  const url = config['baseURL'] + '/login/verify/';
+
+  const httpHeadersWithToken = { headers : new HttpHeaders({'Content-Type': 'application/json'})};
+  return this.http.post(url, body, httpHeadersWithToken);
+}
+
+verifyTokenSubs(): any {
+  return new Promise((resolve, reject) => {
+    this.verifyToken().subscribe(
+      data => {
+        resolve();
+      },
+      error => {
+        console.log(error);
+        reject(error)
+      }
+    );
+  });
+}
 
   refreshToken(): Observable<any> {
     const body = { refresh: this.cookieService.get('refresh') };
