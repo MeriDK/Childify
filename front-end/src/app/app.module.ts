@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FamilyPageComponent } from './family-page/family-page.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -40,7 +39,6 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     AppComponent,
     FamilyPageComponent,
     NavMenuComponent,
-    RegistrationComponent,
     TaskComponent,
     TaskListComponent,
     LoginPageComponent,
