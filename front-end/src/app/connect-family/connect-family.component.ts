@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { RegistrationAddService } from './registration-add.service';
 import jwt_decode from 'jwt-decode';
 import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
-import $ from 'node_modules/jquery';
 import { connectToFamily, createNewFamily } from './connect.service';
+
 
 @Component({
   selector: 'app-connect-family',
@@ -12,29 +12,28 @@ import { connectToFamily, createNewFamily } from './connect.service';
   styleUrls: ['./connect-family.component.sass'],
   providers: [RegistrationAddService]
 })
-export class ConnectFamilyComponent implements AfterViewInit {
+export class ConnectFamilyComponent implements OnInit {
 
-  isChild = !jwt_decode(this.token.getAccess()).isParent;
+  isParent = jwt_decode(this.token.getAccess()).isParent;
+  isCreate = false;
   data: any;
-  isCreate: boolean;
+  private formBuilder: any;
 
-  constructor(private api: RegistrationAddService, private token: TokenService,
-              private router: Router) {
-    this.data = {family_id: '', username: ''};
+  constructor(private api: RegistrationAddService, private token: TokenService, private router: Router) {
+    this.data = { family_id: '', username: '' };
   }
 
-  ngAfterViewInit(): void {
-    this.setAccessToCreate();
-  }
-
-  setAccessToCreate(): void {
-    if (this.isChild) {
-      $('li.tab--create').css('cursor', 'no-drop');
-      $('li.tab--create').children().addClass('disabled');
-    }
+  ngOnInit(): void {
   }
 
   connectCreateFamily(): void {
+    if (this.data.username === '') {
+      return;
+    }
+    if (!this.isCreate && this.data.family_id === '') {
+      return;
+    }
+
     if (this.isCreate) {
       createNewFamily(this.api, this.token, {username: this.data.username}, this.router);
     }
