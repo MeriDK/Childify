@@ -10,6 +10,8 @@ from Family.models import Family
 from Parent.models import Parent
 from Child.models import Child
 from User.models import User
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 
 class TaskDetail(APIView):
@@ -80,36 +82,26 @@ class TaskCreate(APIView):
             return JsonResponse(serializers.data,status = 400)
 
 
-class ParentTaskStatus(viewsets.ViewSet):
+class ParentTaskStatus(generics.ListCreateAPIView):
+    serializer_class = TaskIconSerializer
+    queryset = Task.object.all()
+    permission_classes = (IsAuthenticated,)
 
-    def list(self, request, id_family=None):
-        if request.user.isParent:
-            user = Parent.object.get(user = request.user)
+    def get_queryset(self):
+
+        status = self.request.query_params.get('status', None)
+        queryset = Task.object.all().filter(status=status)
+        child = 0
+        if self.request.user.isParent:
+            user = Parent.object.filter(user=self.request.user.user_id).first()
         else:
-            user = Child.object.get(user=request.user)
+            user = Child.object.filter(user=self.request.user.user_id).first()
+            child = user.id
+        family = user.family.id
+        queryset = queryset.filter(id_family=family)
 
+        if status != '1' and child:
+            queryset = queryset.filter(id_child=child)
 
-        try:
-            name_status = request.GET.get('status','')
-            if name_status == "inProgress":
-                status = 2
-            elif name_status == "check":
-                status = 3
-            elif name_status == "done":
-                status = 4
+        return queryset
 
-            if name_status == "todo":
-                queryset = Task.object.filter(id_family=user.family, status=1)
-            else:
-                print("OK", request.user.isParent)
-                print(request.user.user_id)
-                if request.user.isParent:
-                    queryset = Task.object.filter(id_family=user.family, status=status)
-                else:
-                    print("Child",status)
-                    queryset = Task.object.filter(id_family=user.family,id_child = request.user, status=status)
-
-        except:
-            queryset = Task.object.filter(id_family=id_family)
-        serializer = TaskSerializer(queryset, many=True)
-        return Response(serializer.data)
