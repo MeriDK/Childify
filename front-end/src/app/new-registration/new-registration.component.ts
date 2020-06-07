@@ -19,9 +19,9 @@ export class NewRegistrationComponent implements OnInit {
   registrationForm: any;
   email: FormControl;
   password: FormControl;
+  activeImg = 1;
 
-  constructor(private api: RegistrationService, private token: TokenService,
-              private router: Router) { }
+  constructor(private api: RegistrationService, private token: TokenService, private router: Router) { }
 
   ngOnInit(): void {
     this.initFormControl();
@@ -43,9 +43,8 @@ export class NewRegistrationComponent implements OnInit {
       email: this.email.value,
       password: this.password.value,
       isParent: $('.radio-group__check-box--parent')[0].checked,
-      numIcon: '4'
+      numIcon: this.activeImg
     };
     registerNewUser(this.api, this.token, data, this.router);
   }
-
 }

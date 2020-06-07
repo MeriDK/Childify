@@ -1,17 +1,56 @@
 <form [formGroup]="registrationForm" novalidate class="login column_center">
-  <img src="../../assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
-  <div class="ava-group">
-    <img src="../../assets/img/ava-icon/1.png" alt="ava"  class="ava-group__main-ava">
-    <div class="ava-group__container">
-        <img src="../../assets/img/ava-icon/1.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/2.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/3.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/4.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/5.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/6.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/7.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/8.png" alt="ava" class="ava-group__ava">
-        <img src="../../assets/img/ava-icon/9.png" alt="ava" class="ava-group__ava">
+  <img src="assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
+  <div class="container ava-group">
+    <div class="row">
+      <div class="col-6 ava-group__padding">
+        <img src="assets/img/ava-icon/{{ activeImg }}.png" alt="ava"  class="ava-group__main-ava">
+      </div>
+      <div class="col-6 ava-group__padding">
+        <div class="container">
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/1.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 1" (click)="activeImg=1">
+              <img src="assets/img/ava-icon-active/1.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 1">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/2.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 2" (click)="activeImg=2">
+              <img src="assets/img/ava-icon-active/2.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 2">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/3.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 3" (click)="activeImg=3">
+              <img src="assets/img/ava-icon-active/3.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 3">
+            </div>
+          </div>
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/4.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 4" (click)="activeImg=4">
+              <img src="assets/img/ava-icon-active/4.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 4">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/5.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 5" (click)="activeImg=5">
+              <img src="assets/img/ava-icon-active/5.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 5">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/6.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 6" (click)="activeImg=6">
+              <img src="assets/img/ava-icon-active/6.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 6">
+            </div>
+          </div>
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/7.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 7" (click)="activeImg=7">
+              <img src="assets/img/ava-icon-active/7.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 7">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/8.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 8" (click)="activeImg=8">
+              <img src="assets/img/ava-icon-active/8.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 8">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon/9.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 9" (click)="activeImg=9">
+              <img src="assets/img/ava-icon-active/9.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 9">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="login__group">

@@ -7,7 +7,6 @@ import { TaskAddComponent } from './task-add/task-add.component';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskInfoChangeComponent } from './task-info-change/task-info-change.component';
 import { FamilyPageComponent } from './family-page/family-page.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
@@ -22,10 +21,6 @@ const routes: Routes = [
   },
   {
     path: 'registration',
-    component: RegistrationComponent
-  },
-  {
-    path: 'new-registration',
     component: NewRegistrationComponent
   },
   {
