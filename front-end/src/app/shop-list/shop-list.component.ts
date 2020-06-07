@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import { getWishList, getOrderList, getReceivedList, addItem, editItem, deleteItem, confirmItem, buyItem, returnItem} from './ShopService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-list',
@@ -16,7 +17,7 @@ import { getWishList, getOrderList, getReceivedList, addItem, editItem, deleteIt
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = jwt_decode(this.tokenService.getAccess()).isParent;
+  isParent = false
   points = 0
   $=$
   translate = translate
@@ -24,9 +25,19 @@ export class ShopListComponent implements OnInit{
   orderGoods = []
   receivedGoods = []
 
-  constructor(private api: ShopService, private tokenService: TokenService) { }
+  constructor(private api: ShopService, private tokenService: TokenService, private router: Router) { }
 
   ngOnInit(): void {
+    if (!this.tokenService.getRefresh()){
+      this.router.navigate(['../login'])
+      return
+    } else {
+      this.tokenService.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+        return
+      })
+    }
+      this.isParent = jwt_decode(this.tokenService.getAccess()).isParent;
       !this.isParent && this.tokenService.getPointsSubs().then(points => {this.points=points.points})
       this.getListData()
       $('input').prop( "disabled", true )  
@@ -35,17 +46,17 @@ export class ShopListComponent implements OnInit{
   }
 
   getListData(): void {
-    getWishList(this.api, this.tokenService).then(data=> {
+    getWishList(this.api, this.tokenService, this.router).then(data=> {
       this.wishGoods=data;
-      getOrderList(this.api, this.tokenService).then(data=> {
+      getOrderList(this.api, this.tokenService, this.router).then(data=> {
         this.orderGoods=data;
-        getReceivedList(this.api, this.tokenService).then(data=> {
+        getReceivedList(this.api, this.tokenService, this.router).then(data=> {
           this.receivedGoods=data;
           $( "div" ).off();
           this.initEventListener();
         })
       })
-    })
+    }).catch(error=>{})
   }
 
   initEventListener(): void {
@@ -230,7 +241,7 @@ export class ShopListComponent implements OnInit{
     "about":$('.modal.add-modal.active .about--value').val(),
     "category":$('.modal.add-modal.active').attr('category')};
     if (this.isParent) {
-      addItem(this.api,data, this.tokenService).then(()=>{
+      addItem(this.api,data, this.tokenService, this.router).then(()=>{
         this.closeModal();
         this.getListData()
       });
@@ -246,7 +257,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
-    deleteItem(this.api,{"id":element[0].id}, this.tokenService)
+    deleteItem(this.api,{"id":element[0].id}, this.tokenService, this.router)
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('delete-start');
@@ -271,7 +282,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
-    buyItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
+    buyItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('moving-start');
@@ -300,7 +311,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
-    confirmItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
+    confirmItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('confirm-start');
@@ -327,7 +338,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
-    returnItem(this.api,{"id":element[0].id}, this.tokenService).then(()=>{
+    returnItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('back-start');
@@ -360,7 +371,7 @@ export class ShopListComponent implements OnInit{
     "category":$('.modal.edit-modal.active').attr('category'),
     "name": $('.modal.edit-modal.active .title--value').val()};
     if (this.isParent) {
-      editItem(this.api,data, this.tokenService).then(()=>{
+      editItem(this.api,data, this.tokenService, this.router).then(()=>{
         this.closeModal();
         this.getListData();
       });;

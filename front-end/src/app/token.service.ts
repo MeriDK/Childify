@@ -3,19 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode'
+import config from  '../../../package.json'
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-
-  baseUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getPoints(): Observable<any> {
     const httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
     'Authorization':'Bearer '+ this.getAccess()})}}
-    const url = this.baseUrl + '/user/points/'
+    const url = config['baseURL'] + '/user/points/'
     return this.http.get(url, httpHeaders())
   }
 
@@ -35,10 +34,31 @@ export class TokenService {
       )
     }) 
 }
+verifyToken(): Observable<any> {
+  const body = { token: this.cookieService.get('refresh') };
+  const url = config['baseURL'] + '/login/verify/';
+
+  const httpHeadersWithToken = { headers : new HttpHeaders({'Content-Type': 'application/json'})};
+  return this.http.post(url, body, httpHeadersWithToken);
+}
+
+verifyTokenSubs(): any {
+  return new Promise((resolve, reject) => {
+    this.verifyToken().subscribe(
+      data => {
+        resolve();
+      },
+      error => {
+        console.log(error);
+        reject(error)
+      }
+    );
+  });
+}
 
   refreshToken(): Observable<any> {
     const body = { refresh: this.cookieService.get('refresh') };
-    const url = this.baseUrl + '/login/refresh/';
+    const url = config['baseURL'] + '/login/refresh/';
 
     const httpHeadersWithToken = { headers : new HttpHeaders({'Content-Type': 'application/json'})};
     return this.http.post(url, body, httpHeadersWithToken);
