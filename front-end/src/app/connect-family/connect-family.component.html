@@ -1,13 +1,16 @@
 <div class="login column_center">
   <img src="../../assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
-  <div class="login__group connect-form">
+  <div class="login__group">
     <input type="text" [(ngModel)]="data.username" placeholder="Ім'я для відображення" class="login__input">
-    <input type="text" *ngIf="this.isCreate===false" [(ngModel)]="data.family_id" placeholder="ID Сім'ї" class="login__input">
+    <input type="text" *ngIf="!this.isCreate" [(ngModel)]="data.family_id" placeholder="ID Сім'ї" class="login__input">
     <button class="login__button" (click)="connectCreateFamily()" type="button">
       <span></span>
-      Приєднатися
+      <span *ngIf="!this.isCreate">Приєднатися</span>
+      <span *ngIf="this.isCreate">Створити сім'ю</span>
     </button>
   </div>
+  <div></div>
+  <div></div>
 </div>
 <ul class="nav nav-tabs connect-menu">
   <li class="nav-item connect-menu__item" *ngIf="isCreate" (click)="isCreate=false">
@@ -26,23 +29,4 @@
     <img src="../../assets/img/connect/CreateNonActive.png" alt="connect-icon" class="connect-menu__img">
   </li>
 </ul>
-<!---
-<div class="connect-menu">
 
-  <div *ngIf="this.isParent===true">
-      <img src="../../assets/img/connect/Connect.png" alt="connect-icon" class="connect-menu__img connect-menu__img_padding-right">
-      <img src="assets/img/connect/CreateActive.png" alt="create-icon" class="connect-menu__img">
-  </div>
-
-    <div *ngIf="isCreate===false">
-      <img src="../../assets/img/connect/ConnectActive.png" alt="connect-icon" class="connect-menu__img connect-menu__img_padding-right">
-      <img src="assets/img/connect/Create.png" alt="create-icon" class="connect-menu__img">
-    </div>
-  </div>
-  <div *ngIf="isParent===false">
-    <img src="../../assets/img/connect/ConnectActive.png" alt="connect-icon" class="connect-menu__img connect-menu__img_padding-right">
-    <img src="assets/img/connect/CreateNonActive.png" alt="create-icon" class="connect-menu__img">
-  </div>
-</div>
-
---->
