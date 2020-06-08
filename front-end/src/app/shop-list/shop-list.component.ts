@@ -5,7 +5,8 @@ import { ShopService } from './shop.service';
 import jwt_decode from 'jwt-decode'
 import { TokenService } from '../token.service';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
-import { addNewGood, getWishList } from './ShopService';
+import { getWishList, getOrderList, getReceivedList, addItem, editItem, deleteItem, confirmItem, buyItem, returnItem} from './ShopService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-list',
@@ -16,62 +17,46 @@ import { addNewGood, getWishList } from './ShopService';
 export class ShopListComponent implements OnInit{
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = true/*jwt_decode(this.tokenService.getAccess()).isParent*/;
-  translate = translate
+  isParent = false
+  points = 0
   $=$
-  numCategory = 3
-  wishGoods = [
-    {
-      title : "Солодощі",
-      points: "123",
-      about: "about",
-      numIcon: 1
-    },
-    {
-      title : "Іграшка",
-      points: "300",
-      about: "about",
-      numIcon: 2
-    },
-    {
-      title : "Морозиво",
-      points: "300",
-      about: "about",
-      numIcon: 3
-    },
-    {
-      title : "Книжка",
-      points: "300",
-      about: "about",
-      numIcon: 4
-    },
-    {
-      title : "Фільм",
-      points: "300",
-      about: "about",
-      numIcon: 5
-    },
-    {
-      title : "Квиток в кіно",
-      points: "300",
-      about: "about",
-      numIcon: 6
-    },
-    {
-      title : "Комп'ютер",
-      points: "300",
-      about: "about",
-      numIcon: 7
-    }
-  ]
-  constructor(private api: ShopService, private tokenService: TokenService) { }
+  translate = translate
+  wishGoods = []
+  orderGoods = []
+  receivedGoods = []
+
+  constructor(private api: ShopService, private tokenService: TokenService, private router: Router) { }
 
   ngOnInit(): void {
-    /*getWishList(this.api, this.tokenService).then(data=> {
-      //this.wishGoods=data;
-      
-    })*/
-    this.initEventListener();
+    if (!this.tokenService.getRefresh()){
+      this.router.navigate(['../login'])
+      return
+    } else {
+      this.tokenService.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+        return
+      })
+    }
+      this.isParent = jwt_decode(this.tokenService.getAccess()).isParent;
+      !this.isParent && this.tokenService.getPointsSubs().then(points => {this.points=points.points})
+      this.getListData()
+      $('input').prop( "disabled", true )  
+      $('.add-modal input').prop( "disabled", false )
+      $('.edit-modal input').prop( "disabled", false )  
+  }
+
+  getListData(): void {
+    getWishList(this.api, this.tokenService, this.router).then(data=> {
+      this.wishGoods=data;
+      getOrderList(this.api, this.tokenService, this.router).then(data=> {
+        this.orderGoods=data;
+        getReceivedList(this.api, this.tokenService, this.router).then(data=> {
+          this.receivedGoods=data;
+          $( "div" ).off();
+          this.initEventListener();
+        })
+      })
+    }).catch(error=>{})
   }
 
   initEventListener(): void {
@@ -86,8 +71,14 @@ export class ShopListComponent implements OnInit{
         }
         if (!$(element).hasClass('selected') && !deselect) {
           $(element).addClass('active')
-          
-          var elementContent = {"numIcon":element.__ngContext__[37], "title":element.__ngContext__[38],"price":element.__ngContext__[39]}
+          var elementContent
+          if (this.activeTab()=='inStock-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[39], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[38] }
+          if (this.activeTab()=='received-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[38], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[36]}
+            if (this.activeTab()=='bought-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[46], "name":element.__ngContext__[48],"points":element.__ngContext__[49],"about":element.__ngContext__[44]}
+         
           this.showModal(elementContent);
         }
         clearTimeout(pressTimer);
@@ -144,40 +135,77 @@ export class ShopListComponent implements OnInit{
       $('.category--value').on('click', (event)=>{
         event.stopPropagation();
         this.openDropdown(event.target);
-      });       
-    }, 100)
+      });
+
+    }, 1)
   }
+
+   updatePoints(): any {
+    !this.isParent && this.tokenService.getPointsSubs().then(async points => {
+      while(this.points != points.points)
+      {
+        var point = Math.floor(Math.abs( points.points - this.points)/100)+1
+        if(this.points < points.points)
+          await this.addPoint(point)
+        else
+          await this.deletePoint(point)
+      }
+      
+    })
+  
+  }
+
+  addPoint(point): any {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.points += point
+        resolve()
+      }, 0.01);
+    })
+  }
+
+  deletePoint(point): any {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.points -= point
+        resolve()
+      }, 0.01);
+    })
+  }
+
+  
   
   openDropdown(element): any {
     var dropdown =$(element.parentNode.querySelector('.category--value__dropdown'))
+    var modal =  $('.'+element.parentNode.parentNode.classList[1])
     dropdown.toggleClass('active')
     if(dropdown.hasClass('active')) {
     $('.category--value__dropdown.active .category.category1').on('click',()=>{
-      $('.edit-modal').attr('numicon',1)
+      modal.attr('category',1)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category2').on('click',()=>{
-      $('.edit-modal').attr('numicon',2)
+      modal.attr('category',2)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category3').on('click',()=>{
-      $('.edit-modal').attr('numicon',3)
+      modal.attr('category',3)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category4').on('click',()=>{
-      $('.edit-modal').attr('numicon',4)
+      modal.attr('category',4)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category5').on('click',()=>{
-      $('.edit-modal').attr('numicon',5)
+      modal.attr('category',5)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category6').on('click',()=>{
-      $('.edit-modal').attr('numicon',6)
+      modal.attr('category',6)
       dropdown.removeClass('active')
     })
     $('.category--value__dropdown.active .category.category7').on('click',()=>{
-      $('.edit-modal').attr('numicon',7)
+      modal.attr('category',7)
       dropdown.removeClass('active')
     })
   
@@ -188,7 +216,7 @@ export class ShopListComponent implements OnInit{
 
   selectNode(element): boolean {
     var activeTab = this.activeTab();
-    if (activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
+    if (!$('.selected').length && activeTab!="received-modal" && !(activeTab=="bought-modal" && this.isParent)) {
       while (element.localName!='li') {
         element = element.parentNode;
       }
@@ -208,7 +236,18 @@ export class ShopListComponent implements OnInit{
   }
 
   createNode(): void {
-    this.closeModal();
+    var data = {"name": $('.modal.add-modal.active .title--value').val(),
+    "points":$('.modal.add-modal.active .price--value input').val(),
+    "about":$('.modal.add-modal.active .about--value').val(),
+    "category":$('.modal.add-modal.active').attr('category')};
+    if (this.isParent) {
+      addItem(this.api,data, this.tokenService, this.router).then(()=>{
+        this.closeModal();
+        this.getListData()
+      });
+    }
+    
+    
   }
 
   deleteNode(): void {
@@ -218,6 +257,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    deleteItem(this.api,{"id":element[0].id}, this.tokenService, this.router)
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('delete-start');
@@ -242,6 +282,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    buyItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('moving-start');
@@ -253,10 +294,14 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            
+            this.getListData();
           },300)
         },200)
       },500)
     },time)    
+    this.updatePoints()
+    })
   }
 
   confirmNode(): void {
@@ -266,6 +311,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    confirmItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('confirm-start');
@@ -277,10 +323,12 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            this.getListData();
           },300)
         },200)
       },500)
     },time)    
+    })
   }
 
   backNode(): void {
@@ -290,6 +338,7 @@ export class ShopListComponent implements OnInit{
       element = $('.li-selectable.selected');
       time = 0;
     }
+    returnItem(this.api,{"id":element[0].id}, this.tokenService, this.router).then(()=>{
     this.closeModal();
     setTimeout(()=> {
       $(element).toggleClass('back-start');
@@ -301,10 +350,14 @@ export class ShopListComponent implements OnInit{
             $(element).toggleClass('hidden');
             $(".footer--shop-list.tab1").removeClass('active');
             $('.selected').removeClass('selected');
+            
+            this.getListData();
           },300)
         },200)
       },500)
-    },time)    
+    },time)
+    this.updatePoints()
+     })
   }
 
   addNode(): void {
@@ -312,31 +365,41 @@ export class ShopListComponent implements OnInit{
   }
 
   editNode(): void {
-    this.closeModal();
+    var data = {"id":$('.modal.edit-modal.active')[0].id,
+    "points":$('.modal.edit-modal.active .price--value input').val(),
+    "about":$('.modal.edit-modal.active .about--value').val(),
+    "category":$('.modal.edit-modal.active').attr('category'),
+    "name": $('.modal.edit-modal.active .title--value').val()};
+    if (this.isParent) {
+      editItem(this.api,data, this.tokenService, this.router).then(()=>{
+        this.closeModal();
+        this.getListData();
+      });;
+    }
   }
 
-  showEditModal(elementContent): void {
-    $(".modal.edit-modal").addClass('active');
-    $(".modal.edit-modal").attr("numIcon",elementContent.numIcon);
-    $(".modal.edit-modal").attr("title",elementContent.title);
-    $(".modal.edit-modal").attr("price",elementContent.price);
-  }
-  
   closeModal(): void {
     var classs = ".modal"+".active";
     $(classs).removeClass('active');
     $(".good-li--shop-list.active").removeClass('active')
   }
   showModal(elementContent): void {
+    var classs =""; 
     if(this.activeTab()=="inStock-modal" && this.isParent) {
-      this.showEditModal(elementContent);
+      classs=".modal.edit-modal"
+      $(classs).addClass('active');
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
-      var classs = ".modal.received-modal";
+      classs = ".modal.received-modal";
       $(classs).addClass('active');
     } else {
-      var classs = ".modal."+this.activeTab();
+      classs = ".modal."+this.activeTab();
       $(classs).addClass('active');
     }
+    $(classs).attr("category",elementContent.category);
+    $(classs).attr("name",elementContent.name);
+    $(classs).attr("points",elementContent.points);
+    $(classs).attr("id",elementContent.id);
+    $(classs).attr("about",elementContent.about);
   }
 
   selectTab(tabId: number) {
@@ -360,6 +423,16 @@ export class ShopListComponent implements OnInit{
       return "received-modal"
     }
     return ""
+  }
+
+  categoryStr(numCategory) {
+    if (numCategory==1) { return "Солодощі"}
+    if (numCategory==2) { return "Іграшка"}
+    if (numCategory==3) { return "Морозиво"}
+    if (numCategory==4) { return "Книжка"}
+    if (numCategory==5) { return "Фільм"}
+    if (numCategory==6) { return "Квиток в кіно"}
+    if (numCategory==7) { return "Комп'ютер"}
   }
  
 }

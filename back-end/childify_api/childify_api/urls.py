@@ -20,9 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('User.urls')),
     path('', include('Family.urls')),
-    path('', include('Prize.urls')),
-    path('', include('Child_prize.urls')),
     path('', include('Settings.urls')),
     path('', include('Task.urls')),
-    path('', include('Shop.urls'))
+    path('', include('Shop.urls')),
+    path('', include('Child.urls'))
 ]

@@ -2,20 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPageComponent} from './login-page/login-page.component';
-import { TaskComponent } from "./task/task.component";
-import { TaskAddComponent } from "./task-add/task-add.component";
-import { TaskInfoComponent } from "./task-info/task-info.component";
-import { TaskInfoChangeComponent } from "./task-info-change/task-info-change.component";
-import { FamilyPageComponent } from "./family-page/family-page.component";
-import { RegistrationComponent } from "./registration/registration.component";
-import { RegistrationAddCreateFamilyComponent } from "./registration-add-create-family/registration-add-create-family.component";
+import { TaskComponent } from './task/task.component';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { TaskInfoComponent } from './task-info/task-info.component';
+import { TaskInfoChangeComponent } from './task-info-change/task-info-change.component';
+import { FamilyPageComponent } from './family-page/family-page.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
-import { LoginComponent } from './login/login.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { ConnectFamilyComponent } from "./connect-family/connect-family.component";
-import { CreateFamilyComponent } from "./create-family/create-family.component";
+import { ConnectFamilyComponent } from './connect-family/connect-family.component';
+import {NewRegistrationComponent} from './new-registration/new-registration.component';
 
 const routes: Routes = [
   {
@@ -23,24 +20,12 @@ const routes: Routes = [
     component: LoginPageComponent
   },
   {
-    path: 'new-login',
-    component: LoginComponent
-  },
-  {
     path: 'registration',
-    component: RegistrationComponent
+    component: NewRegistrationComponent
   },
   {
     path: 'connect-family',
-    component: RegistrationAddCreateFamilyComponent
-  },
-  {
-    path: 'new-connect-family',
     component: ConnectFamilyComponent
-  },
-  {
-    path: 'new-create-family',
-    component: CreateFamilyComponent
   },
   {
     path: 'family',

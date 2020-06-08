@@ -276,8 +276,8 @@
                     .child {
                         .li-child {
                             display: initial;
-                            margin-block-start: -61px;
-                            margin-inline-start: -30px;
+                            margin-block-start: -65px;
+                            margin-inline-start: -54px;
                         }
                         div.li-selectable {
                             margin-inline-start: 30px;
@@ -683,6 +683,60 @@
                     margin-top: 9px;
                     margin-left: 5px;
                     zoom: 0.4;
+                }
+            }
+            .ico1 {
+
+                svg {
+                    margin-left: 17px !important;
+                    margin-top: 8px !important;
+                }
+            }
+            .ico2 {
+                margin-top: 5px;
+            
+                svg {
+                    margin-left: 5px !important;
+                    margin-top: 20px !important;
+                }
+            }
+            .ico3 {
+            
+                svg {
+                    margin-left: 13px !important;
+                    margin-top: 8px !important;
+                }
+            }
+            .ico4 {
+                margin-top: 3px;
+            
+                svg {
+                    margin-left: 19px !important;
+                    margin-top: 16px !important;
+                }
+            }
+            .ico5 {
+                margin-top: 3px;
+            
+                svg {
+                    margin-left: 18px !important;
+                    margin-top: 18px !important;
+                }
+            }
+            .ico6 {
+                margin-top: 3px;
+            
+                svg {
+                    margin-left: 17px !important;
+                    margin-top: 17px !important;
+                }
+            }
+            .ico7 {
+                margin-top: 3px;
+            
+                svg {
+                    margin-left: 6px !important;
+                    margin-top: 19px !important;
                 }
             }
             .price {

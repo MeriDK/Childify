@@ -1,0 +1,77 @@
+.login
+  padding: 2rem
+  min-height: 100vh
+  &__logo
+    width: 40vh
+    margin-top: 2rem
+  &__group
+    width: 45vh
+    input::placeholder
+      color: rgba(119, 142, 148, 0.25)
+  &__input
+    height: 8vh
+    min-width: 100%
+    outline: 0
+    border-radius: 8px
+    box-shadow: inset 3px 3px 4px rgba(0, 0, 0, 0.05)
+    border: 1px solid rgba(119, 142, 148, 0.25)
+    margin-top: 1rem
+    padding: 1rem 0 1rem 1.5rem
+  &__button
+    background: #FF5025
+    border-radius: 8px
+    width: 100%
+    height: 8vh
+    color: white
+    font-size: 1.3rem
+    border: 0
+    outline: 0
+    margin-top: 1rem
+  &__link
+    text-decoration: underline
+    color: #778E94
+    margin-top: 0.9rem
+  &__error
+    color: #FF5025
+    text-align: center
+
+.column_center
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.ava-group
+  height: 23vh
+  width: 46vh
+  margin-top: 1rem
+  &__main-ava
+    height: 23vh
+  &__ava
+    height: 8vh
+  &__padding
+    padding: 0
+
+.radio-group
+  display: flex
+  width: 40vh
+  justify-content: space-between
+  margin-top: 1rem
+  &__container
+    display: flex
+    align-items: center
+  &__label
+    color: #778E94
+    margin-left: 0.7rem
+  &__check-box
+    display: none
+    & + label
+      background: url("../../assets/img/mark/UnChecked.png") no-repeat
+      height: 34px
+      width: 34px
+      margin: 0
+    &:checked + label
+      background: url("../../assets/img/mark/Checked.png") no-repeat
+      height: 34px
+      width: 34px
+      margin: 0
+

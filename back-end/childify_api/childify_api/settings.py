@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import json
 from datetime import timedelta
 
 
@@ -27,11 +28,21 @@ SECRET_KEY = 'wd1m10s!gbav9&%owj!%z6qrr60sp)4(%k3h@ky86$ndb=f0g6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:4200"
-]
+with open('./package.json') as json_file:
+    data = json.load(json_file)
+    IP = data['IP']
+    print(IP)
+    ALLOWED_HOSTS = [
+        IP
+    ]
+    baseURL = data['baseURL']
+    print(baseURL)   
+    CORS_ORIGIN_WHITELIST = [
+       baseURL 
+    ]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,9 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Child.apps.ChildConfig',
-    'Child_prize.apps.ChildPrizeConfig',
     'Family.apps.FamilyConfig',
-    'Prize.apps.PrizeConfig',
     'Parent.apps.ParentConfig',
     'User.apps.UserConfig',
     'Shop.apps.ShopConfig',

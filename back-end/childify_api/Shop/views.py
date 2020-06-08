@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -9,119 +10,116 @@ from Child.models import Child
 from Parent.models import Parent
 
 
-def check_family(user, family):
-    user_info = Child.object.filter(user=user).first() or Parent.object.filter(user=user).first()
-    if user_info.family.id != int(family):
-        return False
-    return True
-
-
 class ItemListView(generics.ListCreateAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        queryset = Item.objects.all()
-        family = self.request.query_params.get('family', None)
-        child = self.request.query_params.get('child', None)
+        """
+        гет масиву для сім'ї в якій є юзер (дітей, батьків) з певним статусом
+        GET  /item/?status=0
+        """
         status = self.request.query_params.get('status', None)
+        queryset = Item.objects.all().filter(status=status)
 
+        child = 0
         if self.request.user.isParent:
-            if child or not family or not status:
-                raise ValidationError(detail='wrong filter usage')
+            user = Parent.object.filter(user=self.request.user.user_id).first()
         else:
-            if bool(family) and (status != '0' or bool(child)):
-                raise ValidationError(detail='wrong filter usage')
-            if bool(child) and (status not in ('1', '2') or bool(family)):
-                raise ValidationError(detail='wrong filter usage')
+            user = Child.object.filter(user=self.request.user.user_id).first()
+            child = user.id
+        family = user.family.id
+        queryset = queryset.filter(family=family)
 
-        if not check_family(self.request.user.user_id, family):
-            raise ValidationError(detail='user isnt in this family')
-
-        if family:
-            queryset = queryset.filter(family=family)
-        if child:
+        if status != '0' and child:
             queryset = queryset.filter(child=child)
-        if status:
-            queryset = queryset.filter(status=status)
         return queryset
 
     def post(self, request, *args, **kwargs):
-        if request.data.get('child', None):
-            return Response({'message': 'no child in post'}, status=400)
+        """
+        пост створення нового айтему - можуть тільки батьки
+        POST  /item/
+        """
+        if request.data.get('child', None) or request.data.get('family', None) or request.data.get('status', None):
+            return Response({'message': 'no child family or status in request'}, status=400)
         if not request.user.isParent:
-            return Response({'message': 'item can create only parent'}, status=400)
-        if not check_family(request.user.user_id, request.data.get('family')):
-            return Response({'message': 'user isnt in this family'}, status=400)
+            return Response({'message': 'item can be created only by parent'}, status=400)
+
+        user = Parent.object.filter(user=self.request.user.user_id).first()
+        family = user.family.id
+        request.data['family'] = family
         return self.create(request, *args, **kwargs)
 
 
-class ItemView(generics.RetrieveUpdateDestroyAPIView):
+def patch_check(request, kwargs, check_status):
+
+    queryset = Item.objects.all()
+    item = queryset.filter(id=kwargs['pk']).first()
+
+    # check if request is from child
+    if request.user.isParent != 0:
+        return f'available only for child'
+
+    # check if child and item have same families
+    child = Child.object.filter(user=request.user.user_id).first()
+    if item.family != child.family:
+        return 'wrong family'
+
+    # check for correct status
+    if item.status != check_status:
+        return f'status {check_status} only'
+
+    # check if child from request and item child are similar
+    if check_status == 1 and child.id != item.child.id:
+        return 'item belongs to another child'
+
+    # check for points
+    if check_status == 0 and child.points < item.points:
+        return 'not enough points'
+
+    # everything is OK
+    return 'OK'
+
+
+def patch_func(request, kwargs, check_status, set_status):
+    check = patch_check(request, kwargs, check_status)
+    if check != 'OK':
+        return Response({'message': check}, status=400)
+
+    item = Item.objects.all().filter(id=kwargs['pk']).first()
+    child = Child.object.filter(user=request.user.user_id).first()
+
+    data = {}
+    # receive
+    if set_status == 1:
+        child.points -= item.points
+        data['child'] = child.id
+    # return
+    elif set_status == 0:
+        child.points += item.points
+        data['child'] = None
+    child.save()
+
+    data['status'] = set_status
+    request._full_data = data
+    return request
+
+
+class ItemReceiveView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
     permission_classes = (IsAuthenticated,)
 
-    def delete(self, request, *args, **kwargs):
-        queryset = Item.objects.all()
-        item = queryset.filter(id=self.kwargs['pk']).first()
-        if not check_family(request.user.user_id, item.family.id):
-            return Response({'message': 'user isnt in this family'}, status=400)
-        if not request.user.isParent:
-            return Response({'message': 'item can delete only parent'}, status=400)
-        if item.child:
-            return Response({'message': 'you cant delete item if child chose it'}, status=400)
-        return self.destroy(request, *args, **kwargs)
-
     def patch(self, request, *args, **kwargs):
-        if request.data.get('child', None):
-            return Response({'message': 'cant change child, use /confirm or /set-child instead'}, status=400)
-        if request.data.get('family', None):
-            return Response({'message': 'changing family is forbidden'}, status=400)
-
-        item = Item.objects.all().filter(id=self.kwargs['pk']).first()
-        if not check_family(request.user.user_id, item.family.id):
-            return Response({'message': 'user isnt in this family'}, status=400)
-        if not request.user.isParent:
-            return Response({'message': 'item can update only parent'}, status=400)
-        return self.partial_update(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return Response(status=405)
-
-
-class ItemSetChildView(generics.UpdateAPIView):
-    serializer_class = ItemSerializer
-    queryset = Item.objects.all()
-    permission_classes = (IsAuthenticated,)
-
-    def patch(self, request, *args, **kwargs):
-        queryset = Item.objects.all()
-        item = queryset.filter(id=self.kwargs['pk']).first()
-
-        if item.child:
-            return Response({'message': 'child already set'}, status=400)
-
-        child = request.data.get('child', None)
-        if not child:
-            return Response({'message': 'child info should be in body'}, status=400)
-
-        item_child = Child.object.filter(id=child).first()
-        if item_child.family != item.family:
-            return Response({'message': 'child not in this family'}, status=400)
-
-        if not check_family(request.user.user_id, item.family.id):
-            return Response({'message': 'user isnt in this family'}, status=400)
-        if request.user.isParent:
-            return Response({'message': 'item can set child only child'}, status=400)
-
-        data = {
-            'child': child,
-            'status': 1
-        }
-        # delete all unnecessary fields and set needed data
-        request._full_data = data
-        return self.partial_update(request, *args, **kwargs)
+        """
+        патч щоб редагувати статус - можуть тільки діти
+        PATCH  /item/1/receive/              0 => 1           знімає бали
+        """
+        patch_res = patch_func(request, self.kwargs, 0, 1)
+        if isinstance(patch_res, Response):
+            return patch_res
+        return self.partial_update(patch_res, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         return Response(status=405)
@@ -133,23 +131,85 @@ class ItemConfirmView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def patch(self, request, *args, **kwargs):
-        queryset = Item.objects.all()
-        item = queryset.filter(id=self.kwargs['pk']).first()
+        """
+        патч щоб редагувати статус - можуть тільки діти
+        PATCH  /item/1/confirm/             1 => 2
+        """
+        patch_res = patch_func(request, self.kwargs, 1, 2)
+        if isinstance(patch_res, Response):
+            return patch_res
+        return self.partial_update(patch_res, *args, **kwargs)
 
-        if item.child is None:
-            return Response({'message': 'child should be set'}, status=400)
+    def put(self, request, *args, **kwargs):
+        return Response(status=405)
 
-        if not check_family(request.user.user_id, item.family.id):
-            return Response({'message': 'user isnt in this family'}, status=400)
-        if request.user.isParent:
-            return Response({'message': 'item can validate only child'}, status=400)
 
-        data = {
-            'status': 2
-        }
-        # delete all unnecessary fields and set needed data
-        request._full_data = data
+class ItemReturnView(generics.UpdateAPIView):
+    serializer_class = ItemSerializer
+    queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    def patch(self, request, *args, **kwargs):
+        """
+        патч щоб редагувати статус - можуть тільки діти
+        PATCH  /item/1/return/                1 => 0          вертає бали
+        """
+        patch_res = patch_func(request, self.kwargs, 1, 0)
+        if isinstance(patch_res, Response):
+            return patch_res
+        return self.partial_update(patch_res, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return Response(status=405)
+
+
+def item_check(request, kwargs):
+
+    item = Item.objects.all().filter(id=kwargs['pk']).first()
+
+    # check if request is from parent
+    if request.user.isParent != 1:
+        return f'available only for parent'
+
+    # check for correct status
+    if item.status != 0:
+        return 'status 0 only'
+
+    # check if parent and item have same families
+    parent = Parent.object.filter(user=request.user.user_id).first()
+    if item.family != parent.family:
+        return 'wrong family'
+
+    # everything is OK
+    return 'OK'
+
+
+class ItemView(generics.UpdateAPIView, generics.DestroyAPIView):
+    serializer_class = ItemSerializer
+    queryset = Item.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    def patch(self, request, *args, **kwargs):
+        """
+        редагування - можуть тільки батьки, коли статус 0
+        PATCH /item/1/
+        """
+        item_check_res = item_check(request, self.kwargs)
+        if item_check_res != 'OK':
+            return Response({'message': item_check_res}, status=400)
+        if 'child' in request.data or 'family' in request.data or 'status' in request.data:
+            return Response({'message': 'cant change this field'}, status=400)
         return self.partial_update(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         return Response(status=405)
+
+    def delete(self, request, *args, **kwargs):
+        """
+        деліт щоб видаляти призи - можуть тільки батьки, коли статус 0
+        DELETE  /item/1/
+        """
+        item_check_res = item_check(request, self.kwargs)
+        if item_check_res != 'OK':
+            return Response({'message': item_check_res}, status=400)
+        return self.destroy(request, *args, **kwargs)

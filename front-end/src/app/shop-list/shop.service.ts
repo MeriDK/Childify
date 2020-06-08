@@ -2,42 +2,72 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token.service';
+import config from  '../../../../package.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  baseUrl = 'http://127.0.0.1:8000'
 
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
-  'Authorization':'Bearer '+ 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg5NzQ4MDAyLCJqdGkiOiIzNDk1ZjI3NjFjMGU0ZTRkOWJjMDRiMjRmYmU5ZmNjNiIsInVzZXJfaWQiOjEsImlzUGFyZW50Ijp0cnVlfQ.zrzzXKfatl9zDVPQJcCIYwnWyHRW6Cr2UZl0LoOdfXo'/*+this.tokenService.getAccess()*/})}}
+  'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 
-  constructor(private http: HttpClient, private tokenService: TokenService) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  getWishList(): Observable<any> {
-    const url = this.baseUrl + '/prize/?family_id=1'
-
+  getPoints(): Observable<any> {
+    const url = config['baseURL'] + '/user/points'
     return this.http.get(url, this.httpHeaders())
   }
 
-  getWishListChild(): Observable<any> {
-    const url = this.baseUrl + '/child_prize/?family_id=1'
-
-    return this.http.get(url, this.httpHeaders())
+  getWishList(api): Observable<any> {
+    const url = config['baseURL'] + '/item/?status=0'
+    return api.http.get(url, api.httpHeaders())
   }
 
-  addNewGood(data): Observable<any> {
-    const body = {name: data.title, family_id: "1", points: data.price, about: data.about}
-    const url = this.baseUrl + '/prize/'
-
-    return this.http.post(url, body, this.httpHeaders())
+  getOrderList(api): Observable<any> {
+    const url = config['baseURL'] + '/item/?status=1'
+    return api.http.get(url, api.httpHeaders())
   }
 
-  addNewGoodChild(data): Observable<any> {
-    const body = {name: data.title, family_id: "1", points: data.price, about: data.about}
-    const url = this.baseUrl + '/child_prize/'
-
-    return this.http.post(url, body, this.httpHeaders())
+  getReceivedList(api): Observable<any> {
+    const url = config['baseURL'] + '/item/?status=2'
+    return api.http.get(url, api.httpHeaders())
   }
+
+  addItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'
+    const body = {"points":data.points,"name":data.name,"about":data.about,"category":data.category}
+    return api.http.post(url, body, api.httpHeaders())
+  }
+
+  buyItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'+data.id+'/receive/'
+    const body = {}
+    return api.http.patch(url, body, api.httpHeaders())
+  }
+
+  confirmItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'+data.id+'/confirm/'
+    const body = {}
+    return api.http.patch(url, body, api.httpHeaders())
+  }
+  returnItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'+data.id+'/return/'
+    const body = {}
+    return api.http.patch(url, body, api.httpHeaders())
+  }
+
+  editItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'+data.id+'/'
+    console.log(data.name)
+    const body = {"points":data.points,"name":data.name,"about":data.about,"category":data.category}
+    return api.http.patch(url, body, api.httpHeaders())
+  }
+
+  deleteItem(api, data): Observable<any> {
+    const url = config['baseURL'] + '/item/'+data.id+'/'
+    return api.http.delete(url, api.httpHeaders())
+  }
+
 }

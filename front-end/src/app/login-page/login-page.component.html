@@ -1,30 +1,21 @@
-<div class="login-page column_center">
-  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-  <img src="../../assets/img/logo.png" alt="logo" class="login-page__logo">
-
+<div class="login column_center">
+  <img src="assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo logo_margin">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="column_center">
-    <div class="login-page__container column_center">
-      <label for="username" class="login-page__label">Username</label>
-      <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Enter Username" class="login-page__input">
-      <div *ngIf="submitted && f.username.errors">
-          <div *ngIf="f.username.errors.required">Username is required</div>
+    <div class="login__group">
+      <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Електронна адреса" class="login__input">
+      <div *ngIf="submitted && f.email.errors">
+          <div *ngIf="f.email.errors.required">Email is required</div>
       </div>
-    </div>
-    <div class="login-page__container column_center">
-      <label for="password" class="login-page__label">Password</label>
-      <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" class="login-page__input">
+      <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Пароль" class="login__input">
       <div *ngIf="submitted && f.password.errors">
         <div *ngIf="f.password.errors.required">Password is required</div>
       </div>
     </div>
-    <button [disabled]="loading" class="login-page__button">
+    <div class="login__link text_margin" routerLink="/change-password">Забув пароль?</div>
+    <button [disabled]="loading" class="login__button">
       <span *ngIf="loading"></span>
-      LOGIN
+      Увійти
     </button>
   </form>
-
-  <div class="login-page__text">
-    Don't have account?
-    <span routerLink="/registration" class="login-page__text_link">Sign up</span>
-  </div>
+  <div class="login__link" routerLink="/new-registration">Зареєструватись</div>
 </div>

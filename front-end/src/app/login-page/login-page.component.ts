@@ -9,7 +9,7 @@ import { TokenService } from '../token.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.sass'],
+  styleUrls: ['./login-page.component.sass', '../new-registration/new-registration.component.sass'],
   providers: [LoginService]
 })
 export class LoginPageComponent implements OnInit {
@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -77,7 +77,7 @@ export class LoginPageComponent implements OnInit {
           this.forwardToFamily();
         },
         error => {
-          this.error = error.message;
+          alert(error.message);
           this.loading = false;
         }
       );

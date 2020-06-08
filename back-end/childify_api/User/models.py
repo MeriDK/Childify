@@ -29,8 +29,8 @@ class MyUserManager(BaseUserManager):
   def addUsername(user, username):
     if not username:
       raise ValueError("User must have an username")
-    if len(username) < 6 :
-      raise ValueError("username must be at least 6 characters")
+    if len(username) < 1 :
+      raise ValueError("username must be at least 1 characters")
     if not regex.match("[^ @]*",username):
       raise ValueError("username must be valid")
     user.username = username

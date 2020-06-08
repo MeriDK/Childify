@@ -6,7 +6,6 @@ from Child.models import Child
 from Family.models import Family
 from Parent.models import Parent
 from User.models import User
-from Prize.models import Prize
 
 class UserStatisticAPIView(APIView):
   

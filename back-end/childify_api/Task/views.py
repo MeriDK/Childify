@@ -10,28 +10,19 @@ from Family.models import Family
 from Parent.models import Parent
 from Child.models import Child
 from User.models import User
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 
 class TaskDetail(APIView):
 
     def get(self, request, *args, **kwargs):
-        question = get_object_or_404(Task,id_family=kwargs['id_family'], pk=kwargs['id'])
+        question = get_object_or_404(Task,pk=kwargs['id'])
         serializer = TaskSerializer(question)
         return Response(serializer.data)
 
     def patch(self, request, *args, **kwargs):
-        question = get_object_or_404(Task,id_family=kwargs['id_family'], pk=kwargs['id'])
-        if(request.data['id_status']==4):
-            user = Child.object.get(user = question.id_child)
-            print(user.points)
-            point = user.points + question.point_task
-            points = dict
-            points['points'] = point
-            serializers = Point(user,data=point,partial=True)
-            if serializers.is_valid():
-                serializers.save()
-            print()
-
+        question = get_object_or_404(Task, pk=kwargs['id'])
         serializer = TaskSerializer(question, data=request.data, partial=True)
         if serializer.is_valid():
             question = serializer.save()
@@ -39,12 +30,12 @@ class TaskDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
-        question = get_object_or_404(Task,id_family=kwargs['id_family'], pk=kwargs['id'])
+        question = get_object_or_404(Task, pk=kwargs['id'])
         question.delete()
         return Response("Task deleted", status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, *args, **kwargs):
-        question = get_object_or_404(Task,id_family=kwargs['id_family'], pk=kwargs['id'])
+        question = get_object_or_404(Task, pk=kwargs['id'])
         serializers = TaskSerializer(question, data = request.data)
         if serializers.is_valid():
             serializers.save()
@@ -52,42 +43,65 @@ class TaskDetail(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class AddPoint(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        question = get_object_or_404(Task, pk=kwargs['id'])
+        serializers = TaskSerializer(question,data=request.data,  partial=True)
+        if serializers.is_valid():
+            user = User.object.get(user_id=serializers.data['id_child'])
+            child = Child.object.get(user=user)
+            point = child.points
+            point += serializers.data['point_task']
+            point = {'points':point}
+            question = get_object_or_404(Child, pk=child.id)
+            point = PointSerializer(question,data=point, partial= True)
+            if point.is_valid():
+                point.save()
+                print(point.data)
+                return Response(point.data)
+        return Response(serializers.errors)
+
 
 class TaskCreate(APIView):
 
-    def post(self, request, id_family):
+    def post(self, request):
         if request.method == "POST":
             serializers = TaskCreateSerializer(data = request.data)
+            user = User.object.get(user_id=request.user.user_id)
+            if request.user.isParent:
+                family = Parent.object.get(user=user)
+            else:
+                family = Child.object.get(user=user)
+            family = Family.object.get(id=family.family.id)
+            print(family)
             if serializers.is_valid():
-                    user = Parent.object.get(user = request.user)
-                    status = Status.objects.get(id=1)
-                    category = Category.objects.get(id=serializers.data['id_category'])
-                    task= Task.object.create_task(user.family,status,category,serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
-                    return JsonResponse({"info":"task create"},status = 201)
+
+                task= Task.object.create_task(family,1,serializers.data['category'],serializers.data['name_task'],serializers.data['info_task'],serializers.data['point_task'])
+                return JsonResponse({"info":"task create"},status = 201)
             return JsonResponse(serializers.data,status = 400)
 
 
+class ParentTaskStatus(generics.ListCreateAPIView):
+    serializer_class = TaskIconSerializer
+    queryset = Task.object.all()
+    permission_classes = (IsAuthenticated,)
 
+    def get_queryset(self):
 
-class ParentTaskStatus(viewsets.ViewSet):
-
-    def list(self, request, id_family=None):
-        if request.user.isParent:
-            user = Parent.object.get(user = request.user)
+        status = self.request.query_params.get('status', None)
+        queryset = Task.object.all().filter(status=status)
+        child = 0
+        if self.request.user.isParent:
+            user = Parent.object.filter(user=self.request.user.user_id).first()
         else:
-            user = Child.object.get(user=request.user)
-        try:
-            name_status = request.GET.get('status','')
-            status = Status.objects.get(name_status = name_status)
-            if name_status == "todo":
-                queryset = Task.object.filter(id_family=user.family, id_status=status)
-            else:
-                if request.user.isParent:
-                    queryset = Task.object.filter(id_family=user.family, id_status=status)
-                else:
-                    queryset = Task.object.filter(id_family=user.family,id_child = request.user, id_status=status)
+            user = Child.object.filter(user=self.request.user.user_id).first()
+            child = user.id
+        family = user.family.id
+        queryset = queryset.filter(id_family=family)
 
-        except:
-            queryset = Task.object.filter(id_family=id_family)
-        serializer = TaskSerializer(queryset, many=True)
-        return Response(serializer.data)
+        if status != '1' and child:
+            queryset = queryset.filter(id_child=child)
+
+        return queryset
+

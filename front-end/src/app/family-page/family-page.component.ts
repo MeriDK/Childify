@@ -7,6 +7,7 @@ import { FamilyMember } from '../family-member/family-member.component';
 import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
 import { SettingsPageComponent } from '../settings-page/settings-page.component';
+import config from  '../../../../package.json'
 
 @Component({
   selector: 'app-family-page',
@@ -23,7 +24,7 @@ export class FamilyPageComponent implements OnInit{
     private router: Router) { }
 
   private user = jwt_decode(this.tokenService.getAccess())
-  private readonly baseUrl = 'http://127.0.0.1:8000';
+
   httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
   'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
 
@@ -56,7 +57,7 @@ export class FamilyPageComponent implements OnInit{
   
   getMembers(): Promise<any> {
     let promise = new Promise((resolve, reject) =>{
-      this.http.get(this.baseUrl + '/family/' + this.user.user_id, this.httpHeaders()).subscribe(value => {
+      this.http.get(config['baseURL'] + '/family/' + this.user.user_id, this.httpHeaders()).subscribe(value => {
         resolve(value['family']);
       }, error => {
         
@@ -76,7 +77,7 @@ export class FamilyPageComponent implements OnInit{
       var memb: FamilyMember = {
       
         name: element['username'],
-        memberUrl: this.baseUrl + '/family/${element[user_id]/statistic',
+        memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
         imgUrl: element['is_parent']? this.imgOld : this.imgYoung
       }
 
@@ -115,7 +116,7 @@ export class FamilyPageComponent implements OnInit{
   
       var json = JSON.stringify(data);
 
-      this.http.post(this.baseUrl + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
+      this.http.post(config['baseURL'] + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
         resolve(value);
       }, error => {
         console.log("There is a prob with network");

@@ -15,12 +15,15 @@ class CategoryEnum(models.TextChoices):
     SWEET = 2
     GAME = 3
     BOOK = 4
+    FILM = 5
+    TICKET = 6
+    COMPUTER = 7
 
 
 class Item(models.Model):
     points = models.IntegerField()
     name = models.TextField(max_length=30)
-    about = models.TextField(max_length=500, default='')
+    about = models.TextField(max_length=500, default='', blank=True)
     status = models.SmallIntegerField(choices=StatusEnum.choices, default=StatusEnum.WISH)
     category = models.SmallIntegerField(choices=CategoryEnum.choices)
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
