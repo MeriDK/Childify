@@ -1,0 +1,40 @@
+.parent-container {
+  display: flexbox;
+  padding-bottom: 1%;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  & .parent {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid rgba(119, 142, 148, 0.25);
+    box-sizing: border-box;
+    border-radius: 10px;
+    align-items: center;
+    
+    & .parent__avatar-wrapper {
+      border-radius: 50%;
+      margin: 3px;
+      padding: 10px;
+
+      background: #FFFFFF;
+      border: 1px solid rgba(119, 142, 148, 0.25);
+      box-sizing: border-box;
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    & a {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 0.0357143em;
+
+      color: #000000;
+    }
+
+  }
+}

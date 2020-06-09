@@ -15,49 +15,22 @@ html, body {
 
 .content {
   width: 100%;
-  margin: 30px auto;
+  //margin: 30px auto;
+  padding-top: 30px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-// parents
 .parent-container {
-  display: flexbox;
-  padding-bottom: 1%;
+  display: flex;
+  padding-bottom: 3%;
+  overflow-x: scroll;
+  width: fit-content;
+  flex-direction: row;
 
-  & .parent {
-    display: flex;
-    flex-direction: column;
-    background: #FFFFFF;
-    border: 1px solid rgba(119, 142, 148, 0.25);
-    box-sizing: border-box;
-    border-radius: 10px;
-    align-items: center;
-    
-    & .parent__avatar-wrapper {
-      border-radius: 50%;
-      margin: 3px;
-      padding: 10px;
-
-      background: #FFFFFF;
-      border: 1px solid rgba(119, 142, 148, 0.25);
-      box-sizing: border-box;
-      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    & a {
-      font-family: Roboto;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
-      text-align: center;
-      letter-spacing: 0.0357143em;
-
-      color: #000000;
-    }
-
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

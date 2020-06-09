@@ -40,9 +40,11 @@ class FamilyStatisticAPIView(APIView):
 
   def get(self, request, id):
     if User.object.filter(user_id=id):
-      family = Parent.object.filter(user_id=id).first().family
+      family = Parent.object.filter(user_id=id).first()
       if not family:
         family = Child.object.filter(user_id=id).first().family
+      else:
+        family = family.family
     
     if family:
       parents = [{"user_id": member.user.user_id, "username": member.user.username, "numIcon": member.user.numIcon, "is_parent": member.user.isParent} for member in Parent.object.filter(family=family)]

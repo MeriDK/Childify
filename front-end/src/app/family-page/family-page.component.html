@@ -1,15 +1,13 @@
-  <app-nav-menu></app-nav-menu>
-  <div class="content" *ngIf="members; else noFamilyMembers">
-      <div class="parent-container">
-        <div class="parent">
-          <div class="parent__avatar-wrapper">
-            <img src="../../assets/svg/any_avatar.svg" alt="picture">
-          </div>
-          
-          <a>name</a>
-        </div>
-      </div>
-        
+  <!-- <app-nav-menu></app-nav-menu> -->
+  <div class="content" *ngIf="members || parents; else noFamilyMembers">
+    
+    <div class="parent-container">
+      <app-family-parent-item 
+        *ngFor="let parent of parents"
+        [parent]="parent"
+      ></app-family-parent-item>
+    </div>
+
       <app-family-member
           *ngFor="let member of members"
           [familyMember] = "member"
@@ -17,5 +15,5 @@
       </div>
 
       <ng-template #noFamilyMembers>
-        <p>No famili members</p>
+        <p>No family members</p>
     </ng-template>

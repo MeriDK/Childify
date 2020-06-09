@@ -36,12 +36,15 @@ export class FamilyPageComponent implements OnInit{
   imgOld = "../../assets/svg/any_avatar.svg";
 
   members: FamilyMember[];
+  parents: FamilyMember[];
 
   ngOnInit(): void {
 
     this.getMembers().then((val) => {
       console.log(val);
       this.members = this.parseMembers(val);
+      this.parents = this.parseParents(val);
+      console.log("Parents\n"+ this.parents);
     },
     (err) => {
       console.log(err);
@@ -53,6 +56,8 @@ export class FamilyPageComponent implements OnInit{
     });
 
     console.log("HERE\n" + this.members)
+    
+    
   }
   
   getMembers(): Promise<any> {
@@ -74,24 +79,43 @@ export class FamilyPageComponent implements OnInit{
     var family: FamilyMember[];
 
     value.forEach(element => {
-      var memb: FamilyMember = {
-      
-        name: element['username'],
-        memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
-        imgUrl: element['is_parent']? this.imgOld : this.imgYoung
-      }
+      if (!element['is_parent']) {
+        var memb: FamilyMember = {
+        
+          name: element['username'],
+          memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
+          imgUrl: this.imgYoung
+        }
 
-      console.log('Memb: ' + memb);
-      if (!family)
-        family = [memb];
-      else {
-        console.log('Family inter:' + family); 
-        family.push(memb);
+        console.log('Memb: ' + memb);
+        if (!family)
+          family = [memb];
+        else {
+          console.log('Family inter:' + family); 
+          family.push(memb);
+        }
+    }
+    });
+
+    return family;
+  }
+
+  parseParents(value): FamilyMember[] {
+    var parents: FamilyMember[];
+
+    value.forEach(element => {
+
+      if(element['is_parent']) {
+        if (parents){
+          parents.push({name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.imgOld});
+        } else {
+          parents = [{name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.imgOld}];
+        }
       }
         
     });
 
-    return family;
+    return parents;
   }
 
   //bad idia
