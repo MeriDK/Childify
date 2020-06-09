@@ -1,7 +1,16 @@
   <app-nav-menu></app-nav-menu>
   <div class="content" *ngIf="members; else noFamilyMembers">
-      
-        <app-family-member
+      <div class="parent-container">
+        <div class="parent">
+          <div class="parent__avatar-wrapper">
+            <img src="../../assets/svg/any_avatar.svg" alt="picture">
+          </div>
+          
+          <a>name</a>
+        </div>
+      </div>
+        
+      <app-family-member
           *ngFor="let member of members"
           [familyMember] = "member"
         ></app-family-member>
