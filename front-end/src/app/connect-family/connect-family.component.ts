@@ -9,7 +9,7 @@ import { connectToFamily, createNewFamily } from './connect.service';
 @Component({
   selector: 'app-connect-family',
   templateUrl: './connect-family.component.html',
-  styleUrls: ['./connect-family.component.sass'],
+  styleUrls: ['./connect-family.component.sass', '../registration/registration.component.sass'],
   providers: [RegistrationAddService]
 })
 export class ConnectFamilyComponent implements OnInit {
