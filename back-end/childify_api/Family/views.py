@@ -6,6 +6,10 @@ from Child.models import Child
 from Family.models import Family
 from Parent.models import Parent
 from User.models import User
+from Task.models import Task
+# Item is a Prize... You know... smels.
+from Shop.models import Item
+from Task.serializers import TaskSerializer
 
 class UserStatisticAPIView(APIView):
   
@@ -29,7 +33,7 @@ class UserStatisticAPIView(APIView):
 
         return JsonResponse(response, status=200)
       else:
-        response = {"user_id": user.user_id,"family": {'name':Family.object.filter(id=family_id).first().name,'size': len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},'statistic': {'prizes': {'accomplised': 0,'amout': 3},'activity': [{'day': [],'accomplished_prizes': []},{'day':[],'reviewd_tasks':[]}]}}
+        response = {'user_id': user.user_id,'family': {'name':Family.object.filter(id=family_id).first().name,'size': len(Parent.object.filter(family_id=family_id))+len(Child.object.filter(family_id=family_id))},'statistic': {'prizes': {'accomplised': 0,'amout': 3},'activity': [{'day': [],'accomplished_prizes': []},{'day':[],'reviewd_tasks':[]}]}}
         return JsonResponse(response, status=200)
     else:
       return JsonResponse({'msg': 'No family'}, status=404)
@@ -47,11 +51,20 @@ class FamilyStatisticAPIView(APIView):
         family = family.family
     
     if family:
-      parents = [{"user_id": member.user.user_id, "username": member.user.username, "numIcon": member.user.numIcon, "is_parent": member.user.isParent} for member in Parent.object.filter(family=family)]
-      childres = [{"user_id": member.user.user_id, "username": member.user.username, "numIcon": member.user.numIcon, "is_parent": member.user.isParent} for member in Child.object.filter(family=family)]
+      parents = [{'user_id': member.user.user_id, 'username': member.user.username, 'numIcon': member.user.numIcon, 'is_parent': member.user.isParent} for member in Parent.object.filter(family=family)]
+
+      tasks = Task.object.filter(id_family=family)
+      rewards = Item.objects.filter(family=family)
+
+      selected_tasks = tasks.filter(status=2)
+
+
+      childres = [{'user_id': member.user.user_id, 'username': member.user.username, 'numIcon': member.user.numIcon, 'is_parent': member.user.isParent, 'statistic': {'points': member.points, 'tasks': {'accomplised': 8, 'selected': 43, 'canceled': 2}, 'rewards': 8}} for member in Child.object.filter(family=family)]
       
+      
+
       return JsonResponse({'family_id': family.id, 'family': parents + childres}, status=200)
-    return JsonResponse({'nsg':'Family does not exist'}, status=404)
+    return JsonResponse({'msg':'Family does not exist'}, status=404)
 
 class FamilyAPIView(APIView):
 
@@ -78,14 +91,14 @@ class FamilyAPIView(APIView):
 
   def post(self, request):
     if self.check_object_family(request.user):
-      return JsonResponse({"msg": "already connected"}, status=405)
+      return JsonResponse({'msg': 'already connected'}, status=405)
 
     family = Family.object.create_family()
     if request.user.isParent:
       Parent.object.create_parent(family, request.user, request.data['username'])
     else:
       Child.object.create_child(family, request.user, request.data['username'])
-    return JsonResponse({"family":family.id}, status=201)
+    return JsonResponse({'family':family.id}, status=201)
 
 
 class FamilyUserAPIView(APIView):
@@ -115,12 +128,12 @@ class FamilyUserAPIView(APIView):
 
 
   def patch(self, request, family_id):
-    if request.method == "PATCH":
+    if request.method == 'PATCH':
       family = self.get_object_family(family_id)
       if not family:
-        return JsonResponse({"msg": "error"}, status=400)
+        return JsonResponse({'msg': 'error'}, status=400)
       if self.check_object_family(request.user):
-        return JsonResponse({"msg": "already connected"}, status=405)
+        return JsonResponse({'msg': 'already connected'}, status=405)
       if request.user.isParent:
         parent = self.get_object_parent(request.user)
         if not parent:
