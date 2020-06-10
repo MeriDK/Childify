@@ -57,9 +57,9 @@
     <input type="text" formControlName="email" placeholder="Електронна адреса" class="login__input"
       [ngClass]="{
         'input-success--registration': (email.touched) && email.valid,
-        'input-danger--registration': (email.touched) && email.invalid
+        'input-danger--registration': email.invalid
       }">
-    <div *ngIf="email.invalid && (email.touched)">
+    <div *ngIf="email.invalid && submitted">
          <div class="login__error" *ngIf="email.errors.required">Помилка. Не введена електронна адреса</div>
          <div class="login__error" *ngIf="email.errors.pattern">Введіть дійсну електронну адресу</div>
     </div>
@@ -68,7 +68,7 @@
         'input-success--registration': (password.touched || password.dirty) && password.valid,
         'input-danger--registration': (password.touched || password.dirty)
       }">
-    <div *ngIf="password.invalid && (password.touched || password.dirty)">
+    <div *ngIf="password.invalid && submitted">
         <div class="login__error" *ngIf="password.errors.required">Помилка. Не введений пароль</div>
         <div class="login__error" *ngIf="password.errors.minlength">Помилка. Пароль повинен бути довшим</div>
     </div>
@@ -91,5 +91,5 @@
     }">
     Зареєструватись
   </button>
-  <div class="login__link" routerLink="/new-login">Уже маєш профіль? Увійти</div>
+  <div class="login__link" routerLink="/login">Уже маєш профіль? Увійти</div>
 </form>

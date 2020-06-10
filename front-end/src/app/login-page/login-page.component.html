@@ -4,11 +4,11 @@
     <div class="login__group">
       <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Електронна адреса" class="login__input">
       <div *ngIf="submitted && f.email.errors">
-          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.required" class="login__error">Помилка. Не введена електронна адреса</div>
       </div>
       <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Пароль" class="login__input">
       <div *ngIf="submitted && f.password.errors">
-        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.required" class="login__error">Помилка. Не введений пароль</div>
       </div>
     </div>
     <div class="login__link text_margin" routerLink="/change-password">Забув пароль?</div>
@@ -17,5 +17,5 @@
       Увійти
     </button>
   </form>
-  <div class="login__link" routerLink="/new-registration">Зареєструватись</div>
+  <div class="login__link" routerLink="/registration">Зареєструватись</div>
 </div>
