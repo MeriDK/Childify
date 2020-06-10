@@ -8,9 +8,9 @@
         "dimass-ip": "concurrently --kill-others \"npm run be-l-ip\" \"npm run fe-ip\"",
         "be": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver",
         "be-l": "python back-end/childify_api/manage.py runserver",
-        "be-ip": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver",
-        "be-l-ip": "python back-end/childify_api/manage.py runserver",
-        "fe-ip": "cd front-end && ng serve --host localhost",
+        "be-ip": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
+        "be-l-ip": "python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
+        "fe-ip": "cd front-end && ng serve --host 127.0.1.1",
         "fe": "cd front-end && ng serve",
         "ip": "back-end\\venv\\Scripts\\activate.bat && python ip.py",
         "ip-local": "back-end\\venv\\Scripts\\activate.bat && python ip.py localhost",
@@ -31,6 +31,6 @@
     "dependencies": {
         "concurrently": "^5.2.0"
     },
-    "baseURL": "http://localhost:8000",
-    "IP": "localhost"
+    "baseURL": "http://127.0.1.1:8000",
+    "IP": "127.0.1.1"
 }
