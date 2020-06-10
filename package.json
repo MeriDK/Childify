@@ -1,13 +1,26 @@
 {
     "scripts": {
-        "dev": "back-end\\venv\\Scripts\\activate.bat && ip.py && npm run dev+",
-        "dev+": "concurrently --kill-others \"npm run back-server\" \"npm run front-server\"",
-        "dev-l": "concurrently --kill-others \"npm run back-server-l\" \"npm run front-server\"",
-        "back-server": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
-        "back-server-l": "source env/bin/activate && python back-end/childify_api/manage.py runserver",
-        "front-server": "cd front-end && ng serve --host 192.168.0.105",
+        "dev": "back-end\\venv\\Scripts\\activate.bat && python ip.py localhost && npm run dev-ip",
+        "dimass": "python ip.py localhost && npm run dimass-ip",
+        "dev+": "back-end\\venv\\Scripts\\activate.bat && python ip.py && npm run dev-ip",
+        "dimass+": "python ip.py && npm run dimass-ip",
+        "dev-ip": "concurrently --kill-others \"npm run be-ip\" \"npm run fe-ip\"",
+        "dimass-ip": "concurrently --kill-others \"npm run be-l-ip\" \"npm run fe-ip\"",
+        "be": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver",
+        "be-l": "python back-end/childify_api/manage.py runserver",
+        "be-ip": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
+        "be-l-ip": "python back-end/childify_api/manage.py runserver 0.0.0.0:8000 ",
+        "fe-ip": "cd front-end && ng serve --host 127.0.1.1",
+        "fe": "cd front-end && ng serve",
+        "ip": "back-end\\venv\\Scripts\\activate.bat && python ip.py",
+        "ip-local": "back-end\\venv\\Scripts\\activate.bat && python ip.py localhost",
+        "ip-l": "python ip.py",
         "makemigrations": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py makemigrations",
+        "makemigrations-l": "python back-end/childify_api/manage.py makemigrations",
         "migrate": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py migrate",
+        "migrate-l": "python back-end/childify_api/manage.py migrate",
+        "createsuperuser": "back-end\\venv\\Scripts\\activate.bat && python back-end/childify_api/manage.py createsuperuser",
+        "createsuperuser-l": "python back-end/childify_api/manage.py createsuperuser",
         "ng": "cd front-end && ng",
         "start": "cd front-end && ng serve",
         "build": "cd front-end && ng build",
@@ -18,6 +31,6 @@
     "dependencies": {
         "concurrently": "^5.2.0"
     },
-    "baseURL": "http://192.168.0.105:8000",
-    "IP": "192.168.0.105"
+    "baseURL": "http://127.0.1.1:8000",
+    "IP": "127.0.1.1"
 }
