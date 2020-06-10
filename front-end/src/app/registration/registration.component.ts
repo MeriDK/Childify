@@ -9,17 +9,18 @@ import { registerNewUser } from './registerNewUser';
 
 @Component({
   selector: 'app-new-registration',
-  templateUrl: './new-registration.component.html',
-  styleUrls: ['./new-registration.component.sass'],
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.sass'],
   providers: [RegistrationService]
 })
-export class NewRegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
   @Input() myvalidator: ValidatorFn;
   registrationForm: any;
   email: FormControl;
   password: FormControl;
   activeImg = 1;
+  submitted = false;
 
   constructor(private api: RegistrationService, private token: TokenService, private router: Router) { }
 
@@ -38,6 +39,7 @@ export class NewRegistrationComponent implements OnInit {
   }
 
   registerNewUser(): void {
+    this.submitted = true;
     if (this.registrationForm.invalid) { return; }
     var data = {
       email: this.email.value,

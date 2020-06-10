@@ -30,7 +30,7 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ShopPrizeIconComponent } from './shop-prize-icon/shop-prize-icon.component';
 import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-category.component';
 import { ConnectFamilyComponent } from './connect-family/connect-family.component';
-import { NewRegistrationComponent } from './new-registration/new-registration.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { UserIconComponent } from './user-icon/user-icon.component';
 
 
@@ -55,7 +55,7 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
     ConnectFamilyComponent,
-    NewRegistrationComponent,
+    RegistrationComponent,
     UserIconComponent
   ],
   imports: [
