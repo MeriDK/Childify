@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, TemplateRef} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef, AfterViewInit} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 import { ShopService } from './shop.service';
@@ -53,6 +53,8 @@ export class ShopListComponent implements OnInit{
         getReceivedList(this.api, this.tokenService, this.router).then(data=> {
           this.receivedGoods=data;
           $( "div" ).off();
+          $('.good-li--shop-list').css('margin-left','calc((100vw - 106px*'+Math.floor(document.body.clientWidth/105)+')/'+Math.floor(document.body.clientWidth/105)*2+')');
+          $('.good-li--shop-list').css('margin-right','calc((100vw - 106px*'+Math.floor(document.body.clientWidth/105)+')/'+Math.floor(document.body.clientWidth/105)*2+')');
           this.initEventListener();
         })
       })
@@ -63,6 +65,10 @@ export class ShopListComponent implements OnInit{
     setTimeout(()=>{
       var pressTimer;
       var deselect = false;
+      $( window ).resize(function() {
+        $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+        $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+      });
       $('.li-selectable').on('touchend',(event)=>{
         event.stopPropagation();
         var element = event.target;
