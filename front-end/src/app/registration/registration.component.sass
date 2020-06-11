@@ -1,11 +1,14 @@
 .login
   padding: 2rem
   min-height: 100vh
+  background-color: white
   &__logo
     width: 70vw
+    max-width: calc(400px*0.7)
     margin-top: 2rem
   &__group
     width: 80vw
+    max-width: calc(400px*0.8)
     input::placeholder
       color: rgba(119, 142, 148, 0.25)
   &__input
@@ -55,6 +58,7 @@
 .radio-group
   display: flex
   width: 70vw
+  max-width: calc(400px*0.7)
   justify-content: space-between
   margin-top: 1rem
   &__container
@@ -75,3 +79,7 @@
       height: 34px
       width: 34px
       margin: 0
+
+.gey-background
+  @media only screen and (min-width: 400px)
+    background-color: rgba(21,27,41,0.17)
