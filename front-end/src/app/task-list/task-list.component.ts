@@ -6,6 +6,7 @@ import {TaskListService} from './task-list.service'
 import { ActivatedRoute } from '@angular/router';
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {TaskInfoChangeComponent} from "../task-info-change/task-info-change.component"
@@ -18,7 +19,7 @@ import {TaskInfoComponent} from "../task-info/task-info.component"
   providers: [TaskListService]
 })
 export class TaskListComponent implements AfterViewInit,OnInit {
-  isChild = !jwt_decode(this.token.getAccess()).isParent;
+  isChild
   task;
   url
   icon;
@@ -27,11 +28,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   translate = translate
 
   ngOnInit(): void {
-    if (this.isChild) {
-      this.url="task/info/"
-    } else {
-      this.url="task/change/"
-    }
+
   }
 
   openModal(task) {
@@ -66,13 +63,34 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   
 
   ngAfterViewInit(): void {
-    $('#tab1-link').on("click",() => {this.getTask()})
+    $('#tab1-link').on("click",() => {
+      this.getTask()
+      this.logOut()
+    })
   }
 
+  logOut(): void{
+    if (!this.token.getRefresh()){
+      this.routers.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.routers.navigate(['../login'])
+      })
+    }
+  }
   tasks = [{id:-1,category:"",name_task: 'test',point_task: 15}];
 
 
-  constructor(private api: TaskListService, private router: ActivatedRoute,  private token :TokenService,private modalService: NgbModal){
+  constructor(private api: TaskListService, private router: ActivatedRoute,  private token :TokenService,private modalService: NgbModal, private routers: Router){
+    if (!this.token.getRefresh()){
+      this.routers.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.routers.navigate(['../login'])
+      })
+      this.isChild = !jwt_decode(this.token.getAccess()).isParent;
+
+    }
     this.getTask();
     
   }

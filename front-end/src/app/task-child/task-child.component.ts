@@ -8,6 +8,7 @@ import jwt_decode from 'jwt-decode'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {TaskInfoComponent} from "../task-info/task-info.component"
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-child',
@@ -18,17 +19,39 @@ import {TaskInfoComponent} from "../task-info/task-info.component"
 export class TaskChildComponent implements AfterViewInit {
 
   ngAfterViewInit(): void{
-    $('#tab2-link').on("click",() => {this.getTask()})
+    $('#tab2-link').on("click",() => {
+      this.getTask()
+      this.logOut()
+    })
   }
 
-  isChild =!jwt_decode(this.token.getAccess()).isParent;
+  logOut(): void{
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+    }
+  }
+
+  isChild;
   translate = translate
   url = 'task/info/'
   picture = "../../assets/img/ava-icon/"
   end = ".png"
   icon;
   tasks = [{id: -1,category:"", name_task: 'test',point_task: 15,id_child:1,status:2, child_icon: ""}];
-  constructor(private api: TaskChildService, private token :TokenService,private modalService: NgbModal) {
+  constructor(private api: TaskChildService, private token :TokenService,private modalService: NgbModal, private router: Router) {
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+      this.isChild = !jwt_decode(this.token.getAccess()).isParent;
+
+    }
       this.getTask()
       
   }
