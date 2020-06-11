@@ -53,8 +53,8 @@ export class ShopListComponent implements OnInit{
         getReceivedList(this.api, this.tokenService, this.router).then(data=> {
           this.receivedGoods=data;
           $( "div" ).off();
-          $('.good-li--shop-list').css('margin-left','calc((100vw - 106px*'+Math.floor(document.body.clientWidth/105)+')/'+Math.floor(document.body.clientWidth/105)*2+')');
-          $('.good-li--shop-list').css('margin-right','calc((100vw - 106px*'+Math.floor(document.body.clientWidth/105)+')/'+Math.floor(document.body.clientWidth/105)*2+')');
+          $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+          $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
           this.initEventListener();
         })
       })
@@ -90,6 +90,31 @@ export class ShopListComponent implements OnInit{
         clearTimeout(pressTimer);
         return false;
       })
+      $('.li-selectable').on('mouseup',(event)=>{
+        event.stopPropagation();
+        var element = event.target;
+        while (element.localName!='li') {
+          element = element.parentNode;
+        }
+        if (!$(element).hasClass('selected') && !deselect) {
+          $(element).addClass('active')
+          var elementContent
+          if (this.activeTab()=='inStock-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[39], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[38] }
+          if (this.activeTab()=='received-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[38], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[36]}
+            if (this.activeTab()=='bought-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[46], "name":element.__ngContext__[48],"points":element.__ngContext__[49],"about":element.__ngContext__[44]}
+         
+          this.showModal(elementContent);
+        }
+        clearTimeout(pressTimer);
+        return false;
+      })
+
+
+
+
       $('.li-selectable').on('touchstart',(event)=>{
         event.stopPropagation();
         deselect = false;
@@ -98,6 +123,16 @@ export class ShopListComponent implements OnInit{
         },150);
         return false; 
       });
+      $('.li-selectable').on('mousedown',(event)=>{
+        event.stopPropagation();
+        deselect = false;
+        pressTimer = window.setTimeout(()=> { 
+          deselect = this.selectNode(event.target);
+        },150);
+        return false; 
+      });
+
+
       $('.btn-move').on('click', (event)=>{
         event.stopPropagation();
         this.moveNode();
