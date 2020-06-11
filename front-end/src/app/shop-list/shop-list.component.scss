@@ -564,6 +564,7 @@
         margin-top: calc(-5px + (100vh - 526px)/2);
         @media only screen and (max-height: 500px) {
             margin-top: 20px;
+            margin-bottom: 20px;
         }
         @media only screen and (min-width: 555px) {
             width: 525px;
@@ -925,7 +926,7 @@
             }
             .btn-back {
                 svg {
-                    margin-top: 13px;
+                    margin-top: 10px;
                 }
             }
             .btn-create {
