@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('Settings.urls')),
     path('', include('Task.urls')),
     path('', include('Shop.urls')),
-    path('', include('Child.urls'))
+    path('', include('Child.urls')),
+    path('', include('Statistic.urls'))
 ]

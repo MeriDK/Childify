@@ -33,6 +33,9 @@ import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-cat
 import { ConnectFamilyComponent } from './connect-family/connect-family.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserIconComponent } from './user-icon/user-icon.component';
+import { FamilyParentItemComponent } from './family-parent-item/family-parent-item.component';
+import { FamilyRecentItemComponent } from './family-recent-item/family-recent-item.component';
+import { FamilyRecentEventsComponent } from './family-recent-events/family-recent-events.component';
 
 
 @NgModule({
@@ -56,6 +59,11 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
     ConnectFamilyComponent,
+    NewRegistrationComponent,
+    UserIconComponent,
+    FamilyParentItemComponent,
+    FamilyRecentItemComponent,
+    FamilyRecentEventsComponent,
     RegistrationComponent,
     UserIconComponent
   ],

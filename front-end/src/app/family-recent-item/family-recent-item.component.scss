@@ -1,13 +1,4 @@
-$square-side: 150px;
-$backgroung-violet: rgb(242, 226, 255);
-
-:host-context(.content) {
-  width: 100%;
-}
-
-
-
-.content__item {
+.recent-item {
   background: #FFFFFF;
   border: 1px solid rgba(119, 142, 148, 0.25);
   box-sizing: border-box;
@@ -19,6 +10,7 @@ $backgroung-violet: rgb(242, 226, 255);
   margin-bottom: 19px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   & a{
     padding-left: 0px;
@@ -39,8 +31,8 @@ $backgroung-violet: rgb(242, 226, 255);
       border-radius: 50%;
       margin: 3px;
       padding: 10px;
-      min-width: 98px;
-      min-height: 98px;
+      min-width: 69px;
+      min-height: 69px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -50,27 +42,57 @@ $backgroung-violet: rgb(242, 226, 255);
       box-sizing: border-box;
       box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
   }
+
+  & .status-wrapper {
+    border-radius: 50%;
+    margin: 3px;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background: #FFFFFF;
+    
+}
+  
 }
 
 .content__item__data {
 
   padding-left: 15px;
 
+  & p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.0357143em;
+    color: #778E94;
+  }
+
+  &>a {
+    margin-bottom: 9px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.0357143em;
+    color: #000000;
+  }
+
   & .content__item__data__info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-
-    & .img-conis,
-      .img-checked-task,
-      .img-task,
-      .img-canceled-task,
-      .img-reward {
+    & .img-conis {
         display: flex;
         flex-direction: row;
         padding: 0px;
-        margin: 0px 48px 11px 0px;
+        margin: 0px 40px 11px 0px;
 
         & a {
           margin: 0px 0px 0px 7px;
@@ -87,10 +109,7 @@ $backgroung-violet: rgb(242, 226, 255);
 
           color: #000000;
         }
-      }
 
-      & .img-reward {
-        height: 20px;
       }
 
   }

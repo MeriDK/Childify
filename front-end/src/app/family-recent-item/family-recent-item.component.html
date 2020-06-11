@@ -1,0 +1,30 @@
+<div class="recent-item">
+    <div class="avatar-wrapper">
+        <img src={{event.imgUrl}}/>
+    </div>
+
+
+    <div class="content__item__data">
+        <p class="status">{{event.status}}</p>
+
+        <a>{{event.title}}</a>
+
+        <div class="content__item__data__info">
+            <div class="img-conis">
+                <img src="../../assets/svg/coin.svg" alt="coins image">
+                <a>{{event.points}}</a>
+            </div>
+            <div class="img-conis">
+                <img src="../../assets/svg/time.svg" alt="time image">
+                <a>{{event.time}}</a>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="status-wrapper">
+        <img src="../../assets/svg/task_statuses/{{event.categoryImg}}.svg"/>
+    </div>
+
+</div>
