@@ -3,7 +3,9 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import {translate} from '../services/StringResourses'
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
-
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {TaskAddComponent} from "../task-add/task-add.component"
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -13,13 +15,46 @@ export class TaskComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
   isParent = jwt_decode(this.token.getAccess()).isParent;
 
-  constructor(private token :TokenService) { }
+  constructor(private token :TokenService, private router: Router,private modalService: NgbModal) { }
 
   translate = translate
   
   ngOnInit(): void {
-    
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.refreshTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+    }
   }
+
+  openModal() {
+    const modalRef = this.modalService.open(TaskAddComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        keyboard: true,
+        backdrop: 'static',
+        
+        centered: true
+      });
+
+    let data = {
+      prop1: 'Some Data',
+      prop2: 'From Parent Component',
+      prop3: 'This Can be anything'
+    }
+
+    modalRef.componentInstance.fromParent = data;
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+    });
+  }
+
+
+
   activeTab() {
     // @ts-ignore
     var tabId ; 

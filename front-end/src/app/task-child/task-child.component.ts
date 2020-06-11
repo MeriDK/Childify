@@ -6,6 +6,8 @@ import {TaskChildService} from './task-child.service'
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {TaskInfoComponent} from "../task-info/task-info.component"
 
 @Component({
   selector: 'app-task-child',
@@ -26,9 +28,30 @@ export class TaskChildComponent implements AfterViewInit {
   end = ".png"
   icon;
   tasks = [{id: -1,category:"", name_task: 'test',point_task: 15,id_child:1,status:2, child_icon: ""}];
-  constructor(private api: TaskChildService, private token :TokenService) {
+  constructor(private api: TaskChildService, private token :TokenService,private modalService: NgbModal) {
       this.getTask()
       
+  }
+
+  openModal(task) {      
+    const modalRef = this.modalService.open(TaskInfoComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        // keyboard: false,
+        // backdrop: 'static'
+        centered: true
+      });
+
+    let task_id = {
+      id : task.id
+    }
+    console.log(task_id)
+    modalRef.componentInstance.task_id = task_id;
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+    });
   }
 
   category(category): void {

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {translate} from '../services/StringResourses'
 import {TaskAddService} from './task-add.service'
 import { $ } from 'protractor';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-task-add',
@@ -14,7 +15,9 @@ export class TaskAddComponent implements OnInit {
   task;
   category;
 
-  constructor(private api: TaskAddService){
+  @Input() fromParent;
+
+  constructor(private api: TaskAddService, public activeModal: NgbActiveModal){
     this.task = [{name_task:'' ,info_task: '', point_task: 0}];
   }
 
@@ -22,7 +25,6 @@ export class TaskAddComponent implements OnInit {
     this.api.createTask(this.task,this.category).subscribe(
       data => {
         // @ts-ignore
-        this.task.push(data,category);
 
       },
       error => {
@@ -31,11 +33,15 @@ export class TaskAddComponent implements OnInit {
     )
     console.log(this.task);
     console.log(this.category)
+    this.activeModal.close();
   }
   ngOnInit(): void {
   }
   filterChanged(selectedValue:string){
     this.category=selectedValue;
+  }
+  closeModal() {
+    this.activeModal.close();
   }
 
 }

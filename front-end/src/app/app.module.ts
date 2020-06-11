@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,7 +69,8 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     DragDropModule,
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    NgbModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]// now using only in routing
