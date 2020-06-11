@@ -449,6 +449,9 @@
             @media only screen and (max-width: 184px){
                 top: calc(100% - 46px);
             }
+            @media only screen and (max-width: 156px){
+                top: calc(100% - 100px);
+            }
 
             /* White */
 
@@ -486,7 +489,7 @@
             
             span {
 
-                @media only screen and (max-width: 184px){
+                @media only screen and (max-width: 238px){
                     display: none;
                 }
 
@@ -560,11 +563,15 @@
         position: fixed;
         display: flex;
         width: calc(100% - 30px);
-        height: 526px;
-        margin-top: calc(-5px + (100vh - 526px)/2);
-        @media only screen and (max-height: 500px) {
+        height: 515px;
+        margin-top: calc((100vh - 515px)/2);
+        @media only screen and (max-height: 555px) {
             margin-top: 20px;
             margin-bottom: 20px;
+            
+        }
+        @media only screen and (max-width: 270px) {
+            height: auto;
         }
         @media only screen and (min-width: 555px) {
             width: 525px;
@@ -877,6 +884,7 @@
             margin-bottom: 0px;
             margin-left: -17px;
             margin-right: -17px;
+            width: 100%;
             flex: 3;
             justify-content: space-between;
             padding: 0;
@@ -930,7 +938,7 @@
                 }
             }
             .btn-create {
-                width: 60vw;
+                width: 60%;
                 height: 43px;
                 background: #FFFFFF;
                 margin-left: 0px;
@@ -998,12 +1006,42 @@
 
     }
     .modal.add-modal {
+
+
         .modal-footer {
             align-self: flex-end;
-        } 
+
+            div {
+                @media only screen and (max-width: 261px) {
+                    margin: 2px !important;
+                }
+                @media only screen and (max-width: 361px) {
+                    margin: 5px !important;
+                }
+            }
+            .btn-create {
+                @media only screen and (max-width: 361px) {
+                    font-size: 5vw !important;
+                }
+            }
+        }
     }
     .modal.edit-modal {
         .modal-footer {
+            div {
+                @media only screen and (max-width: 271px) {
+                    margin: 2px !important;
+                }
+                @media only screen and (max-width: 401px) {
+                    margin: 5px !important;
+                }
+            }
+            .btn-edit {
+                @media only screen and (max-width: 401px) {
+                    width: 40% !important;
+                    font-size: 5vw;
+                }
+            }
             .btn-delete {
                 margin-left: 0px;
                 margin-right: 18px;
@@ -1023,6 +1061,7 @@
         } 
     }
     .btn-add {
+        
         position: fixed;
         z-index: 1;
         top: calc(100% - 7px - 42px);
@@ -1047,7 +1086,7 @@
 
 }
 .absolute {
-    @media only screen and (max-height: 550px){
+    @media only screen and (max-height: 555px){
         position: absolute !important;
     }
 }
