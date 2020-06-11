@@ -1,8 +1,4 @@
 
-<header class="header-childify">
-  <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
-    <h1 class="header-childify__title">{{translate('task_title')}}</h1>
-</header>
 <div class="all">
 <h3 class="name_task">{{translate('name_task')}}</h3>
 <input type="text" placeholder="{{translate('name_your_task')}}" class="input-name_task"  [(ngModel)]="task.name_task">
@@ -25,8 +21,8 @@
 <h3 class='title_info'>{{translate('more_info')}}</h3>
 <textarea name="Text1" cols="40" rows="3" placeholder="{{translate('write_info_about_task')}}" [(ngModel)]="task.info_task"></textarea>
 <div class="button">
-<button class="btn_add" routerLink='../' (click)='createTask()'>{{translate('add')}}</button>
-<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../'>
+<button class="btn_add"  (click)='createTask()'>{{translate('add')}}</button>
+<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" (click)="closeModal()">
 </div>
 </div>
 

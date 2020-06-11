@@ -9,7 +9,7 @@ import { TokenService } from '../token.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.sass', '../new-registration/new-registration.component.sass'],
+  styleUrls: ['./login-page.component.sass', '../registration/registration.component.sass'],
   providers: [LoginService]
 })
 export class LoginPageComponent implements OnInit {

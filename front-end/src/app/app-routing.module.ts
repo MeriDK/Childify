@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { UserStatisticComponent } from './user-statistic/user-statistic.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ConnectFamilyComponent } from './connect-family/connect-family.component';
-import {NewRegistrationComponent} from './new-registration/new-registration.component';
+import {RegistrationComponent} from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'registration',
-    component: NewRegistrationComponent
+    component: RegistrationComponent
   },
   {
     path: 'connect-family',

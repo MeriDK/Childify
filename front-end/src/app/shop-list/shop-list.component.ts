@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, TemplateRef} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef, AfterViewInit} from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 import { ShopService } from './shop.service';
@@ -53,6 +53,8 @@ export class ShopListComponent implements OnInit{
         getReceivedList(this.api, this.tokenService, this.router).then(data=> {
           this.receivedGoods=data;
           $( "div" ).off();
+          $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+          $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
           this.initEventListener();
         })
       })
@@ -63,6 +65,14 @@ export class ShopListComponent implements OnInit{
     setTimeout(()=>{
       var pressTimer;
       var deselect = false;
+      $( window ).resize(function() {
+        $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+        $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
+      });
+      $('#logout').on('click', ()=>{
+        this.tokenService.logout()
+        this.router.navigate(['../login'])
+      })
       $('.li-selectable').on('touchend',(event)=>{
         event.stopPropagation();
         var element = event.target;
@@ -84,6 +94,31 @@ export class ShopListComponent implements OnInit{
         clearTimeout(pressTimer);
         return false;
       })
+      $('.li-selectable').on('mouseup',(event)=>{
+        event.stopPropagation();
+        var element = event.target;
+        while (element.localName!='li') {
+          element = element.parentNode;
+        }
+        if (!$(element).hasClass('selected') && !deselect) {
+          $(element).addClass('active')
+          var elementContent
+          if (this.activeTab()=='inStock-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[39], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[38] }
+          if (this.activeTab()=='received-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[38], "name":element.__ngContext__[40],"points":element.__ngContext__[41],"about":element.__ngContext__[36]}
+            if (this.activeTab()=='bought-modal')
+            elementContent = {"id":element.id,"category":element.__ngContext__[46], "name":element.__ngContext__[48],"points":element.__ngContext__[49],"about":element.__ngContext__[44]}
+         
+          this.showModal(elementContent);
+        }
+        clearTimeout(pressTimer);
+        return false;
+      })
+
+
+
+
       $('.li-selectable').on('touchstart',(event)=>{
         event.stopPropagation();
         deselect = false;
@@ -92,6 +127,16 @@ export class ShopListComponent implements OnInit{
         },150);
         return false; 
       });
+      $('.li-selectable').on('mousedown',(event)=>{
+        event.stopPropagation();
+        deselect = false;
+        pressTimer = window.setTimeout(()=> { 
+          deselect = this.selectNode(event.target);
+        },150);
+        return false; 
+      });
+
+
       $('.btn-move').on('click', (event)=>{
         event.stopPropagation();
         this.moveNode();
@@ -361,7 +406,13 @@ export class ShopListComponent implements OnInit{
   }
 
   addNode(): void {
-    $(".modal.add-modal").addClass('active');
+    $(".modal.add-modal").css('display','flex');
+      setTimeout(() => {
+        $(".modal.add-modal").addClass('active');
+        setTimeout(() => {
+          $(".modal.add-modal").addClass('absolute');
+        }, 700);
+      }, 100);
   }
 
   editNode(): void {
@@ -380,20 +431,47 @@ export class ShopListComponent implements OnInit{
 
   closeModal(): void {
     var classs = ".modal"+".active";
+    var el = $(classs)
+    $(classs).css('position','fixed');
     $(classs).removeClass('active');
+    setTimeout(() => {
+      el.css('display','none');
+      $('.list--shop-list').css('position','unset');
+    }, 100);
     $(".good-li--shop-list.active").removeClass('active')
   }
   showModal(elementContent): void {
     var classs =""; 
     if(this.activeTab()=="inStock-modal" && this.isParent) {
       classs=".modal.edit-modal"
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
+        }, 700);
+      }, 100);
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
       classs = ".modal.received-modal";
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
+        }, 700);
+      }, 100);
     } else {
       classs = ".modal."+this.activeTab();
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
+        }, 700);
+      }, 100);
     }
     $(classs).attr("category",elementContent.category);
     $(classs).attr("name",elementContent.name);

@@ -1,0 +1,97 @@
+<div class="column_center gey-background">
+  <form [formGroup]="registrationForm" novalidate class="login column_center">
+    <img src="assets/img/Childify_Logo_Name_1080.png" alt="logo" class="login__logo">
+    <div class="container ava-group">
+      <div class="row">
+        <div class="col-6 ava-group__padding">
+          <img src="assets/img/ava-icon/{{ activeImg }}.png" alt="ava"  class="ava-group__main-ava">
+        </div>
+        <div class="col-6 ava-group__padding">
+          <div class="container">
+            <div class="row ava-group__padding">
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/1.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 1" (click)="activeImg=1">
+                <img src="assets/img/ava-icon-active/1.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 1">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/2.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 2" (click)="activeImg=2">
+                <img src="assets/img/ava-icon-active/2.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 2">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/3.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 3" (click)="activeImg=3">
+                <img src="assets/img/ava-icon-active/3.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 3">
+              </div>
+            </div>
+            <div class="row ava-group__padding">
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/4.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 4" (click)="activeImg=4">
+                <img src="assets/img/ava-icon-active/4.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 4">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/5.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 5" (click)="activeImg=5">
+                <img src="assets/img/ava-icon-active/5.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 5">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/6.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 6" (click)="activeImg=6">
+                <img src="assets/img/ava-icon-active/6.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 6">
+              </div>
+            </div>
+            <div class="row ava-group__padding">
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/7.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 7" (click)="activeImg=7">
+                <img src="assets/img/ava-icon-active/7.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 7">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/8.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 8" (click)="activeImg=8">
+                <img src="assets/img/ava-icon-active/8.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 8">
+              </div>
+              <div class="col-4 ava-group__padding">
+                <img src="assets/img/ava-icon/9.png" alt="ava" class="ava-group__ava" *ngIf="activeImg !== 9" (click)="activeImg=9">
+                <img src="assets/img/ava-icon-active/9.png" alt="ava" class="ava-group__ava" *ngIf="activeImg === 9">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login__group">
+      <input type="text" formControlName="email" placeholder="Електронна адреса" class="login__input"
+        [ngClass]="{
+          'input-success--registration': (email.touched) && email.valid,
+          'input-danger--registration': email.invalid
+        }">
+      <div *ngIf="email.invalid && submitted">
+           <div class="login__error" *ngIf="email.errors.required">Помилка. Не введена електронна адреса</div>
+           <div class="login__error" *ngIf="email.errors.pattern">Введіть дійсну електронну адресу</div>
+      </div>
+      <input type="password" formControlName="password" placeholder="Пароль" class="login__input"
+        [ngClass]="{
+          'input-success--registration': (password.touched || password.dirty) && password.valid,
+          'input-danger--registration': (password.touched || password.dirty)
+        }">
+      <div *ngIf="password.invalid && submitted">
+          <div class="login__error" *ngIf="password.errors.required">Помилка. Не введений пароль</div>
+          <div class="login__error" *ngIf="password.errors.minlength">Помилка. Пароль повинен бути довшим</div>
+      </div>
+    </div>
+    <div class="radio-group">
+      <div class="radio-group__container">
+        <input type="radio" class="radio-group__check-box radio-group__check-box--child" id="child" name="isParent" checked>
+        <label for="child"></label>
+        <div class="radio-group__label">Дитина</div>
+      </div>
+      <div class="radio-group__container">
+        <input type="radio" class="radio-group__check-box radio-group__check-box--parent" id="parent" name="isParent">
+        <label for="parent"></label>
+        <div class="radio-group__label">Дорослий</div>
+      </div>
+    </div>
+    <button class="login__button" (click)="registerNewUser()"
+      [ngClass]="{
+        'btn-disable--registration disabled': password.errors || email.errors
+      }">
+      Зареєструватись
+    </button>
+    <div class="login__link" routerLink="/login">Уже маєш профіль? Увійти</div>
+  </form>
+</div>

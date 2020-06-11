@@ -5,7 +5,7 @@
         <div *ngFor="let task of tasks"class="task" cdkDrag>
             <div class = "task-info">
 
-            <a href={{url}}{{task.id}}>
+            <a (click)="openModal(task)">
                 <img *ngIf="!isChild" class="task-icon" src="{{task.category}}"><img *ngIf="!isChild" class="child-icon" src="{{task.child_icon}}">
                 <img *ngIf="isChild" class="task-icon-child" src="{{task.category}}">
                 <h3 *ngIf="!isChild" class="task-name parent">{{task.name_task}}</h3>
