@@ -56,10 +56,8 @@ class FamilyStatisticAPIView(APIView):
       tasks = Task.object.filter(id_family=family)
       rewards = Item.objects.filter(family=family)
 
-      selected_tasks = tasks.filter(status=2)
 
-
-      childres = [{'user_id': member.user.user_id, 'username': member.user.username, 'numIcon': member.user.numIcon, 'is_parent': member.user.isParent, 'statistic': {'points': member.points, 'tasks': {'accomplised': 8, 'selected': 43, 'canceled': 2}, 'rewards': 8}} for member in Child.object.filter(family=family)]
+      childres = [{'user_id': member.user.user_id, 'username': member.user.username, 'numIcon': member.user.numIcon, 'is_parent': member.user.isParent, 'statistic': {'points': member.points, 'tasks': {'accomplised': len(tasks.filter(id_child=member).filter(status=4)), 'selected': len(tasks.filter(id_child=member).filter(status=2)), 'canceled': 0}, 'rewards': len(rewards.filter(child=member).filter(status=2))}} for member in Child.object.filter(family=family)]
       
       
 
