@@ -6,13 +6,15 @@
 
   & .parent {
     display: flex;
+    padding-top: 7px;
     flex-direction: column;
     background: #FFFFFF;
     border: 1px solid rgba(119, 142, 148, 0.25);
     box-sizing: border-box;
     border-radius: 10px;
     align-items: center;
-    
+    justify-content: space-between;
+
     & .parent__avatar-wrapper {
       border-radius: 50%;
       margin: 3px;
@@ -26,6 +28,7 @@
 
     & a {
       padding-top: 6px;
+      padding-bottom: 7px;
       font-family: Roboto;
       font-style: normal;
       font-weight: normal;
