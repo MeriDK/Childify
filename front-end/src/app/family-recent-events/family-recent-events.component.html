@@ -1,0 +1,11 @@
+<div class="last-event-block">
+    <a>Today</a>
+    <span></span>
+
+  </div>
+  <div class="recent-items">
+    <app-family-recent-item
+    *ngFor="let event of events"
+    [event] = "event"
+    ></app-family-recent-item>
+  </div>

@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+export interface Event {
+  title: string
+  status: string
+  points: number
+  time: string
+  categoryImg: string
+  imgUrl: string
+}
 
 @Component({
   selector: 'app-family-recent-item',
@@ -6,6 +15,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./family-recent-item.component.scss']
 })
 export class FamilyRecentItemComponent implements OnInit {
+
+  @Input() event: Event
 
   constructor() { }
 

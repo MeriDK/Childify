@@ -1,0 +1,38 @@
+.last-event-block {
+    margin-top: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 19px;
+  
+    & span {
+      display: inline-block;
+      width: 95%;
+      height: 1px;
+      justify-self: center;
+      background-color: #778E94;
+      
+    }
+  
+    &>a {
+      position: absolute;
+      display: inline-block;
+      background-color: white;
+      padding: 0px 7px 0px 7px;
+  
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: 0.0357143em;
+      color: #778E94;
+    }
+  
+    & .recent-items {
+      display: block;
+    }
+  }
