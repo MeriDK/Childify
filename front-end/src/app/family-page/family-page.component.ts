@@ -79,7 +79,7 @@ export class FamilyPageComponent implements OnInit{
         
           name: element['username'],
           memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
-          imgUrl: this.imgYoung,
+          imgUrl: this.chooseImg(element['numIcon']),
           points: element['statistic']['points'],
           rewards: element['statistic']['rewards'],
           tasks: {
@@ -109,15 +109,19 @@ export class FamilyPageComponent implements OnInit{
 
       if(element['is_parent']) {
         if (parents){
-          parents.push({name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.imgOld});
+          parents.push({name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.chooseImg(element['numIcon'])});
         } else {
-          parents = [{name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.imgOld}];
+          parents = [{name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.chooseImg(element['numIcon'])}];
         }
       }
         
     });
 
     return parents;
+  }
+
+  chooseImg(num): string {
+    return '../../assets/svg/' + num + '.svg';
   }
 
   //bad idia
