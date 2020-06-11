@@ -141,6 +141,14 @@
                     margin-right: 0px;
                     margin-left: calc((100vw - 106px*3)/6);
                     margin-right: calc((100vw - 106px*3)/6);
+                    @media only screen and (min-width: 500px){
+                        margin-left: 10px;
+                        margin-right: 10px;  
+                    }
+                    @media only screen and (max-width: 300px){
+                        margin-left: 4px;
+                        margin-right: 4px;  
+                    }
                     display: inline-flex;
                     flex-direction: column;
                     padding: 5px 8px;
@@ -197,9 +205,6 @@
                             /* Light Shadow */
 
                             box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
-                            svg {
-                                margin-top: 12px;
-                            }
                             
                         }
                         
@@ -278,6 +283,10 @@
                             display: initial;
                             margin-block-start: -65px;
                             margin-inline-start: -54px;
+                            svg{
+                                width: 35px;
+                                margin-top: 2px !important;
+                            }
                         }
                         div.li-selectable {
                             margin-inline-start: 30px;
@@ -296,6 +305,9 @@
                         .li-buyed {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -344,6 +356,9 @@
                         .li-confirm {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -369,6 +384,9 @@
                         .li-back {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -423,7 +441,7 @@
             display: flex;
             flex-direction: row;
             left: 0px;
-            top: calc(100vh - 56px);
+            top: calc(100% - 56px);
 
             /* White */
 
@@ -530,6 +548,9 @@
         width: calc(100% - 30px);
         height: 526px;
         margin-top: calc(-5px + (100vh - 526px)/2);
+        @media only screen and (max-height: 500px){
+            margin-top: 20px;
+        }
         margin-left: 200vh;
         margin-right: 15px;
 
@@ -637,7 +658,7 @@
                     align-items: center;
                     padding-left: 50px;
                     background: #FFFFFF;
-                    width: calc(100% - 20px);
+                    width: calc(100% -  4px);
                     height: 48px;
                     /* Light_Grey_25 */
     
@@ -682,61 +703,62 @@
                 svg {
                     margin-top: 9px;
                     margin-left: 5px;
-                    zoom: 0.4;
                 }
             }
             .ico1 {
 
                 svg {
-                    margin-left: 17px !important;
-                    margin-top: 8px !important;
+                    width: 14px;
+                    margin-top: -14px;
+                    margin-left: 7px;
                 }
             }
             .ico2 {
-                margin-top: 5px;
             
                 svg {
-                    margin-left: 5px !important;
-                    margin-top: 20px !important;
+                    width: 24px;
+                    margin-top: -4px;
+                    margin-left: 3px;
                 }
             }
             .ico3 {
             
                 svg {
-                    margin-left: 13px !important;
-                    margin-top: 8px !important;
+                    width: 19px;
+                    margin-top: -16px;
+                    margin-left: 6px;
                 }
             }
             .ico4 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 19px !important;
-                    margin-top: 16px !important;
+                    width: 16px;
+                    margin-top: -6px;
+                    margin-left: 7px;
                 }
             }
             .ico5 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 18px !important;
-                    margin-top: 18px !important;
+                    width: 16px;
+                    margin-top: -6px;
+                    margin-left: 8px;
                 }
             }
             .ico6 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 17px !important;
-                    margin-top: 17px !important;
+                    width: 17px;
+                    margin-top: -5px;
+                    margin-left: 7px;
                 }
             }
             .ico7 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 6px !important;
-                    margin-top: 19px !important;
+                    width: 22px;
+                    margin-top: -4px;
+                    margin-left: 4px;
                 }
             }
             .price {
@@ -829,6 +851,9 @@
             div {
                 align-self: flex-end;
                 flex: none;
+                @media only screen and (max-width: 300px){
+                    flex: inherit;
+                }
                 width: 41px;
                 height: 41px;
                 border-radius: 50%;
@@ -921,6 +946,9 @@
             }
         }
     }
+    .modal{
+        display: none;
+    }
     .modal.active {
         margin-left: 15px;
     }
@@ -963,7 +991,7 @@
     .btn-add {
         position: fixed;
         z-index: 1;
-        margin-block-start: calc(100vh - 7px - 42px);
+        top: calc(100% - 7px - 42px);
         margin-inline-start: calc(100vw - 6px - 42px);
         background: #FFFFFF;
         box-shadow: 1px 1px 3px rgba(134, 134, 134, 0.9), -1px -1px 2px rgba(255, 255, 255, 0.9), 1px -1px 2px rgba(217, 217, 217, 0.2), -1px 1px 2px rgba(217, 217, 217, 0.2), inset -1px -1px 2px rgba(217, 217, 217, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.3);
@@ -983,4 +1011,9 @@
     }
 
 
+}
+.absolute {
+    @media only screen and (max-height: 500px){
+        position: absolute !important;
+    }
 }
