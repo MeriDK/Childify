@@ -1,5 +1,6 @@
 $square-side: 150px;
 $backgroung-violet: rgb(242, 226, 255);
+$custom-gray: rgba(119, 142, 148, 0.25);
 
 html, body {
     font-family: sans-serif;
@@ -32,5 +33,44 @@ html, body {
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+.last-event-block {
+  margin-top: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 19px;
+
+  & span {
+    display: inline-block;
+    width: 95%;
+    height: 1px;
+    justify-self: center;
+    background-color: #778E94;
+    
+  }
+
+  &>a {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    padding: 0px 7px 0px 7px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    letter-spacing: 0.0357143em;
+    color: #778E94;
+  }
+
+  & .recent-items {
+    display: block;
   }
 }

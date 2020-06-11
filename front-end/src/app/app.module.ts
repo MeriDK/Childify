@@ -33,6 +33,7 @@ import { ConnectFamilyComponent } from './connect-family/connect-family.componen
 import { NewRegistrationComponent } from './new-registration/new-registration.component';
 import { UserIconComponent } from './user-icon/user-icon.component';
 import { FamilyParentItemComponent } from './family-parent-item/family-parent-item.component';
+import { FamilyRecentItemComponent } from './family-recent-item/family-recent-item.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { FamilyParentItemComponent } from './family-parent-item/family-parent-it
     ConnectFamilyComponent,
     NewRegistrationComponent,
     UserIconComponent,
-    FamilyParentItemComponent
+    FamilyParentItemComponent,
+    FamilyRecentItemComponent
   ],
   imports: [
     BrowserModule,
