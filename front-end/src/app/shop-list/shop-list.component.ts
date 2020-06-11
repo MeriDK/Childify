@@ -432,6 +432,7 @@ export class ShopListComponent implements OnInit{
     $(classs).removeClass('active');
     setTimeout(() => {
       el.css('display','none');
+      $('.list--shop-list').css('position','unset');
     }, 100);
     $(".good-li--shop-list.active").removeClass('active')
   }
@@ -444,6 +445,7 @@ export class ShopListComponent implements OnInit{
         $(classs).addClass('active');
         setTimeout(() => {
           $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
         }, 700);
       }, 100);
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
@@ -453,6 +455,7 @@ export class ShopListComponent implements OnInit{
         $(classs).addClass('active');
         setTimeout(() => {
           $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
         }, 700);
       }, 100);
     } else {
@@ -462,6 +465,7 @@ export class ShopListComponent implements OnInit{
         $(classs).addClass('active');
         setTimeout(() => {
           $(classs).addClass('absolute');
+          $('.list--shop-list').css('position','fixed');
         }, 700);
       }, 100);
     }
