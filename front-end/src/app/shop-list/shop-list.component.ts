@@ -69,6 +69,10 @@ export class ShopListComponent implements OnInit{
         $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
         $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
       });
+      $('.shop-list__head .span').on('click', ()=>{
+        this.tokenService.logout()
+        this.router.navigate(['../login'])
+      })
       $('.li-selectable').on('touchend',(event)=>{
         event.stopPropagation();
         var element = event.target;
