@@ -13,9 +13,19 @@ import {TaskAddComponent} from "../task-add/task-add.component"
 })
 export class TaskComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
-  isParent = jwt_decode(this.token.getAccess()).isParent;
+  isParent;
 
-  constructor(private token :TokenService, private router: Router,private modalService: NgbModal) { }
+  constructor(private token :TokenService, private router: Router,private modalService: NgbModal) { 
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+      this.isParent = jwt_decode(this.token.getAccess()).isParent;
+
+    }
+  }
 
   translate = translate
   
