@@ -1,7 +1,4 @@
-<header class="header-childify">
-  <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
-    <h1 class="header-childify__title">{{translate('task_title')}}</h1>
-</header>
+
 <h3 class="name_task">{{translate('name_task')}}</h3>
 <input type="text" placeholder="Name task" class="input-name_task"  [(ngModel)]="task.name_task">
 
@@ -29,6 +26,6 @@ Vestibulum porttitor, est in tempor accumsan, arcu quam pellentesque augue, ut i
 
 
 <div class="button">
-  <button class="btn_add" routerLink='../../' (click)='updateTask()'>{{translate('save_change')}}</button>
-  <img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../../'>
+  <button class="btn_add" (click)='updateTask()'>{{translate('save_change')}}</button>
+  <img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" (click) = "closeModal()">
 </div>

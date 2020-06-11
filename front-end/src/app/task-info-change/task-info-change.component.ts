@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {translate} from '../services/StringResourses'
 import { ActivatedRoute } from '@angular/router';
 import {TaskInfoChangeServer} from './task-info-change.service'
+
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-task-info-change',
@@ -13,25 +15,27 @@ import {TaskInfoChangeServer} from './task-info-change.service'
 export class TaskInfoChangeComponent implements OnInit {
 
   translate = translate
-  id_task;
   task;
   category;
+  @Input() task_id;
   
   
-  constructor(private route: ActivatedRoute, private api: TaskInfoChangeServer) {
-    this.id_task = this.route.snapshot.paramMap.get("id")
+  constructor(private route: ActivatedRoute, private api: TaskInfoChangeServer,public activeModal: NgbActiveModal) {
+    
     this.task={id:-1, name_task: "",info_task:"" ,point_task:0}
-    this.getOneTask();
+   
 
     
   }
 
   ngOnInit(): void {
     console.log(this.task.category)
+    console.log(this.task_id)
+    this.getOneTask();
   }
 
   getOneTask = () => {
-    this.api.getTask(this.id_task).subscribe(
+    this.api.getTask(this.task_id.id).subscribe(
       data => {
         this.task=data
         this.category=data.category
@@ -54,9 +58,14 @@ export class TaskInfoChangeComponent implements OnInit {
         console.log(error)
       }
     )
+    this.closeModal()
   }
 
   filterChanged(selectedValue:string){
     this.category=selectedValue;
+  }
+
+  closeModal() {
+    this.activeModal.close();
   }
 }

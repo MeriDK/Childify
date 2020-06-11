@@ -23,6 +23,11 @@ class TaskDetail(APIView):
 
     def patch(self, request, *args, **kwargs):
         question = get_object_or_404(Task, pk=kwargs['id'])
+        if (request.data['status'] == 2):
+            print("ok")
+            print(Child.object.get(user=request.user.user_id))
+            child = Child.object.get(user=request.user.user_id)
+            request.data['id_child'] = child.id
         serializer = TaskSerializer(question, data=request.data, partial=True)
         if serializer.is_valid():
             question = serializer.save()
