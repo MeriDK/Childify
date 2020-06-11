@@ -361,7 +361,13 @@ export class ShopListComponent implements OnInit{
   }
 
   addNode(): void {
-    $(".modal.add-modal").addClass('active');
+    $(".modal.add-modal").css('display','flex');
+      setTimeout(() => {
+        $(".modal.add-modal").addClass('active');
+        setTimeout(() => {
+          $(".modal.add-modal").addClass('absolute');
+        }, 700);
+      }, 100);
   }
 
   editNode(): void {
@@ -380,20 +386,43 @@ export class ShopListComponent implements OnInit{
 
   closeModal(): void {
     var classs = ".modal"+".active";
+    var el = $(classs)
+    $(classs).css('position','fixed');
     $(classs).removeClass('active');
+    setTimeout(() => {
+      el.css('display','none');
+    }, 100);
     $(".good-li--shop-list.active").removeClass('active')
   }
   showModal(elementContent): void {
     var classs =""; 
     if(this.activeTab()=="inStock-modal" && this.isParent) {
       classs=".modal.edit-modal"
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+        }, 700);
+      }, 100);
     } else if(this.activeTab()=="bought-modal" && this.isParent) {
       classs = ".modal.received-modal";
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+        }, 700);
+      }, 100);
     } else {
       classs = ".modal."+this.activeTab();
-      $(classs).addClass('active');
+      $(classs).css('display','flex');
+      setTimeout(() => {
+        $(classs).addClass('active');
+        setTimeout(() => {
+          $(classs).addClass('absolute');
+        }, 700);
+      }, 100);
     }
     $(classs).attr("category",elementContent.category);
     $(classs).attr("name",elementContent.name);
