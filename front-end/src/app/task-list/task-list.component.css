@@ -82,9 +82,7 @@
 }
 
 .icon-status-change{
-  float: right;
   height: 60px;
-  margin-top: -29px;
 }
 
 .icon-coin{
@@ -111,3 +109,11 @@
   margin-right: 3px;
 }
 
+.button-move{
+    padding: 2px;
+    float: right;
+    height: 60px;
+    margin-top: -30px;
+    background-color: white;
+    border: none;
+}

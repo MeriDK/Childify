@@ -28,6 +28,8 @@ class TaskDetail(APIView):
             print(Child.object.get(user=request.user.user_id))
             child = Child.object.get(user=request.user.user_id)
             request.data['id_child'] = child.id
+        if (request.data['status'] == 1):
+            request.data['id_child'] = None
         serializer = TaskSerializer(question, data=request.data, partial=True)
         if serializer.is_valid():
             question = serializer.save()
@@ -95,18 +97,24 @@ class ParentTaskStatus(generics.ListCreateAPIView):
     def get_queryset(self):
 
         status = self.request.query_params.get('status', None)
-        queryset = Task.object.all().filter(status=status)
+        if status == '4' or status == '2':
+            print("AND?")
+            status = ['2', '4']
+        queryset = Task.object.all().filter(status__in=status)
+        print("First", queryset)
         child = 0
         if self.request.user.isParent:
             user = Parent.object.filter(user=self.request.user.user_id).first()
         else:
             user = Child.object.filter(user=self.request.user.user_id).first()
+            print("Second", queryset)
             child = user.id
         family = user.family.id
         queryset = queryset.filter(id_family=family)
 
         if status != '1' and child:
             queryset = queryset.filter(id_child=child)
+            print("Second", queryset)
 
         return queryset
 
