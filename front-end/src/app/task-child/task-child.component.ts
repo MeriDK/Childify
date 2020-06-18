@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, AfterContentInit, OnInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
@@ -16,9 +16,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./task-child.component.sass'],
   providers: [TaskChildService]
 })
-export class TaskChildComponent implements AfterViewInit {
+export class TaskChildComponent implements AfterViewInit{
 
   ngAfterViewInit(): void{
+    console.log("Work)")
     $('#tab2-link').on("click",() => {
       this.getTask()
       this.logOut()
@@ -55,6 +56,7 @@ export class TaskChildComponent implements AfterViewInit {
       this.getTask()
       
   }
+
 
   openModal(task) {      
     const modalRef = this.modalService.open(TaskInfoComponent,
@@ -109,7 +111,6 @@ export class TaskChildComponent implements AfterViewInit {
         console.log(error)
       }
     )
-    console.log("Why",this.tasks)
   }
 
   updateTasktoCheck = (task) =>{

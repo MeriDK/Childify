@@ -11,7 +11,8 @@ class Status(models.TextChoices):
     TODO = 1
     INPROGRESS = 2
     CHECK = 3
-    DONE = 4
+    CANCEL = 4
+    DONE = 5
 
 
 
@@ -46,4 +47,6 @@ class Task (models.Model):
     name_task = models.CharField(verbose_name="Name task", max_length=50)
     info_task = models.CharField(verbose_name="Info task", max_length=200,null=True)
     point_task = models.IntegerField(verbose_name='Point')
+    date = models.DateTimeField('date_published', auto_now=True)
+
     object = TaskManager()

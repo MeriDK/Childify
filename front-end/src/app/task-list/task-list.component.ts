@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
@@ -74,6 +74,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
       this.routers.navigate(['../login'])
     } else {
       this.token.verifyTokenSubs().catch(()=>{
+        console.log("login")
         this.routers.navigate(['../login'])
       })
     }
