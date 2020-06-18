@@ -70,6 +70,7 @@ back-end/childify_api/Task/__pycache__
 back-end/childify_api/Task/migrations/
 back-end/childify_api/Settings/__pycache__
 back-end/childify_api/Settings/migrations/
+back-end/childify_api/Statistic/__pycache__
 
 # project
 .idea

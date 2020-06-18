@@ -1,29 +1,65 @@
-<app-nav-menu></app-nav-menu>
-<div class="settings-page">
-    <div class="settings-block">
-        <div class="avatar-block">
-            <div class="current-avatar">
-                <img src="../../assets/img/Childify_Logo.png"/>
+<img src="assets/img/settings/Page_Header_Bar.png" alt="menu" class="settings__menu">
+<form novalidate class="login column_center settings">
+  <div class="container ava-group">
+    <div class="row">
+      <div class="col-6 ava-group__padding">
+        <img src="assets/img/ava-icon/{{ user.numIcon }}.png" alt="ava"  class="ava-group__main-ava">
+      </div>
+      <div class="col-6 ava-group__padding">
+        <div class="container">
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 1 ? '-active' : '' }}/1.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=1">
             </div>
-            
-            <div class="change-avatar">
-                <img src="../../assets/img/Childify_Logo.png"/>
-                <img src="../../assets/img/Childify_Logo.png"/>
-                <img src="../../assets/img/Childify_Logo.png"/>
-                <img src="../../assets/img/Childify_Logo.png"/>
-                <img src="../../assets/img/Childify_Logo.png"/>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 2 ? '-active' : '' }}/2.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=2">
             </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 3 ? '-active' : '' }}/3.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=3">
+            </div>
+          </div>
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 4 ? '-active' : '' }}/4.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=4">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 5 ? '-active' : '' }}/5.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=5">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 6 ? '-active' : '' }}/6.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=6">
+            </div>
+          </div>
+          <div class="row ava-group__padding">
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 7 ? '-active' : '' }}/7.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=7">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 8 ? '-active' : '' }}/8.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=8">
+            </div>
+            <div class="col-4 ava-group__padding">
+              <img src="assets/img/ava-icon{{ user.numIcon === 9 ? '-active' : '' }}/9.png" alt="ava" class="ava-group__ava" (click)="user.numIcon=9">
+            </div>
+          </div>
         </div>
-
-        <div class="data-block">
-            <input type="text" (input)="userNameInputHandler($event)" [value]="this.username">
-            <input type="email" (input)="emailInputHandler($event)" [value]="this.email">
-        </div>
+      </div>
     </div>
-    
-    <div class="buttons-block">
-        <button class="btn-confirm" (click)="onSaveClick()">{{saveBtnText}}</button>
-        <button class="btn-get-family-id" (click)="showId()">{{familyIdBtnText}}</button>
-        <button class="btn-out-from-family" (click)="onRejectClick()">{{rejectBtnText}}</button>
-    </div>
-</div>
+  </div>
+  <div class="login__group">
+    <input type="text" (input)="userNameInputHandler($event)" [value]="user.username" class="login__input">
+    <input type="email" (input)="emailInputHandler($event)" [value]="user.email" class="login__input">
+  </div>
+  <div class="login__group settings__group">
+    <button class="settings__button text-left" (click)="onSubmit()">
+      <img src="assets/img/settings/Save.png" alt="save" class="settings__icon">
+      Зберегти
+    </button>
+    <button class="settings__button text-left" (click)="showId()">
+      <img src="assets/img/settings/FAQ.png" alt="save" class="settings__icon">
+      Дізнатися ID сім'ї
+    </button>
+    <button class="settings__button text-left" (click)="onDeleteFamily()">
+      <img src="assets/img/settings/Family.png" alt="save" class="settings__icon">
+      Вийти з сім'ї
+    </button>
+  </div>
+</form>

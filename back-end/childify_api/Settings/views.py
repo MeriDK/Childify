@@ -49,9 +49,8 @@ class SettingsAPIView(APIView):
                 family = member.family
             
             if family:
-                member.family = None
-                member.save()
-                return JsonResponse({'code': 200, 'msg': request.data})
+                member.delete()
+                return JsonResponse({'code': 203, 'msg': request.data})
             
         return JsonResponse({'msg': 'No user exist'})
 
