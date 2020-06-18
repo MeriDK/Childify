@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import jwt_decode from 'jwt-decode'
 
-import { FamilyMember } from '../family-member/family-member.component';
+import { FamilyMember, FamilyChild } from '../family-member/family-member.component';
 import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
 import { SettingsPageComponent } from '../settings-page/settings-page.component';
@@ -35,24 +35,24 @@ export class FamilyPageComponent implements OnInit{
   imgYoung = "../../assets/svg/kid.svg";
   imgOld = "../../assets/svg/any_avatar.svg";
 
-  members: FamilyMember[];
+  children: FamilyChild[];
+  parents: FamilyMember[];
 
   ngOnInit(): void {
 
     this.getMembers().then((val) => {
       console.log(val);
-      this.members = this.parseMembers(val);
+      this.children = this.parseChildren(val);
+      this.parents = this.parseParents(val);
+      console.log("Parents\n"+ this.parents);
     },
     (err) => {
       console.log(err);
-      
-      
       this.refreshToken();
-      
-      
     });
 
-    console.log("HERE\n" + this.members)
+    console.log("HERE\n" + this.children)
+    
   }
   
   getMembers(): Promise<any> {
@@ -70,35 +70,73 @@ export class FamilyPageComponent implements OnInit{
     return promise;
   }
   
-  parseMembers(value): FamilyMember[] {
-    var family: FamilyMember[];
+  parseChildren(value): FamilyChild[] {
+    var family: FamilyChild[];
 
     value.forEach(element => {
-      var memb: FamilyMember = {
-      
-        name: element['username'],
-        memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
-        imgUrl: element['is_parent']? this.imgOld : this.imgYoung
-      }
+      if (!element['is_parent']) {
+        var memb: FamilyChild = {
+        
+          name: element['username'],
+          memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic',
+          imgUrl: this.chooseImg(element['numIcon']),
+          points: element['statistic']['points'],
+          rewards: element['statistic']['rewards'],
+          tasks: {
+            accomplished: element['statistic']['tasks']['accomplised'],
+            selected: element['statistic']['tasks']['selected'],
+            canceled: element['statistic']['tasks']['canceled']
+          }
+        }
 
-      console.log('Memb: ' + memb);
-      if (!family)
-        family = [memb];
-      else {
-        console.log('Family inter:' + family); 
-        family.push(memb);
+        console.log('Memb: ' + memb);
+        if (!family)
+          family = [memb];
+        else {
+          console.log('Family inter:' + family); 
+          family.push(memb);
+        }
+    }
+    });
+
+    return family;
+  }
+
+  parseParents(value): FamilyMember[] {
+    var parents: FamilyMember[];
+
+    value.forEach(element => {
+
+      if(element['is_parent']) {
+        if (parents){
+          parents.push({name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.chooseImg(element['numIcon'])});
+        } else {
+          parents = [{name: element['username'], memberUrl: config['baseURL'] + '/family/${element[user_id]/statistic', imgUrl: this.chooseImg(element['numIcon'])}];
+        }
       }
         
     });
 
-    return family;
+    return parents;
+  }
+
+  chooseImg(num): string {
+    return '../../assets/svg/' + num + '.svg';
   }
 
   //bad idia
 
   refreshToken(): boolean {
     this.refresh().then((val)=>{
-      this.tokenService.setCookie({'access':val['access']})  
+      this.tokenService.setCookie({'access':val['access']});  
+      this.getMembers().then((val) => {
+        console.log(val);
+        this.children = this.parseChildren(val);
+        this.parents = this.parseParents(val);
+        console.log("Parents\n"+ this.parents);
+      }, (err) => {
+        alert('There is problems with internet. Please, reload page.');
+      });
     }, (err) => {
         console.log(err);
         return false;

@@ -11,12 +11,19 @@ export class TokenService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
+
+  logout(): any {
+    this.cookieService.delete('access');
+    this.cookieService.delete('refresh');
+  }
+  
   getPoints(): Observable<any> {
     const httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
     'Authorization':'Bearer '+ this.getAccess()})}}
     const url = config['baseURL'] + '/user/points/'
     return this.http.get(url, httpHeaders())
   }
+  
 
   getPointsSubs() : any {
     return   new Promise((resolve, reject) => {

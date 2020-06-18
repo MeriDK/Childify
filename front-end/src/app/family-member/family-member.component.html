@@ -1,8 +1,38 @@
 <div class="content__item">
-    <img src="{{ familyMember.imgUrl }}"/>
+    <div class="avatar-wrapper">
+        <img src="{{ familyChild.imgUrl }}"/>
+    </div>
+   
     
     <div class="content__item__data">
-        <a href="{{ familyMember.memberUrl }}">{{ familyMember.name }}</a>
-        <img class="coins_img" src="../../assets/svg/coin.svg" alt="coins image">100
+        
+        <!-- <a href="{{ familyChild.memberUrl }}"> -->
+        <a>
+            {{ familyChild.name }}
+        </a>
+        <div class="content__item__data__info">
+                <div class="img-conis">
+                <img src="../../assets/svg/coin.svg" alt="coins image">
+                <a>{{familyChild.points}}</a>
+            </div>
+            <div class="img-checked-task">
+                <img  src="../../assets/svg/checked_task.svg" alt="checked tasks image">
+                <a>{{familyChild.tasks.accomplished}}</a>
+            </div>
+            <div class="img-reward">
+                <img src="../../assets/svg/reward.svg" alt="reward image">
+                <a>{{familyChild.rewards}}</a>
+            </div>
+            <div class="img-task">
+                <img src="../../assets/svg/task.svg" alt="tasks image">
+                <a>{{familyChild.tasks.selected}}</a>
+            </div>
+            <div class="img-canceled-task">
+                <img src="../../assets/svg/casnceled_task.svg" alt="canceled tasks image">
+                <a>{{familyChild.tasks.canceled}}</a>
+            </div>
+            
+        </div>
+        
     </div>
 </div>

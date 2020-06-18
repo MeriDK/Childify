@@ -1,5 +1,6 @@
 $square-side: 150px;
 $backgroung-violet: rgb(242, 226, 255);
+$custom-gray: rgba(119, 142, 148, 0.25);
 
 html, body {
     font-family: sans-serif;
@@ -15,9 +16,22 @@ html, body {
 
 .content {
   width: 100%;
-  margin: 30px auto;
+  //margin: 30px auto;
+  padding-top: 30px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.parent-container {
+  display: flex;
+  padding-bottom: 3%;
+  overflow-x: scroll;
+  width: fit-content;
+  flex-direction: row;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

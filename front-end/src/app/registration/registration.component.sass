@@ -1,15 +1,18 @@
 .login
   padding: 2rem
   min-height: 100vh
+  background-color: white
   &__logo
-    width: 40vh
+    width: 70vw
+    max-width: calc(400px*0.7)
     margin-top: 2rem
   &__group
-    width: 45vh
+    width: 80vw
+    max-width: calc(400px*0.8)
     input::placeholder
       color: rgba(119, 142, 148, 0.25)
   &__input
-    height: 8vh
+    height: 51px
     min-width: 100%
     outline: 0
     border-radius: 8px
@@ -21,7 +24,7 @@
     background: #FF5025
     border-radius: 8px
     width: 100%
-    height: 8vh
+    height: 51px
     color: white
     font-size: 1.3rem
     border: 0
@@ -41,20 +44,21 @@
   align-items: center
 
 .ava-group
-  min-height: 23vh
+  min-height: 147px
   width: 100%
   margin-top: 1rem
   &__main-ava
-    height: 23vh
-    margin-top: 1.5vh
+    height: 147px
+    margin-top: 10px
   &__ava
-    height: 8vh
+    height: 51px
   &__padding
     padding: 0
 
 .radio-group
   display: flex
-  width: 40vh
+  width: 70vw
+  max-width: calc(400px*0.7)
   justify-content: space-between
   margin-top: 1rem
   &__container
@@ -75,3 +79,7 @@
       height: 34px
       width: 34px
       margin: 0
+
+.gey-background
+  @media only screen and (min-width: 400px)
+    background-color: rgba(21,27,41,0.17)

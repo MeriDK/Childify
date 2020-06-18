@@ -5,6 +5,10 @@ import {translate} from '../services/StringResourses'
 import {TaskCheckService} from './task-check.service'
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {TaskInfoComponent} from "../task-info/task-info.component"
 
 @Component({
   selector: 'app-task-check',
@@ -17,20 +21,65 @@ export class TaskCheckComponent implements AfterViewInit{
   picture = "../../assets/img/ava-icon/"
   
   ngAfterViewInit(): void{
-    $('#tab3-link').on("click",() => {this.getTaskCheck()})
+
+    $('#tab3-link').on("click",() => {
+      this.getTaskCheck()
+      this.logOut()
+    })
     console.log($('#tab3-link'))
     this.getTaskCheck()
   }
 
-  isChild = !jwt_decode(this.token.getAccess()).isParent;
+  logOut(): void{
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+    }
+  }
+
+  isChild;
   translate = translate
   now = true
   url = "task/info/"
   icon;
   tasks = [{id: -1,category:"",name_task: 'test',point_task: 15,id_child:1,child_icon:""}];
-  constructor(private api: TaskCheckService, private token :TokenService) {
+  constructor(private api: TaskCheckService, private token :TokenService, private router: Router ,private modalService: NgbModal) {
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+      })
+      this.isChild = !jwt_decode(this.token.getAccess()).isParent;
+
+    }
     this.getTaskCheck();
   }
+
+  openModal(task) {      
+    const modalRef = this.modalService.open(TaskInfoComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        // keyboard: false,
+        // backdrop: 'static'
+        centered: true
+      });
+
+    let task_id = {
+      id : task.id
+    }
+    console.log(task_id)
+    modalRef.componentInstance.task_id = task_id;
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+    });
+  }
+
 
   category(category): void {
     if(category==1){

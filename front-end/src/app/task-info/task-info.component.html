@@ -1,12 +1,9 @@
-<header class="header-childify">
-    <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
-      <h1 class="header-childify__title">{{translate('task_title')}}</h1>
-</header>
+
 
 <div class="body">
 <h3 class="name_task">{{translate('name_task')}}</h3>
     <h2 class="name-task">{{task.name_task}}</h2>
-<h3 class = "category-title">Category</h3>
+<h3 class = "category-title">{{translate('category')}}</h3>
     <h2 class="category">{{name_category}}</h2>
 
 <h3 class="title_point">{{translate('points')}}</h3>
@@ -14,5 +11,5 @@
 <img class="coin" src="../../assets/img/task-icon/Coin_input.png">
 <h3 class="title_info">{{translate('more_info')}}</h3>
 <p>{{task.info_task}}</p>
-<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" routerLink='../../'>
+<img class="btn_cansel" src="../../assets/img/task-icon/Cancel Button.png" (click)="closeModal()">
 </div>

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,9 @@ import { ShopPrizeCategoryComponent } from './shop-prize-category/shop-prize-cat
 import { ConnectFamilyComponent } from './connect-family/connect-family.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserIconComponent } from './user-icon/user-icon.component';
+import { FamilyParentItemComponent } from './family-parent-item/family-parent-item.component';
+import { FamilyRecentItemComponent } from './family-recent-item/family-recent-item.component';
+import { FamilyRecentEventsComponent } from './family-recent-events/family-recent-events.component';
 
 
 @NgModule({
@@ -55,6 +59,11 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
     ConnectFamilyComponent,
+    NewRegistrationComponent,
+    UserIconComponent,
+    FamilyParentItemComponent,
+    FamilyRecentItemComponent,
+    FamilyRecentEventsComponent,
     RegistrationComponent,
     UserIconComponent
   ],
@@ -68,7 +77,8 @@ import { UserIconComponent } from './user-icon/user-icon.component';
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     DragDropModule,
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    NgbModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent, /*TaskComponent, TaskListComponent, RegistrationComponent, ShopListComponent*/]// now using only in routing

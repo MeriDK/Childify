@@ -5,7 +5,8 @@
             z-index: 1;
             padding: 0;
             width: 100%;
-            height: 56px;
+            height: fit-content;
+            text-align: center;
             position: fixed;
             display: flex;
             left: 0%;
@@ -16,7 +17,13 @@
             mix-blend-mode: normal;
             box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.12);
             .title--shop-list {
+                @media only screen and (max-width: 144px){
+                    width: inherit;
+                }
                 .span {
+                    @media only screen and (max-width: 250px){
+                        display: none;
+                    }
                     margin-top: 17px;
                     margin-bottom: 16px;
                     margin-left: 11px;
@@ -50,6 +57,10 @@
                 }
             }
             .points--shop-list {
+                
+                @media only screen and (max-width: 144px){
+                    width: inherit;
+                }
                 svg {
                     margin-left: 7px;
                     margin-right: 7px;
@@ -92,6 +103,10 @@
             mix-blend-mode: normal;
             box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.12);
             div {
+                @media only screen and (max-width: 224px){
+                    margin-left: 2px !important;
+                    margin-right: 2px !important;
+                }
                 margin-left: 17px;
                 margin-right: 17px;
                 display: inline-block;
@@ -138,9 +153,6 @@
                 padding: 0;
                 .good-li--shop-list {
                     margin: 5px;
-                    margin-right: 0px;
-                    margin-left: calc((100vw - 106px*3)/6);
-                    margin-right: calc((100vw - 106px*3)/6);
                     display: inline-flex;
                     flex-direction: column;
                     padding: 5px 8px;
@@ -197,9 +209,6 @@
                             /* Light Shadow */
 
                             box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
-                            svg {
-                                margin-top: 12px;
-                            }
                             
                         }
                         
@@ -278,6 +287,10 @@
                             display: initial;
                             margin-block-start: -65px;
                             margin-inline-start: -54px;
+                            svg{
+                                width: 50px;
+                                margin-top: 12px !important;
+                            }
                         }
                         div.li-selectable {
                             margin-inline-start: 30px;
@@ -296,6 +309,9 @@
                         .li-buyed {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -344,6 +360,9 @@
                         .li-confirm {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -369,6 +388,9 @@
                         .li-back {
                             display: initial;
                             margin-top: -24px;
+                            svg{
+                                margin-top: 15px;
+                            }
                         }
                         div {
                             display: none;
@@ -423,7 +445,13 @@
             display: flex;
             flex-direction: row;
             left: 0px;
-            top: calc(100vh - 56px);
+            top: calc(100% - 56px);
+            @media only screen and (max-width: 184px){
+                top: calc(100% - 46px);
+            }
+            @media only screen and (max-width: 156px){
+                top: calc(100% - 100px);
+            }
 
             /* White */
 
@@ -439,7 +467,9 @@
             flex-direction: column;
             padding: 0px 0px;
             margin: 5px;
-
+            @media only screen and (max-width: 184px){
+                margin: 1px;
+            }
             position: static;
             left: 66.94%;
             right: 1.94%;
@@ -458,6 +488,11 @@
             align-self: center;
             
             span {
+
+                @media only screen and (max-width: 238px){
+                    display: none;
+                }
+
                 left: 14.29%;
                 right: 14.29%;
                 top: 73.91%;
@@ -528,8 +563,20 @@
         position: fixed;
         display: flex;
         width: calc(100% - 30px);
-        height: 526px;
-        margin-top: calc(-5px + (100vh - 526px)/2);
+        height: 515px;
+        margin-top: calc((100vh - 515px)/2);
+        @media only screen and (max-height: 555px) {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            
+        }
+        @media only screen and (max-width: 270px) {
+            height: auto;
+        }
+        @media only screen and (min-width: 555px) {
+            width: 525px;
+            margin-left: calc((100% - 525px)/2) !important;
+        }
         margin-left: 200vh;
         margin-right: 15px;
 
@@ -598,6 +645,7 @@
                 letter-spacing: 0.0357143em;
 
                 color: #000000;
+                overflow: hidden;
             }
             .category {
                 margin-bottom: 1px;
@@ -607,6 +655,7 @@
                 align-items: center;
                 padding-left: 50px;
                 background: #FFFFFF;
+                overflow: hidden;
                 width: calc(100% - 20px);
                 height: 48px;
                 /* Light_Grey_25 */
@@ -637,7 +686,7 @@
                     align-items: center;
                     padding-left: 50px;
                     background: #FFFFFF;
-                    width: calc(100% - 20px);
+                    width: calc(100% -  4px);
                     height: 48px;
                     /* Light_Grey_25 */
     
@@ -682,70 +731,76 @@
                 svg {
                     margin-top: 9px;
                     margin-left: 5px;
-                    zoom: 0.4;
                 }
             }
             .ico1 {
 
                 svg {
-                    margin-left: 17px !important;
-                    margin-top: 8px !important;
+                    width: 14px;
+                    margin-top: -14px;
+                    margin-left: 7px;
                 }
             }
             .ico2 {
-                margin-top: 5px;
             
                 svg {
-                    margin-left: 5px !important;
-                    margin-top: 20px !important;
+                    width: 24px;
+                    margin-top: -4px;
+                    margin-left: 3px;
                 }
             }
             .ico3 {
             
                 svg {
-                    margin-left: 13px !important;
-                    margin-top: 8px !important;
+                    width: 19px;
+                    margin-top: -16px;
+                    margin-left: 6px;
                 }
             }
             .ico4 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 19px !important;
-                    margin-top: 16px !important;
+                    width: 16px;
+                    margin-top: -6px;
+                    margin-left: 7px;
                 }
             }
             .ico5 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 18px !important;
-                    margin-top: 18px !important;
+                    width: 16px;
+                    margin-top: -6px;
+                    margin-left: 8px;
                 }
             }
             .ico6 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 17px !important;
-                    margin-top: 17px !important;
+                    width: 17px;
+                    margin-top: -5px;
+                    margin-left: 7px;
                 }
             }
             .ico7 {
-                margin-top: 3px;
             
                 svg {
-                    margin-left: 6px !important;
-                    margin-top: 19px !important;
+                    width: 22px;
+                    margin-top: -4px;
+                    margin-left: 4px;
                 }
             }
             .price {
                 margin-bottom: 4px;
             }
             .price--value {
+                overflow: hidden;
                 input {
+                    overflow: hidden;
                     width: 130px;
                     height: 47px;
+                    @media only screen and (max-width: 233px) {
+                        width: 80%;
+                    }
     
                     /* Color/Neutral/6 - White */
     
@@ -775,17 +830,25 @@
                     margin: 7px 0px;
     
                     padding-right: 51px;
+                    @media only screen and (max-width: 187px) {
+                        padding-right: 0px;
+                    }
                 }
                 svg {
                     margin-left: -43px;
                     margin-top: -3px;
+                    @media only screen and (max-width: 187px) {
+                        display: none;
+                    }
                 }
+                
             }
             
             .about {
                 margin-bottom: 7px;
             }
             .about--value {
+                overflow: hidden;
                 font-family: Roboto;
                 font-style: normal;
                 font-weight: normal;
@@ -821,12 +884,16 @@
             margin-bottom: 0px;
             margin-left: -17px;
             margin-right: -17px;
+            width: 100%;
             flex: 3;
             justify-content: space-between;
             padding: 0;
             border: 0;
             display: flex;
             div {
+                @media only screen and (max-width: 180px) {
+                    margin: 2px !important;
+                }
                 align-self: flex-end;
                 flex: none;
                 width: 41px;
@@ -867,11 +934,11 @@
             }
             .btn-back {
                 svg {
-                    margin-top: 13px;
+                    margin-top: 10px;
                 }
             }
             .btn-create {
-                width: 60vw;
+                width: 60%;
                 height: 43px;
                 background: #FFFFFF;
                 margin-left: 0px;
@@ -921,6 +988,9 @@
             }
         }
     }
+    .modal{
+        display: none;
+    }
     .modal.active {
         margin-left: 15px;
     }
@@ -936,12 +1006,42 @@
 
     }
     .modal.add-modal {
+
+
         .modal-footer {
             align-self: flex-end;
-        } 
+
+            div {
+                @media only screen and (max-width: 261px) {
+                    margin: 2px !important;
+                }
+                @media only screen and (max-width: 361px) {
+                    margin: 5px !important;
+                }
+            }
+            .btn-create {
+                @media only screen and (max-width: 361px) {
+                    font-size: 5vw !important;
+                }
+            }
+        }
     }
     .modal.edit-modal {
         .modal-footer {
+            div {
+                @media only screen and (max-width: 271px) {
+                    margin: 2px !important;
+                }
+                @media only screen and (max-width: 401px) {
+                    margin: 5px !important;
+                }
+            }
+            .btn-edit {
+                @media only screen and (max-width: 401px) {
+                    width: 40% !important;
+                    font-size: 5vw;
+                }
+            }
             .btn-delete {
                 margin-left: 0px;
                 margin-right: 18px;
@@ -961,9 +1061,10 @@
         } 
     }
     .btn-add {
+        
         position: fixed;
         z-index: 1;
-        margin-block-start: calc(100vh - 7px - 42px);
+        top: calc(100% - 7px - 42px);
         margin-inline-start: calc(100vw - 6px - 42px);
         background: #FFFFFF;
         box-shadow: 1px 1px 3px rgba(134, 134, 134, 0.9), -1px -1px 2px rgba(255, 255, 255, 0.9), 1px -1px 2px rgba(217, 217, 217, 0.2), -1px 1px 2px rgba(217, 217, 217, 0.2), inset -1px -1px 2px rgba(217, 217, 217, 0.5), inset 1px 1px 2px rgba(255, 255, 255, 0.3);
@@ -983,4 +1084,9 @@
     }
 
 
+}
+.absolute {
+    @media only screen and (max-height: 555px){
+        position: absolute !important;
+    }
 }

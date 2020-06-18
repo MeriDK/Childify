@@ -6,6 +6,19 @@ export interface FamilyMember {
   name: string
 }
 
+export interface FamilyChild {
+  imgUrl: string
+  memberUrl: string
+  name: string
+  points: number
+  rewards: number
+  tasks: {
+    accomplished: number
+    selected: number
+    canceled: number
+  }
+}
+
 @Component({
   selector: 'app-family-member',
   templateUrl: './family-member.component.html',
@@ -13,7 +26,7 @@ export interface FamilyMember {
 })
 export class FamilyMemberComponent implements OnInit, AfterViewInit {
 
-  @Input() familyMember: FamilyMember;
+  @Input() familyChild: FamilyChild;
 
   constructor() { }
   

@@ -1,10 +1,11 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, Input } from '@angular/core';
 import $ from 'node_modules/jquery'
 import {translate} from '../services/StringResourses'
 import { ActivatedRoute } from '@angular/router';
 import {TaskInfoServer} from './task-info.service'
 import { from } from 'rxjs';
 
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-task-info',
@@ -12,7 +13,7 @@ import { from } from 'rxjs';
   styleUrls: ['./task-info.component.sass'],
   providers: [TaskInfoServer]
 })
-export class TaskInfoComponent{
+export class TaskInfoComponent implements OnInit {
   isChild = false
   translate = translate
   id_task;
@@ -20,13 +21,14 @@ export class TaskInfoComponent{
   category;
   name_category;
 
-  
-  constructor(private route: ActivatedRoute, private api: TaskInfoServer) {
-    this.id_task = this.route.snapshot.paramMap.get("id")
-    this.getOneTask();
+  @Input() task_id;
+  constructor(private route: ActivatedRoute, private api: TaskInfoServer,public activeModal: NgbActiveModal) {
     this.task={id:-1,category:0 ,name_task: "",info_task:"" ,point_task:0,id_child:"name child"}
   }
 
+  ngOnInit(): void {
+    this.getOneTask();
+  }
 
   category_t(catagory): void {
     if(catagory==1){
@@ -48,7 +50,7 @@ export class TaskInfoComponent{
 
 
   getOneTask = () => {
-    this.api.getTask(this.id_task).subscribe(
+    this.api.getTask(this.task_id.id).subscribe(
       data => {
         this.task=data
         this.category=data.category
@@ -58,5 +60,8 @@ export class TaskInfoComponent{
         console.log(error)
       }
     )
+  }
+  closeModal() {
+    this.activeModal.close();
   }
 }
