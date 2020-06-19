@@ -61,9 +61,22 @@ export class FamilyRecentEventsComponent implements OnInit {
       console.log('---------------------' + this.chooseImg(el['executor']['numIcon']));
       
       if (events) {
-        events.push({title: el['title'], status: this.parseCategory(el['status']), points: el['points'], time: el['time'], categoryImg: el['category'], imgUrl: this.chooseImg(el['executor']['numIcon'])});
+        events.push({
+          title: el['title'], 
+          status: this.parseCategory(el['status']), 
+          points: el['points'], 
+          time: new Date(el['time']).getHours() + ':' + new Date(el['time']).getMinutes(), 
+          categoryImg: el['category'], 
+          imgUrl: this.chooseImg(el['executor']['numIcon'])});
       } else {
-        events = [{title: el['title'], status: this.parseCategory(el['status']), points: el['points'], time: el['time'], categoryImg: el['category'], imgUrl: this.chooseImg(el['executor']['numIcon'])}]
+        events = [{
+          title: el['title'], 
+          status: this.parseCategory(el['status']), 
+          points: el['points'], 
+          time: new Date(el['time']).getHours() + ':' + new Date(el['time']).getMinutes(), 
+          categoryImg: el['category'], 
+          imgUrl: this.chooseImg(el['executor']['numIcon'])
+        }]
       }
     });
 

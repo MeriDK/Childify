@@ -11,6 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  max-width: 800px;
 
   & a{
     padding-left: 0px;
@@ -41,6 +43,17 @@
       border: 1px solid rgba(119, 142, 148, 0.25);
       box-sizing: border-box;
       box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+
+      &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+        /* initial ratio of 1:1*/
+      }
+
+      &>img {
+        width: 43px;
+      }
   }
 
   & .status-wrapper {
@@ -92,7 +105,7 @@
         display: flex;
         flex-direction: row;
         padding: 0px;
-        margin: 0px 40px 11px 0px;
+        margin: 0px 30px 11px 0px;
 
         & a {
           margin: 0px 0px 0px 7px;
