@@ -1,10 +1,14 @@
-.parent-container {
-  display: flexbox;
-  padding-bottom: 1%;
-  margin-left: 5px;
-  margin-right: 5px;
+.parent-item-wrapper {
+  display: flex;
+  height: 100%;
+  margin: auto;
+}
+.parent {
+    padding-bottom: 1%;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 100%;
 
-  & .parent {
     display: flex;
     padding-top: 7px;
     flex-direction: column;
@@ -14,16 +18,44 @@
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
+    min-width: 77px;
+    min-height: 92px;
+    height: 100%;
+    
 
     & .parent__avatar-wrapper {
       border-radius: 50%;
       margin: 3px;
       padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 55px;
+      min-height: 55px;
+      
 
       background: #FFFFFF;
       border: 1px solid rgba(119, 142, 148, 0.25);
       box-sizing: border-box;
       box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+
+      &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+        /* initial ratio of 1:1*/
+      }
+
+      &:after {
+        content: "";
+        display: block;
+        //padding-left: 50%;
+      }
+
+      &>img {
+        max-height: 30px;
+        max-width: 30px;
+      }
     }
 
     & a {
@@ -41,4 +73,3 @@
     }
 
   }
-}

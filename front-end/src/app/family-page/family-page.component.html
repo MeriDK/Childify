@@ -2,19 +2,27 @@
   <div class="content" *ngIf="children || parents; else noFamilyMembers">
     
     <div class="parent-container">
-      <app-family-parent-item 
-        *ngFor="let parent of parents"
-        [parent]="parent"
-      ></app-family-parent-item>
+      <div class="parent-container-scrollable">
+        
+        <app-family-parent-item 
+          *ngFor="let parent of parents"
+          [parent]="parent"
+        ></app-family-parent-item>
+      </div>
+      
     </div>
 
+    <div class="children-container">
+      
       <app-family-member
           *ngFor="let member of children"
           [familyChild] = "member"
         ></app-family-member>
-      </div>
+    </div>
+      
+  </div>
 
-      <ng-template #noFamilyMembers>
+    <ng-template #noFamilyMembers>
         <p>No family members</p>
     </ng-template>
 

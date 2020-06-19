@@ -19,19 +19,39 @@ html, body {
   //margin: 30px auto;
   padding-top: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  //justify-content: center;
+  align-items: center;
+
+  & .children-container {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+
+    max-width: 800px;
+  }
 }
 
 .parent-container {
   display: flex;
+  width: 100%;
   padding-bottom: 3%;
   overflow-x: scroll;
-  width: fit-content;
+  //width: fit-content;
   flex-direction: row;
+  //justify-content: center;
+  
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  & .parent-container-scrollable {
+    display: flex;
+    //width: fit-content;
+    margin: auto;
   }
 }
