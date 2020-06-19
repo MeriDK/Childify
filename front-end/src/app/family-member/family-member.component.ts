@@ -31,7 +31,6 @@ export class FamilyMemberComponent implements OnInit, AfterViewInit {
   constructor() { }
   
   ngAfterViewInit(): void {
-    console.log("FAMILY");
   }
 
   ngOnInit(): void {
