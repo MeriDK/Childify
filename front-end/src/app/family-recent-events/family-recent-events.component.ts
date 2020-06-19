@@ -96,7 +96,9 @@ export class FamilyRecentEventsComponent implements OnInit {
       case 3:
         return 'Cheked';
       case 4:
-        return 'Done';
+        return 'Відмінено';
+      case 5:
+        return 'Done'
     }
 
     return 'Undefined';
