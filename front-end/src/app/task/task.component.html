@@ -1,5 +1,6 @@
+<app-menu></app-menu>
 <header class="header-childify">
-  <img class="header-childify-task" src="../../assets/img/task-icon/Tasks.png">
+  <img class="header-childify-task" (click)="$('#menu-sidebar').addClass('active')" src="../../assets/img/task-icon/Tasks.png">
     <h1 class="header-childify__title">{{translate('task_title')}}</h1>
 </header>
 

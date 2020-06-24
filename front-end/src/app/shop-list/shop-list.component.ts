@@ -69,10 +69,6 @@ export class ShopListComponent implements OnInit{
         $('.good-li--shop-list').css('margin-left','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
         $('.good-li--shop-list').css('margin-right','calc((100vw - 109px*'+Math.floor(document.body.clientWidth/109)+')/'+Math.floor(document.body.clientWidth/109)*2+' + 2px)');
       });
-      $('#logout').on('click', ()=>{
-        this.tokenService.logout()
-        this.router.navigate(['../login'])
-      })
       $('.li-selectable').on('touchend',(event)=>{
         event.stopPropagation();
         var element = event.target;
@@ -135,7 +131,6 @@ export class ShopListComponent implements OnInit{
         },150);
         return false; 
       });
-
 
       $('.btn-move').on('click', (event)=>{
         event.stopPropagation();
