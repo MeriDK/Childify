@@ -43,3 +43,18 @@
     justify-content: center;
     align-items: center;
 }
+
+.noEventsMessage {
+  padding-left: 5%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  letter-spacing: 0.0357143em;
+  color: #778E94;
+}

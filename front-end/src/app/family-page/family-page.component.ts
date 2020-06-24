@@ -114,8 +114,6 @@ export class FamilyPageComponent implements OnInit{
         resolve(value['family']);
       }, error => {
           console.log(error.status);
-          
-          //this.refreshToken();
         
         console.log("There is a prob with network");
         reject(error);
