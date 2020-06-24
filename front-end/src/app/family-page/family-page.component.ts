@@ -59,6 +59,19 @@ export class FamilyPageComponent implements OnInit{
 
   ngOnInit(): void {
     
+    this.showMembers();
+  }
+
+  initHeaders() {
+    if (!this.tokenService.getAccess()){
+      this.router.navigate(['/login']);
+    }
+    this.user = jwt_decode(this.tokenService.getAccess());
+    this.httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
+    'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
+  }
+
+  showMembers(): void {
     this.initHeaders();
 
     this.getMembers().then((val) => {
@@ -85,21 +98,14 @@ export class FamilyPageComponent implements OnInit{
           this.router.navigate(['/login']);
         }); 
       } else {
-        setTimeout(this.ngOnInit, 5000);
+        setTimeout(() => {
+          this.showMembers();
+        }, 5000);
       }
     });
 
     console.log("HERE\n" + this.children)
     
-  }
-
-  initHeaders() {
-    if (!this.tokenService.getAccess()){
-      this.router.navigate(['/login']);
-    }
-    this.user = jwt_decode(this.tokenService.getAccess());
-    this.httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
-    'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
   }
   
   getMembers(): Promise<any> {
