@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 19px;
+    width: 100%;
   
     & span {
       display: inline-block;
@@ -32,7 +33,13 @@
       color: #778E94;
     }
   
-    & .recent-items {
-      display: block;
-    }
+    
   }
+.recent-items {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

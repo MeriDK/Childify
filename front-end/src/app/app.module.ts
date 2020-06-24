@@ -36,6 +36,8 @@ import { UserIconComponent } from './user-icon/user-icon.component';
 import { FamilyParentItemComponent } from './family-parent-item/family-parent-item.component';
 import { FamilyRecentItemComponent } from './family-recent-item/family-recent-item.component';
 import { FamilyRecentEventsComponent } from './family-recent-events/family-recent-events.component';
+import { MenuComponent } from './menu/menu.component';
+import { MenuIconComponent } from './menu-icon/menu-icon.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { FamilyRecentEventsComponent } from './family-recent-events/family-recen
     FamilyRecentItemComponent,
     FamilyRecentEventsComponent,
     RegistrationComponent,
-    UserIconComponent
+    UserIconComponent,
+    MenuComponent,
+    MenuIconComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ import { CssSelector } from '@angular/compiler';
 export class TaskComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
   isParent;
+  $=$
 
   constructor(private token :TokenService, private router: Router,private modalService: NgbModal) { 
     if (!this.token.getRefresh()){

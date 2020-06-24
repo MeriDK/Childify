@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import $ from 'node_modules/jquery'
 import jwt_decode from 'jwt-decode'
 
 import { FamilyMember, FamilyChild } from '../family-member/family-member.component';
@@ -18,15 +19,36 @@ import config from  '../../../../package.json'
 @Injectable()
 export class FamilyPageComponent implements OnInit{
 
+  $=$
+
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
-    private router: Router) { }
+    private router: Router) { 
 
-  private user = jwt_decode(this.tokenService.getAccess())
+    if (!this.tokenService.getRefresh()){
+      this.router.navigate(['../login'])
+      return
+    } else {
+      this.tokenService.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+        return
+      })
+    }
+    if (!this.tokenService.getAccess()) {
+      this.tokenService.refreshTokenSubs().then(() => {
+        tokenService.logout();
+        this.router.navigate(['/login']);
+      },(err) => {
+        this.router.navigate(['/login']);
+      });
+    }
+    this.initHeaders();
+    }
 
-  httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
-  'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
+  private user;
+
+  public httpHeaders;
 
   data : Observable<any>;
   
@@ -39,6 +61,8 @@ export class FamilyPageComponent implements OnInit{
   parents: FamilyMember[];
 
   ngOnInit(): void {
+    
+    this.initHeaders();
 
     this.getMembers().then((val) => {
       console.log(val);
@@ -48,11 +72,37 @@ export class FamilyPageComponent implements OnInit{
     },
     (err) => {
       console.log(err);
-      this.refreshToken();
+      if (err.status == 401){
+        this.tokenService.refreshTokenSubs().then(() => {
+          this.initHeaders();
+
+          this.getMembers().then((val) => {
+            console.log(val);
+            this.children = this.parseChildren(val);
+            this.parents = this.parseParents(val);
+            console.log("Parents\n"+ this.parents);
+          }, (err) => {
+            this.router.navigate(['/login']);
+          });
+        },(err) => {
+          this.router.navigate(['/login']);
+        }); 
+      } else {
+        this.router.navigate(['/login']);
+      }
     });
 
     console.log("HERE\n" + this.children)
     
+  }
+
+  initHeaders() {
+    if (!this.tokenService.getAccess()){
+      this.router.navigate(['/login']);
+    }
+    this.user = jwt_decode(this.tokenService.getAccess());
+    this.httpHeaders = ()=>{ return {headers : new HttpHeaders({'Content-Type': 'application/json',
+    'Authorization':'Bearer '+ this.tokenService.getAccess()})}}
   }
   
   getMembers(): Promise<any> {
@@ -60,11 +110,12 @@ export class FamilyPageComponent implements OnInit{
       this.http.get(config['baseURL'] + '/family/' + this.user.user_id, this.httpHeaders()).subscribe(value => {
         resolve(value['family']);
       }, error => {
-        
-          this.refreshToken();
+          console.log(error.status);
+          
+          //this.refreshToken();
         
         console.log("There is a prob with network");
-        reject();
+        reject(error);
       });
     });
     return promise;
@@ -122,46 +173,6 @@ export class FamilyPageComponent implements OnInit{
 
   chooseImg(num): string {
     return '../../assets/svg/' + num + '.svg';
-  }
-
-  //bad idia
-
-  refreshToken(): boolean {
-    this.refresh().then((val)=>{
-      this.tokenService.setCookie({'access':val['access']});  
-      this.getMembers().then((val) => {
-        console.log(val);
-        this.children = this.parseChildren(val);
-        this.parents = this.parseParents(val);
-        console.log("Parents\n"+ this.parents);
-      }, (err) => {
-        alert('There is problems with internet. Please, reload page.');
-      });
-    }, (err) => {
-        console.log(err);
-        return false;
-      });
-    return true;
-  }
-
-  refresh(): Promise<any> {
-    let promise = new Promise((resolve, reject) =>{
-      console.log(this.user.user_id);
-      
-      var data = {
-        refresh: this.tokenService.getRefresh()
-      };
-  
-      var json = JSON.stringify(data);
-
-      this.http.post(config['baseURL'] + '/login/refresh/', json, this.httpHeaders()).subscribe(value => {
-        resolve(value);
-      }, error => {
-        console.log("There is a prob with network");
-        reject(error);
-      });
-    });
-    return promise;
   }
 
 }
