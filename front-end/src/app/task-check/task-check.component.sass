@@ -8,6 +8,7 @@
     box-sizing: border-box
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1)
     border-radius: 10px
+    margin-left: 5%
 
 .cdk-drag-preview 
   box-sizing: border-box
@@ -32,7 +33,7 @@
     margin:  5px
 
 .task h3
-    padding-left: 20px
+    padding-left: 10px
     margin:  0px
     margin-top: 12px
     color: black
@@ -70,9 +71,9 @@
 
 
 
-.icon-not-done
+.icon-done
     float: right
-    height: 60px
+    width: 60px
     margin-top: -29px
 
 .icon-coin
@@ -97,7 +98,7 @@
 
 
 .text-coin-child
-    padding-left: 20px
+    padding-left: 10px
     display: inline
     padding-right: 3px
     font-family: Roboto
@@ -109,4 +110,58 @@
     float: right
     margin-right: 5px
     margin-top: -5px
-    height: 36px
+    width: 36px
+
+
+@media only screen and (min-width: 800px)
+    .task h3
+        padding-left: 30px
+
+    .task-icon
+        width: 7%
+        margin-top: -1.5%
+    
+    .text-coin
+        font-size: 20px
+        margin-top: 3%
+    .icon-coin
+        margin-top: 3.4%
+    
+    .task-icon-child
+        width: 7%
+        margin-top: -2%
+
+    .task .parent
+        margin-bottom: -7px
+        padding-top: 1%
+    
+
+    .icon-done
+        width: 6%
+        margin-top: -2.6%
+
+    .icon-back
+        width: 4%
+        margin-top: 0.6%
+    
+
+    .task h3
+        margin-top: 2%
+
+    .child-icon
+        width: 8%
+        margin-top: -1.4%
+        margin-left: -8.2%
+
+    .text-coin-child
+        padding-left: 30px
+    
+
+
+
+@media only screen and (min-width: 1150px)
+  .icon-done
+    width: 6%
+    margin-top: -1.9%
+  
+

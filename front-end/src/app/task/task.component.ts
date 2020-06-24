@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {TaskAddComponent} from "../task-add/task-add.component"
 import $ from 'node_modules/jquery'
+import { CssSelector } from '@angular/compiler';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -39,6 +41,8 @@ export class TaskComponent implements OnInit {
         this.router.navigate(['../login'])
       })
     }
+
+    $('.mat-typography').css("height","auto")
   }
 
   openModal() {
@@ -85,6 +89,8 @@ export class TaskComponent implements OnInit {
     }
     return ""
   }
+
+
   
   
   

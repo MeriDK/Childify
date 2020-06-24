@@ -8,6 +8,7 @@
     box-sizing: border-box;
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    margin-left: 5%;
 }
 
 .cdk-drag-preview {
@@ -52,7 +53,7 @@
 }
 .task .parent{
   margin-bottom: -7px;
-  padding-top: 9px;
+  padding-top: 12px;
 }
 
 
@@ -74,25 +75,27 @@
 }
 
 .task-icon{
-  margin:  5px;
-  width: 50px;
-  display:inline-block;
+  margin: 5px;
+  width: 60px;
+  display: inline-block;
   float: left;
   margin-top: -8px;
 }
 
 .icon-status-change{
-  height: 60px;
+  float: right;
+  width: 60px;
+  margin-top: -25px;
 }
 
 .icon-coin{
   float: right;
-  margin-top: 4%;
+  margin-top: 25px;
 }
 .text-coin{
   float: right;
   margin-bottom: 0;
-  margin-top: 4%;
+  margin-top: 21px;
   font-family: Roboto;
   font-size: 14px;
   letter-spacing: 0.0357143em;
@@ -109,11 +112,35 @@
   margin-right: 3px;
 }
 
-.button-move{
-    padding: 2px;
-    float: right;
-    height: 60px;
-    margin-top: -30px;
-    background-color: white;
-    border: none;
+
+@media only screen and (min-width: 800px){
+  .task-icon{
+    width: 7%;
+    margin-top: -1.5%;
+  }
+  .text-coin{
+    font-size: 20px;
+  }
+
+  .task .parent{
+    margin-bottom: -7px;
+    padding-top: 1%;
+  }
+
+  .icon-status-change{
+    width: 5%;
+    margin-top: -3%;
+  }
+
+  .task h3{
+    margin-top: 2%;
+  }
+
+} 
+
+@media only screen and (min-width: 1150px){
+  .icon-status-change{
+    width: 5%;
+    margin-top: -2%;
+  }
 }
