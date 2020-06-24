@@ -44,8 +44,6 @@
             flex: 2;
             text-align: -webkit-center;
             align-self: center;
-            margin-top: -10vh;
-            margin-left: -10vh;
             .user-name_span{
                 font-family: Roboto;
                 font-style: normal;
@@ -53,7 +51,10 @@
                 font-size: 30px;
                 line-height: 35px;
                 letter-spacing: 0.0357143em;
-
+                @media only screen and (max-width: 240px) {
+                    font-size: 15px;
+                    line-height: 20px;
+                }
                 color: #000000;
             }
         }
@@ -63,6 +64,9 @@
     .btn-block {
         width: 100%;
         height: 59px;
+        @media only screen and (max-height: 390px) {
+            height: 10vh;
+        }
         .icon {
             margin-left: 15px;
             margin-right: 15px;
@@ -93,6 +97,11 @@
 
     .btn-list,    .footer-btn {
         .list-item{
+
+            @media only screen and (max-height: 390px) {
+                height: 19px;
+                font-size: 15px;
+            }
             border: 0;
             width: 100%;
             height: 59px;
