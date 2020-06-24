@@ -85,7 +85,7 @@ export class FamilyPageComponent implements OnInit{
           this.router.navigate(['/login']);
         }); 
       } else {
-        this.router.navigate(['/login']);
+        setTimeout(this.ngOnInit, 5000);
       }
     });
 
