@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import $ from 'node_modules/jquery'
 import jwt_decode from 'jwt-decode'
 
 import { FamilyMember, FamilyChild } from '../family-member/family-member.component';
@@ -17,6 +18,8 @@ import config from  '../../../../package.json'
 
 @Injectable()
 export class FamilyPageComponent implements OnInit{
+
+  $=$
 
   constructor(
     private http: HttpClient,

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import config from '../../../../package.json';
 import { SettingsService } from './settings.service';
+import $ from 'node_modules/jquery'
 
 @Component({
   selector: 'app-settings-page',
@@ -11,6 +12,7 @@ import { SettingsService } from './settings.service';
 })
 export class SettingsPageComponent implements OnInit {
 
+  $=$
   user = {
     username: 'Your Username',
     email: 'Your Email',

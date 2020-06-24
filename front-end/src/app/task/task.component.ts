@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode'
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {TaskAddComponent} from "../task-add/task-add.component"
+import $ from 'node_modules/jquery'
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -14,6 +15,7 @@ import {TaskAddComponent} from "../task-add/task-add.component"
 export class TaskComponent implements OnInit {
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
   isParent;
+  $=$
 
   constructor(private token :TokenService, private router: Router,private modalService: NgbModal) { 
     if (!this.token.getRefresh()){
