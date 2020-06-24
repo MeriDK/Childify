@@ -324,7 +324,7 @@ header{
         display: flex;
         flex-direction: row;
         left: 0px;
-        top: calc(100vh - 56px);
+        top: calc(100% - 56px);
 
         /* White */
 
@@ -439,6 +439,7 @@ header{
     padding: 0;
     display: none;
     bottom: 9px;
+    right: 9px;
     svg {
         margin-top: 10px;
     }
@@ -447,5 +448,4 @@ header{
     }
 
 }
-
 

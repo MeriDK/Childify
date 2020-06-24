@@ -59,7 +59,6 @@ import { FamilyRecentEventsComponent } from './family-recent-events/family-recen
     ShopPrizeIconComponent,
     ShopPrizeCategoryComponent,
     ConnectFamilyComponent,
-    NewRegistrationComponent,
     UserIconComponent,
     FamilyParentItemComponent,
     FamilyRecentItemComponent,

@@ -5,7 +5,7 @@
     <div *ngFor="let task of tasks"class="task" cdkDrag>
         <div class = "task-info">
 
-        <a (click)="openModal(task)"><img class="task-icon" src="{{task.category}}"><h3 *ngIf="!isChild" class="task-name parent">{{task.name_task}}</h3><h3 *ngIf="isChild" class="task-name child">{{task.name_task}}</h3></a><button class = 'button-move'><img class="icon-status-change" *ngIf="isChild" (click)="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Move Button.png"/></button>
+        <a (click)="openModal(task)"><img class="task-icon" src="{{task.category}}"><h3 *ngIf="!isChild" class="task-name parent">{{task.name_task}}</h3><h3 *ngIf="isChild" class="task-name child">{{task.name_task}}</h3></a><img class="icon-status-change" *ngIf="isChild" (click)="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Move Button.png"/>
         <p *ngIf="isChild" class="text-coin-child">{{task.point_task}}</p><img *ngIf="isChild" class="icon-coin-child" src="../../assets/img/task-icon/coin-child.png"/><img *ngIf="!isChild" class="icon-coin" src="../../assets/img/task-icon/Coin.png"/><p *ngIf="!isChild" class="text-coin">{{task.point_task}}</p></div>  
 
     </div>

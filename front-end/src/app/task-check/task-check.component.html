@@ -10,8 +10,8 @@
                     <img *ngIf="isChild" class="task-icon-child" src="{{task.category}}">
                     <h3  class="task-name child">{{task.name_task}}</h3>
                 </a>
-            <img *ngIf = "isChild" class="icon-not-done" (click) ="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Back Button.png"/>
-            <img *ngIf = "!isChild" class="icon-not-done" (click) ="updateTasktoDone(task)" src="../../assets/img/task-icon/Confirm Button.png"/>
+            <img *ngIf = "isChild" class="icon-done" (click) ="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Back Button.png"/>
+            <img *ngIf = "!isChild" class="icon-done" (click) ="updateTasktoDone(task)" src="../../assets/img/task-icon/Confirm Button.png"/>
             <img *ngIf = "!isChild" class="icon-back" (click) ="updateTasktoInProgress(task)" src="../../assets/img/task-icon/Back Button.png"/>
             <p  class="text-coin-child">{{task.point_task}}</p><img  class="icon-coin-child" src="../../assets/img/task-icon/coin-child.png"/>
             </div>   
