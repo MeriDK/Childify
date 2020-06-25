@@ -29,8 +29,7 @@ class StatisticAPIView(APIView):
             if family:
 
                 tasks = [{'title': event.name_task, 'status': event.status, 'category': event.category, 'points': event.point_task, 'time': event.date, 'executor': {'id': event.id_child.user.user_id, 'numIcon': event.id_child.user.numIcon}} for event in Task.object.filter(id_family=family).filter(id_child__isnull=False).filter(date__gte=timezone.now() -timedelta(1)).order_by('-date')[:3]]
-                #rewards = Item.objects.filter(family=family).order_by('-id')[:3]
-                #rewards = Task.object.filter(id_family=family).filter(id_child__isnull=False).order_by('-id')[:3]
+
                 return JsonResponse({'events': tasks}, status=200)
             
             

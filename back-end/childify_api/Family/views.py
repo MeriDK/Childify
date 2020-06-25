@@ -1,13 +1,13 @@
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework import status
 
 from Child.models import Child
 from Family.models import Family
 from Parent.models import Parent
 from User.models import User
 from Task.models import Task
-# Item is a Prize... You know... smels.
 from Shop.models import Item
 from Task.serializers import TaskSerializer
 
