@@ -34,7 +34,6 @@ class SettingsAPIView(APIView):
         return JsonResponse({'msg': 'No user exist'})
 
     def patch(self, request, user_id):
-        print('Damn')
         user = get_object_or_404(User, pk=user_id)
         serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
