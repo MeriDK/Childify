@@ -26,9 +26,9 @@ export class TaskComponent implements OnInit {
       this.token.verifyTokenSubs().catch(()=>{
         this.router.navigate(['../login'])
       })
-      this.isParent = jwt_decode(this.token.getAccess()).isParent;
-
     }
+    this.token.refreshTokenSubs
+    this.isParent = jwt_decode(this.token.getAccess()).isParent
   }
 
   translate = translate
@@ -45,32 +45,7 @@ export class TaskComponent implements OnInit {
     $('.mat-typography').css("height","auto")
   }
 
-  openModal() {
-    const modalRef = this.modalService.open(TaskAddComponent,
-      {
-        scrollable: true,
-        windowClass: 'myCustomModalClass',
-        keyboard: true,
-        backdrop: 'static',
-        
-        centered: true
-      });
-
-    let data = {
-      prop1: 'Some Data',
-      prop2: 'From Parent Component',
-      prop3: 'This Can be anything'
-    }
-
-    modalRef.componentInstance.fromParent = data;
-    modalRef.result.then((result) => {
-      console.log(result);
-    }, (reason) => {
-    });
-  }
-
-
-
+  
   activeTab() {
     // @ts-ignore
     var tabId ; 

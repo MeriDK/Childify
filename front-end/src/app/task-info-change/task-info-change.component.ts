@@ -21,16 +21,10 @@ export class TaskInfoChangeComponent implements OnInit {
   
   
   constructor(private route: ActivatedRoute, private api: TaskInfoChangeServer,public activeModal: NgbActiveModal) {
-    
     this.task={id:-1, name_task: "",info_task:"" ,point_task:0}
-   
-
-    
   }
 
   ngOnInit(): void {
-    console.log(this.task.category)
-    console.log(this.task_id)
     this.getOneTask();
   }
 
@@ -44,7 +38,6 @@ export class TaskInfoChangeComponent implements OnInit {
         console.log(error)
       }
     )
-    console.log(this.task)
    
   }
 
@@ -66,6 +59,6 @@ export class TaskInfoChangeComponent implements OnInit {
   }
 
   closeModal() {
-    this.activeModal.close();
+    this.activeModal.close(1);
   }
 }

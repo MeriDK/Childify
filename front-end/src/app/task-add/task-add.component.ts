@@ -31,8 +31,6 @@ export class TaskAddComponent implements OnInit {
         console.log(error);
       }
     )
-    console.log(this.task);
-    console.log(this.category)
     this.activeModal.close();
   }
   ngOnInit(): void {
@@ -41,7 +39,7 @@ export class TaskAddComponent implements OnInit {
     this.category=selectedValue;
   }
   closeModal() {
-    this.activeModal.close();
+    this.activeModal.close(1);
   }
 
 }

@@ -44,7 +44,7 @@
         <app-task-check></app-task-check>
     </tab>
 </tabset>
-<div *ngIf="isParent" class="btn btn-add" [ngClass]="{'shown': activeTab()=='inStock-modal'}" (click)="openModal()">
+<div *ngIf="isParent" class="btn btn-add" id="btn-model-add" [ngClass]="{'shown': activeTab()=='inStock-modal'}">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.10209 6.60209V0.5H8.93124V6.60209H15.0333V9.43124H8.93124V15.5333H6.10209V9.43124H0V6.60209H6.10209Z" fill="#232526"/>
   </svg>                                                

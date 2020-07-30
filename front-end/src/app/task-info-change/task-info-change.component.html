@@ -1,6 +1,6 @@
 
 <h3 class="name_task">{{translate('name_task')}}</h3>
-<input type="text" placeholder="Name task" class="input-name_task"  [(ngModel)]="task.name_task">
+<input type="text" placeholder="Name task" class="input-name_task"  maxlength="19" [(ngModel)]="task.name_task">
 
 <h3 class = "title_category" >{{translate('category')}}</h3>
 <div class="chose-category">
@@ -15,7 +15,7 @@
 
 
 <h3 class="title_point">{{translate('points')}}</h3>
-<input type="number" placeholder="15" class="input-point"  [(ngModel)]="task.point_task">
+<input type="number" placeholder="0" class="input-point" min="0" max="999" maxlength="3" step="1" [(ngModel)]="task.point_task">
 
 <h3 class='title_info'>{{translate('more_info')}}</h3>
 <textarea name="Text1" cols="40" rows="3"  [(ngModel)]="task.info_task">Lorem ipsum dolor sit amet, consectetur adipiscing elit.

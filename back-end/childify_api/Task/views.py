@@ -56,8 +56,7 @@ class AddPoint(APIView):
         question = get_object_or_404(Task, pk=kwargs['id'])
         serializers = TaskSerializer(question,data=request.data,  partial=True)
         if serializers.is_valid():
-            user = User.object.get(user_id=serializers.data['id_child'])
-            child = Child.object.get(user=user)
+            child = Child.object.get(id =serializers.data['id_child'])
             point = child.points
             point += serializers.data['point_task']
             point = {'points':point}
