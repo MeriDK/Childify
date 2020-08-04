@@ -4,6 +4,7 @@
     <div class="login__group">
       <input type="text" [(ngModel)]="data.username" placeholder="Ім'я для відображення" class="login__input">
       <input type="text" *ngIf="!this.isCreate" [(ngModel)]="data.family_id" placeholder="ID Сім'ї" class="login__input">
+      <input type="password" [(ngModel)]="data.password" placeholder="Пароль" class="login__input">
       <button class="login__button" (click)="connectCreateFamily()" type="button">
         <span></span>
         <span *ngIf="!this.isCreate">Приєднатися</span>

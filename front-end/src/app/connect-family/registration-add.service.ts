@@ -19,13 +19,13 @@ export class RegistrationAddService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   createNewFamily(data): Observable<any> {
-    const body = {username: data.username};
+    const body = {username: data.username, password: data.password};
     const url = config['baseURL'] + '/family/';
     return this.http.post(url, body, this.httpHeaders());
   }
 
   connectToFamily(data): Observable<any> {
-    const body = {username: data.username};
+    const body = {username: data.username, password: data.password};
     const url = config['baseURL'] + '/family/' + data.family_id + '/user/';
     return this.http.patch(url, body, this.httpHeaders());
   }

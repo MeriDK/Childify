@@ -12,7 +12,7 @@ import { connectToFamily, createNewFamily } from './connect.service';
   styleUrls: ['./connect-family.component.sass', '../registration/registration.component.sass'],
   providers: [RegistrationAddService]
 })
-export class ConnectFamilyComponent implements OnInit {
+export class ConnectFamilyComponent {
 
   isParent = jwt_decode(this.token.getAccess()).isParent;
   isCreate = false;
@@ -20,25 +20,17 @@ export class ConnectFamilyComponent implements OnInit {
   private formBuilder: any;
 
   constructor(private api: RegistrationAddService, private token: TokenService, private router: Router) {
-    this.data = { family_id: '', username: '' };
-  }
-
-  ngOnInit(): void {
+    this.data = { family_id: '', username: '', password: '' };
   }
 
   connectCreateFamily(): void {
-    if (this.data.username === '') {
+    if ((!this.data.username || !this.data.password) || !this.isCreate && !this.data.family_id) {
       return;
-    }
-    if (!this.isCreate && this.data.family_id === '') {
-      return;
-    }
-
-    if (this.isCreate) {
-      createNewFamily(this.api, this.token, {username: this.data.username}, this.router);
+    } else if (this.isCreate) {
+      createNewFamily(this.api, this.token, {username: this.data.username, password: this.data.password}, this.router);
     }
     else {
-      connectToFamily(this.api, this.token, {username: this.data.username, family_id: this.data.family_id}, this.router);
+      connectToFamily(this.api, this.token, {username: this.data.username, family_id: this.data.family_id, password: this.data.password}, this.router);
     }
   }
 }
