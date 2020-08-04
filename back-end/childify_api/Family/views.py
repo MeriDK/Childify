@@ -88,7 +88,7 @@ class FamilyAPIView(APIView):
     if self.check_object_family(request.user):
       return JsonResponse({'msg': 'already connected'}, status=405)
 
-    family = Family.object.create_family()
+    family = Family.object.create_family(request.data['password'])
     if request.user.isParent:
       Parent.object.create_parent(family, request.user, request.data['username'])
     else:
@@ -129,6 +129,8 @@ class FamilyUserAPIView(APIView):
         return JsonResponse({'msg': 'error'}, status=400)
       if self.check_object_family(request.user):
         return JsonResponse({'msg': 'already connected'}, status=405)
+      if not Family.verify(request.data['password'], family.password):
+        return JsonResponse({'msg': 'wrong password'}, status=403)
       if request.user.isParent:
         parent = self.get_object_parent(request.user)
         if not parent:
