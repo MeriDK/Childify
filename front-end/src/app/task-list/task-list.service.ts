@@ -14,7 +14,11 @@ export class TaskListService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
+
   getTaskList(): Observable<any> {
+    this.tokenService.refreshToken
+    this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json',
+  'Authorization':'Bearer '+ this.tokenService.getAccess()})
     return this.http.get(config['baseURL'] + "/task/list?status=1" , {headers: this.httpHeaders})
   }
 

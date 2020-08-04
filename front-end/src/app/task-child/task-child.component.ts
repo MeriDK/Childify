@@ -16,10 +16,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./task-child.component.sass'],
   providers: [TaskChildService]
 })
-export class TaskChildComponent implements AfterViewInit{
+export class TaskChildComponent implements AfterViewInit, OnInit{
 
   ngAfterViewInit(): void{
-    console.log("Work)")
     $('#tab2-link').on("click",() => {
       this.getTask()
       this.logOut()
@@ -32,6 +31,16 @@ export class TaskChildComponent implements AfterViewInit{
     } else {
       this.token.verifyTokenSubs().catch(()=>{
         this.router.navigate(['../login'])
+      })
+    }
+
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+      return
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+        return
       })
     }
   }
@@ -56,12 +65,15 @@ export class TaskChildComponent implements AfterViewInit{
       this.getTask()
       
   }
+  ngOnInit(): void {
+    this.logOut()
+  }
 
 
   openModal(task) {      
     const modalRef = this.modalService.open(TaskInfoComponent,
       {
-        scrollable: true,
+        scrollable: false,
         windowClass: 'myCustomModalClass',
         // keyboard: false,
         // backdrop: 'static'
@@ -71,10 +83,8 @@ export class TaskChildComponent implements AfterViewInit{
     let task_id = {
       id : task.id
     }
-    console.log(task_id)
     modalRef.componentInstance.task_id = task_id;
     modalRef.result.then((result) => {
-      console.log(result);
     }, (reason) => {
     });
   }

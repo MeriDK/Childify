@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, AfterViewInit, AfterContentInit, OnInit } from '@angular/core';
 import $ from 'node_modules/jquery'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {translate} from '../services/StringResourses'
@@ -16,7 +16,7 @@ import {TaskInfoComponent} from "../task-info/task-info.component"
   styleUrls: ['./task-check.component.sass'],
   providers: [TaskCheckService]
 })
-export class TaskCheckComponent implements AfterViewInit{
+export class TaskCheckComponent implements AfterViewInit, OnInit{
 
   picture = "../../assets/img/ava-icon/"
   
@@ -26,7 +26,7 @@ export class TaskCheckComponent implements AfterViewInit{
       this.getTaskCheck()
       this.logOut()
     })
-    console.log($('#tab3-link'))
+
     this.getTaskCheck()
   }
 
@@ -35,8 +35,17 @@ export class TaskCheckComponent implements AfterViewInit{
       this.router.navigate(['../login'])
     } else {
       this.token.verifyTokenSubs().catch(()=>{
-        console.log("token")
         this.router.navigate(['../login'])
+      })
+    }
+
+    if (!this.token.getRefresh()){
+      this.router.navigate(['../login'])
+      return
+    } else {
+      this.token.verifyTokenSubs().catch(()=>{
+        this.router.navigate(['../login'])
+        return
       })
     }
   }
@@ -59,11 +68,14 @@ export class TaskCheckComponent implements AfterViewInit{
     }
     this.getTaskCheck();
   }
+  ngOnInit(): void {
+    this.logOut()
+  }
 
   openModal(task) {      
     const modalRef = this.modalService.open(TaskInfoComponent,
       {
-        scrollable: true,
+        scrollable: false,
         windowClass: 'myCustomModalClass',
         // keyboard: false,
         // backdrop: 'static'
@@ -73,10 +85,8 @@ export class TaskCheckComponent implements AfterViewInit{
     let task_id = {
       id : task.id
     }
-    console.log(task_id)
     modalRef.componentInstance.task_id = task_id;
     modalRef.result.then((result) => {
-      console.log(result);
     }, (reason) => {
     });
   }
@@ -104,7 +114,6 @@ export class TaskCheckComponent implements AfterViewInit{
     this.api.getTaskList().subscribe(
       data => {
         this.tasks = data;
-        console.log(this.tasks)
         for (var i = 0; i<this.tasks.length; i++){
           this.category(this.tasks[i].category)
           this.tasks[i].category=this.icon

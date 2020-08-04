@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode'
 import { Router } from '@angular/router';
+import {TaskAddComponent} from "../task-add/task-add.component"
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {TaskInfoChangeComponent} from "../task-info-change/task-info-change.component"
@@ -28,8 +29,10 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   translate = translate
 
   ngOnInit(): void {
-
+    this.logOut()
   }
+
+  
 
   openModal(task) {
     if(this.isChild){
@@ -41,7 +44,7 @@ export class TaskListComponent implements AfterViewInit,OnInit {
       
     const modalRef = this.modalService.open(this.model,
       {
-        scrollable: true,
+        scrollable: false,
         windowClass: 'myCustomModalClass',
         // keyboard: false,
         // backdrop: 'static'
@@ -51,10 +54,9 @@ export class TaskListComponent implements AfterViewInit,OnInit {
     let task_id = {
       id : task.id
     }
-    console.log(task_id)
     modalRef.componentInstance.task_id = task_id;
     modalRef.result.then((result) => {
-      console.log(result);
+      this.getTask()
     }, (reason) => {
     });
     this.getTask()
@@ -65,36 +67,77 @@ export class TaskListComponent implements AfterViewInit,OnInit {
   ngAfterViewInit(): void {
     $('#tab1-link').on("click",() => {
       this.getTask()
-      this.logOut()
+
+    })
+    $('#btn-model-add').on("click",() => {
+      this.openModalAdd()
     })
   }
 
+  openModalAdd() {
+    const modalRef = this.modalService.open(TaskAddComponent,
+      {
+        scrollable: false,
+        windowClass: 'myCustomModalClass',
+        keyboard: true,
+        backdrop: 'static',
+        
+        centered: true
+      });
+
+    let data = {
+      prop1: 'Some Data',
+      prop2: 'From Parent Component',
+      prop3: 'This Can be anything'
+    }
+
+    modalRef.componentInstance.fromParent = data;
+    modalRef.result.then((result) => {
+      this.getTask();
+    }, (reason) => {
+    });
+  }
+
   logOut(): void{
+    this.token.refreshTokenSubs
     if (!this.token.getRefresh()){
-      this.routers.navigate(['../login'])
+      this.route.navigate(['../login'])
+      return
     } else {
       this.token.verifyTokenSubs().catch(()=>{
-        console.log("login")
-        this.routers.navigate(['../login'])
+        this.route.navigate(['../login'])
+        return
       })
     }
+    this.isChild = !jwt_decode(this.token.getAccess()).isParent;
+    
   }
   tasks = [{id:-1,category:"",name_task: 'test',point_task: 15}];
 
 
-  constructor(private api: TaskListService, private router: ActivatedRoute,  private token :TokenService,private modalService: NgbModal, private routers: Router){
+  constructor(private api: TaskListService, private route: Router, private router: ActivatedRoute,  private token :TokenService,private modalService: NgbModal, private routers: Router){
     if (!this.token.getRefresh()){
-      this.routers.navigate(['../login'])
+      this.route.navigate(['../login'])
+      return
     } else {
       this.token.verifyTokenSubs().catch(()=>{
-        this.routers.navigate(['../login'])
+        this.route.navigate(['../login'])
+        return
       })
-      this.isChild = !jwt_decode(this.token.getAccess()).isParent;
-
+    }
+    if (!this.token.getAccess()) {
+      this.token.refreshTokenSubs().then(() => {
+        token.logout();
+        this.route.navigate(['/login']);
+      },(err) => {
+        this.route.navigate(['/login']);
+      });
     }
     this.getTask();
     
   }
+
+
 
   category(category): void {
     if(category=="1"){
@@ -121,7 +164,6 @@ export class TaskListComponent implements AfterViewInit,OnInit {
         for (var i = 0; i<this.tasks.length; i++){
           this.category(this.tasks[i].category)
           this.tasks[i].category=this.icon
-          console.log(this.tasks[i].category)
         }
         
       },
@@ -129,12 +171,9 @@ export class TaskListComponent implements AfterViewInit,OnInit {
         console.log(error)
       }
     )
-    console.log(this.tasks)
-    
   }
 
   updateTasktoInProgress = (task) =>{
-    console.log(this.task)
     this.api.updateTasktoInProgress(task).subscribe(
       data => {
         // @ts-ignore
